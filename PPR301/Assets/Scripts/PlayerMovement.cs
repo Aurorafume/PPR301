@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     // Private variables for managing player state
     private bool isCrouching = false;
     bool readyToJump;
-    bool grounded;
+    public bool grounded;
     float horizontalInput;
     float verticalInput;
 
@@ -59,6 +59,12 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
+    private IEnumerator DisableGroundDetectionTemporarily()
+    {
+        grounded = false;
+        yield return new WaitForSeconds(0.1f);
+    }
+
     private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -95,8 +101,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Jump()
     {
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Reset the vertical velocity
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse); // Add the jump force
+        rb.velocity = new Vector3(0f, 0f, 0f); // Reset ALL velocity before jumping
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        StartCoroutine(DisableGroundDetectionTemporarily());
     }
 
     private void ResetJump()

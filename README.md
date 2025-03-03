@@ -11,7 +11,7 @@ Delegations
 Ali: Controls/Movement System
 Riley: Style sheet, Character Design, Character textures
 Jayden: Physics System 
-Brooke: Noise system logic (Voice input, object interaction, sound from the player, gameplay rules for sound allowance) + Camera + Menu Scenes
+Brooke: Noise system logic (Voice input, object interaction, sound from the player, gameplay rules for sound allowance) + Camera + basic menu scripts/placeholders
 Jarrod: Character model, Environment design plan
 Collaborative: Gameplay ideas
 
@@ -22,6 +22,12 @@ Gameplay rules for sound allowance
 Link scenes
 Basic menu setup (placeholders)
 Settings menu
+
+Controls:
+WASD - Regular movement
+Space - Jump
+Shift - Crouch
+R - Start audio inputS
 
 --------
 
