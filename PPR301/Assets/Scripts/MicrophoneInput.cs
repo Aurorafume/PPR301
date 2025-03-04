@@ -7,7 +7,7 @@ public class MicrophoneInput : MonoBehaviour
     public AudioSource audioSource; // Assign an AudioSource in the Inspector
     public int sampleRate = 44100; // Common sample rates: 44100, 48000
     public string selectedMic; // Stores the selected microphone
-    private float volumeLevel = 0f; // Stores current volume level
+    // private float volumeLevel = 0f; // Stores current volume level
 
     private bool isRecording = false;
     private float[] audioSamples = new float[1024]; // For visualisation
@@ -110,8 +110,13 @@ public class MicrophoneInput : MonoBehaviour
 
         // Convert to dB (ensure we never take log(0) by adding a small offset)
         float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); 
+    }
 
-        // Display the volume level
-        GUI.Label(new Rect(10, 10, 300, 20), $"Volume Level: {decibelLevel:F2} dB");
+    public float GetCurrentNoiseLevel()
+    {
+        float rms = Mathf.Sqrt(audioSamples.Select(x => x * x).Sum() / audioSamples.Length);
+        float normalisedRMS = rms / 1.0f; // Normalise within range
+        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); // Convert to dB
+        return decibelLevel;
     }
 }
