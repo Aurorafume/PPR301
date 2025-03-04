@@ -27,7 +27,8 @@ Controls:
 WASD - Regular movement
 Space - Jump
 Shift - Crouch
-R - Start audio inputS
+R - Start audio input
+s - Stop audio input
 
 --------
 

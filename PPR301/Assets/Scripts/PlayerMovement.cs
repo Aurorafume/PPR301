@@ -34,6 +34,8 @@ public class PlayerMovement : MonoBehaviour
 
     // Public variables for interaction
     public Camera playerCamera;
+    public NoiseHandler noiseHandler;
+    public MicrophoneInput microphoneInput;
 
     private void Start()
     {
@@ -75,6 +77,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false; // Set the jump cooldown
             Jump(); // Jump
             Invoke(nameof(ResetJump), jumpCooldown); // Reset the jump cooldown
+            noiseHandler.GenerateNoise(noiseHandler.jumpNoise); // Add the jump noise in dB
         }
     }
 
@@ -104,6 +107,8 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(0f, 0f, 0f); // Reset ALL velocity before jumping
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         StartCoroutine(DisableGroundDetectionTemporarily());
+
+
     }
 
     private void ResetJump()
