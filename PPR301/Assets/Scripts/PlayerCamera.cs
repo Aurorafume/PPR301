@@ -3,29 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
-{
-    public float sensX; // X sensitivity
-    public float sensY; // Y sensitivity
+{   
+    // Camera sensitivity parameters
+    public float sensX;
+    public float sensY;
 
-    public Transform orientation; // Player's orientation
+    // References
+    public Transform orientation;
 
-    float xRotation; // X rotation
-    float yRotation; // Y rotation
+    // Rotation angles
+    float xRotation;
+    float yRotation;
 
     void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
-        Cursor.visible = false; // Hide the cursor
+    {   
+        // Lock cursor and hide it
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
-    {
-        float mouseX = Input.GetAxis("Mouse X") * sensX * Time.deltaTime; // Get mouse X input
-        float mouseY = Input.GetAxis("Mouse Y") * sensY * Time.deltaTime; // Get mouse Y input
-        xRotation -= mouseY; // Subtract mouseY from xRotation
-        yRotation += mouseX; // Add mouseX to yRotation
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f); // Clamp xRotation between -90 and 90
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f); // Set the camera's rotation
-        orientation.rotation = Quaternion.Euler(0f, yRotation, 0f); // Set the player's rotation
+    {   
+        // Get mouse input for camera rotation
+        float mouseX = Input.GetAxis("Mouse X") * sensX * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * sensY * Time.deltaTime;
+        xRotation -= mouseY;
+        yRotation += mouseX;
+        xRotation = Mathf.Clamp(xRotation, 0f, 0f);
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0f);
+        orientation.rotation = Quaternion.Euler(0f, yRotation, 0f);
     }
 }
