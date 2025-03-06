@@ -5,30 +5,31 @@ using UnityEngine.UI;
 
 public class NoiseBar : MonoBehaviour
 {
-    public Image noiseBar; // Assign the UI Image in the inspector
+    public Image noiseBar;
     public Color greenColor = Color.green;
     public Color yellowColor = Color.yellow;
     public Color redColor = Color.red;
 
-    private float minNoise = -40f; // Minimum dB
-    private float maxNoise = 0f;   // Maximum dB
+    // Noise level range
+    private float minNoise = -65f;
+    private float maxNoise = 0f;
 
     public void UpdateNoiseLevel(float noiseLevel)
     {
-        // Normalize noise level between 0 and 1 for fill amount
-        float normalizedNoise = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
-        noiseBar.fillAmount = normalizedNoise;
+        // Normalise noise level between 0 and 1 for fill amount
+        float normalisedNoise = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
+        noiseBar.fillAmount = normalisedNoise;
 
         // Set color based on noise level
-        if (normalizedNoise < 0.4f) // Green zone
+        if (normalisedNoise < 0.4f)
         {
             noiseBar.color = greenColor;
         }
-        else if (normalizedNoise < 0.7f) // Yellow zone
+        else if (normalisedNoise < 0.6f)
         {
             noiseBar.color = yellowColor;
         }
-        else // Red zone
+        else
         {
             noiseBar.color = redColor;
         }
