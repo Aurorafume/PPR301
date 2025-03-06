@@ -6,23 +6,6 @@ ASSESSMENT 1 -
 Cat Game Idea:
 "Cat that hops around a tightly cramped Music store. Physics/Sound Based. Too much noise will make the game fail. Point system."
 
-Delegations
-
-Ali: Controls/Movement System
-Riley: Style sheet, Character Design, Character textures
-Jayden: Physics System 
-Brooke: Noise system logic (Voice input, object interaction, sound from the player, gameplay rules for sound allowance) + Camera + basic menu scripts/placeholders
-Jarrod: Character model, Environment design plan
-Collaborative: Gameplay ideas
-
-TODO (BROOKE)
-Object interaction
-Sound from the player
-Gameplay rules for sound allowance
-Link scenes
-Basic menu setup (placeholders)
-Settings menu
-
 Controls:
 WASD - Regular movement
 Space - Jump
@@ -34,18 +17,12 @@ s - Stop audio input
 
 ASSESSMENT 2 -
 
-Delegations
-
 --------
 
 ASSESSMENT 3 -
 
-Delegations
-
 --------
 
 ASSESSMENT 4 -
-
-Delegations
 
 
