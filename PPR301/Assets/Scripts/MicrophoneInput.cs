@@ -4,13 +4,13 @@ using System.Linq;
 
 public class MicrophoneInput : MonoBehaviour
 {
-    public AudioSource audioSource; // Assign an AudioSource in the Inspector
-    public int sampleRate = 44100; // Common sample rates: 44100, 48000
-    public string selectedMic; // Stores the selected microphone
-    // private float volumeLevel = 0f; // Stores current volume level
+    public AudioSource audioSource;
+    public int sampleRate = 44100;
+    public string selectedMic;
+    // private float volumeLevel = 0f;
 
     private bool isRecording = false;
-    private float[] audioSamples = new float[1024]; // For visualisation
+    private float[] audioSamples = new float[1024];
 
     void Start()
     {
@@ -47,14 +47,16 @@ public class MicrophoneInput : MonoBehaviour
     }
 
     public void StartMicrophone()
-    {
+    {   
+        // Check if already recording
         if (isRecording) return;
 
+        // Start recording using the selected microphone
         if (selectedMic != null)
         {
             audioSource.clip = Microphone.Start(selectedMic, true, 10, sampleRate);
             audioSource.loop = true;
-            while (!(Microphone.GetPosition(selectedMic) > 0)) { } // Wait for mic to start
+            while (!(Microphone.GetPosition(selectedMic) > 0)) { }
             audioSource.Play();
             isRecording = true;
             Debug.Log("Microphone recording started...");
@@ -63,15 +65,17 @@ public class MicrophoneInput : MonoBehaviour
 
     public void StopMicrophone()
     {
+        // Check if not recording
         if (!isRecording) return;
 
+        // Stop recording and playback
         Microphone.End(selectedMic);
         audioSource.Stop();
         isRecording = false;
         Debug.Log("Microphone recording stopped.");
     }
 
-    /* Uncomment if you want audio visualisation
+    /* Uncomment if u want to add audio visualisation (but I dont think we need this tbh)
     // Draw waveform visualisation using GL lines
     private void OnRenderObject()
     {
@@ -113,10 +117,11 @@ public class MicrophoneInput : MonoBehaviour
     }
 
     public float GetCurrentNoiseLevel()
-    {
+    {   
+        // Compute RMS (Root Mean Square) volume level and convert to dB
         float rms = Mathf.Sqrt(audioSamples.Select(x => x * x).Sum() / audioSamples.Length);
-        float normalisedRMS = rms / 1.0f; // Normalise within range
-        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); // Convert to dB
+        float normalisedRMS = rms / 1.0f; 
+        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f);
         return decibelLevel;
     }
 }
