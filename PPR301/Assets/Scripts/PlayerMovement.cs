@@ -18,9 +18,10 @@ public class PlayerMovement : MonoBehaviour
     public bool isCrouching = false;
     public bool readyToJump;
     public bool grounded;
-    private bool wasGrounded;  // Tracks previous ground state
+    private bool wasGrounded;
     private float horizontalInput;
     private float verticalInput;
+    private float lastNoiseTime;
 
     // Key bindings
     public KeyCode jumpKey = KeyCode.Space;
@@ -36,9 +37,6 @@ public class PlayerMovement : MonoBehaviour
     public NoiseHandler noiseHandler;
     public MicrophoneInput microphoneInput;
 
-    // Crouch coroutine
-    private Coroutine crouchRoutine;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -53,23 +51,23 @@ public class PlayerMovement : MonoBehaviour
         // Store previous grounded state before updating
         wasGrounded = grounded;
 
-        // Ground detection using Raycast
-        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight * 0.5f + 0.3f, whatIsGround);
-
-        // Debugging: Visualise ground detection ray
-        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.3f), grounded ? Color.green : Color.red);
+        // Optimised ground detection using SphereCast for more stability
+        CheckGroundStatus();
 
         // Play landing sound when reconnecting with ground after being airborne
         if (!wasGrounded && grounded)
         {
-            noiseHandler.GenerateNoise(noiseHandler.jumpNoise);
+            GenerateLandingNoise();
         }
 
         MyInput();
         SpeedControl();
         HandleCrouch();
 
+        // Apply drag only when grounded
         rb.drag = grounded ? groundDrag : 0;
+
+        RotatePlayerToCamera();
     }
 
     private void FixedUpdate()
@@ -77,15 +75,27 @@ public class PlayerMovement : MonoBehaviour
         MovePlayer();
     }
 
-    private IEnumerator DisableGroundDetectionTemporarily()
-    {   
-        // Disable ground detection for a short duration after jumping
-        yield return new WaitForSeconds(0.1f);
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
+    private void CheckGroundStatus()
+    {
+        // Use SphereCast for a broader ground detection area
+        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f, whatIsGround);
+
+        //Visualise ground detection ray
+        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
+    }
+
+    private void GenerateLandingNoise()
+    {
+        // Prevent excessive noise generation by using a cooldown
+        if (Time.time - lastNoiseTime > 0.5f)
+        {
+            noiseHandler.GenerateNoise(noiseHandler.jumpNoise);
+            lastNoiseTime = Time.time;
+        }
     }
 
     private void MyInput()
-    {   
+    {
         // Get player input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
@@ -100,14 +110,17 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void MovePlayer()
-    {   
-        // Move player based on input
+    {
+        // Correct movement direction (forward/back and left/right)
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        moveDirection.Normalize(); // Prevent faster diagonal movement
 
         // Apply movement speed based on grounded state
         if (grounded)
         {
-            rb.velocity = new Vector3(moveDirection.x * playerSpeed, rb.velocity.y, moveDirection.z * playerSpeed);
+            // More efficient movement when grounded
+            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
         }
         else
         {
@@ -117,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void SpeedControl()
-    {   
+    {
         // Limit player speed to playerSpeed
         Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
 
@@ -130,61 +143,58 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void Jump()
-    {   
+    {
         // Apply jump force
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        StartCoroutine(DisableGroundDetectionTemporarily());
+
+        // Delay ground detection after jumping to prevent instant re-grounding
+        Invoke(nameof(EnableGroundDetection), 0.1f);
+    }
+
+    private void EnableGroundDetection()
+    {
+        // Recheck ground status after a short delay
+        CheckGroundStatus();
     }
 
     private void ResetJump()
-    {   
+    {
         // Reset jump cooldown
         readyToJump = true;
     }
 
     private void HandleCrouch()
-    {   
+    {
+        // Smoothly adjust player height when crouching
+        float targetHeight = isCrouching ? crouchHeight : originalScale.y;
+        transform.localScale = new Vector3(originalScale.x, Mathf.MoveTowards(transform.localScale.y, targetHeight, crouchSpeed * Time.deltaTime), originalScale.z);
+
         // Handle crouch input
-        if (Input.GetKeyDown(crouchKey) && !isCrouching)
+        if (Input.GetKeyDown(crouchKey))
         {
             isCrouching = true;
-            if (crouchRoutine != null) StopCoroutine(crouchRoutine);
-            crouchRoutine = StartCoroutine(Crouch());
         }
-        else if (Input.GetKeyUp(crouchKey) && isCrouching)
+        else if (Input.GetKeyUp(crouchKey))
         {
             isCrouching = false;
-            if (crouchRoutine != null) StopCoroutine(crouchRoutine);
-            crouchRoutine = StartCoroutine(Uncrouch());
         }
     }
 
-    private IEnumerator Crouch()
-    {   
-        // Crouch coroutine
-        Vector3 targetScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
-
-        while (transform.localScale.y > crouchHeight)
+    private void RotatePlayerToCamera()
+    {
+        // Rotate player to face camera direction
+        if (playerCamera != null)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime * 5f);
-            yield return null;
+            Vector3 cameraForward = playerCamera.transform.forward;
+            cameraForward.y = 0;
+
+            // Only rotate if there’s a significant change in direction
+            if (Vector3.Angle(transform.forward, cameraForward) > 1f)
+            {
+                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+            }
         }
-
-        transform.localScale = targetScale;
-    }
-
-    private IEnumerator Uncrouch()
-    {   
-        // Uncrouch coroutine
-        Vector3 targetScale = originalScale;
-
-        while (transform.localScale.y < originalScale.y)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime * 5f);
-            yield return null;
-        }
-
-        transform.localScale = targetScale;
     }
 }
