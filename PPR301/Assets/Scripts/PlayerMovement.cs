@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-// Public variables for player movement and interaction settings
+    // Player movement parameters
     public float playerSpeed;
     public float groundDrag;
     public float jumpForce;
@@ -14,28 +14,30 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed = 10f;
     public float playerHeight;
 
-    // Private variables for managing player state
-    private bool isCrouching = false;
-    bool readyToJump;
+    // Player state variables
+    public bool isCrouching = false;
+    public bool readyToJump;
     public bool grounded;
-    float horizontalInput;
-    float verticalInput;
+    private bool wasGrounded;  // Tracks previous ground state
+    private float horizontalInput;
+    private float verticalInput;
 
-    // Public variables for key bindings
+    // Key bindings
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode crouchKey = KeyCode.LeftShift;
 
-    // Public variables for managing ground detection and orientation
+    // References
     public LayerMask whatIsGround;
     public Transform orientation;
-    Vector3 moveDirection;
-    Rigidbody rb;
+    private Vector3 moveDirection;
+    private Rigidbody rb;
     private Vector3 originalScale;
-
-    // Public variables for interaction
     public Camera playerCamera;
     public NoiseHandler noiseHandler;
     public MicrophoneInput microphoneInput;
+
+    // Crouch coroutine
+    private Coroutine crouchRoutine;
 
     private void Start()
     {
@@ -48,12 +50,26 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround); // Check if the player is grounded
+        // Store previous grounded state before updating
+        wasGrounded = grounded;
+
+        // Ground detection using Raycast
+        grounded = Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, playerHeight * 0.5f + 0.3f, whatIsGround);
+
+        // Debugging: Visualise ground detection ray
+        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f + 0.3f), grounded ? Color.green : Color.red);
+
+        // Play landing sound when reconnecting with ground after being airborne
+        if (!wasGrounded && grounded)
+        {
+            noiseHandler.GenerateNoise(noiseHandler.jumpNoise);
+        }
+
         MyInput();
         SpeedControl();
         HandleCrouch();
-        
-        rb.drag = grounded ? groundDrag : 0; // Change the drag value based on player state
+
+        rb.drag = grounded ? groundDrag : 0;
     }
 
     private void FixedUpdate()
@@ -62,105 +78,113 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private IEnumerator DisableGroundDetectionTemporarily()
-    {
-        grounded = false;
+    {   
+        // Disable ground detection for a short duration after jumping
         yield return new WaitForSeconds(0.1f);
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.3f, whatIsGround);
     }
 
     private void MyInput()
-    {
+    {   
+        // Get player input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        
+
+        // Jump input
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            readyToJump = false; // Set the jump cooldown
-            Jump(); // Jump
-            Invoke(nameof(ResetJump), jumpCooldown); // Reset the jump cooldown
-            noiseHandler.GenerateNoise(noiseHandler.jumpNoise); // Add the jump noise in dB
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
     }
 
     private void MovePlayer()
-    {
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput; // Calculate the move direction
-        
+    {   
+        // Move player based on input
+        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+
+        // Apply movement speed based on grounded state
         if (grounded)
-            rb.AddForce(moveDirection.normalized * playerSpeed * 10f, ForceMode.Force); // Move the player
+        {
+            rb.velocity = new Vector3(moveDirection.x * playerSpeed, rb.velocity.y, moveDirection.z * playerSpeed);
+        }
         else
-            rb.AddForce(moveDirection.normalized * playerSpeed * 10f * airMultiplier, ForceMode.Force); // Move the player in the air
+        {
+            float adjustedAirMultiplier = Mathf.Lerp(0.5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
+            rb.velocity = new Vector3(moveDirection.x * playerSpeed * adjustedAirMultiplier, rb.velocity.y, moveDirection.z * playerSpeed * adjustedAirMultiplier);
+        }
     }
 
     private void SpeedControl()
-    {
-        Vector3 flatVel = new Vector3(rb.velocity.x, 0f, rb.velocity.z); // Calculate the flat velocity
-         
-        if (flatVel.magnitude > playerSpeed)
+    {   
+        // Limit player speed to playerSpeed
+        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        // Limit player speed if it exceeds playerSpeed
+        if (flatVelocity.magnitude > playerSpeed)
         {
-            Vector3 limitedVel = flatVel.normalized * playerSpeed; // Limit the velocity
-            rb.velocity = new Vector3(limitedVel.x, rb.velocity.y, limitedVel.z); // Set the limited velocity
+            Vector3 limitedVelocity = flatVelocity.normalized * playerSpeed;
+            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
         }
     }
 
     private void Jump()
-    {
-        rb.velocity = new Vector3(0f, 0f, 0f); // Reset ALL velocity before jumping
+    {   
+        // Apply jump force
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         StartCoroutine(DisableGroundDetectionTemporarily());
-
-
     }
 
     private void ResetJump()
-    {
+    {   
+        // Reset jump cooldown
         readyToJump = true;
     }
 
     private void HandleCrouch()
-    {
-        if (Input.GetKeyDown(crouchKey)) // Check if the crouch key is pressed
+    {   
+        // Handle crouch input
+        if (Input.GetKeyDown(crouchKey) && !isCrouching)
         {
-            if (!isCrouching)
-            {
-                isCrouching = true; // Set the crouching state
-                StopAllCoroutines(); // Stop all coroutines
-                StartCoroutine(Crouch());  // Start the crouch coroutine
-            }
-        } 
-        else if (Input.GetKeyUp(crouchKey)) // Check if the crouch key is released
+            isCrouching = true;
+            if (crouchRoutine != null) StopCoroutine(crouchRoutine);
+            crouchRoutine = StartCoroutine(Crouch());
+        }
+        else if (Input.GetKeyUp(crouchKey) && isCrouching)
         {
-            if (isCrouching)
-            {
-                isCrouching = false; // Reset the crouching state
-                StopAllCoroutines(); // Stop all coroutines
-                StartCoroutine(Uncrouch()); // Start the uncrouch coroutine
-            }
+            isCrouching = false;
+            if (crouchRoutine != null) StopCoroutine(crouchRoutine);
+            crouchRoutine = StartCoroutine(Uncrouch());
         }
     }
 
     private IEnumerator Crouch()
-    {
-        Vector3 targetScale = new Vector3(originalScale.x, crouchHeight, originalScale.z); // Calculate the target scale
-        
+    {   
+        // Crouch coroutine
+        Vector3 targetScale = new Vector3(originalScale.x, crouchHeight, originalScale.z);
+
         while (transform.localScale.y > crouchHeight)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime); // Lerp the scale
-            yield return null; // Wait for the next frame
+            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime * 5f);
+            yield return null;
         }
-        
-        transform.localScale = targetScale; // Set the scale to the target scale
+
+        transform.localScale = targetScale;
     }
 
     private IEnumerator Uncrouch()
-    {
-        Vector3 targetScale = originalScale; // Calculate the target scale
-        
+    {   
+        // Uncrouch coroutine
+        Vector3 targetScale = originalScale;
+
         while (transform.localScale.y < originalScale.y)
         {
-            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime); // Lerp the scale
-            yield return null; // Wait for the next frame
+            transform.localScale = Vector3.Lerp(transform.localScale, targetScale, crouchSpeed * Time.deltaTime * 5f);
+            yield return null;
         }
-        
-        transform.localScale = targetScale; // Set the scale to the target scale
+
+        transform.localScale = targetScale;
     }
 }
