@@ -11,7 +11,7 @@ WASD - Regular movement
 Space - Jump
 Shift - Crouch
 R - Start audio input
-s - Stop audio input
+T - Stop audio input
 
 --------
 

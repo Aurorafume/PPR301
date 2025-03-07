@@ -63,6 +63,7 @@ public class PlayerMovement : MonoBehaviour
         MyInput();
         SpeedControl();
         HandleCrouch();
+        CheckForObjectContact();
 
         // Apply drag only when grounded
         rb.drag = grounded ? groundDrag : 0;
@@ -84,12 +85,38 @@ public class PlayerMovement : MonoBehaviour
         Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
     }
 
-    private void GenerateLandingNoise()
+    private void CheckForObjectContact()
     {
-        // Prevent excessive noise generation by using a cooldown
+        // Define the detection radius (adjust as needed)
+        float detectionRadius = 0.5f;
+
+        // Check for objects within the radius
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Object"))
+            {
+                GenerateObjectNoise();
+                break; 
+            }
+        }
+    }
+
+    private void GenerateObjectNoise()
+    {
         if (Time.time - lastNoiseTime > 0.5f)
         {
-            noiseHandler.GenerateNoise(noiseHandler.jumpNoise);
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise)); // Ensure positive values
+            lastNoiseTime = Time.time;
+        }
+    }
+
+    private void GenerateLandingNoise()
+    {
+        if (Time.time - lastNoiseTime > 0.5f)
+        {
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.jumpNoise)); // Ensure positive values
             lastNoiseTime = Time.time;
         }
     }
