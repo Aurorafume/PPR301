@@ -9,13 +9,10 @@ public class NoiseBar : MonoBehaviour
     public Color greenColor = Color.green;
     public Color yellowColor = Color.yellow;
     public Color redColor = Color.red;
-
-    // Noise level range
     private float minNoise = 0f;
     private float maxNoise = 100f;
-
-    private float targetNoiseLevel = 0f; // Stores the new noise level target
-    private float smoothSpeed = 5f; // Adjust this to control smoothness
+    private float targetNoiseLevel = 0f; 
+    private float smoothSpeed = 5f; 
 
     void Update()
     {

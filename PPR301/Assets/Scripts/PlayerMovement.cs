@@ -35,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalScale;
     public Camera playerCamera;
     public NoiseHandler noiseHandler;
-    public MicrophoneInput microphoneInput;
 
     private void Start()
     {
@@ -104,19 +103,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void GenerateObjectNoise()
-    {
+    {   
+        // Generate noise when colliding with objects 
         if (Time.time - lastNoiseTime > 0.5f)
-        {
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise)); // Ensure positive values
+        {   
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
             lastNoiseTime = Time.time;
         }
     }
 
     private void GenerateLandingNoise()
-    {
+    {   
+        // Generate noise when landing on the ground
         if (Time.time - lastNoiseTime > 0.5f)
         {
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.jumpNoise)); // Ensure positive values
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.jumpNoise));
             lastNoiseTime = Time.time;
         }
     }
@@ -138,14 +139,13 @@ public class PlayerMovement : MonoBehaviour
 
     private void MovePlayer()
     {
-        // Correct movement direction (forward/back and left/right)
+        // Calculate movement direction based on camera orientation
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        moveDirection.Normalize(); // Prevent faster diagonal movement
+        moveDirection.Normalize();
 
         // Apply movement speed based on grounded state
         if (grounded)
         {
-            // More efficient movement when grounded
             Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
             rb.MovePosition(targetPosition);
         }

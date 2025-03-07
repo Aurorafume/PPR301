@@ -124,8 +124,9 @@ public class MicrophoneInput : MonoBehaviour
         float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); 
 
         // Ensure positive values by offsetting
-        float positiveDecibelLevel = decibelLevel + 65f; // Adjust offset if needed
+        float positiveDecibelLevel = decibelLevel + 65f;
 
-        return Mathf.Max(positiveDecibelLevel, 0f); // Ensure it's never negative
+        // Return the noise level and ensure it's not negative
+        return Mathf.Max(positiveDecibelLevel, 0f);
     }
 }

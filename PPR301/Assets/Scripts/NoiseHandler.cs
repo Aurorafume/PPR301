@@ -8,13 +8,12 @@ public class NoiseHandler : MonoBehaviour
     public float jumpNoise = 5f; 
     public float collisionNoise = 10f;
     public float voiceNoiseThreshold;
+    private float additionalNoise = 0f;
 
     // References
     public PlayerMovement playerMovement;
     private MicrophoneInput microphoneInput;
     public NoiseBar noiseBar;
-
-    private float additionalNoise = 0f; // Stores extra noise from jumps & collisions
 
     void Start()
     {   
@@ -50,7 +49,8 @@ public class NoiseHandler : MonoBehaviour
 
     public void GenerateNoise(float extraNoise)
     {   
-        additionalNoise += Mathf.Abs(extraNoise); // Accumulate noise instead of replacing
+        // Add extra noise to the accumulated noise
+        additionalNoise += Mathf.Abs(extraNoise);
 
         // Debugging
         Debug.Log($"New Noise Added: {extraNoise}, Total Additional Noise: {additionalNoise}");
