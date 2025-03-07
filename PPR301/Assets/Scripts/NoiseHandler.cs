@@ -5,14 +5,16 @@ using UnityEngine;
 public class NoiseHandler : MonoBehaviour
 {
     // Noise parameters
-    public float jumpNoise = -5f; 
-    public float collisionNoise = -10f;
-    public float voiceNoiseThreshold = -30f;
+    public float jumpNoise = 5f; 
+    public float collisionNoise = 10f;
+    public float voiceNoiseThreshold;
 
     // References
     public PlayerMovement playerMovement;
     private MicrophoneInput microphoneInput;
     public NoiseBar noiseBar;
+
+    private float additionalNoise = 0f; // Stores extra noise from jumps & collisions
 
     void Start()
     {   
@@ -27,38 +29,30 @@ public class NoiseHandler : MonoBehaviour
 
     void Update()
     {   
-        // Check if MicrophoneInput component is not null
         if (microphoneInput != null)
         {
-            float currentNoise = microphoneInput.GetCurrentNoiseLevel();
-            noiseBar.UpdateNoiseLevel(currentNoise);
+            // Get current noise level from mic
+            float micNoise = microphoneInput.GetCurrentNoiseLevel();
+            
+            // Combine mic noise with accumulated noise
+            float totalNoise = micNoise + additionalNoise;
 
-            if (currentNoise > voiceNoiseThreshold)
-            {
-                GenerateNoise(currentNoise);
-            }
+            // Debug log for tracking
+            Debug.Log($"Mic Noise: {micNoise}, Additional Noise: {additionalNoise}, Total Noise: {totalNoise}");
+
+            // Update noise bar
+            noiseBar.UpdateNoiseLevel(totalNoise);
+
+            // Decay additional noise over time (simulating noise fading)
+            additionalNoise = Mathf.Lerp(additionalNoise, 0, Time.deltaTime * 0.5f);
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    public void GenerateNoise(float extraNoise)
     {   
-        // Check if collision object is tagged as "Object"
-        if (collision.gameObject.CompareTag("Object"))
-        {
-            GenerateNoise(collisionNoise);
-        }
-    }
+        additionalNoise += Mathf.Abs(extraNoise); // Accumulate noise instead of replacing
 
-    public void GenerateNoise(float amount)
-    {   
-        // Debug noise generated
-        Debug.Log($"Noise generated: {amount} dB");
-
-        // Check if noise amount exceeds voice noise threshold (Debugging)
-        if (amount > voiceNoiseThreshold)
-        {
-            Debug.Log("Alert: Player noise detected!");
-            Debug.Log("Total noise level: " + amount + " dB");
-        }
+        // Debugging
+        Debug.Log($"New Noise Added: {extraNoise}, Total Additional Noise: {additionalNoise}");
     }
 }

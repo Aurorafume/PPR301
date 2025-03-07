@@ -33,8 +33,8 @@ public class MicrophoneInput : MonoBehaviour
             StartMicrophone();
         }
 
-        // Stop recording when the user presses "S"
-        if (Input.GetKeyDown(KeyCode.S))
+        // Stop recording when the user presses "T"
+        if (Input.GetKeyDown(KeyCode.T))
         {
             StopMicrophone();
         }
@@ -121,7 +121,11 @@ public class MicrophoneInput : MonoBehaviour
         // Compute RMS (Root Mean Square) volume level and convert to dB
         float rms = Mathf.Sqrt(audioSamples.Select(x => x * x).Sum() / audioSamples.Length);
         float normalisedRMS = rms / 1.0f; 
-        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f);
-        return decibelLevel;
+        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); 
+
+        // Ensure positive values by offsetting
+        float positiveDecibelLevel = decibelLevel + 65f; // Adjust offset if needed
+
+        return Mathf.Max(positiveDecibelLevel, 0f); // Ensure it's never negative
     }
 }

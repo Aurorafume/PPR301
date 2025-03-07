@@ -11,21 +11,25 @@ public class NoiseBar : MonoBehaviour
     public Color redColor = Color.red;
 
     // Noise level range
-    private float minNoise = -65f;
-    private float maxNoise = 0f;
+    private float minNoise = 0f;
+    private float maxNoise = 100f;
 
-    public void UpdateNoiseLevel(float noiseLevel)
+    private float targetNoiseLevel = 0f; // Stores the new noise level target
+    private float smoothSpeed = 5f; // Adjust this to control smoothness
+
+    void Update()
     {
-        // Normalise noise level between 0 and 1 for fill amount
-        float normalisedNoise = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
-        noiseBar.fillAmount = normalisedNoise;
+        // Smoothly interpolate current noise level towards the target value
+        float currentFill = noiseBar.fillAmount;
+        float smoothedFill = Mathf.Lerp(currentFill, targetNoiseLevel, Time.deltaTime * smoothSpeed);
+        noiseBar.fillAmount = smoothedFill;
 
-        // Set color based on noise level
-        if (normalisedNoise < 0.4f)
+        // Set color based on smoothed noise level
+        if (smoothedFill < 0.4f)
         {
             noiseBar.color = greenColor;
         }
-        else if (normalisedNoise < 0.6f)
+        else if (smoothedFill < 0.6f)
         {
             noiseBar.color = yellowColor;
         }
@@ -33,5 +37,11 @@ public class NoiseBar : MonoBehaviour
         {
             noiseBar.color = redColor;
         }
+    }
+
+    public void UpdateNoiseLevel(float noiseLevel)
+    {
+        // Normalise noise level between 0 and 1
+        targetNoiseLevel = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
     }
 }

@@ -818,7 +818,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379141863}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: f7542d1dd825d55418161d291298e110, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1291,9 +1291,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678bcb02b41f8cc44829e08982986685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpNoise: 5
-  collisionNoise: 10
-  voiceNoiseThreshold: -30
+  jumpNoise: 35
+  collisionNoise: 25
+  voiceNoiseThreshold: 35
   playerMovement: {fileID: 1839871879}
   noiseBar: {fileID: 758779079}
 --- !u!1 &2033640489
