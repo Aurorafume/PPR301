@@ -1,15 +1,12 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Linq;
 
 public class MicrophoneInput : MonoBehaviour
 {
-    public AudioSource audioSource;
     public int sampleRate = 44100;
     public string selectedMic;
-    // private float volumeLevel = 0f;
-
     private bool isRecording = false;
+    private AudioClip micClip;
     private float[] audioSamples = new float[1024];
 
     void Start()
@@ -39,81 +36,48 @@ public class MicrophoneInput : MonoBehaviour
             StopMicrophone();
         }
 
-        // Update audio visualisation
-        if (audioSource.isPlaying)
+        // Continuously read microphone data if recording
+        if (isRecording && micClip)
         {
-            audioSource.GetOutputData(audioSamples, 0);
+            ReadMicrophoneData();
         }
     }
 
     public void StartMicrophone()
     {   
-        // Check if already recording
+        // Prevent starting multiple recordings
         if (isRecording) return;
 
-        // Start recording using the selected microphone
+        // Start recording with the selected microphone
         if (selectedMic != null)
         {
-            audioSource.clip = Microphone.Start(selectedMic, true, 10, sampleRate);
-            audioSource.loop = true;
-            while (!(Microphone.GetPosition(selectedMic) > 0)) { }
-            audioSource.Play();
+            micClip = Microphone.Start(selectedMic, true, 10, sampleRate);
             isRecording = true;
             Debug.Log("Microphone recording started...");
         }
     }
 
     public void StopMicrophone()
-    {
-        // Check if not recording
+    {   
+        // Prevent stopping if not recording
         if (!isRecording) return;
 
-        // Stop recording and playback
+        // Stop recording and reset flag
         Microphone.End(selectedMic);
-        audioSource.Stop();
         isRecording = false;
         Debug.Log("Microphone recording stopped.");
     }
 
-    /* Uncomment if u want to add audio visualisation (but I dont think we need this tbh)
-    // Draw waveform visualisation using GL lines
-    private void OnRenderObject()
-    {
-        if (audioSamples == null || audioSamples.Length == 0)
-            return;
+    private void ReadMicrophoneData()
+    {   
+        // Prevent reading data if clip is null
+        if (!micClip) return;
 
-        GL.PushMatrix();
-        GL.LoadPixelMatrix();
-        GL.Begin(GL.LINES);
-        GL.Color(Color.green);
+        // Get the current position of the microphone recording
+        int micPosition = Microphone.GetPosition(selectedMic);
+        if (micPosition < audioSamples.Length) return;
 
-        for (int i = 0; i < audioSamples.Length - 1; i++)
-        {
-            float x1 = i * (Screen.width / (float)audioSamples.Length);
-            float y1 = Screen.height / 2 + audioSamples[i] * 100;
-            float x2 = (i + 1) * (Screen.width / (float)audioSamples.Length);
-            float y2 = Screen.height / 2 + audioSamples[i + 1] * 100;
-
-            GL.Vertex3(x1, y1, 0);
-            GL.Vertex3(x2, y2, 0);
-        }
-
-        GL.End();
-        GL.PopMatrix();
-    }*/
-
-    private void OnGUI()
-    {
-        GUI.color = Color.white;
-        
-        // Compute RMS (Root Mean Square) volume level
-        float rms = Mathf.Sqrt(audioSamples.Select(x => x * x).Sum() / audioSamples.Length);
-
-        // Normalise RMS against the full scale (1.0) to avoid extremely negative dB values
-        float normalisedRMS = rms / 1.0f; // Unity audio is between -1.0 and 1.0
-
-        // Convert to dB (ensure we never take log(0) by adding a small offset)
-        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); 
+        micClip.GetData(audioSamples, micPosition - audioSamples.Length);
     }
 
     public float GetCurrentNoiseLevel()
@@ -126,7 +90,6 @@ public class MicrophoneInput : MonoBehaviour
         // Ensure positive values by offsetting
         float positiveDecibelLevel = decibelLevel + 65f;
 
-        // Return the noise level and ensure it's not negative
         return Mathf.Max(positiveDecibelLevel, 0f);
     }
 }
