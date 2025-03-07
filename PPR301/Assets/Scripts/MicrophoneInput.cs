@@ -13,8 +13,9 @@ public class MicrophoneInput : MonoBehaviour
     {
         // Get the default microphone
         if (Microphone.devices.Length > 0)
-        {
+        {   
             selectedMic = Microphone.devices[0];
+            StartMicrophone();
         }
         else
         {
@@ -23,7 +24,10 @@ public class MicrophoneInput : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        /*
+        // Removed because recording now starts automatically
+
         // Start recording when the user presses "R"
         if (Input.GetKeyDown(KeyCode.R))
         {
@@ -34,7 +38,7 @@ public class MicrophoneInput : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.T))
         {
             StopMicrophone();
-        }
+        }*/
 
         // Continuously read microphone data if recording
         if (isRecording && micClip)
