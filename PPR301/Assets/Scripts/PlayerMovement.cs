@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    // Player movement parameters
+    [Header("Player Movement Parameters")]
     public float playerSpeed;
     public float groundDrag;
     public float jumpForce;
@@ -14,7 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed = 10f;
     public float playerHeight;
 
-    // Player state variables
+    [Header("Player State Variables")]
     public bool isCrouching = false;
     public bool readyToJump;
     public bool grounded;
@@ -23,11 +23,11 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private float lastNoiseTime;
 
-    // Key bindings
+    [Header("Key Bindings")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode crouchKey = KeyCode.LeftShift;
 
-    // References
+    [Header("References")]
     public LayerMask whatIsGround;
     public Transform orientation;
     private Vector3 moveDirection;
@@ -35,13 +35,14 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 originalScale;
     public Camera playerCamera;
     public NoiseHandler noiseHandler;
+    public Transform crouchScaleObject;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         readyToJump = true;
-        originalScale = transform.localScale;
+        originalScale = crouchScaleObject.localScale;
         playerCamera = Camera.main;
     }
 
@@ -195,7 +196,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // Smoothly adjust player height when crouching
         float targetHeight = isCrouching ? crouchHeight : originalScale.y;
-        transform.localScale = new Vector3(originalScale.x, Mathf.MoveTowards(transform.localScale.y, targetHeight, crouchSpeed * Time.deltaTime), originalScale.z);
+        crouchScaleObject.localScale = new Vector3(originalScale.x, Mathf.MoveTowards(crouchScaleObject.localScale.y, targetHeight, crouchSpeed * Time.deltaTime), originalScale.z);
 
         // Handle crouch input
         if (Input.GetKeyDown(crouchKey))
