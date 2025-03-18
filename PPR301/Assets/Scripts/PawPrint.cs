@@ -55,7 +55,7 @@ public class PawPrint : MonoBehaviour
         {
             if(pawIndex < 1){pawIndex++;}
             else{pawIndex = 0;}
-            Vector3 offset = new Vector3(pawLocationArray[pawIndex], -negatePawHeight, 1);
+            Vector3 offset = new Vector3(pawLocationArray[pawIndex], -negatePawHeight, 0.5f);
             Vector3 spawnPosition = transform.position + transform.rotation * offset;
             GameObject newPaw = Instantiate(pawPrefab, spawnPosition, transform.rotation * Quaternion.Euler(90, 0, 0));
             SpriteRenderer spriteRenderer = newPaw.GetComponent<SpriteRenderer>();
