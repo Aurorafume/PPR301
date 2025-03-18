@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Linq;
+using System.Collections;
 
 public class MicrophoneInput : MonoBehaviour
 {
@@ -9,6 +10,12 @@ public class MicrophoneInput : MonoBehaviour
     private AudioClip micClip;
     private float[] audioSamples = new float[1024];
 
+    IEnumerator DelayMicReadings()
+    {
+        yield return new WaitForSeconds(2f);
+        isRecording = true;
+    }
+
     void Start()
     {
         // Get the default microphone
@@ -16,6 +23,7 @@ public class MicrophoneInput : MonoBehaviour
         {   
             selectedMic = Microphone.devices[0];
             StartMicrophone();
+            StartCoroutine(DelayMicReadings());
         }
         else
         {

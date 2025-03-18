@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,19 @@ public class NoiseBar : MonoBehaviour
     private float maxNoise = 100f;
     private float targetNoiseLevel = 0f; 
     private float smoothSpeed = 5f; 
+
+    // Timer
+    private float startTime;
+    private float timeLimit = 3f;
+
+    // Event
+    public event Action OnNoiseMaxed;
+
+    void Start()
+    {   
+        noiseBar.fillAmount = 0f; // Initialize noise bar to empty
+        startTime = Time.time; // Capture the start time
+    }
 
     void Update()
     {
@@ -33,12 +47,23 @@ public class NoiseBar : MonoBehaviour
         else
         {
             noiseBar.color = redColor;
+
+            // Trigger event when noise level reaches red zone
+            OnNoiseMaxed?.Invoke();
         }
     }
 
     public void UpdateNoiseLevel(float noiseLevel)
-    {
-        // Normalise noise level between 0 and 1
-        targetNoiseLevel = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
+    {   
+        // Normalize noise level between 0 and 1
+        float normalizedNoise = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
+
+        // Restrict noise to yellow zone for the first 3 seconds
+        if (Time.time - startTime < timeLimit)
+        {
+            normalizedNoise = Mathf.Min(normalizedNoise, 0.59f); // Cap at just below red
+        }
+
+        targetNoiseLevel = normalizedNoise;
     }
 }
