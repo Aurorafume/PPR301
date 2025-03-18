@@ -1735,7 +1735,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865363727}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
@@ -1856,7 +1856,6 @@ MonoBehaviour:
   enemyManagerPrefab: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   canSpawnEnemy: 1
   spawnCooldown: 10
-  gameStartDelay: 5
 --- !u!1 &1877825063
 GameObject:
   m_ObjectHideFlags: 0

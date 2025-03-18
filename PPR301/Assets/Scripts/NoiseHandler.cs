@@ -48,9 +48,6 @@ public class NoiseHandler : MonoBehaviour
             // Combine mic noise with accumulated noise
             float totalNoise = micNoise + additionalNoise;
 
-            // Debug log for tracking
-            Debug.Log($"Mic Noise: {micNoise}, Additional Noise: {additionalNoise}, Total Noise: {totalNoise}");
-
             // Update noise bar
             noiseBar.UpdateNoiseLevel(totalNoise);
 
@@ -63,9 +60,6 @@ public class NoiseHandler : MonoBehaviour
     {   
         // Add extra noise to the accumulated noise
         additionalNoise += Mathf.Abs(extraNoise);
-
-        // Debugging
-        Debug.Log($"New Noise Added: {extraNoise}, Total Additional Noise: {additionalNoise}");
     }
 
     void TrySpawnEnemyManager()

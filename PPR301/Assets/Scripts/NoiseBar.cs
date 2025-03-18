@@ -24,8 +24,8 @@ public class NoiseBar : MonoBehaviour
 
     void Start()
     {   
-        noiseBar.fillAmount = 0f; // Initialize noise bar to empty
-        startTime = Time.time; // Capture the start time
+        noiseBar.fillAmount = 0f;
+        startTime = Time.time;
     }
 
     void Update()
@@ -55,13 +55,14 @@ public class NoiseBar : MonoBehaviour
 
     public void UpdateNoiseLevel(float noiseLevel)
     {   
-        // Normalize noise level between 0 and 1
+        // Normalise noise level between 0 and 1
         float normalizedNoise = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
 
         // Restrict noise to yellow zone for the first 3 seconds
         if (Time.time - startTime < timeLimit)
-        {
-            normalizedNoise = Mathf.Min(normalizedNoise, 0.59f); // Cap at just below red
+        {   
+            // Clamp noise level
+            normalizedNoise = Mathf.Min(normalizedNoise, 0.59f);
         }
 
         targetNoiseLevel = normalizedNoise;
