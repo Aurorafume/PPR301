@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent; 
-    public GameObject playerToChase; //players gameobject to chase
+    private GameObject playerToChase; //players gameobject to chase
     public Vector3 playerLocation; //player's location
     //enemy
     public bool angry;
@@ -27,6 +27,9 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         enemySpawnPoint = transform.position;
+
+        // Set the player to chase as anything with the tag player
+        playerToChase = GameObject.Find("Player");
 
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
