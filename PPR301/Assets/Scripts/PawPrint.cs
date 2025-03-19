@@ -15,11 +15,9 @@ public class PawPrint : MonoBehaviour
     public float[] pawLocationArray = new float[2];
     public float[] horizontalPawLocationArray = new float[4];
     public int pawIndex;
-    //public int pawIndex2;
     public int pawIndex3;
     public List<GameObject> spawnedPaws = new List<GameObject>();//list of paw prints
     public bool horizontalMovement;
-    public bool footPrints;
 
     // Start is called before the first frame update
     void Start()
@@ -32,21 +30,29 @@ public class PawPrint : MonoBehaviour
     {
         float hInput = Input.GetAxisRaw("Horizontal");
         float vInput = Input.GetAxisRaw("Vertical");
-        if(((vInput != 0 && hInput == 0) && script.grounded) || footPrints)
+        if(((vInput != 0 && hInput == 0) && (script.grounded || script.isCrouching)))
         {
             steps();
         }
-        else if(((vInput == 0 && hInput != 0) && script.grounded) || footPrints)
+        else if(((vInput == 0 && hInput != 0) && (script.grounded || script.isCrouching)))
         {
             sideSteps();
             Debug.Log("side stepping");
         }
-        else if(((vInput != 0 && hInput != 0) && script.grounded) || footPrints)
+        else if(((vInput != 0 && hInput != 0) && (script.grounded || script.isCrouching)))
         {
             sideSteps();
             Debug.Log("diagonal stepping");
         }
         fade();
+        if(script.isCrouching)
+        {
+            negatePawHeight = 0.24f;
+        }
+        else
+        {
+            negatePawHeight = 0.49f;
+        }
     }
     public void steps()
     {

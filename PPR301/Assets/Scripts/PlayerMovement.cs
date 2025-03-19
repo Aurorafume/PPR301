@@ -218,7 +218,7 @@ public class PlayerMovement : MonoBehaviour
         crouchScaleObject.localScale = new Vector3(originalScale.x, Mathf.MoveTowards(crouchScaleObject.localScale.y, targetHeight, crouchSpeed * Time.deltaTime), originalScale.z);
 
         // Handle crouch input
-        if (Input.GetKeyDown(crouchKey))
+        if (Input.GetKeyDown(crouchKey) && grounded)
         {
             isCrouching = true;
         }
