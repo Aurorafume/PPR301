@@ -36,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
     public Camera playerCamera;
     public NoiseHandler noiseHandler;
     public Transform crouchScaleObject;
+    private Animator anim;
 
     private void Start()
     {
@@ -44,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
         readyToJump = true;
         originalScale = crouchScaleObject.localScale;
         playerCamera = Camera.main;
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -80,6 +82,17 @@ public class PlayerMovement : MonoBehaviour
     {
         // Use SphereCast for a broader ground detection area
         grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f, whatIsGround);
+
+        anim.SetBool("isJumping", !grounded);
+
+    if (!grounded && rb.velocity.y < -0.1f)
+    {
+        anim.SetBool("isFalling", true);
+    }
+    else if (grounded)
+    {
+        anim.SetBool("isFalling", false);
+    }
 
         //Visualise ground detection ray
         Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
@@ -135,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
+
         }
     }
 
@@ -143,6 +157,10 @@ public class PlayerMovement : MonoBehaviour
         // Calculate movement direction based on camera orientation
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
         moveDirection.Normalize();
+
+        //Check if walking and animate
+        bool isWalking = moveDirection.magnitude > 0;
+        anim.SetBool("isWalking", isWalking);
 
         // Apply movement speed based on grounded state
         if (grounded)
@@ -175,6 +193,7 @@ public class PlayerMovement : MonoBehaviour
         // Apply jump force
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        anim.SetBool("isJumping", true);
 
         // Delay ground detection after jumping to prevent instant re-grounding
         Invoke(nameof(EnableGroundDetection), 0.1f);

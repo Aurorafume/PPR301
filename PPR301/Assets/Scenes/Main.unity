@@ -1599,9 +1599,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892909b4b15f6e44e924eb10a5193000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 4
+  playerSpeed: 3
   groundDrag: 3
-  jumpForce: 8
+  jumpForce: 7
   jumpCooldown: 1
   airMultiplier: 1
   crouchHeight: 0.5
@@ -1996,18 +1996,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2020786629
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2020786627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c80a69a9c070c6468d4248bfb2fe833, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2033640489
 GameObject:
   m_ObjectHideFlags: 0
