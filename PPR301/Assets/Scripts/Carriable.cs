@@ -4,15 +4,5 @@ using UnityEngine;
 
 public class Carriable : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // This script is not useless. Attach it to any carriable object and set its layer to 'interactable'.
 }
