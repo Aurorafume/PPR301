@@ -5,6 +5,7 @@ using UnityEngine;
 public class OutOfBounds : MonoBehaviour
 {
     public Vector3 respawnLocation;
+    public Vector3 respawnLocation2;
 
     void OnCollisionEnter(Collision collision)
 {
@@ -12,6 +13,11 @@ public class OutOfBounds : MonoBehaviour
     {
         Debug.Log("Respawn");
         transform.position = respawnLocation;
+    }
+    if (collision.gameObject.CompareTag("Light"))
+    {
+        Debug.Log("Respawn");
+        transform.position = respawnLocation2;
     }
 }
 }

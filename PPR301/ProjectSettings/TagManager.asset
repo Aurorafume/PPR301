@@ -9,6 +9,8 @@ TagManager:
   - Object
   - Bridge
   - Out of bounds
+  - Maze
+  - Light
   layers:
   - Default
   - TransparentFX

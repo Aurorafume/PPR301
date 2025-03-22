@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     public Transform crouchScaleObject;
     private Animator anim;
     //Ali's code
-    public bool BridgeMode; //Bridge mode cant jump.
+    public bool noJumpMode; //Bridge mode cant jump.
 
     private void Start()
     {
@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         // Get player input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        if(BridgeMode == false)
+        if(noJumpMode == false)
         {
             // Jump input
             if (Input.GetKey(jumpKey) && readyToJump && grounded)
