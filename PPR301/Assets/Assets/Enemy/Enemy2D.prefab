@@ -101,7 +101,7 @@ MonoBehaviour:
   agent: {fileID: 9002502280049489785}
   playerLocation: {x: 0, y: 0, z: 0}
   angry: 0
-  aggroDistance: 7
+  aggroDistance: 1000
   distanceFromPlayer: 0
   respawnTimer: 3
   chasing: 0

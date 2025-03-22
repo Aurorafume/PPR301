@@ -23,6 +23,7 @@ public class EnemyAI : MonoBehaviour
     public float fadeStrength = 100f;
     public bool fading;
     private SpriteRenderer spriteRenderer;
+    private NoiseBar noiseBar;
 
     void Start()
     {
@@ -32,6 +33,8 @@ public class EnemyAI : MonoBehaviour
         playerToChase = GameObject.Find("Player");
 
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        noiseBar = FindObjectOfType<NoiseBar>();
     }
     void Update()
     {   
@@ -45,22 +48,33 @@ public class EnemyAI : MonoBehaviour
     public void enemyChase()
     {
         if(chasing)
-        {
+        {   
             agent.SetDestination(playerLocation);
             walkAnimation();
             whenToRespawn = respawnTimer;
             angry = true;
+
+            if (noiseBar != null)
+            {
+                noiseBar.ForceChaseVisuals(true);
+            }
         }
         else
         {
             whenToRespawn -= Time.deltaTime;
-            agent.SetDestination(transform.position);//stops immediately instead of drifting
+            agent.SetDestination(transform.position);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
-            if(whenToRespawn <= 0)
+            
+            if (whenToRespawn <= 0)
             {
                 fading = true;
-                //transform.position = enemySpawnPoint;
+                Debug.Log("Enemy Despawned");
                 aggroDistance = 10;
+
+                if (noiseBar != null)
+                {
+                    noiseBar.ForceChaseVisuals(false);
+                }
             }
             angry = false;
         }
@@ -133,12 +147,17 @@ public class EnemyAI : MonoBehaviour
         {
             fadeStrength += Time.deltaTime / 1.5f;
         }
+
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, fadeStrength);
         fadeStrength = Mathf.Clamp(fadeStrength, 0, 1);
+        
         if(fadeStrength == 0)
         {
             transform.position = enemySpawnPoint;
             fading = false;
+            
+            // Reset enemy existence flag
+            NoiseHandler.NotifyEnemyDespawned();
         }
 
     }
