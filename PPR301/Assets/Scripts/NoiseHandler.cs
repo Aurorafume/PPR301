@@ -18,24 +18,28 @@ public class NoiseHandler : MonoBehaviour
 
     // Enemy
     public bool canSpawnEnemy = false;
+    private static bool enemyExists = false;
     public float spawnCooldown = 10f;
 
     void Start()
-    {   
+    {       
+        // Get references
         microphoneInput = GetComponent<MicrophoneInput>();
         additionalNoise = 0f;
 
-        // Check if MicrophoneInput component is missing
         if (microphoneInput == null)
-        {
+        {   
+            // Log error if microphone input component is missing
             Debug.LogError("MicrophoneInput component is missing!");
         }
 
-        // Subscribe to noise max event
         if (noiseBar != null)
-        {
+        {   
+            // Subscribe to event
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
             noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
         }
+
     }
 
     void Update()
@@ -56,6 +60,25 @@ public class NoiseHandler : MonoBehaviour
         }
     }
 
+    void OnEnable()
+    {   
+        // Subscribe to event
+        if (noiseBar != null)
+        {
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
+            noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
+        }
+    }
+
+    void OnDisable()
+    {   
+        // Unsubscribe from event
+        if (noiseBar != null)
+        {
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
+        }
+    }
+
     public void GenerateNoise(float extraNoise)
     {   
         // Add extra noise to the accumulated noise
@@ -64,12 +87,21 @@ public class NoiseHandler : MonoBehaviour
 
     void TrySpawnEnemyManager()
     {   
-        // Check if enemy manager can spawn
-        if (canSpawnEnemy)
+        // Try to spawn enemy manager if conditions are met
+        if (canSpawnEnemy && !enemyExists)
         {
             SpawnEnemyManager();
+            enemyExists = true;
             StartCoroutine(SpawnCooldown());
         }
+    }
+
+    public static void NotifyEnemyDespawned()
+    {   
+        // Notify that enemy has been despawned and delete the enemy manager
+        enemyExists = false;
+        GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
+        Destroy(enemyManager);
     }
 
     void SpawnEnemyManager()
