@@ -43,7 +43,7 @@ public class MyLight : MonoBehaviour
             {
                 endPoint = direction * hit.distance; // Stop at collision
                 //detect player
-                if (hit.collider.CompareTag("Player"))
+                if (hit.collider.CompareTag("Player") && hazard)
                 {
                     Debug.Log("Hit Player!");
                     player.transform.position = script.respawnLocation2;
