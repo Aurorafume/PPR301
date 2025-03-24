@@ -12,6 +12,7 @@ public class PlayerInteractHandler : MonoBehaviour
     [SerializeField] float jointLimit = 0.1f;
     [SerializeField] float jointSpring = 100f;
     [SerializeField] float jointDamper = 5f;
+    public bool isCarrying;
 
     [Header("References")]
     [SerializeField] KeyCode grabButton = KeyCode.Mouse0;
@@ -35,12 +36,11 @@ public class PlayerInteractHandler : MonoBehaviour
     void HandleInput()
     {
         // Detect input and pick up or drop depending on whether something is already held.
-        if (Input.GetKeyDown(grabButton))
+        if (Input.GetKeyDown(grabButton) && isCarrying == false)
         {
             TryGrabObject();
         }
-
-        if (Input.GetKeyUp(grabButton))
+        else if(Input.GetKeyDown(grabButton) && isCarrying == true)
         {
             if (hasCarryObject)
             {
@@ -51,6 +51,18 @@ public class PlayerInteractHandler : MonoBehaviour
                 ReleaseGrabbedObject();
             }
         }
+
+        //if (Input.GetKeyUp(grabButton) )
+        //{
+        //    if (hasCarryObject)
+        //    {
+        //        ReleaseCarryObject();
+        //    }
+        //    if (draggingObject)
+        //    {
+        //        ReleaseGrabbedObject();
+        //    }
+        //}
     }
 
     void TryGrabObject()
@@ -67,12 +79,13 @@ public class PlayerInteractHandler : MonoBehaviour
             if (carriable != null)
             {
                 CarryObject(interactableHit);
+                isCarrying = true;
             }
-
             Draggable draggable = interactableHit.transform.GetComponent<Draggable>();
             if (draggable != null)
             {
                 DragObject(interactableHit);
+                isCarrying = true;
             }
         }
     }
@@ -147,6 +160,7 @@ public class PlayerInteractHandler : MonoBehaviour
         carryObjectCollider.enabled = true;
 
         hasCarryObject = false;
+        isCarrying = false;
     }
 
     void ReleaseGrabbedObject()
@@ -162,5 +176,6 @@ public class PlayerInteractHandler : MonoBehaviour
         }
 
         draggingObject = false;
+        isCarrying = false;
     }
 }
