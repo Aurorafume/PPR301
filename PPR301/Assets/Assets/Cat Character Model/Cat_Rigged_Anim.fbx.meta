@@ -100,7 +100,7 @@ ModelImporter:
       takeName: Cat_Rig|rig.001Action
       internalID: -8255285669967193587
       firstFrame: 30
-      lastFrame: 42
+      lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -128,8 +128,8 @@ ModelImporter:
       name: Cat_Fall
       takeName: Cat_Rig|rig.001Action
       internalID: 4966894412344893365
-      firstFrame: 43
-      lastFrame: 44
+      firstFrame: 42
+      lastFrame: 51
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -157,7 +157,7 @@ ModelImporter:
       name: Cat_Land
       takeName: Cat_Rig|rig.001Action
       internalID: 5880666983748064424
-      firstFrame: 44
+      firstFrame: 52
       lastFrame: 61
       wrapMode: 0
       orientationOffsetY: 0
