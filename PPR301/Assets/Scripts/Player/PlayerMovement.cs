@@ -40,6 +40,10 @@ public class PlayerMovement : MonoBehaviour
     //Ali's code
     public bool noJumpMode; //Bridge mode cant jump.
 
+    [Header("Idle Animation")]
+    public float idleTimeThreshold = 3f; // Time before setting isIdle to true
+    private float lastMoveTime;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -73,6 +77,24 @@ public class PlayerMovement : MonoBehaviour
         rb.drag = grounded ? groundDrag : 0;
 
         RotatePlayerToCamera();
+        
+        HandleIdleState();
+    }
+
+    private void HandleIdleState()
+    {
+    // Check if player is moving (either by input or velocity)
+        bool isMoving = horizontalInput != 0 || verticalInput != 0 || rb.velocity.magnitude > 0.1f;
+
+        if (isMoving)
+        {
+            lastMoveTime = Time.time; // Reset idle timer
+            anim.SetBool("isIdle", false);
+        }
+        else if (Time.time - lastMoveTime > idleTimeThreshold)
+        {
+            anim.SetBool("isIdle", true);
+        }
     }
 
     private void FixedUpdate()

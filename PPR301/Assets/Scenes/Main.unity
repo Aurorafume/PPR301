@@ -5831,6 +5831,7 @@ MonoBehaviour:
   noiseHandler: {fileID: 1865363733}
   crouchScaleObject: {fileID: 1788730706}
   noJumpMode: 0
+  idleTimeThreshold: 7
 --- !u!54 &1839871880
 Rigidbody:
   m_ObjectHideFlags: 0
