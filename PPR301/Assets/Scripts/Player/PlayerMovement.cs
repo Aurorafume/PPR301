@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftShift;
 
     [Header("References")]
-    public LayerMask whatIsGround;
+    //public LayerMask whatIsGround;
     public Transform orientation;
     private Vector3 moveDirection;
     private Rigidbody rb;
@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
         
         HandleIdleState();
     }
-
     private void HandleIdleState()
     {
     // Check if player is moving (either by input or velocity)
@@ -104,8 +103,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGroundStatus()
     {
-        // Use SphereCast for a broader ground detection area
-        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f, whatIsGround);
+        // Use SphereCast for a broader ground detection area // Changed using tag.
+        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f) && hit.collider.CompareTag("Ground");
 
         anim.SetBool("isJumping", !grounded);
 
