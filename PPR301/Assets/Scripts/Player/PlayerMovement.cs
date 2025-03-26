@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftShift;
 
     [Header("References")]
-    public LayerMask whatIsGround;
+    //public LayerMask whatIsGround;
     public Transform orientation;
     private Vector3 moveDirection;
     private Rigidbody rb;
@@ -80,7 +80,6 @@ public class PlayerMovement : MonoBehaviour
         
         HandleIdleState();
     }
-
     private void HandleIdleState()
     {
     // Check if player is moving (either by input or velocity)

@@ -106,7 +106,8 @@ public class PlayerInteractHandler : MonoBehaviour
         grabbedObjectRB.isKinematic = true;
 
         carryObjectCollider = interactableHit.collider;
-        carryObjectCollider.enabled = false;
+        //carryObjectCollider.enabled = false;
+        carryObjectCollider.isTrigger = true; //makes key still usable when carried
     }
 
     void DragObject(RaycastHit interactableHit)
@@ -157,7 +158,8 @@ public class PlayerInteractHandler : MonoBehaviour
         carryObject = null;
             
         grabbedObjectRB.isKinematic = false;
-        carryObjectCollider.enabled = true;
+        //carryObjectCollider.enabled = true;
+        carryObjectCollider.isTrigger = false;
 
         hasCarryObject = false;
         isCarrying = false;

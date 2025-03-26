@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 3375895}
   - component: {fileID: 3375894}
   - component: {fileID: 3375893}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -328,9 +328,9 @@ GameObject:
   - component: {fileID: 193491427}
   - component: {fileID: 193491426}
   - component: {fileID: 193491425}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (3)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -672,9 +672,9 @@ GameObject:
   - component: {fileID: 271175455}
   - component: {fileID: 271175454}
   - component: {fileID: 271175453}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (7)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -866,9 +866,9 @@ GameObject:
   - component: {fileID: 289930425}
   - component: {fileID: 289930424}
   - component: {fileID: 289930423}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (8)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1018,7 +1018,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f82f04775854cba4d9a67dba34bc185e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1744,9 +1744,9 @@ GameObject:
   - component: {fileID: 485983730}
   - component: {fileID: 485983729}
   - component: {fileID: 485983728}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2655,7 +2655,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &758779078
 Transform:
   m_ObjectHideFlags: 0
@@ -3124,7 +3124,7 @@ GameObject:
   - component: {fileID: 874025888}
   - component: {fileID: 874025887}
   - component: {fileID: 874025886}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -3699,7 +3699,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: f82f04775854cba4d9a67dba34bc185e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4328,7 +4328,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95c7c222eb699cf409086577570ef48b, type: 2}
+  - {fileID: 2100000, guid: f82f04775854cba4d9a67dba34bc185e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4678,9 +4678,9 @@ GameObject:
   - component: {fileID: 1236942415}
   - component: {fileID: 1236942414}
   - component: {fileID: 1236942413}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4815,7 +4815,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 875fea53379169c4db798cc1683d8795, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5216,7 +5216,7 @@ GameObject:
   - component: {fileID: 1378692804}
   - component: {fileID: 1378692803}
   - component: {fileID: 1378692802}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor (4)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5440,9 +5440,9 @@ GameObject:
   - component: {fileID: 1426533751}
   - component: {fileID: 1426533750}
   - component: {fileID: 1426533749}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (4)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6315,7 +6315,7 @@ GameObject:
   - component: {fileID: 1692682701}
   - component: {fileID: 1692682700}
   - component: {fileID: 1692682699}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6882,9 +6882,9 @@ GameObject:
   - component: {fileID: 1794938883}
   - component: {fileID: 1794938882}
   - component: {fileID: 1794938881}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (9)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7173,9 +7173,9 @@ GameObject:
   - component: {fileID: 1823688519}
   - component: {fileID: 1823688518}
   - component: {fileID: 1823688517}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7270,9 +7270,9 @@ GameObject:
   - component: {fileID: 1828786552}
   - component: {fileID: 1828786551}
   - component: {fileID: 1828786550}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (10)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7422,9 +7422,6 @@ MonoBehaviour:
   grounded: 0
   jumpKey: 32
   crouchKey: 304
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 64
   orientation: {fileID: 910144857}
   playerCamera: {fileID: 963194227}
   noiseHandler: {fileID: 1865363733}
@@ -8306,8 +8303,8 @@ Rigidbody:
   m_GameObject: {fileID: 1884779732}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 3
+  m_AngularDrag: 3
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -8412,9 +8409,9 @@ GameObject:
   - component: {fileID: 1967580895}
   - component: {fileID: 1967580894}
   - component: {fileID: 1967580893}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (6)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8940,7 +8937,7 @@ GameObject:
   - component: {fileID: 2033640493}
   - component: {fileID: 2033640492}
   - component: {fileID: 2033640491}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Floor
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -9300,9 +9297,9 @@ GameObject:
   - component: {fileID: 2072757479}
   - component: {fileID: 2072757478}
   - component: {fileID: 2072757477}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bridge_part (5)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9537,10 +9534,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Wheel
       objectReference: {fileID: 0}
+    - target: {fileID: 2985239128901091784, guid: 7387033e01f7c84418ba79003405154b, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2985239128901091784, guid: 7387033e01f7c84418ba79003405154b, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 2985239128901091785, guid: 7387033e01f7c84418ba79003405154b, type: 3}
       propertyPath: obj
       value: 
       objectReference: {fileID: 8399408320466212912, guid: 90de8e3918675df408d500c962e77943, type: 3}
+    - target: {fileID: 2985239128901091787, guid: 7387033e01f7c84418ba79003405154b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f82f04775854cba4d9a67dba34bc185e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7387033e01f7c84418ba79003405154b, type: 3}
 --- !u!1001 &3378407705093867258
