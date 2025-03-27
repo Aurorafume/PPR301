@@ -11,6 +11,8 @@ TagManager:
   - Out of bounds
   - Maze
   - Light
+  - Wall
+  - Bounce
   layers:
   - Default
   - TransparentFX
