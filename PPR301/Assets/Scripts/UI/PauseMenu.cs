@@ -8,28 +8,34 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
+
+    // Reference to the Noise Bar
+    public GameObject noiseBar;
+
     private bool isPaused = false;
 
     void Start()
-    {   
+    {
         // Hide pause menu and settings menu
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
+
+        // Ensure Noise Bar is visible at the start
+        noiseBar.SetActive(true);
+
         Time.timeScale = 1f;
         isPaused = false;
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Update()
-    {   
+    {
         // Pause game when escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (settingsMenuUI.activeSelf)
             {
-                settingsMenuUI.SetActive(false);
-                pauseMenuUI.SetActive(true);
+                CloseSettings();
             }
             else
             {
@@ -42,51 +48,56 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume()
-    {   
-        // Hide pause menu and settings menu
+    {
         pauseMenuUI.SetActive(false);
+        settingsMenuUI.SetActive(false);
+        // Show the Noise Bar again
+        noiseBar.SetActive(true);
+
         Time.timeScale = 1f;
         isPaused = false;
-
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     public void Pause()
-    {   
-        // Show pause menu
+    {
         pauseMenuUI.SetActive(true);
         settingsMenuUI.SetActive(false);
+        // Hide the Noise Bar when paused
+        noiseBar.SetActive(false);
+
         Time.timeScale = 0f;
         isPaused = true;
-
         Cursor.lockState = CursorLockMode.None;
     }
 
+    public void OpenSettings()
+    {
+        // Show settings menu
+        settingsMenuUI.SetActive(true);
+        pauseMenuUI.SetActive(false);
+        // Also hide the Noise Bar when in settings
+        noiseBar.SetActive(false);
+    }
+
+    public void CloseSettings()
+    {
+        // Hide settings menu and show pause menu again
+        settingsMenuUI.SetActive(false);
+        pauseMenuUI.SetActive(true);
+        // Keep Noise Bar hidden if we’re still in the pause menu
+        noiseBar.SetActive(false);
+    }
+
     public void LoadMainMenu()
-    {   
-        // Load the main menu
+    {
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartMenu");
     }
 
     public void QuitGame()
-    {   
-        // Quit the game
+    {
         Debug.Log("Quitting game...");
         Application.Quit();
-    }
-
-    public void OpenSettings()
-    {   
-        // Show settings menu
-        settingsMenuUI.SetActive(true);
-        pauseMenuUI.SetActive(false);
-    }
-
-    public void CloseSettings()
-    {   
-        // Hide settings menu
-        settingsMenuUI.SetActive(false);
-        pauseMenuUI.SetActive(true);
     }
 }
