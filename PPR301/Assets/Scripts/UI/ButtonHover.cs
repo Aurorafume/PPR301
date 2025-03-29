@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    // An array of all dull images. Assign these in the Inspector in the order you want:
+    // An array of all dull images
     // e.g., 0 - Resume, 1 - Settings, 2 - Leave, 3 - Back.
     public GameObject[] dullImages;
 

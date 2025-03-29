@@ -10060,6 +10060,7 @@ GameObject:
   - component: {fileID: 1865363731}
   - component: {fileID: 1865363732}
   - component: {fileID: 1865363733}
+  - component: {fileID: 1865363734}
   m_Layer: 0
   m_Name: Audio Detection
   m_TagString: Untagged
@@ -10216,14 +10217,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678bcb02b41f8cc44829e08982986685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpNoise: 30
-  collisionNoise: 20
-  voiceNoiseThreshold: 70
+  jumpNoise: 15
+  collisionNoise: 15
+  voiceNoiseThreshold: 25
   playerMovement: {fileID: 1839871879}
   noiseBar: {fileID: 758779079}
+  ambientNoise: {fileID: 1865363734}
   enemyManagerPrefab: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   canSpawnEnemy: 1
   spawnCooldown: 10
+--- !u!114 &1865363734
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865363727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1e54104c9104d42b46c3c1b517abd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  calibrationDuration: 1
+  sampleInterval: 0.1
+  ambientNoiseBaseline: 0
+  isCalibrated: 0
 --- !u!1 &1872525709
 GameObject:
   m_ObjectHideFlags: 0

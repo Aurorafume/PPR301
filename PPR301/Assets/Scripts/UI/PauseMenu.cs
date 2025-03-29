@@ -8,10 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseMenuUI;
     public GameObject settingsMenuUI;
-
-    // Reference to the Noise Bar
     public GameObject noiseBar;
-
     private bool isPaused = false;
 
     void Start()

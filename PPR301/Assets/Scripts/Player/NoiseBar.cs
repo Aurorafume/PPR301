@@ -24,7 +24,7 @@ public class NoiseBar : MonoBehaviour
 
     [Header("Noise Variables")]
     private float minNoise = 0f;
-    private float maxNoise = 80f;
+    private float maxNoise = 30f;
     private float noisePercentage = 0f;
     private float targetNoiseLevel = 0f;
     private float smoothSpeed = 5f;
