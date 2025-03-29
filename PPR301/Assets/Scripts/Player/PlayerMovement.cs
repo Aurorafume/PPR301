@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchHeight = 0.5f;
     public float crouchSpeed = 10f;
     public float playerHeight;
+    [SerializeField] private float rotationSpeed = 5f;
 
     [Header("Player State Variables")]
     public bool isCrouching = false;
@@ -28,26 +29,29 @@ public class PlayerMovement : MonoBehaviour
     public KeyCode crouchKey = KeyCode.LeftShift;
 
     [Header("References")]
-    //public LayerMask whatIsGround;
     public Transform orientation;
+    public Camera playerCamera;
+    public Transform crouchScaleObject;
+    public NoiseHandler noiseHandler;
+    public Animator anim;
+
     private Vector3 moveDirection;
     private Rigidbody rb;
     private Vector3 originalScale;
-    public Camera playerCamera;
-    public NoiseHandler noiseHandler;
-    public Transform crouchScaleObject;
-    private Animator anim;
-    //Ali's code
-    public bool noJumpMode; //Bridge mode cant jump.
+
+    [Header("Custom Flags")]
+    public bool noJumpMode; // Bridge mode: can't jump.
 
     [Header("Idle Animation")]
-    public float idleTimeThreshold = 3f; // Time before setting isIdle to true
+    public float idleTimeThreshold = 3f;
     private float lastMoveTime;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+
         readyToJump = true;
         originalScale = crouchScaleObject.localScale;
         playerCamera = Camera.main;
@@ -56,192 +60,43 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        // Store previous grounded state before updating
         wasGrounded = grounded;
 
-        // Optimised ground detection using SphereCast for more stability
         CheckGroundStatus();
 
-        // Play landing sound when reconnecting with ground after being airborne
         if (!wasGrounded && grounded)
-        {
             GenerateLandingNoise();
-        }
 
-        MyInput();
-        SpeedControl();
+        GetPlayerInput();
         HandleCrouch();
-        CheckForObjectContact();
-
-        // Apply drag only when grounded
-        rb.drag = grounded ? groundDrag : 0;
-
-        RotatePlayerToCamera();
-        
         HandleIdleState();
-    }
-    private void HandleIdleState()
-    {
-    // Check if player is moving (either by input or velocity)
-        bool isMoving = horizontalInput != 0 || verticalInput != 0 || rb.velocity.magnitude > 0.1f;
+        CheckForObjectContact();
+        MovePlayer();
+        RotatePlayer();
+        SpeedControl();
 
-        if (isMoving)
-        {
-            lastMoveTime = Time.time; // Reset idle timer
-            anim.SetBool("isIdle", false);
-        }
-        else if (Time.time - lastMoveTime > idleTimeThreshold)
-        {
-            anim.SetBool("isIdle", true);
-        }
+        rb.drag = grounded ? groundDrag : 0;
     }
 
     private void FixedUpdate()
     {
-        MovePlayer();
+        /*MovePlayer();
+        RotatePlayer();
+        SpeedControl();*/
     }
 
-    private void CheckGroundStatus()
+    private void GetPlayerInput()
     {
-        // Use SphereCast for a broader ground detection area // Changed using tag.
-        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f) && hit.collider.CompareTag("Ground");
-
-        anim.SetBool("isJumping", !grounded);
-
-    if (!grounded && rb.velocity.y < -0.1f)
-    {
-        anim.SetBool("isFalling", true);
-    }
-    else if (grounded)
-    {
-        anim.SetBool("isFalling", false);
-    }
-
-        //Visualise ground detection ray
-        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
-    }
-
-    private void CheckForObjectContact()
-    {
-        // Define the detection radius (adjust as needed)
-        float detectionRadius = 0.5f;
-
-        // Check for objects within the radius
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
-
-        foreach (Collider collider in colliders)
-        {
-            if (collider.CompareTag("Object"))
-            {
-                GenerateObjectNoise();
-                break; 
-            }
-        }
-    }
-
-    private void GenerateObjectNoise()
-    {   
-        // Generate noise when colliding with objects 
-        if (Time.time - lastNoiseTime > 0.5f)
-        {   
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
-            lastNoiseTime = Time.time;
-        }
-    }
-
-    private void GenerateLandingNoise()
-    {   
-        // Generate noise when landing on the ground
-        if (Time.time - lastNoiseTime > 0.5f)
-        {
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.jumpNoise));
-            lastNoiseTime = Time.time;
-        }
-    }
-
-    private void MyInput()
-    {
-        // Get player input
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-        if(noJumpMode == false)
+
+        if (!noJumpMode && Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            // Jump input
-            if (Input.GetKey(jumpKey) && readyToJump && grounded)
-            {
-                readyToJump = false;
-                Jump();
-                Invoke(nameof(ResetJump), jumpCooldown);
-            }
+            readyToJump = false;
+            Jump();
+            Invoke(nameof(ResetJump), jumpCooldown);
         }
-    }
 
-    private void MovePlayer()
-    {
-        // Calculate movement direction based on camera orientation
-        moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-        moveDirection.Normalize();
-
-        //Check if walking and animate
-        bool isWalking = moveDirection.magnitude > 0;
-        anim.SetBool("isWalking", isWalking);
-
-        // Apply movement speed based on grounded state
-        if (grounded)
-        {
-            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(targetPosition);
-        }
-        else
-        {
-            float adjustedAirMultiplier = Mathf.Lerp(0.5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
-            rb.velocity = new Vector3(moveDirection.x * playerSpeed * adjustedAirMultiplier, rb.velocity.y, moveDirection.z * playerSpeed * adjustedAirMultiplier);
-        }
-    }
-
-    private void SpeedControl()
-    {
-        // Limit player speed to playerSpeed
-        Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        // Limit player speed if it exceeds playerSpeed
-        if (flatVelocity.magnitude > playerSpeed)
-        {
-            Vector3 limitedVelocity = flatVelocity.normalized * playerSpeed;
-            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
-        }
-    }
-
-    private void Jump()
-    {
-        // Apply jump force
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        anim.SetBool("isJumping", true);
-
-        // Delay ground detection after jumping to prevent instant re-grounding
-        Invoke(nameof(EnableGroundDetection), 0.1f);
-    }
-
-    private void EnableGroundDetection()
-    {
-        // Recheck ground status after a short delay
-        CheckGroundStatus();
-    }
-
-    private void ResetJump()
-    {
-        // Reset jump cooldown
-        readyToJump = true;
-    }
-
-    private void HandleCrouch()
-    {
-        // Smoothly adjust player height when crouching
-        float targetHeight = isCrouching ? crouchHeight : originalScale.y;
-        crouchScaleObject.localScale = new Vector3(originalScale.x, Mathf.MoveTowards(crouchScaleObject.localScale.y, targetHeight, crouchSpeed * Time.deltaTime), originalScale.z);
-
-        // Handle crouch input
         if (Input.GetKeyDown(crouchKey) && grounded)
         {
             isCrouching = true;
@@ -252,20 +107,154 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void RotatePlayerToCamera()
+    private void MovePlayer()
     {
-        // Rotate player to face camera direction
-        if (playerCamera != null)
-        {
-            Vector3 cameraForward = playerCamera.transform.forward;
-            cameraForward.y = 0;
+        Vector3 camForward = playerCamera.transform.forward;
+        Vector3 camRight = playerCamera.transform.right;
+        camForward.y = 0f;
+        camRight.y = 0f;
+        camForward.Normalize();
+        camRight.Normalize();
 
-            // Only rotate if there’s a significant change in direction
-            if (Vector3.Angle(transform.forward, cameraForward) > 1f)
+        moveDirection = (camForward * verticalInput + camRight * horizontalInput).normalized;
+
+        anim.SetBool("isWalking", moveDirection.magnitude > 0);
+
+        if (grounded)
+        {
+            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
+        }
+        else
+        {
+            float adjustedAirMultiplier = Mathf.Lerp(5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
+            Vector3 airMove = moveDirection * playerSpeed * airMultiplier;
+            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Vector3 velocityChange = airMove - horizontalVelocity;
+            velocityChange = Vector3.ClampMagnitude(velocityChange, playerSpeed); // prevent too much
+
+            rb.AddForce(velocityChange, ForceMode.Acceleration);
+        }
+    }
+
+    private void RotatePlayer()
+    {
+        if (moveDirection.sqrMagnitude > 0.01f)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            Quaternion smoothedRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            rb.MoveRotation(smoothedRotation);
+        }
+    }
+
+    private void SpeedControl()
+    {
+        /*Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+        if (flatVelocity.magnitude > playerSpeed)
+        {
+            Vector3 limitedVelocity = flatVelocity.normalized * playerSpeed;
+            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
+        }*/
+    }
+
+    private void Jump()
+    {
+        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+
+        Vector3 jumpBoost = moveDirection * playerSpeed * 1f; // tweak multiplier
+        rb.AddForce(jumpBoost, ForceMode.Impulse);
+
+        anim.SetBool("isJumping", true);
+
+        Invoke(nameof(EnableGroundDetection), 0.1f);
+    }
+
+    private void ResetJump()
+    {
+        readyToJump = true;
+    }
+
+    private void EnableGroundDetection()
+    {
+        CheckGroundStatus();
+    }
+
+    private void CheckGroundStatus()
+    {
+        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f) && hit.collider.CompareTag("Ground");
+
+        anim.SetBool("isJumping", !grounded);
+
+        if (!grounded && rb.velocity.y < -0.1f)
+        {
+            anim.SetBool("isFalling", true);
+        }
+        else if (grounded)
+        {
+            anim.SetBool("isFalling", false);
+        }
+
+        Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
+    }
+
+    private void HandleCrouch()
+    {
+        float targetHeight = isCrouching ? crouchHeight : originalScale.y;
+        crouchScaleObject.localScale = new Vector3(
+            originalScale.x,
+            Mathf.MoveTowards(crouchScaleObject.localScale.y, targetHeight, crouchSpeed * Time.deltaTime),
+            originalScale.z
+        );
+    }
+
+    private void CheckForObjectContact()
+    {
+        float detectionRadius = 0.5f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+
+        foreach (Collider collider in colliders)
+        {
+            if (collider.CompareTag("Object"))
             {
-                Quaternion targetRotation = Quaternion.LookRotation(cameraForward);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 10f);
+                GenerateObjectNoise();
+                break;
             }
+        }
+    }
+
+    private void GenerateObjectNoise()
+    {
+        if (Time.time - lastNoiseTime > 0.5f)
+        {
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
+            lastNoiseTime = Time.time;
+        }
+    }
+
+    private void GenerateLandingNoise()
+    {
+        if (Time.time - lastNoiseTime > 0.5f)
+        {
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.jumpNoise));
+            lastNoiseTime = Time.time;
+        }
+    }
+
+    private void HandleIdleState()
+    {
+        bool isMoving = horizontalInput != 0 || verticalInput != 0 || rb.velocity.magnitude > 0.1f;
+
+        if (isMoving)
+        {
+            lastMoveTime = Time.time;
+            anim.SetBool("isIdle", false);
+        }
+        else if (Time.time - lastMoveTime > idleTimeThreshold)
+        {
+            anim.SetBool("isIdle", true);
         }
     }
 }

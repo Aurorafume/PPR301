@@ -5026,7 +5026,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1839871874}
-  m_RootOrder: 3
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918448064
 GameObject:
@@ -5125,37 +5125,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 918448064}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &924165207
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 924165208}
-  m_Layer: 7
-  m_Name: CameraPosition
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &924165208
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 924165207}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.39499998, z: 0.279}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1839871874}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -5234,12 +5203,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.06, z: -2.18}
+  m_LocalPosition: {x: 0, y: 1.0599997, z: -2.1799998}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1839871874}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -5256,7 +5225,7 @@ MonoBehaviour:
   player: {fileID: 1839871874}
   offset: {x: 0, y: 2, z: -4}
   sensitivity: 2
-  smoothSpeed: 100
+  smoothSpeed: 500
   minPitch: -20
   maxPitch: 50
   zoomSpeed: 1
@@ -8310,7 +8279,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1839871874}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1541116851
 GameObject:
@@ -9914,10 +9883,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1788730706}
-  - {fileID: 963194228}
-  - {fileID: 924165208}
   - {fileID: 910144857}
   - {fileID: 1538879300}
+  - {fileID: 963194228}
   m_Father: {fileID: 1214123497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9933,14 +9901,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892909b4b15f6e44e924eb10a5193000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 3
-  groundDrag: 3
-  jumpForce: 7
+  playerSpeed: 0.7
+  groundDrag: 6
+  jumpForce: 9
   jumpCooldown: 1
-  airMultiplier: 1
-  crouchHeight: 0.5
-  crouchSpeed: 10
+  airMultiplier: 3
+  crouchHeight: 0.7
+  crouchSpeed: 2
   playerHeight: 1
+  rotationSpeed: 0.6
   isCrouching: 0
   readyToJump: 0
   grounded: 0
@@ -9948,8 +9917,9 @@ MonoBehaviour:
   crouchKey: 304
   orientation: {fileID: 910144857}
   playerCamera: {fileID: 963194227}
-  noiseHandler: {fileID: 1865363733}
   crouchScaleObject: {fileID: 1788730706}
+  noiseHandler: {fileID: 1865363733}
+  anim: {fileID: 0}
   noJumpMode: 0
   idleTimeThreshold: 7
 --- !u!54 &1839871880
@@ -10219,7 +10189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpNoise: 15
   collisionNoise: 15
-  voiceNoiseMargin: 3
+  voiceNoiseMargin: 4
   ambientNoise: {fileID: 1865363734}
   noiseBar: {fileID: 758779079}
   enemyManagerPrefab: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
