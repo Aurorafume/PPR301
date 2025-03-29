@@ -3,17 +3,18 @@ using UnityEngine;
 
 public class NoiseHandler : MonoBehaviour
 {
-    // Noise parameters
-    public float jumpNoise = 5f; 
-    public float collisionNoise = 10f;
-    public float voiceNoiseThreshold;
+    // Extra noise events (e.g jump, collision)
+    public float jumpNoise = 10f;
+    public float collisionNoise = 5f;
+    [Tooltip("Additional noise required above ambient to register as talking.")]
+    public float voiceNoiseMargin = 5f;
+
     private float additionalNoise = 0f;
 
     // References
-    public PlayerMovement playerMovement;
+    public AmbientNoise ambientNoise;
     private MicrophoneInput microphoneInput;
     public NoiseBar noiseBar;
-    public AmbientNoise ambientNoise;
     public GameObject enemyManagerPrefab;
 
     // Enemy spawning
@@ -23,14 +24,12 @@ public class NoiseHandler : MonoBehaviour
 
     void Start()
     {       
-        // Get the MicrophoneInput component (should be on the same GameObject)
         microphoneInput = GetComponent<MicrophoneInput>();
         if (microphoneInput == null)
-        {   
+        {
             Debug.LogError("NoiseHandler: Missing MicrophoneInput component!");
         }
         
-        // Ensure AmbientNoise reference is assigned in the Inspector
         if (ambientNoise == null)
         {
             Debug.LogError("NoiseHandler: AmbientNoise reference not set in inspector!");
@@ -38,38 +37,42 @@ public class NoiseHandler : MonoBehaviour
 
         additionalNoise = 0f;
 
-        // Subscribe to the noise max event
         if (noiseBar != null)
-        {   
+        {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
             noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
         }
     }
 
     void Update()
-    {   
-        // Only proceed if both microphone input and ambient calibration are ready
+    {       
+        // Proceed only if the microphone and ambient calibration are ready
         if (microphoneInput != null && ambientNoise != null && ambientNoise.isCalibrated)
         {
-            // Get current noise from microphone
             float micNoise = microphoneInput.GetCurrentNoiseLevel();
 
-            // Subtract ambient noise baseline; ensure it doesn't drop below zero
+            // Subtract ambient noise; ensure we don't go negative
             float adjustedNoise = Mathf.Max(micNoise - ambientNoise.ambientNoiseBaseline, 0f);
 
-            // Combine with any extra noise (e.g., from jumps or collisions)
+            // Combine with any extra noise events (jumps, collisions, etc.)
             float totalNoise = adjustedNoise + additionalNoise;
 
-            // Update the noise bar with the adjusted noise level
-            noiseBar.UpdateNoiseLevel(totalNoise);
+            // Update the noise bar using a dynamic maximum based on ambient noise + margin
+            noiseBar.UpdateNoiseLevel(totalNoise, ambientNoise.ambientNoiseBaseline, voiceNoiseMargin);
 
-            // Gradually decay the additional noise over time
+            // Decay the additional noise over time
             additionalNoise = Mathf.Lerp(additionalNoise, 0, Time.deltaTime * 0.5f);
         }
     }
 
+    // Called by other scripts (e.g on jump or collision events)
+    public void GenerateNoise(float extraNoise)
+    {       
+        additionalNoise += Mathf.Abs(extraNoise);
+    }
+
     void OnEnable()
-    {   
+    {       
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
@@ -78,22 +81,16 @@ public class NoiseHandler : MonoBehaviour
     }
 
     void OnDisable()
-    {   
+    {       
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
         }
     }
 
-    public void GenerateNoise(float extraNoise)
-    {   
-        // Add extra noise (e.g., from player actions)
-        additionalNoise += Mathf.Abs(extraNoise);
-    }
-
+    // Trigger enemy spawn when noise reaches a critical level
     void TrySpawnEnemyManager()
-    {   
-        // Spawn enemy manager if conditions are met
+    {       
         if (canSpawnEnemy && !enemyExists)
         {
             SpawnEnemyManager();
@@ -102,16 +99,9 @@ public class NoiseHandler : MonoBehaviour
         }
     }
 
-    public static void NotifyEnemyDespawned()
-    {   
-        // Called externally when the enemy despawns
-        enemyExists = false;
-        GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
-        Destroy(enemyManager);
-    }
-
+    // Spawns the enemy manager
     void SpawnEnemyManager()
-    {   
+    {       
         if (enemyManagerPrefab != null)
         {
             Instantiate(enemyManagerPrefab, Vector3.zero, Quaternion.identity);
@@ -123,9 +113,19 @@ public class NoiseHandler : MonoBehaviour
         }
     }
 
+    // Called by EnemyAI when the enemy has fully faded out and should be despawned.
+    public static void NotifyEnemyDespawned()
+    {       
+        enemyExists = false;
+        GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
+        if (enemyManager != null)
+        {
+            Destroy(enemyManager);
+        }
+    }
+
     IEnumerator SpawnCooldown()
-    {   
-        // Prevent enemy manager spawns from occurring too frequently
+    {       
         canSpawnEnemy = false;
         yield return new WaitForSeconds(spawnCooldown); 
         canSpawnEnemy = true;

@@ -22,9 +22,7 @@ public class NoiseBar : MonoBehaviour
     private float nextFrameTime;
     private bool forceMaxBackground = false;
 
-    [Header("Noise Variables")]
-    private float minNoise = 0f;
-    private float maxNoise = 30f;
+    // Dynamic noise values
     private float noisePercentage = 0f;
     private float targetNoiseLevel = 0f;
     private float smoothSpeed = 5f;
@@ -33,52 +31,29 @@ public class NoiseBar : MonoBehaviour
 
     void Start()
     {
-        // Store noise level sprite frames
         noiseLevels = new Sprite[][] {
             level1Frames, level2Frames, level3Frames, level4Frames, level5Frames, level6Frames
         };
 
-        // Set initial noise bar sprite
         noiseBarImage.sprite = level1Frames[0];
         nextFrameTime = Time.time + frameRate;
     }
 
     void Update()
     {
-        // Smooth transition between noise levels
+        // Smoothly interpolate noise percentage for a fluid UI update
         noisePercentage = Mathf.Lerp(noisePercentage, targetNoiseLevel, Time.deltaTime * smoothSpeed);
         UpdateNoiseBarSprite();
 
-        // Adjust red background intensity based on noise
         float redIntensity = Mathf.Lerp(0f, 1f, noisePercentage);
-
-        float actualRedIntensity = forceMaxBackground ? 1f : Mathf.Lerp(0f, 1f, noisePercentage);
-        float actualAlpha = forceMaxBackground ? 1f : Mathf.Lerp(0f, 1f, noisePercentage);
+        float actualRedIntensity = forceMaxBackground ? 1f : redIntensity;
+        float actualAlpha = forceMaxBackground ? 1f : redIntensity;
         float actualRadius = forceMaxBackground ? 0.3f : Mathf.Lerp(1f, 0.3f, noisePercentage);
 
         background.material.SetFloat("_Alpha", actualAlpha);
         background.material.SetFloat("_Radius", actualRadius);
 
-        // Apply the effect only when noise is present
         if (noisePercentage > 0.05f)
-        {
-            background.color = new Color(1f, 0f, 0f, redIntensity);
-            background.gameObject.SetActive(true);
-        }
-        else
-        {
-            background.gameObject.SetActive(false);
-        }
-
-        // Handle animation frame updates
-        if (Time.time >= nextFrameTime)
-        {
-            currentFrame = (currentFrame + 1) % 4;
-            nextFrameTime = Time.time + frameRate;
-        }
-
-        // Update the red background intensity
-        if (actualRedIntensity > 0.05f)
         {
             background.color = new Color(1f, 0f, 0f, actualRedIntensity);
             background.gameObject.SetActive(true);
@@ -87,25 +62,23 @@ public class NoiseBar : MonoBehaviour
         {
             background.gameObject.SetActive(false);
         }
-    }
 
-    public void ForceChaseVisuals(bool active)
-    {   
-        // Force the chase visuals to be active
-        forceMaxBackground = active;
-        isChasing = active;
-
-        if (!active)
+        if (Time.time >= nextFrameTime)
         {
-            StopChase();
+            currentFrame = (currentFrame + 1) % 4;
+            nextFrameTime = Time.time + frameRate;
         }
     }
 
-    public void UpdateNoiseLevel(float noiseLevel)
-    {   
-        // Update the noise level
-        targetNoiseLevel = Mathf.InverseLerp(minNoise, maxNoise, noiseLevel);
+    // Updated to accept dynamic parameters: ambientBaseline and voiceMargin
+    public void UpdateNoiseLevel(float noiseLevel, float ambientBaseline, float voiceMargin)
+    {
+        // The dynamic maximum is the ambient baseline plus the additional margin required to register talking.
+        float dynamicMaxNoise = ambientBaseline + voiceMargin;
+        // Calculate the percentage relative to this dynamic maximum.
+        targetNoiseLevel = Mathf.Clamp01(noiseLevel / dynamicMaxNoise);
 
+        // If the noise level reaches the top of the scale, trigger an event (e.g for enemy spawns).
         if (targetNoiseLevel >= 1f && !isChasing)
         {
             isChasing = true;
@@ -115,26 +88,22 @@ public class NoiseBar : MonoBehaviour
     }
 
     void UpdateNoiseBarSprite()
-    {   
-        // Update the noise bar sprite based on the noise level
+    {
         if (isChasing)
         {
             noiseBarImage.sprite = chaseWarningFrames[currentFrame];
             return;
         }
 
-        // Determine the noise level index
         int levelIndex = Mathf.Clamp(Mathf.FloorToInt(noisePercentage * noiseLevels.Length), 0, noiseLevels.Length - 1);
         noiseBarImage.sprite = noiseLevels[levelIndex][currentFrame];
 
-        // Adjust transparency based on noise level
         float alpha = Mathf.Lerp(0.5f, 1f, noisePercentage);
         noiseBarImage.color = new Color(1f, 1f, 1f, alpha);
     }
 
     IEnumerator ChaseWarningAnimation()
     {
-        // Play the chase warning animation
         while (isChasing)
         {
             noiseBarImage.sprite = chaseWarningFrames[currentFrame];
@@ -142,15 +111,20 @@ public class NoiseBar : MonoBehaviour
         }
     }   
 
-    public void StopChase()
+    public void ForceChaseVisuals(bool active)
     {   
-        // Stop the chase
-        isChasing = false;
-        noiseBarImage.sprite = level1Frames[0];
+        forceMaxBackground = active;
+        isChasing = active;
+
+        if (!active)
+        {
+            StopChase();
+        }
     }
 
-    void DespawnEnemyManager()
+    public void StopChase()
     {   
-        StopChase();
+        isChasing = false;
+        noiseBarImage.sprite = level1Frames[0];
     }
 }

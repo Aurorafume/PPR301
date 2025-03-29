@@ -10219,10 +10219,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpNoise: 15
   collisionNoise: 15
-  voiceNoiseThreshold: 25
-  playerMovement: {fileID: 1839871879}
-  noiseBar: {fileID: 758779079}
+  voiceNoiseMargin: 3
   ambientNoise: {fileID: 1865363734}
+  noiseBar: {fileID: 758779079}
   enemyManagerPrefab: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   canSpawnEnemy: 1
   spawnCooldown: 10
