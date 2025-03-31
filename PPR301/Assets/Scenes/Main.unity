@@ -9960,7 +9960,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892909b4b15f6e44e924eb10a5193000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 0.7
+  playerSpeed: 1.3
   groundDrag: 6
   jumpForce: 9
   jumpCooldown: 1
@@ -11852,8 +11852,8 @@ MonoBehaviour:
   angleStep: 2.5
   rayLength: 15
   hazard: 1
-  player: {fileID: 0}
-  script: {fileID: 0}
+  player: {fileID: 1839871873}
+  script: {fileID: 1839871885}
 --- !u!23 &2052054213
 MeshRenderer:
   m_ObjectHideFlags: 0
