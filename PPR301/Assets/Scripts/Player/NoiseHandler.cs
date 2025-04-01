@@ -21,6 +21,7 @@ public class NoiseHandler : MonoBehaviour
     public bool canSpawnEnemy = false;
     private static bool enemyExists = false;
     public float spawnCooldown = 10f;
+    public Vector3 enemySpawnLocation;
 
     void Start()
     {       
@@ -104,7 +105,7 @@ public class NoiseHandler : MonoBehaviour
     {       
         if (enemyManagerPrefab != null)
         {
-            Instantiate(enemyManagerPrefab, Vector3.zero, Quaternion.identity);
+            Instantiate(enemyManagerPrefab, enemySpawnLocation, Quaternion.identity);
             Debug.Log("Enemy Manager Spawned!");
         }
         else
