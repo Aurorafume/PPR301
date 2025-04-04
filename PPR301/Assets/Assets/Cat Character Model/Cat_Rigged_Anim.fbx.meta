@@ -99,7 +99,7 @@ ModelImporter:
       name: Cat_Jump
       takeName: Cat_Rig|rig.001Action
       internalID: -8255285669967193587
-      firstFrame: 30
+      firstFrame: 31
       lastFrame: 41
       wrapMode: 0
       orientationOffsetY: 0
