@@ -52,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool draggingObject;
     public bool inTopDownMode;
+    float forwardAngularOffsetFromWorldZ = 0;
 
     private void Start()
     {
@@ -80,9 +81,7 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         HandleIdleState();
         CheckForObjectContact();
-        //DefaultMovement();
         moveBehaviour();
-        //RotatePlayer();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -124,9 +123,11 @@ public class PlayerMovement : MonoBehaviour
         UpdateMoveBehaviour();
     }
 
-    void SetInTopDownMode(bool state)
+    void SetInTopDownMode(bool state, float forwardAngularDirection)
     {
         inTopDownMode = state;
+
+        forwardAngularOffsetFromWorldZ = forwardAngularDirection;
 
         UpdateMoveBehaviour();
     }
@@ -219,16 +220,21 @@ public class PlayerMovement : MonoBehaviour
 
     private void TopDownMovement()
     {
-        moveDirection = transform.forward * verticalInput;
+        // forwardAngularOffsetFromWorldZ is an angle in degrees determining which world direction is forwards,
+        // with the default (0) being world positive Z.
+        Vector3 forwardDirection = new Vector3(0f, forwardAngularOffsetFromWorldZ, 0f);
+
+        moveDirection = new Vector3 (horizontalInput, 0f, verticalInput).normalized;
+
+        moveDirection = Quaternion.Euler(forwardDirection) * moveDirection;
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
+        
 
         Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
         rb.MovePosition(targetPosition);
 
-        Quaternion targetRotation = Quaternion.Euler(0, horizontalInput * topDownRotationSpeed * Time.fixedDeltaTime, 0);
-    
-        rb.MoveRotation(rb.rotation * targetRotation);
+        DefaultPlayerRotation();
     }
 
     private void SpeedControl()
