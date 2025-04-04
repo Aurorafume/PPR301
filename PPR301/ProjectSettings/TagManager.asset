@@ -7,12 +7,12 @@ TagManager:
   - Map
   - Ground
   - Object
-  - Bridge
   - Out of bounds
-  - Maze
   - Light
   - Wall
   - Bounce
+  - Area1
+  - Area2
   layers:
   - Default
   - TransparentFX
