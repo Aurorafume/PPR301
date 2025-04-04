@@ -6576,7 +6576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1214123496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 208.17, y: -1.21, z: -0.99}
+  m_LocalPosition: {x: 156.7, y: 0.24, z: -6.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -10063,7 +10063,7 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSpeed: 2
   playerHeight: 1
-  rotationSpeed: 1
+  rotationSpeed: 2
   isCrouching: 0
   readyToJump: 0
   grounded: 0
