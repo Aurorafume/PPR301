@@ -4439,7 +4439,7 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSpeed: 2
   playerHeight: 1
-  rotationSpeed: 1
+  rotationSpeed: 2
   topDownRotationSpeed: 50
   isCrouching: 0
   readyToJump: 0
