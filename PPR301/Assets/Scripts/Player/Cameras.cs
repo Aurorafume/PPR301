@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,9 @@ public class Cameras : MonoBehaviour
     public Camera camera2;  // Reference to Camera 2
     public Camera camera3;  // Reference to Camera 2
     public PlayerMovement script;
-    // Start is called before the first frame update
+
+    public static event Action<bool> OnEnterTopDownCamera;
+
     void Start()
     {
         camera1.depth = 1;
@@ -43,12 +46,14 @@ public class Cameras : MonoBehaviour
             camera1.depth = 0;
             camera2.depth = 1;
             script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true);
         }
         else if (collision.gameObject.CompareTag("Maze"))
         {
             camera1.depth = 0;
             camera3.depth = 1;
             script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true);
         }
     }
     void OnTriggerExit(Collider collision)
@@ -58,12 +63,14 @@ public class Cameras : MonoBehaviour
             camera2.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false);
         }
         else if (collision.gameObject.CompareTag("Maze"))
         {
             camera3.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false);
         }
     }
 }

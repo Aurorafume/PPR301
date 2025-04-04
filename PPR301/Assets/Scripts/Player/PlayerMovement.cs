@@ -14,6 +14,7 @@ public class PlayerMovement : MonoBehaviour
     public float crouchSpeed = 10f;
     public float playerHeight;
     [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float topDownRotationSpeed = 50f;
 
     [Header("Player State Variables")]
     public bool isCrouching = false;
@@ -46,6 +47,12 @@ public class PlayerMovement : MonoBehaviour
     public float idleTimeThreshold = 3f;
     private float lastMoveTime;
 
+    private delegate void MoveBehaviour();
+    private MoveBehaviour moveBehaviour;
+
+    public bool draggingObject;
+    public bool inTopDownMode;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -54,8 +61,10 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         originalScale = crouchScaleObject.localScale;
-        //playerCamera = Camera.main;
+        playerCamera = Camera.main;
         anim = GetComponentInChildren<Animator>();
+
+        moveBehaviour = DefaultMovement;
     }
 
     private void Update()
@@ -71,8 +80,9 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         HandleIdleState();
         CheckForObjectContact();
-        MovePlayer();
-        RotatePlayer();
+        //DefaultMovement();
+        moveBehaviour();
+        //RotatePlayer();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -107,7 +117,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void MovePlayer()
+    void SetDraggingObject(bool state)
+    {
+        draggingObject = state;
+
+        UpdateMoveBehaviour();
+    }
+
+    void SetInTopDownMode(bool state)
+    {
+        inTopDownMode = state;
+
+        UpdateMoveBehaviour();
+    }
+
+    public void UpdateMoveBehaviour()
+    {
+        if (draggingObject)
+        {
+            moveBehaviour = DragMovement;
+        }
+        else if (inTopDownMode)
+        {
+            moveBehaviour = TopDownMovement;
+        }
+        else
+        {
+            moveBehaviour = DefaultMovement;
+        }
+    }
+
+    private void DefaultMovement()
     {
         Vector3 camForward = playerCamera.transform.forward;
         Vector3 camRight = playerCamera.transform.right;
@@ -136,9 +176,11 @@ public class PlayerMovement : MonoBehaviour
 
             rb.AddForce(velocityChange, ForceMode.Acceleration);
         }
+
+        DefaultPlayerRotation();
     }
 
-    private void RotatePlayer()
+    private void DefaultPlayerRotation()
     {
         if (moveDirection.sqrMagnitude > 0.01f)
         {
@@ -146,6 +188,47 @@ public class PlayerMovement : MonoBehaviour
             Quaternion smoothedRotation = Quaternion.Slerp(rb.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
             rb.MoveRotation(smoothedRotation);
         }
+    }
+
+    private void DragMovement()
+    {
+        verticalInput = Mathf.Clamp(verticalInput, float.MinValue, 0f);
+        horizontalInput = 0f;
+
+        moveDirection = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
+
+        anim.SetBool("isWalking", moveDirection.magnitude > 0);
+
+        if (grounded)
+        {
+            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
+        }
+        else
+        {
+            float adjustedAirMultiplier = Mathf.Lerp(5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
+            Vector3 airMove = moveDirection * playerSpeed * airMultiplier;
+            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+
+            Vector3 velocityChange = airMove - horizontalVelocity;
+            velocityChange = Vector3.ClampMagnitude(velocityChange, playerSpeed); // prevent too much
+
+            rb.AddForce(velocityChange, ForceMode.Acceleration);
+        }
+    }
+
+    private void TopDownMovement()
+    {
+        moveDirection = transform.forward * verticalInput;
+
+        anim.SetBool("isWalking", moveDirection.magnitude > 0);
+
+        Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(targetPosition);
+
+        Quaternion targetRotation = Quaternion.Euler(0, horizontalInput * topDownRotationSpeed * Time.fixedDeltaTime, 0);
+    
+        rb.MoveRotation(rb.rotation * targetRotation);
     }
 
     private void SpeedControl()
@@ -256,5 +339,17 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isIdle", true);
         }
+    }
+
+    private void OnEnable()
+    {
+        Cameras.OnEnterTopDownCamera += SetInTopDownMode;
+        PlayerInteractHandler.OnDragObject += SetDraggingObject;
+    }
+
+    private void OnDisable()
+    {
+        Cameras.OnEnterTopDownCamera -= SetInTopDownMode;
+        PlayerInteractHandler.OnDragObject -= SetDraggingObject;
     }
 }

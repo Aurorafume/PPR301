@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,8 +26,17 @@ public class PlayerInteractHandler : MonoBehaviour
     ConfigurableJoint joint;
     Vector3 grabPoint;
 
+    PlayerMovement playerMovement;
+
     bool hasCarryObject;
     bool draggingObject;
+
+    public static event Action<bool> OnDragObject;
+
+    void Awake()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+    }
 
     void Update()
     {
@@ -112,6 +122,8 @@ public class PlayerInteractHandler : MonoBehaviour
 
     void DragObject(RaycastHit interactableHit)
     {
+        OnDragObject?.Invoke(true);
+
         draggingObject = true;
 
         grabbedObjectRB = interactableHit.rigidbody;
@@ -167,6 +179,8 @@ public class PlayerInteractHandler : MonoBehaviour
 
     void ReleaseGrabbedObject()
     {
+        OnDragObject?.Invoke(false);
+
         if (joint)
         {
             Destroy(joint);
