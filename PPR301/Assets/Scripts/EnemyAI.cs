@@ -25,6 +25,7 @@ public class EnemyAI : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private NoiseBar noiseBar;
     public States states;
+    public GameObject player;
     
     void Start()
     {
@@ -131,12 +132,32 @@ public class EnemyAI : MonoBehaviour
         playerLocation = playerToChase.transform.position;
     }
 
-    public void touchPlayer()//2D enemy
-    {
-        if(distanceFromPlayer <= 2f)
+    public void touchPlayer()
+    {   
+        GameObject hidingSpot = GameObject.FindGameObjectWithTag("Hiding Spot");
+
+        if (distanceFromPlayer <= 2f)
         {
             Debug.Log("Touching Player");
-            states.gameOver = true;
+
+            if (states.playerIsHiding)
+            {
+                Debug.Log("Player is hiding. Enemy will despawn.");
+                fading = true;
+                noiseBar.StopChase();
+
+                // Stop chase visuals when despawning due to hiding
+                if (noiseBar != null)
+                {
+                    noiseBar.ForceChaseVisuals(false);
+                }
+
+                FadeTo();
+            }
+            else
+            {
+                states.gameOver = true;
+            }
         }
     }
 

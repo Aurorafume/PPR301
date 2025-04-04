@@ -14,6 +14,7 @@ TagManager:
   - Area1
   - Area2
   - Enemy
+  - Hiding Spot
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Player
   - Object
   - Interactable
-  - 
+  - Hiding Spot
   - 
   - 
   - 
