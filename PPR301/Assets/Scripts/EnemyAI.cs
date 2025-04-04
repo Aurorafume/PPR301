@@ -24,9 +24,13 @@ public class EnemyAI : MonoBehaviour
     public bool fading;
     private SpriteRenderer spriteRenderer;
     private NoiseBar noiseBar;
-
+    public States states;
+    
     void Start()
     {
+        // get the States script
+        states = FindObjectOfType<States>();
+
         enemySpawnPoint = transform.position;
 
         // Set the player to chase as anything with the tag player
@@ -36,6 +40,7 @@ public class EnemyAI : MonoBehaviour
 
         noiseBar = FindObjectOfType<NoiseBar>();
     }
+
     void Update()
     {   
         updatePlayerLocation();
@@ -79,6 +84,7 @@ public class EnemyAI : MonoBehaviour
             angry = false;
         }
     }
+
     public void walkAnimation()
     {
         if(turnNum < 15 && right)
@@ -99,6 +105,7 @@ public class EnemyAI : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, turnNum);
     }
+
     public void checkAggroDistance()
     {
         //checks distance between player and enemy
@@ -117,25 +124,29 @@ public class EnemyAI : MonoBehaviour
             aggroDistance = 15;
         }
     }
+
     public void updatePlayerLocation()
     {
         //set playerLocation to player's current location
         playerLocation = playerToChase.transform.position;
     }
+
     public void touchPlayer()//2D enemy
     {
-        if(distanceFromPlayer <= 1.3f)
+        if(distanceFromPlayer <= 2f)
         {
-            //do something when touching player
             Debug.Log("Touching Player");
+            states.gameOver = true;
         }
     }
+
     public void billboard()//turns enemy towards camera
     {
         Vector3 lookPos = Camera.main.transform.position - transform.position; // Get direction
         lookPos.y = 0; // Keep Y-axis fixed
         transform.rotation = Quaternion.LookRotation(-lookPos);
     }
+
     public void FadeTo()
     {
         //float fadeStrength = 100f;
