@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 9002502280049489787}
   - component: {fileID: 9002502280049489784}
   - component: {fileID: 9002502280049489785}
+  - component: {fileID: 5155047180215732996}
   m_Layer: 0
   m_Name: Enemy2D
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,6 +109,8 @@ MonoBehaviour:
   enemySpawnPoint: {x: 0, y: 0, z: 0}
   fadeStrength: 100
   fading: 0
+  states: {fileID: 0}
+  player: {fileID: 0}
 --- !u!195 &9002502280049489785
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -130,3 +133,16 @@ NavMeshAgent:
   m_BaseOffset: 5.53
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!65 &5155047180215732996
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9002502280049489788}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 2.6056285, y: 11.06, z: 0.2}
+  m_Center: {x: 0.19006819, y: 0, z: 0}

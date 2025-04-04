@@ -24,9 +24,14 @@ public class EnemyAI : MonoBehaviour
     public bool fading;
     private SpriteRenderer spriteRenderer;
     private NoiseBar noiseBar;
-
+    public States states;
+    public GameObject player;
+    
     void Start()
     {
+        // get the States script
+        states = FindObjectOfType<States>();
+
         enemySpawnPoint = transform.position;
 
         // Set the player to chase as anything with the tag player
@@ -36,6 +41,7 @@ public class EnemyAI : MonoBehaviour
 
         noiseBar = FindObjectOfType<NoiseBar>();
     }
+
     void Update()
     {   
         updatePlayerLocation();
@@ -79,6 +85,7 @@ public class EnemyAI : MonoBehaviour
             angry = false;
         }
     }
+
     public void walkAnimation()
     {
         if(turnNum < 15 && right)
@@ -99,6 +106,7 @@ public class EnemyAI : MonoBehaviour
         }
         transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, turnNum);
     }
+
     public void checkAggroDistance()
     {
         //checks distance between player and enemy
@@ -117,25 +125,49 @@ public class EnemyAI : MonoBehaviour
             aggroDistance = 15;
         }
     }
+
     public void updatePlayerLocation()
     {
         //set playerLocation to player's current location
         playerLocation = playerToChase.transform.position;
     }
-    public void touchPlayer()//2D enemy
-    {
-        if(distanceFromPlayer <= 1.3f)
+
+    public void touchPlayer()
+    {   
+        GameObject hidingSpot = GameObject.FindGameObjectWithTag("Hiding Spot");
+
+        if (distanceFromPlayer <= 2f)
         {
-            //do something when touching player
             Debug.Log("Touching Player");
+
+            if (states.playerIsHiding)
+            {
+                Debug.Log("Player is hiding. Enemy will despawn.");
+                fading = true;
+                noiseBar.StopChase();
+
+                // Stop chase visuals when despawning due to hiding
+                if (noiseBar != null)
+                {
+                    noiseBar.ForceChaseVisuals(false);
+                }
+
+                FadeTo();
+            }
+            else
+            {
+                states.gameOver = true;
+            }
         }
     }
+
     public void billboard()//turns enemy towards camera
     {
         Vector3 lookPos = Camera.main.transform.position - transform.position; // Get direction
         lookPos.y = 0; // Keep Y-axis fixed
         transform.rotation = Quaternion.LookRotation(-lookPos);
     }
+
     public void FadeTo()
     {
         //float fadeStrength = 100f;
