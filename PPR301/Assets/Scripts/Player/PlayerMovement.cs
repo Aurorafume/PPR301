@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         originalScale = crouchScaleObject.localScale;
-        playerCamera = Camera.main;
+        //playerCamera = Camera.main;
         anim = GetComponentInChildren<Animator>();
     }
 

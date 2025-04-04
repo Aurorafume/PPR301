@@ -621,8 +621,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1424916070}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.12, y: 0, z: 0}
-  m_LocalScale: {x: 23.18829, y: 0.64998996, z: 25.312}
+  m_LocalPosition: {x: -3.8032, y: -0, z: 8.0029}
+  m_LocalScale: {x: 17.82252, y: 0.64998996, z: 41.31678}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -639,8 +639,9 @@ GameObject:
   - component: {fileID: 1642359922}
   - component: {fileID: 1642359921}
   - component: {fileID: 1642359920}
+  - component: {fileID: 1642359923}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Original Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -712,6 +713,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1642359923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642359919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!1 &1733054721
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1850088815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -208.58, y: 3.01, z: 6.27}
+  m_LocalPosition: {x: -211.34, y: 3.01, z: -1.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -925,7 +959,7 @@ MonoBehaviour:
   jumpKey: 32
   crouchKey: 304
   orientation: {fileID: 1108964181}
-  playerCamera: {fileID: 1642359921}
+  playerCamera: {fileID: 1879861836}
   crouchScaleObject: {fileID: 1733054722}
   noiseHandler: {fileID: 0}
   anim: {fileID: 0}
