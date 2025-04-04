@@ -5681,8 +5681,8 @@ GameObject:
   - component: {fileID: 1026068030}
   - component: {fileID: 1026068029}
   m_Layer: 0
-  m_Name: Bridge_Area
-  m_TagString: Bridge
+  m_Name: Area1
+  m_TagString: Area1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8362,8 +8362,8 @@ GameObject:
   - component: {fileID: 1519837368}
   - component: {fileID: 1519837367}
   m_Layer: 0
-  m_Name: Light_Maze_Area
-  m_TagString: Maze
+  m_Name: Area2
+  m_TagString: Area2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
