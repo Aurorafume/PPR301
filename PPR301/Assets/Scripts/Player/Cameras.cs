@@ -41,14 +41,14 @@ public class Cameras : MonoBehaviour
     }
     void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Bridge"))
+        if (collision.gameObject.CompareTag("Area1"))
         {
             camera1.depth = 0;
             camera2.depth = 1;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true);
         }
-        else if (collision.gameObject.CompareTag("Maze"))
+        else if (collision.gameObject.CompareTag("Area1"))
         {
             camera1.depth = 0;
             camera3.depth = 1;
@@ -58,14 +58,14 @@ public class Cameras : MonoBehaviour
     }
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Bridge"))
+        if (collision.gameObject.CompareTag("Area2"))
         {
             camera2.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false);
         }
-        else if (collision.gameObject.CompareTag("Maze"))
+        else if (collision.gameObject.CompareTag("Area2"))
         {
             camera3.depth = 0;
             camera1.depth = 1;
