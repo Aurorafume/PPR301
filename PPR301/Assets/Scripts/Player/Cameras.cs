@@ -10,7 +10,7 @@ public class Cameras : MonoBehaviour
     public Camera camera3;  // Reference to Camera 2
     public PlayerMovement script;
 
-    public static event Action<bool> OnEnterTopDownCamera;
+    public static event Action<bool, float> OnEnterTopDownCamera;
 
     void Start()
     {
@@ -46,14 +46,14 @@ public class Cameras : MonoBehaviour
             camera1.depth = 0;
             camera2.depth = 1;
             script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true);
+            OnEnterTopDownCamera?.Invoke(true, -90f);
         }
         else if (collision.gameObject.CompareTag("Area2"))
         {
             camera1.depth = 0;
             camera3.depth = 1;
             script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true);
+            OnEnterTopDownCamera?.Invoke(true, -90f);
         }
     }
     void OnTriggerExit(Collider collision)
@@ -63,14 +63,14 @@ public class Cameras : MonoBehaviour
             camera2.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false);
+            OnEnterTopDownCamera?.Invoke(false, -90f);
         }
         else if (collision.gameObject.CompareTag("Area2"))
         {
             camera3.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false);
+            OnEnterTopDownCamera?.Invoke(false, -90f);
         }
     }
 }
