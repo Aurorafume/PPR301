@@ -5488,7 +5488,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &983741713
 Transform:
   m_ObjectHideFlags: 0
@@ -10064,6 +10064,7 @@ MonoBehaviour:
   crouchSpeed: 2
   playerHeight: 1
   rotationSpeed: 2
+  topDownRotationSpeed: 50
   isCrouching: 0
   readyToJump: 0
   grounded: 0
@@ -10076,6 +10077,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   noJumpMode: 0
   idleTimeThreshold: 7
+  draggingObject: 0
+  inTopDownMode: 0
 --- !u!54 &1839871880
 Rigidbody:
   m_ObjectHideFlags: 0
