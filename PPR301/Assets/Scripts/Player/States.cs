@@ -8,8 +8,11 @@ public class States : MonoBehaviour
 {
     public bool gameOver = false;
     public bool playerIsHiding = false;
+    public bool playerIsOnPlatform = false;
     public GameObject player;
     public GameObject enemy;
+    public EnemySpawning enemySpawning;
+    public LayerMask platformLayer;
 
     void Update()
     {
@@ -26,6 +29,11 @@ public class States : MonoBehaviour
         {
             playerIsHiding = true;
         }
+
+        if (IsInLayerMask(other.gameObject, platformLayer))
+        {
+            playerIsOnPlatform = true;
+        }
     }
 
     void OnTriggerExit(Collider other)
@@ -34,5 +42,16 @@ public class States : MonoBehaviour
         {
             playerIsHiding = false;
         }
+
+        if (IsInLayerMask(other.gameObject, platformLayer))
+        {
+            playerIsOnPlatform = false;
+        }
+    }
+
+    // Utility method to check if an object is in a specific LayerMask
+    bool IsInLayerMask(GameObject obj, LayerMask layerMask)
+    {
+        return ((layerMask.value & (1 << obj.layer)) > 0);
     }
 }

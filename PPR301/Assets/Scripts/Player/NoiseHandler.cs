@@ -3,25 +3,20 @@ using UnityEngine;
 
 public class NoiseHandler : MonoBehaviour
 {
-    // Extra noise events (e.g jump, collision)
     public float jumpNoise = 10f;
     public float collisionNoise = 5f;
-    [Tooltip("Additional noise required above ambient to register as talking.")]
     public float voiceNoiseMargin = 5f;
-
     private float additionalNoise = 0f;
 
-    // References
     public AmbientNoise ambientNoise;
     private MicrophoneInput microphoneInput;
     public NoiseBar noiseBar;
     public GameObject enemyManagerPrefab;
 
-    // Enemy spawning
     public bool canSpawnEnemy = false;
-    private static bool enemyExists = false;
+    public static bool enemyExists = false;
     public float spawnCooldown = 10f;
-    public Vector3 enemySpawnLocation;
+    public EnemySpawning enemySpawning;
 
     void Start()
     {       
@@ -90,8 +85,22 @@ public class NoiseHandler : MonoBehaviour
     }
 
     // Trigger enemy spawn when noise reaches a critical level
-    void TrySpawnEnemyManager()
-    {       
+    public void TrySpawnEnemyManager()
+    {   
+        if (enemySpawning == null)
+        {
+            Debug.LogError("EnemySpawning reference is not set!");
+            return;
+        }
+
+        // Check what platform the player is on
+        Transform currentPlatform = enemySpawning.GetCurrentEnemySpawnPoint();
+        if (currentPlatform == null)
+        {
+            Debug.LogWarning("No platform found for enemy spawn.");
+            return;
+        }
+
         if (canSpawnEnemy && !enemyExists)
         {
             SpawnEnemyManager();
@@ -102,15 +111,23 @@ public class NoiseHandler : MonoBehaviour
 
     // Spawns the enemy manager
     void SpawnEnemyManager()
-    {       
-        if (enemyManagerPrefab != null)
+    {
+        if (enemyManagerPrefab != null && enemySpawning != null)
         {
-            Instantiate(enemyManagerPrefab, enemySpawnLocation, Quaternion.identity);
-            Debug.Log("Enemy Manager Spawned!");
+            Transform spawnPoint = enemySpawning.GetCurrentEnemySpawnPoint();
+            if (spawnPoint != null)
+            {
+                Instantiate(enemyManagerPrefab, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log("Enemy Manager Spawned at " + spawnPoint.position);
+            }
+            else
+            {
+                Debug.LogWarning("No matching platform/spawn point found for current player position.");
+            }
         }
         else
         {
-            Debug.LogError("Enemy Manager Prefab is not assigned!");
+            Debug.LogError("Enemy Manager Prefab or EnemySpawning is not assigned!");
         }
     }
 
