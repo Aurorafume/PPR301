@@ -5339,7 +5339,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1503087598}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: -90, y: 90, z: 0}
 --- !u!65 &1360852309
 BoxCollider:
@@ -5896,8 +5896,8 @@ Transform:
   - {fileID: 1099933377}
   - {fileID: 1257061454}
   - {fileID: 172780959}
-  - {fileID: 1184894946}
   - {fileID: 1360852308}
+  - {fileID: 1184894946}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -6746,7 +6746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892909b4b15f6e44e924eb10a5193000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 0.5
+  playerSpeed: 1
   groundDrag: 7
   jumpForce: 10
   jumpCooldown: 1
