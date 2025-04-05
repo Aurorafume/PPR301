@@ -7,7 +7,8 @@ public class Cameras : MonoBehaviour
 {
     public Camera camera1;  // Reference to Camera 1
     public Camera camera2;  // Reference to Camera 2
-    public Camera camera3;  // Reference to Camera 2
+    public Camera camera3;  // Reference to Camera 3
+    public Camera camera4;  // Reference to Camera 4
     public PlayerMovement script;
     public PlayerCamera camera;
 
@@ -18,6 +19,7 @@ public class Cameras : MonoBehaviour
         camera1.depth = 1;
         camera2.depth = 0;
         camera3.depth = 0;
+        camera4.depth = 0;
     }
 
     // Update is called once per frame
@@ -56,7 +58,14 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90f);
         }
-        //camera.yaw = -90;
+        else if (collision.gameObject.CompareTag("Area3"))
+        {//
+            //camera1.depth = 0;
+            camera3.depth = 0;
+            camera4.depth = 1;
+            script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true, -90f);
+        }
     }
     void OnTriggerExit(Collider collision)
     {
@@ -67,18 +76,12 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90f);
         }
-        else if (collision.gameObject.CompareTag("Area2"))
-        {
-            camera3.depth = 0;
-            camera1.depth = 1;
-            script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false, -90f);
-        }
-        //camera.yaw = -90;
-    }
-    IEnumerator Coroutine()
-    {
-        yield return new WaitForSeconds(1);
-        camera.yaw = -90;
+        //else if (collision.gameObject.CompareTag("Area2")) connected to area 3
+        //{
+        //    camera3.depth = 0;
+        //    camera1.depth = 1;
+        //    script.noJumpMode = false;
+        //    OnEnterTopDownCamera?.Invoke(false, -90f);
+        //}
     }
 }
