@@ -25,4 +25,10 @@ public class GameOverMenu : MonoBehaviour
         // Load the main menu scene
         SceneManager.LoadScene("StartMenu");
     }
+
+    public void RestartDemo()
+    {
+        // Load the demo scene
+        SceneManager.LoadScene("MainDemoA2");
+    }
 }
