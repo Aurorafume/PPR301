@@ -2694,7 +2694,7 @@ GameObject:
   - component: {fileID: 509646596}
   - component: {fileID: 509646597}
   m_Layer: 11
-  m_Name: GameObject 1
+  m_Name: Collider 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6185,7 +6185,7 @@ GameObject:
   - component: {fileID: 1061061528}
   - component: {fileID: 1061061529}
   m_Layer: 11
-  m_Name: GameObject 2
+  m_Name: Collider 2
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10598,6 +10598,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   respawnLocation: {x: -25.75277, y: 2.2, z: 0.6}
   respawnLocation2: {x: -49.38, y: 3.55, z: 0}
+  currentRespawnLocation: {x: 0, y: 0, z: 0}
+  spawnLocationsArray: {x: 0, y: 0, z: 0}
 --- !u!114 &1839871886
 MonoBehaviour:
   m_ObjectHideFlags: 0
