@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("Player Movement Parameters")]
     public float playerSpeed;
     public float groundDrag;
     public float jumpForce;
@@ -17,7 +16,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [SerializeField] private float topDownRotationSpeed = 50f;
 
-    [Header("Player State Variables")]
     public bool isCrouching = false;
     public bool readyToJump;
     public bool grounded;
@@ -26,25 +24,19 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private float lastNoiseTime;
 
-    [Header("Key Bindings")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode crouchKey = KeyCode.LeftShift;
 
-    [Header("References")]
     public Transform orientation;
     public Camera playerCamera;
     public Transform crouchScaleObject;
     public NoiseHandler noiseHandler;
     public Animator anim;
-
     private Vector3 moveDirection;
     private Rigidbody rb;
     private Vector3 originalScale;
 
-    [Header("Custom Flags")]
-    public bool noJumpMode; // Bridge mode: can't jump.
-
-    [Header("Idle Animation")]
+    public bool noJumpMode;
     public float idleTimeThreshold = 3f;
     private float lastMoveTime;
 
@@ -82,7 +74,6 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         HandleIdleState();
         CheckForObjectContact();
-        //moveBehaviour();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -90,10 +81,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        /*MovePlayer();
-        RotatePlayer();
-        SpeedControl();*/
-
         moveBehaviour();
     }
 
