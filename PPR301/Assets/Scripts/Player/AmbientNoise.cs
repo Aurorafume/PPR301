@@ -28,7 +28,7 @@ public class AmbientNoise : MonoBehaviour
 
     IEnumerator CalibrateAmbientNoise()
     {
-        Debug.Log("Starting ambient noise calibration...");
+        Debug.Log("Starting ambient noise calibration");
         float sum = 0f;
         int sampleCount = 0;
         float startTime = Time.time;
