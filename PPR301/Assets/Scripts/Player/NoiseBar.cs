@@ -4,11 +4,8 @@ using UnityEngine.UI;
 
 public class NoiseBar : MonoBehaviour
 {
-    [Header("UI Components")]
     public Image noiseBarImage;
     public Image background; 
-
-    [Header("Sprite Frames")]
     public Sprite[] level1Frames;
     public Sprite[] level2Frames;
     public Sprite[] level3Frames;
@@ -21,16 +18,20 @@ public class NoiseBar : MonoBehaviour
     private float frameRate = 0.15f;
     private float nextFrameTime;
     private bool forceMaxBackground = false;
-
-    // Dynamic noise values
-    private float noisePercentage = 0f;
+    public float noisePercentage = 0f;
     private float targetNoiseLevel = 0f;
     private float smoothSpeed = 5f;
     private bool isChasing = false;
     public event System.Action OnNoiseMaxed;
+    public float TargetNoiseLevel { get; private set; }
+    public States states;
+    public EnemySpawning enemySpawning;
 
     void Start()
-    {
+    {   
+        states = FindObjectOfType<States>();
+        enemySpawning = FindObjectOfType<EnemySpawning>();
+
         noiseLevels = new Sprite[][] {
             level1Frames, level2Frames, level3Frames, level4Frames, level5Frames, level6Frames
         };
@@ -79,11 +80,22 @@ public class NoiseBar : MonoBehaviour
         targetNoiseLevel = Mathf.Clamp01(noiseLevel / dynamicMaxNoise);
 
         // If the noise level reaches the top of the scale, trigger an event (e.g for enemy spawns).
-        if (targetNoiseLevel >= 1f && !isChasing)
-        {
-            isChasing = true;
-            OnNoiseMaxed?.Invoke();
-            StartCoroutine(ChaseWarningAnimation());
+        if (targetNoiseLevel >= 1f && !isChasing && states.playerIsOnPlatform)
+        {   
+            // Find the specific platform and spawn point
+            Transform currentPlatform = enemySpawning.GetCurrentEnemySpawnPoint();
+            if (currentPlatform == null)
+            {
+                Debug.LogWarning("No platform found for enemy spawn.");
+                return;
+            }
+
+            if (currentPlatform != null)
+            {
+                isChasing = true;
+                OnNoiseMaxed?.Invoke();
+                StartCoroutine(ChaseWarningAnimation());
+            }
         }
     }
 

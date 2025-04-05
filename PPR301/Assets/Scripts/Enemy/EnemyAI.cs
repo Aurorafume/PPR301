@@ -6,20 +6,16 @@ using UnityEngine.AI;
 public class EnemyAI : MonoBehaviour
 {
     public NavMeshAgent agent; 
-    private GameObject playerToChase; //players gameobject to chase
-    public Vector3 playerLocation; //player's location
-    //enemy
+    private GameObject playerToChase;
+    public Vector3 playerLocation;
     public bool angry;
     public int aggroDistance;
     public float distanceFromPlayer;
     private float whenToRespawn;
     public float respawnTimer;
     public bool chasing;
-    public Vector3 enemySpawnPoint; //where enemy respawns when it loses the player
-    //animation
     private float turnNum;
     private bool right;
-
     public float fadeStrength = 100f;
     public bool fading;
     private SpriteRenderer spriteRenderer;
@@ -31,8 +27,7 @@ public class EnemyAI : MonoBehaviour
     {
         // get the States script
         states = FindObjectOfType<States>();
-
-        enemySpawnPoint = transform.position;
+        player = GameObject.Find("Player");
 
         // Set the player to chase as anything with the tag player
         playerToChase = GameObject.Find("Player");
@@ -70,7 +65,7 @@ public class EnemyAI : MonoBehaviour
             whenToRespawn -= Time.deltaTime;
             agent.SetDestination(transform.position);
             transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, 0);
-            
+
             if (whenToRespawn <= 0)
             {
                 fading = true;
@@ -122,7 +117,7 @@ public class EnemyAI : MonoBehaviour
         //longer follow distance when following
         if(angry)
         {
-            aggroDistance = 15;
+            aggroDistance = 20;
         }
     }
 
@@ -185,7 +180,7 @@ public class EnemyAI : MonoBehaviour
         
         if(fadeStrength == 0)
         {
-            transform.position = enemySpawnPoint;
+            //transform.position = enemySpawnPoint;
             fading = false;
             
             // Reset enemy existence flag

@@ -15,6 +15,7 @@ TagManager:
   - Area2
   - Enemy
   - Hiding Spot
+  - EnemySpawn
   layers:
   - Default
   - TransparentFX
