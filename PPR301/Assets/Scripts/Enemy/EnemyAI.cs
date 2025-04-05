@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     private bool right;
     public float fadeStrength = 100f;
     public bool fading;
+    
     private SpriteRenderer spriteRenderer;
     private NoiseBar noiseBar;
     public States states;
@@ -28,6 +29,8 @@ public class EnemyAI : MonoBehaviour
         // get the States script
         states = FindObjectOfType<States>();
         player = GameObject.Find("Player");
+
+        GameObject[] walls = GameObject.FindGameObjectsWithTag("Wall");
 
         // Set the player to chase as anything with the tag player
         playerToChase = GameObject.Find("Player");
@@ -186,6 +189,5 @@ public class EnemyAI : MonoBehaviour
             // Reset enemy existence flag
             NoiseHandler.NotifyEnemyDespawned();
         }
-
     }
 }

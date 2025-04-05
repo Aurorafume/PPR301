@@ -138,8 +138,8 @@ GameObject:
   m_Name: BuildingFloor (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &49916449
 Transform:
@@ -236,8 +236,8 @@ GameObject:
   m_Name: Wall (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &77053006
 Transform:
@@ -265,7 +265,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 8733429697405204941, guid: 89ad7f24b5fcd204a8c6fad734e2d590, type: 3}
 --- !u!23 &77053008
@@ -999,8 +999,8 @@ GameObject:
   m_Name: Upper_Wall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &409749280
 Transform:
@@ -6087,8 +6087,8 @@ GameObject:
   m_Name: Wall (2)
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1499575780
 Transform:
@@ -8460,10 +8460,10 @@ GameObject:
   - component: {fileID: 241276580}
   m_Layer: 6
   m_Name: First_Floor
-  m_TagString: Ground
+  m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &543450652035262179
 Transform:
@@ -8571,8 +8571,8 @@ GameObject:
   m_Name: Lamp2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &733811998883899530
 GameObject:
@@ -8933,8 +8933,8 @@ GameObject:
   m_Name: Lamp4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1767153506163232085
 MeshRenderer:
@@ -9096,8 +9096,8 @@ GameObject:
   m_Name: Upper_Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &2230886812344559023
 Transform:
@@ -9161,8 +9161,8 @@ GameObject:
   m_Name: SecondFloor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &2635234390447242895
 GameObject:
@@ -9195,8 +9195,8 @@ GameObject:
   m_Name: Scaffolding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &2755532347358737262
 MeshFilter:
@@ -10140,8 +10140,8 @@ GameObject:
   m_Name: Top_floor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!33 &5496093829136499105
 MeshFilter:
@@ -11104,8 +11104,8 @@ GameObject:
   m_Name: Wall
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7522650066044667651
 GameObject:
@@ -11492,8 +11492,8 @@ GameObject:
   m_Name: Lamp3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &7865415914718077394
 GameObject:
@@ -11732,8 +11732,8 @@ GameObject:
   m_Name: Lamp1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &8523772855088807071
 GameObject:
