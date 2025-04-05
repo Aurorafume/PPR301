@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 3375895}
   - component: {fileID: 3375894}
   - component: {fileID: 3375893}
-  m_Layer: 0
-  m_Name: Floor (3)
+  m_Layer: 11
+  m_Name: Floor (zone 1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -537,6 +537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 199334965}
+  - component: {fileID: 199334966}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -558,9 +559,36 @@ Transform:
   m_Children:
   - {fileID: 1865363728}
   - {fileID: 1815710993}
+  - {fileID: 798166778}
+  - {fileID: 1123384904}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &199334966
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 199334964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87761d12b97130b4fa5cdfe2e2f83446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Platforms:
+  - {fileID: 3375891}
+  - {fileID: 874025884}
+  EnemySpawns:
+  - {fileID: 798166777}
+  - {fileID: 1123384903}
+  PlatformLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  enemyAI: {fileID: 530481748}
+  noiseBar: {fileID: 758779079}
+  states: {fileID: 1839871886}
+  noiseHandler: {fileID: 1865363733}
 --- !u!1 &205006292
 GameObject:
   m_ObjectHideFlags: 0
@@ -2853,6 +2881,17 @@ Transform:
   m_Father: {fileID: 736490042}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530481748 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+  m_PrefabInstance: {fileID: 325286153}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &557974101
 GameObject:
   m_ObjectHideFlags: 0
@@ -4375,6 +4414,37 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &798166777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 798166778}
+  m_Layer: 12
+  m_Name: Enemy Spawn 1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &798166778
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 798166777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -49.61, y: 4.48, z: -11.05}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 199334965}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &805999180
 GameObject:
   m_ObjectHideFlags: 0
@@ -5041,8 +5111,8 @@ GameObject:
   - component: {fileID: 874025888}
   - component: {fileID: 874025887}
   - component: {fileID: 874025886}
-  m_Layer: 0
-  m_Name: Floor (4)
+  m_Layer: 11
+  m_Name: Floor (zone 2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6538,6 +6608,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1123384903
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1123384904}
+  m_Layer: 12
+  m_Name: Enemy Spawn 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1123384904
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1123384903}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -80.43, y: 4.84, z: -2.62}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 199334965}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1156680492
 GameObject:
   m_ObjectHideFlags: 0
@@ -10242,6 +10343,7 @@ GameObject:
   - component: {fileID: 1839871885}
   - component: {fileID: 1839871886}
   - component: {fileID: 1839871887}
+  - component: {fileID: 1839871888}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -10416,6 +10518,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameOver: 0
   playerIsHiding: 0
+  playerIsOnPlatform: 0
   player: {fileID: 1839871873}
   enemy: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
 --- !u!65 &1839871887
@@ -10431,6 +10534,31 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.0482469, z: 1}
   m_Center: {x: 0, y: -0.02412343, z: 0}
+--- !u!114 &1839871888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1839871873}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87761d12b97130b4fa5cdfe2e2f83446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Platforms:
+  - {fileID: 3375891}
+  - {fileID: 874025884}
+  EnemySpawns:
+  - {fileID: 798166777}
+  - {fileID: 1123384903}
+  PlatformLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  enemyAI: {fileID: 0}
+  noiseBar: {fileID: 0}
+  states: {fileID: 0}
+  noiseHandler: {fileID: 0}
 --- !u!1 &1865363727
 GameObject:
   m_ObjectHideFlags: 0
