@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         HandleIdleState();
         CheckForObjectContact();
-        moveBehaviour();
+        //moveBehaviour();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -92,6 +92,8 @@ public class PlayerMovement : MonoBehaviour
         /*MovePlayer();
         RotatePlayer();
         SpeedControl();*/
+
+        moveBehaviour();
     }
 
     private void GetPlayerInput()
