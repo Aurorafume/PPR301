@@ -9,6 +9,7 @@ public class Cameras : MonoBehaviour
     public Camera camera2;  // Reference to Camera 2
     public Camera camera3;  // Reference to Camera 2
     public PlayerMovement script;
+    public PlayerCamera camera;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
 
@@ -55,6 +56,7 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90f);
         }
+        //camera.yaw = -90;
     }
     void OnTriggerExit(Collider collision)
     {
@@ -72,5 +74,11 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90f);
         }
+        //camera.yaw = -90;
+    }
+    IEnumerator Coroutine()
+    {
+        yield return new WaitForSeconds(1);
+        camera.yaw = -90;
     }
 }

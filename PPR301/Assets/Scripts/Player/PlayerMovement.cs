@@ -137,8 +137,15 @@ public class PlayerMovement : MonoBehaviour
     IEnumerator MyCoroutine()
     {
         // suspend execution for 5 seconds
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         moveBehaviour = TopDownMovement;
+        Debug.Log("Changing walk mode");
+    }
+    IEnumerator MyCoroutine2()
+    {
+        // suspend execution for 5 seconds
+        yield return new WaitForSeconds(0.5f);
+        moveBehaviour = DefaultMovement;
         Debug.Log("Changing walk mode");
     }
 
@@ -150,12 +157,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else if (inTopDownMode)
         {
-            moveBehaviour = TopDownMovement;
-            //StartCoroutine(MyCoroutine());
+            //moveBehaviour = TopDownMovement;
+            StartCoroutine(MyCoroutine());
         }
         else
         {
-            moveBehaviour = DefaultMovement;
+            //moveBehaviour = DefaultMovement;
+            StartCoroutine(MyCoroutine2());
         }
     }
 

@@ -12,7 +12,7 @@ public class PlayerCamera : MonoBehaviour
     public float minZoom = 2f;
     public float maxZoom = 8f;
     private float pitch = 0f;
-    private float yaw = 0f;
+    public float yaw = 0f;
     private float currentZoom = 4f;
 
     void Start()
