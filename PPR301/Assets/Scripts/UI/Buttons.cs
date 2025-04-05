@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Buttons : MonoBehaviour
 {
@@ -23,5 +24,11 @@ public class Buttons : MonoBehaviour
     public void message()
     {
         Debug.Log("hello");
+    }
+
+    public void PlayDemo()
+    {
+        // Load the demo scene
+        SceneManager.LoadScene("MainDemoA2");
     }
 }
