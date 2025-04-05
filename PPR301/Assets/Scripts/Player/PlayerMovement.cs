@@ -131,6 +131,13 @@ public class PlayerMovement : MonoBehaviour
 
         UpdateMoveBehaviour();
     }
+    IEnumerator MyCoroutine()
+    {
+        // suspend execution for 5 seconds
+        yield return new WaitForSeconds(1);
+        moveBehaviour = TopDownMovement;
+        Debug.Log("Changing walk mode");
+    }
 
     public void UpdateMoveBehaviour()
     {
@@ -141,6 +148,7 @@ public class PlayerMovement : MonoBehaviour
         else if (inTopDownMode)
         {
             moveBehaviour = TopDownMovement;
+            //StartCoroutine(MyCoroutine());
         }
         else
         {
