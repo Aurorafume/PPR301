@@ -10,6 +10,7 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
+    public float airControlSpeed = 5f;
     public float crouchHeight = 0.5f;
     public float crouchSpeed = 10f;
     public float playerHeight;
@@ -81,7 +82,7 @@ public class PlayerMovement : MonoBehaviour
         HandleCrouch();
         HandleIdleState();
         CheckForObjectContact();
-        moveBehaviour();
+        //moveBehaviour();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -92,6 +93,8 @@ public class PlayerMovement : MonoBehaviour
         /*MovePlayer();
         RotatePlayer();
         SpeedControl();*/
+
+        moveBehaviour();
     }
 
     private void GetPlayerInput()
@@ -176,13 +179,10 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            float adjustedAirMultiplier = Mathf.Lerp(5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
-            Vector3 airMove = moveDirection * playerSpeed * airMultiplier;
             Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
+            Vector3 airMove = moveDirection * airControlSpeed;
             Vector3 velocityChange = airMove - horizontalVelocity;
-            velocityChange = Vector3.ClampMagnitude(velocityChange, playerSpeed); // prevent too much
-
+            velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
             rb.AddForce(velocityChange, ForceMode.Acceleration);
         }
 
