@@ -6,6 +6,8 @@ public class OutOfBounds : MonoBehaviour
 {
     public Vector3 respawnLocation;
     public Vector3 respawnLocation2;
+    public Vector3 currentRespawnLocation;
+    public Vector3 spawnLocationsArray;
 
     void OnCollisionEnter(Collision collision)
 {
