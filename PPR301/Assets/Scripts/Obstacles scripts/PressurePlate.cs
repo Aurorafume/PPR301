@@ -16,14 +16,14 @@ public class PressurePlate : MonoBehaviour
         if(activated == false)
         {
             activated = true;
-            transform.localScale = new Vector3(1,0.26f,1);
+            //transform.localScale = new Vector3(1,0.26f,1);
             GetComponent<Renderer>().material = glowMaterial;
             door.SetActive(false);
         }
         else
         {
             activated = false;
-            transform.localScale = new Vector3(1,1,1);
+            //transform.localScale = new Vector3(1,1,1);
             GetComponent<Renderer>().material = offMaterial;
             door.SetActive(true);
         }
@@ -33,7 +33,7 @@ public class PressurePlate : MonoBehaviour
         if(touchButton == false)
         {
             activated = false;
-            transform.localScale = new Vector3(1,1,1);
+            //transform.localScale = new Vector3(1,1,1);
             GetComponent<Renderer>().material = offMaterial;
             door.SetActive(true);
         }

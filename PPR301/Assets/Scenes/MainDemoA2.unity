@@ -3731,6 +3731,7 @@ MonoBehaviour:
   zoomSpeed: 1
   minZoom: 2
   maxZoom: 8
+  yaw: 0
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6755,7 +6756,7 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSpeed: 2
   playerHeight: 1
-  rotationSpeed: 1
+  rotationSpeed: 8
   topDownRotationSpeed: 50
   isCrouching: 0
   readyToJump: 0
@@ -6852,6 +6853,7 @@ MonoBehaviour:
   camera2: {fileID: 0}
   camera3: {fileID: 1990331330}
   script: {fileID: 1839871879}
+  camera: {fileID: 0}
 --- !u!114 &1839871885
 MonoBehaviour:
   m_ObjectHideFlags: 0
