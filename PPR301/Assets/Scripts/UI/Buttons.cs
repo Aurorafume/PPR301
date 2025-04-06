@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Buttons : MonoBehaviour
 {
+    public States states;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,7 +28,9 @@ public class Buttons : MonoBehaviour
         Debug.Log("hello");
     }
     public void PlayDemo()
-    {
+    {   
+        // Reset the game state
+        states.ResetGameState();
         // Load the demo scene
         SceneManager.LoadScene("MainDemoA2");
     }

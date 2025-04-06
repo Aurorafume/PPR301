@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameOverMenu : MonoBehaviour
 {
-
+    public States states;
     public void Start()
     {
         // Have the mouse unlocked when the game starts
@@ -27,7 +27,8 @@ public class GameOverMenu : MonoBehaviour
     }
 
     public void RestartDemo()
-    {
+    {   
+        states.ResetGameState();
         // Load the demo scene
         SceneManager.LoadScene("MainDemoA2");
     }

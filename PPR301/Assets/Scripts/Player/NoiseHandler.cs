@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class NoiseHandler : MonoBehaviour
 {
-    public float jumpNoise = 10f;
-    public float collisionNoise = 5f;
-    public float voiceNoiseMargin = 5f;
+    public float jumpNoise;
+    public float collisionNoise;
+    public float voiceNoiseMargin;
     private float additionalNoise = 0f;
 
     public AmbientNoise ambientNoise;
