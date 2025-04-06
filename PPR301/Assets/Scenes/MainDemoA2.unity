@@ -7558,7 +7558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   jumpNoise: 1
   collisionNoise: 15
-  voiceNoiseMargin: 0.5
+  voiceNoiseMargin: 1
   ambientNoise: {fileID: 1865363734}
   noiseBar: {fileID: 758779079}
   enemyManagerPrefab: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
@@ -7907,6 +7907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf388d8829c95b340b69b671c6a0ec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  states: {fileID: 0}
 --- !u!4 &1921804668
 Transform:
   m_ObjectHideFlags: 0
