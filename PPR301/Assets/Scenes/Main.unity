@@ -10675,6 +10675,7 @@ MonoBehaviour:
   camera1: {fileID: 963194227}
   camera2: {fileID: 1708246717}
   camera3: {fileID: 1990331330}
+  camera4: {fileID: 0}
   script: {fileID: 1839871879}
   camera: {fileID: 0}
 --- !u!114 &1839871885
@@ -10897,7 +10898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 678bcb02b41f8cc44829e08982986685, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpNoise: 15
+  jumpNoise: 5
   collisionNoise: 15
   voiceNoiseMargin: 4
   ambientNoise: {fileID: 1865363734}
