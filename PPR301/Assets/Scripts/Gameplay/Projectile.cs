@@ -35,6 +35,12 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
             script.projectileCount2--;
         }
+        if(collision.CompareTag("Destroyable wall"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+            script.projectileCount2--;
+        }
         else if(collision.CompareTag("Bounce"))
         {
             if(vertical)

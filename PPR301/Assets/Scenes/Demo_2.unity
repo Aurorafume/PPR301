@@ -818,7 +818,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &202881121
 BoxCollider:
@@ -915,7 +915,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &227290766
 BoxCollider:
@@ -3763,7 +3763,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1091962495
 BoxCollider:
@@ -4471,7 +4471,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1378078391
 MonoBehaviour:
@@ -4489,7 +4489,7 @@ MonoBehaviour:
   player: {fileID: 1850088815}
   detectionRange: 2.5
   projectileCount: 1
-  projectileCount2: 0
+  projectileCount2: -100
 --- !u!65 &1378078392
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4567,7 +4567,7 @@ GameObject:
   - component: {fileID: 1407631234}
   m_Layer: 0
   m_Name: Wall3 (2)
-  m_TagString: Wall
+  m_TagString: Destroyable wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5044,12 +5044,12 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 62993120}
+  - {fileID: 1378078390}
   - {fileID: 1554514455}
   - {fileID: 227290765}
   - {fileID: 1091962494}
   - {fileID: 1989874378}
   - {fileID: 202881120}
-  - {fileID: 1378078390}
   - {fileID: 542207876}
   - {fileID: 1407631233}
   m_Father: {fileID: 941188812}
@@ -5281,7 +5281,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1554514456
 BoxCollider:
@@ -7634,7 +7634,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1476135128}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1989874379
 BoxCollider:

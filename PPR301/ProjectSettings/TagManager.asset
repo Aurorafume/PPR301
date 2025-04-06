@@ -19,6 +19,7 @@ TagManager:
   - Area3
   - Area4
   - Phase
+  - Destroyable wall
   layers:
   - Default
   - TransparentFX
