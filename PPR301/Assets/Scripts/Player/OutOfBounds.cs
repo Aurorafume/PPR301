@@ -6,20 +6,28 @@ public class OutOfBounds : MonoBehaviour
 {
     public Vector3 respawnLocation;
     public Vector3 respawnLocation2;
+
+    public Vector3[] spawnLocationsArray;
     public Vector3 currentRespawnLocation;
-    public Vector3 spawnLocationsArray;
+
+    void Start()
+    {
+        spawnLocationsArray = new Vector3[2];
+        spawnLocationsArray[0] = respawnLocation;
+        spawnLocationsArray[1] = respawnLocation2;
+    }
 
     void OnCollisionEnter(Collision collision)
 {
     if (collision.gameObject.CompareTag("Out of bounds"))
     {
         Debug.Log("Respawn");
-        transform.position = respawnLocation;
+        transform.position = currentRespawnLocation;
     }
     if (collision.gameObject.CompareTag("Light"))
     {
         Debug.Log("Respawn");
-        transform.position = respawnLocation2;
+        transform.position = currentRespawnLocation;
     }
 }
 }
