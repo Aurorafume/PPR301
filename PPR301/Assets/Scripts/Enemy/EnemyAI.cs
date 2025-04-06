@@ -180,15 +180,12 @@ public class EnemyAI : MonoBehaviour
             fadeStrength += Time.deltaTime / 1.5f;
         }
 
-        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, fadeStrength);
         fadeStrength = Mathf.Clamp(fadeStrength, 0, 1);
-        
-        if(fadeStrength == 0)
+        spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, fadeStrength);
+
+        if (fadeStrength <= 0.01f && fading) // small margin for float accuracy
         {
-            //transform.position = enemySpawnPoint;
             fading = false;
-            
-            // Reset enemy existence flag
             NoiseHandler.NotifyEnemyDespawned();
         }
     }

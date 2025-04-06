@@ -375,13 +375,13 @@ Rigidbody:
   m_GameObject: {fileID: 86958787}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!4 &86958794 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -570,7 +570,7 @@ MonoBehaviour:
   PlatformLayer:
     serializedVersion: 2
     m_Bits: 2048
-  enemyAI: {fileID: 612874760}
+  enemyAI: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   noiseBar: {fileID: 758779079}
   states: {fileID: 1839871886}
   noiseHandler: {fileID: 1865363733}
@@ -1284,13 +1284,13 @@ Rigidbody:
   m_GameObject: {fileID: 442174275}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!4 &442174282 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -1819,22 +1819,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
---- !u!1 &612874759 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
-  m_PrefabInstance: {fileID: 612874758}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &612874760 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
-  m_PrefabInstance: {fileID: 612874758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 612874759}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &614800166 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2724198075042662040, guid: b4bcc671da8bd3f428e41592d141ab10, type: 3}
@@ -2362,13 +2346,13 @@ Rigidbody:
   m_GameObject: {fileID: 682295910}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!114 &682295918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2817,13 +2801,13 @@ Rigidbody:
   m_GameObject: {fileID: 824366986}
   serializedVersion: 2
   m_Mass: 0.1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!65 &824366989
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4804,13 +4788,13 @@ Rigidbody:
   m_GameObject: {fileID: 1184894947}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!1 &1193782381
 GameObject:
   m_ObjectHideFlags: 0
@@ -6139,13 +6123,13 @@ Rigidbody:
   m_GameObject: {fileID: 1456567967}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
+  m_Drag: 4
+  m_AngularDrag: 4
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!4 &1456567974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -7324,7 +7308,7 @@ MonoBehaviour:
   playerIsHiding: 0
   playerIsOnPlatform: 0
   player: {fileID: 1839871873}
-  enemy: {fileID: 612874759}
+  enemy: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   enemySpawning: {fileID: 199334966}
   platformLayer:
     serializedVersion: 2

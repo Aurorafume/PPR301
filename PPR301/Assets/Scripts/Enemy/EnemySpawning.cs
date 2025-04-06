@@ -13,8 +13,7 @@ public class EnemySpawning : MonoBehaviour
 
     public PlatformSpawnPair[] platformSpawnPairs;
     public LayerMask PlatformLayer;
-    public EnemyAI enemyAI;
-    public GameObject enemyPrefab;
+    public GameObject enemyAI;
     public NoiseBar noiseBar;
     public States states;
     public NoiseHandler noiseHandler;
