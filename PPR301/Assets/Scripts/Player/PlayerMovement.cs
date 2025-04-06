@@ -276,7 +276,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGroundStatus()
     {
-        grounded = Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f) && hit.collider.CompareTag("Ground");
+        if (Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
+        {
+            grounded = hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
+        }
+        else
+        {
+            grounded = false;
+        }
 
         anim.SetBool("isJumping", !grounded);
 
