@@ -7127,6 +7127,7 @@ MonoBehaviour:
   camera1: {fileID: 963194227}
   camera2: {fileID: 0}
   camera3: {fileID: 1990331330}
+  camera4: {fileID: 0}
   script: {fileID: 1839871879}
   camera: {fileID: 0}
 --- !u!114 &1839871885
@@ -8458,9 +8459,9 @@ GameObject:
   - component: {fileID: 4332471916872797568}
   - component: {fileID: 5413081416601371182}
   - component: {fileID: 241276580}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: First_Floor
-  m_TagString: Wall
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
