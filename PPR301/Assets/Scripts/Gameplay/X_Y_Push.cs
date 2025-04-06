@@ -13,9 +13,9 @@ public class X_Y_Push : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.x > -91)
+        if(transform.position.x > -78)
         {
-            transform.position = new Vector3(-91,transform.position.y,transform.position.z);
+            transform.position = new Vector3(-78,transform.position.y,transform.position.z);
         }
     }
 }
