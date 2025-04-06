@@ -11,6 +11,7 @@ public class Cameras : MonoBehaviour
     public Camera camera4;  // Reference to Camera 4
     public PlayerMovement script;
     public PlayerCamera camera;
+    public OutOfBounds BoundsScript;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
 
@@ -50,6 +51,7 @@ public class Cameras : MonoBehaviour
             camera2.depth = 1;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90f);
+            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[0];
         }
         else if (collision.gameObject.CompareTag("Area2"))
         {
@@ -57,14 +59,17 @@ public class Cameras : MonoBehaviour
             camera3.depth = 1;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90f);
+            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[1];
         }
         else if (collision.gameObject.CompareTag("Area3"))
         {//
             //camera1.depth = 0;
-            camera3.depth = 0;
-            camera4.depth = 1;
-            script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true, -90f);
+            //camera3.depth = 0;
+            //camera4.depth = 1;
+            //script.noJumpMode = true;
+            //OnEnterTopDownCamera?.Invoke(true, -90f);
+            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+            Debug.Log("RESPAWN");
         }
     }
     void OnTriggerExit(Collider collision)
@@ -76,12 +81,12 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90f);
         }
-        //else if (collision.gameObject.CompareTag("Area2")) connected to area 3
-        //{
-        //    camera3.depth = 0;
-        //    camera1.depth = 1;
-        //    script.noJumpMode = false;
-        //    OnEnterTopDownCamera?.Invoke(false, -90f);
-        //}
+        else if (collision.gameObject.CompareTag("Area2"))
+        {
+            camera3.depth = 0;
+            camera1.depth = 1;
+            script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false, -90f);
+        }
     }
 }
