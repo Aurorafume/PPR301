@@ -278,7 +278,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
         {
-            grounded = hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object") || hit.collider.CompareTag("Phase");
+            grounded = hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
         }
         else
         {
@@ -360,12 +360,12 @@ public class PlayerMovement : MonoBehaviour
     private void OnEnable()
     {
         Cameras.OnEnterTopDownCamera += SetInTopDownMode;
-        PlayerInteractHandler.OnDragObject += SetDraggingObject;
+        Draggable.OnDragObject += SetDraggingObject;
     }
 
     private void OnDisable()
     {
         Cameras.OnEnterTopDownCamera -= SetInTopDownMode;
-        PlayerInteractHandler.OnDragObject -= SetDraggingObject;
+        Draggable.OnDragObject -= SetDraggingObject;
     }
 }

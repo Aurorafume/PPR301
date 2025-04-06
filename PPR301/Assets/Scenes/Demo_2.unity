@@ -2387,6 +2387,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &627994215
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2820,6 +2823,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!4 &876800680 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6457590153161269651, guid: ade615dcaf677f64cac772b685077123, type: 3}
@@ -4083,6 +4089,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!65 &1148496866
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4117,6 +4126,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0669f3d8f4b119f418a4bbe061cc198f, type: 3}
   m_PrefabInstance: {fileID: 1754163172}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1148496871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148496863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1148496865}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1170229256
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,6 +4458,7 @@ GameObject:
   - component: {fileID: 1299719541}
   - component: {fileID: 1299719539}
   - component: {fileID: 1299719545}
+  - component: {fileID: 1299719546}
   m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
@@ -4535,6 +4572,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
+--- !u!114 &1299719546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299719538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1299719545}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1378078389
 GameObject:
   m_ObjectHideFlags: 0
@@ -4858,6 +4925,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &1417591532
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5005,6 +5075,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &1460005808
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6758,15 +6831,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabRadius: 0.5
   grabDistance: 1
-  jointLimit: 0.1
-  jointSpring: 100
-  jointDamper: 5
-  isCarrying: 0
-  grabButton: 323
+  interactButton: 323
   interactableLayer:
     serializedVersion: 2
     m_Bits: 512
-  mouthPosition: {fileID: 388721577}
+  mouth: {fileID: 388721577}
+  hitPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1850088821
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6854,6 +6924,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &1876455262
 Rigidbody:
   m_ObjectHideFlags: 0
