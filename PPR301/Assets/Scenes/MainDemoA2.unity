@@ -340,6 +340,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &86958789
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -511,6 +514,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &172780962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1489,6 +1495,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &442174277
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2605,6 +2614,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &682295919
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3100,11 +3112,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!4 &824367001 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
   m_PrefabInstance: {fileID: 931940642}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &824367002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 824366986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 824366998}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &844363758 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: f8148e573624dc9498effc8df7b0316d, type: 3}
@@ -3436,6 +3478,7 @@ GameObject:
   - component: {fileID: 854613957}
   - component: {fileID: 854613955}
   - component: {fileID: 854613960}
+  - component: {fileID: 854613961}
   m_Layer: 9
   m_Name: Object (8)
   m_TagString: Object
@@ -3549,6 +3592,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
+--- !u!114 &854613961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 854613953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 854613960}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &855046012 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
@@ -3566,6 +3639,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!54 &855046014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3844,6 +3920,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!114 &911767223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3891,6 +3970,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0669f3d8f4b119f418a4bbe061cc198f, type: 3}
   m_PrefabInstance: {fileID: 911767220}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &911767229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 911767221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 911767222}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &931940642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4984,6 +5090,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &1184894949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5039,6 +5148,33 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &1184894953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184894947}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1184894948}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1193782381
 GameObject:
   m_ObjectHideFlags: 0
@@ -5580,6 +5716,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &1257061457
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5733,6 +5872,7 @@ GameObject:
   - component: {fileID: 1344373393}
   - component: {fileID: 1344373392}
   - component: {fileID: 1344373391}
+  - component: {fileID: 1344373396}
   m_Layer: 9
   m_Name: Object (7)
   m_TagString: Object
@@ -5783,6 +5923,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &1344373393
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5846,6 +5989,33 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1344373389}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1344373396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1344373389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1344373392}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1355453847
 GameObject:
   m_ObjectHideFlags: 0
@@ -6200,6 +6370,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 1
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!65 &1437994278
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6234,6 +6407,33 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0669f3d8f4b119f418a4bbe061cc198f, type: 3}
   m_PrefabInstance: {fileID: 1945508587}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1437994285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1437994275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1437994277}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1001 &1447248047
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6332,6 +6532,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!65 &1456567969
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6701,6 +6904,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &1533682304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6756,6 +6962,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.00669144, y: 0.020222237, z: 0.002808789}
   m_Center: {x: -0.000099082055, y: 0.0000000060665126, z: 0.01095947}
+--- !u!114 &1533682310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1533682299}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1533682302}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1538879299
 GameObject:
   m_ObjectHideFlags: 0
@@ -7467,15 +7700,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   grabRadius: 0.5
   grabDistance: 1
-  jointLimit: 0.1
-  jointSpring: 100
-  jointDamper: 5
-  isCarrying: 0
-  grabButton: 323
+  interactButton: 323
   interactableLayer:
     serializedVersion: 2
     m_Bits: 512
-  mouthPosition: {fileID: 1538879300}
+  mouth: {fileID: 1538879300}
+  hitPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &1839871882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7839,6 +8069,7 @@ GameObject:
   - component: {fileID: 1877825065}
   - component: {fileID: 1877825064}
   - component: {fileID: 1877825070}
+  - component: {fileID: 1877825071}
   m_Layer: 9
   m_Name: Cube
   m_TagString: Object
@@ -7952,6 +8183,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
+--- !u!114 &1877825071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877825063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1877825070}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &1878639124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: 0669f3d8f4b119f418a4bbe061cc198f, type: 3}
@@ -8787,11 +9048,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
 --- !u!4 &2105555920 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
   m_PrefabInstance: {fileID: 1917432772}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2105555921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2105555908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2105555917}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!23 &34075629728086338
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10801,6 +11092,7 @@ GameObject:
   - component: {fileID: 7847693397541991591}
   - component: {fileID: 7847693397541991594}
   - component: {fileID: 7847693397541991593}
+  - component: {fileID: 7847693397541991595}
   m_Layer: 9
   m_Name: jar.002
   m_TagString: Object
@@ -11448,6 +11740,7 @@ GameObject:
   - component: {fileID: 7772994251879554686}
   - component: {fileID: 7772994251879554685}
   - component: {fileID: 7772994251879554684}
+  - component: {fileID: 7772994251879554687}
   m_Layer: 9
   m_Name: register.002
   m_TagString: Object
@@ -11551,6 +11844,7 @@ GameObject:
   - component: {fileID: 7325152644599143035}
   - component: {fileID: 7325152644599143034}
   - component: {fileID: 7325152644599143039}
+  - component: {fileID: 7325152644599143040}
   m_Layer: 9
   m_Name: guitar_stand.002
   m_TagString: Object
@@ -11570,6 +11864,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &7325152644599143035
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11638,6 +11935,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.011655504, y: 0.0013151936, z: 0.010568749}
   m_Center: {x: -0.000000032217752, y: 0.005789841, z: 0.011230862}
+--- !u!114 &7325152644599143040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7325152644599143033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7325152644599143034}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &7407423045001307118
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -11658,6 +11982,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &7407423045001307121
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11983,6 +12310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jointLimit: 0.1
+  jointSpring: 100
+  jointDamper: 5
 --- !u!54 &7772994251879554685
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12012,6 +12342,33 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.0074086497, y: 0.008187463, z: 0.005750732}
   m_Center: {x: 0.000000007586202, y: -0.00012134376, z: 0.0020291707}
+--- !u!114 &7772994251879554687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7186476712455817708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7772994251879554684}
+        m_TargetAssemblyTypeName: Draggable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!33 &7847693397541991590
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -12076,6 +12433,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c1ddb01015979b46b06afa75ebbd28d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectType: 0
+  holdPositionOffset: {x: 0, y: 0, z: 0}
+  holdOrientation: {x: 0, y: 0, z: 0}
+--- !u!114 &7847693397541991595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5802140715800982975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a51e3f3b3dbe6c445aea0360d01f1834, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnInteraction:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7847693397541991594}
+        m_TargetAssemblyTypeName: Carriable, Assembly-CSharp
+        m_MethodName: OnInteraction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7850612061917627435
 GameObject:
   m_ObjectHideFlags: 0

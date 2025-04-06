@@ -9,34 +9,14 @@ public class PlayerInteractHandler : MonoBehaviour
     [SerializeField] float grabRadius = 0.5f;
     [SerializeField] float grabDistance = 1f;
     
-    [Header("Drag Parameters")]
-    [SerializeField] float jointLimit = 0.1f;
-    [SerializeField] float jointSpring = 100f;
-    [SerializeField] float jointDamper = 5f;
-    public bool isCarrying;
-
     [Header("References")]
-    [SerializeField] KeyCode grabButton = KeyCode.Mouse0;
+    [SerializeField] KeyCode interactButton = KeyCode.Mouse0;
     [SerializeField] LayerMask interactableLayer;
-    [SerializeField] Transform mouthPosition;
+    public Transform mouth;
 
-    Transform carryObject;
-    Collider carryObjectCollider;
-    Rigidbody grabbedObjectRB;
-    ConfigurableJoint joint;
-    Vector3 grabPoint;
+    Interactable interactableInUse;
 
-    PlayerMovement playerMovement;
-
-    bool hasCarryObject;
-    bool draggingObject;
-
-    public static event Action<bool> OnDragObject;
-
-    void Awake()
-    {
-        playerMovement = GetComponent<PlayerMovement>();
-    }
+    [HideInInspector] public Vector3 hitPoint;
 
     void Update()
     {
@@ -46,152 +26,41 @@ public class PlayerInteractHandler : MonoBehaviour
     void HandleInput()
     {
         // Detect input and pick up or drop depending on whether something is already held.
-        if (Input.GetKeyDown(grabButton) && isCarrying == false)
+        if (Input.GetKeyDown(interactButton))
         {
-            TryGrabObject();
-        }
-        else if(Input.GetKeyDown(grabButton) && isCarrying == true)
-        {
-            if (hasCarryObject)
+            if (interactableInUse)
             {
-                ReleaseCarryObject();
+                interactableInUse.Interact();
             }
-            if (draggingObject)
+            else
             {
-                ReleaseGrabbedObject();
+                TryInteract();
             }
+            
         }
-
-        //if (Input.GetKeyUp(grabButton) )
-        //{
-        //    if (hasCarryObject)
-        //    {
-        //        ReleaseCarryObject();
-        //    }
-        //    if (draggingObject)
-        //    {
-        //        ReleaseGrabbedObject();
-        //    }
-        //}
     }
 
-    void TryGrabObject()
+    void TryInteract()
     {
         // Look for a collider with interactable layer to be picked up within a small region in
         // front of the player.
-        RaycastHit interactableHit;
+        RaycastHit hit;
         bool interactableDetected = Physics.SphereCast(transform.position, grabRadius, 
-                                                    transform.forward, out interactableHit, 
+                                                    transform.forward, out hit, 
                                                     grabDistance, interactableLayer);
         if (interactableDetected)
         {
-            Carriable carriable = interactableHit.transform.GetComponent<Carriable>();
-            if (carriable != null)
+            Interactable interactable = hit.transform.GetComponent<Interactable>();
+            if (interactable != null)
             {
-                CarryObject(interactableHit);
-                isCarrying = true;
-            }
-            Draggable draggable = interactableHit.transform.GetComponent<Draggable>();
-            if (draggable != null)
-            {
-                DragObject(interactableHit);
-                isCarrying = true;
+                hitPoint = hit.point;
+                interactable.Interact();
             }
         }
     }
 
-    void CarryObject(RaycastHit interactableHit)
+    public void SetInteractableInUse(Interactable myInteractable)
     {
-        hasCarryObject = true;
-
-        // Get carriable object's transform and rigidbody.
-        carryObject = interactableHit.transform;
-        grabbedObjectRB = interactableHit.rigidbody;
-
-        // Held objects are parented to the player, have physics disabled, and collider disabled.
-
-        carryObject.position = mouthPosition.position;
-        carryObject.parent = mouthPosition;
-
-        grabbedObjectRB.isKinematic = true;
-
-        carryObjectCollider = interactableHit.collider;
-        //carryObjectCollider.enabled = false;
-        carryObjectCollider.isTrigger = true; //makes key still usable when carried
-    }
-
-    void DragObject(RaycastHit interactableHit)
-    {
-        OnDragObject?.Invoke(true);
-
-        draggingObject = true;
-
-        grabbedObjectRB = interactableHit.rigidbody;
-        grabPoint = interactableHit.point;
-
-        joint = grabbedObjectRB.gameObject.AddComponent<ConfigurableJoint>();
-        joint = ConfigureJoint(joint);
-    }
-
-    ConfigurableJoint ConfigureJoint(ConfigurableJoint thisJoint)
-    {
-        thisJoint.xMotion = ConfigurableJointMotion.Limited;
-        thisJoint.yMotion = ConfigurableJointMotion.Limited;
-        thisJoint.zMotion = ConfigurableJointMotion.Limited;
-        thisJoint.angularXMotion = ConfigurableJointMotion.Free;
-        thisJoint.angularYMotion = ConfigurableJointMotion.Free;
-        thisJoint.angularZMotion = ConfigurableJointMotion.Free;
-
-        SoftJointLimit limit = new SoftJointLimit();
-        limit.limit = jointLimit;
-        thisJoint.linearLimit = limit;
-
-        JointDrive drive = new JointDrive();
-        drive.positionSpring = jointSpring;
-        drive.positionDamper = jointDamper;
-        drive.maximumForce = Mathf.Infinity;
-
-        thisJoint.xDrive = drive;
-        thisJoint.yDrive = drive;
-        thisJoint.zDrive = drive;
-
-        thisJoint.connectedBody = this.GetComponent<Rigidbody>();
-        thisJoint.anchor = grabbedObjectRB.transform.InverseTransformPoint(grabPoint);
-        thisJoint.breakForce = Mathf.Infinity;
-
-        return thisJoint;
-    }
-
-    void ReleaseCarryObject()
-    {
-        // Drop the item by returning it to its original values/state.
-
-        carryObject.parent = null;
-        carryObject = null;
-            
-        grabbedObjectRB.isKinematic = false;
-        //carryObjectCollider.enabled = true;
-        carryObjectCollider.isTrigger = false;
-
-        hasCarryObject = false;
-        isCarrying = false;
-    }
-
-    void ReleaseGrabbedObject()
-    {
-        OnDragObject?.Invoke(false);
-
-        if (joint)
-        {
-            Destroy(joint);
-        }
-
-        if (grabbedObjectRB)
-        {
-            grabbedObjectRB = null;
-        }
-
-        draggingObject = false;
-        isCarrying = false;
+        interactableInUse = myInteractable;
     }
 }
