@@ -25,10 +25,14 @@ public class Buttons : MonoBehaviour
     {
         Debug.Log("hello");
     }
-
     public void PlayDemo()
     {
         // Load the demo scene
         SceneManager.LoadScene("MainDemoA2");
+    }
+    public void PlayDemo2()
+    {
+        // Load the demo scene
+        SceneManager.LoadScene("Demo_2");
     }
 }
