@@ -10573,7 +10573,8 @@ Transform:
   m_LocalPosition: {x: -1.1018476, y: 0.005, z: 0}
   m_LocalScale: {x: 721.4788, y: 4.0444922, z: 1147.3905}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1112182354}
   m_Father: {fileID: 543450652035262179}
   m_RootOrder: 32
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -10631,6 +10632,7 @@ GameObject:
   - component: {fileID: 8194828440318866561}
   - component: {fileID: 34075629728086338}
   - component: {fileID: 8194828440318866562}
+  - component: {fileID: 8194828440318866563}
   m_Layer: 11
   m_Name: front_desk.001
   m_TagString: Ground
