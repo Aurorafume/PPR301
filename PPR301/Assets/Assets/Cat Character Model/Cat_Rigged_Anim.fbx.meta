@@ -70,8 +70,8 @@ ModelImporter:
       name: Cat_Idle
       takeName: Cat_Rig|rig.001Action
       internalID: 5679534422087185884
-      firstFrame: 70
-      lastFrame: 129
+      firstFrame: 71
+      lastFrame: 132
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
