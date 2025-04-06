@@ -14,13 +14,15 @@ public class EnemySpawning : MonoBehaviour
     public PlatformSpawnPair[] platformSpawnPairs;
     public LayerMask PlatformLayer;
     public EnemyAI enemyAI;
+    public GameObject enemyPrefab;
     public NoiseBar noiseBar;
     public States states;
     public NoiseHandler noiseHandler;
     public GameObject Player;
 
+
     void Start()
-    {
+    {   
         foreach (var pair in platformSpawnPairs)
         {
             Debug.Log($"Platform: {pair.platform.name} paired with Spawn: {pair.spawnPoint.name}");
@@ -35,7 +37,7 @@ public class EnemySpawning : MonoBehaviour
             return null;
 
         RaycastHit hit;
-        float checkDistance = 1f;
+        float checkDistance = 2f;
 
         if (Physics.Raycast(Player.transform.position, Vector3.down, out hit, checkDistance, PlatformLayer))
         {

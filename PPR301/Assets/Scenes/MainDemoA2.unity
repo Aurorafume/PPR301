@@ -1469,7 +1469,7 @@ GameObject:
   m_Name: Wall Int (1)
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &468862175
@@ -1809,6 +1809,10 @@ PrefabInstance:
     - target: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_Name
       value: Enemy2D
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+      propertyPath: m_Layer
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_IsActive
@@ -2421,10 +2425,10 @@ GameObject:
   - component: {fileID: 705023369}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &705023368
 Transform:
@@ -2434,7 +2438,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705023367}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.434, z: 0}
+  m_LocalPosition: {x: 0, y: 0.538, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2452,8 +2456,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2646873, y: 0.54507726, z: 4.813509}
-  m_Center: {x: 0.99199826, y: -0.22746298, z: 1.2867012}
+  m_Size: {x: 2.138828, y: 0.81070286, z: 4.813509}
+  m_Center: {x: 1.0549282, y: -0.094651386, z: 1.2867012}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -4501,10 +4505,10 @@ GameObject:
   - component: {fileID: 1112182355}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Ground
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1112182354
 Transform:
@@ -4514,7 +4518,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1112182353}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.395, z: 0}
+  m_LocalPosition: {x: 0.00002, y: 0.372, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4532,8 +4536,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.014869009, y: 0.4159868, z: 0.01851475}
-  m_Center: {x: -0.0057147243, y: -0.14003451, z: 0.000043972723}
+  m_Size: {x: 0.01587369, y: 0.5841542, z: 0.01851475}
+  m_Center: {x: -0.0052123694, y: -0.05595151, z: 0.000043972737}
 --- !u!1 &1156680492
 GameObject:
   m_ObjectHideFlags: 0
@@ -4624,7 +4628,7 @@ GameObject:
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1166250018
 Transform:
@@ -4885,7 +4889,7 @@ GameObject:
   m_TagString: EnemySpawn
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1202619246
 Transform:
@@ -7823,15 +7827,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.008315644
+      value: 0.00763
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.0715646
+      value: -0.07347
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.007915189
+      value: -0.00817
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -7876,6 +7880,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_TagString
       value: Object
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -8861,7 +8869,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!1 &804486926907355114
 GameObject:
@@ -9123,7 +9131,7 @@ GameObject:
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1636919039978612638
 Transform:
@@ -10387,12 +10395,12 @@ GameObject:
   - component: {fileID: 8194828440318866561}
   - component: {fileID: 34075629728086338}
   - component: {fileID: 8194828440318866562}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: front_desk.001
   m_TagString: Ground
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 95
   m_IsActive: 1
 --- !u!23 &5413081416601371182
 MeshRenderer:
@@ -10732,7 +10740,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7186476712455817708}
   m_LocalRotation: {x: -0.27059823, y: 0.65328145, z: 0.65328145, w: 0.2705982}
-  m_LocalPosition: {x: 4.835, y: 0.66, z: 19.077}
+  m_LocalPosition: {x: 4.968, y: 0.637, z: 19.094}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11021,7 +11029,7 @@ GameObject:
   m_Name: Wall Int
   m_TagString: Wall
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
+  m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!1 &6607918826650229834
@@ -11206,8 +11214,8 @@ GameObject:
   m_Name: register.002
   m_TagString: Object
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &7186961568116559490
 Transform:

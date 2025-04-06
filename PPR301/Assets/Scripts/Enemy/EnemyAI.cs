@@ -38,6 +38,8 @@ public class EnemyAI : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         noiseBar = FindObjectOfType<NoiseBar>();
+
+        agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
     }
 
     void Update()

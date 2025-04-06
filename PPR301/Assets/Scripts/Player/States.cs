@@ -21,6 +21,8 @@ public class States : MonoBehaviour
             SceneManager.LoadScene("GameOver");
             gameOver = false;
         }
+
+        CheckIfPlayerIsOnPlatform();
     }
 
     void OnTriggerEnter(Collider other)
@@ -33,6 +35,21 @@ public class States : MonoBehaviour
         if (IsInLayerMask(other.gameObject, platformLayer))
         {
             playerIsOnPlatform = true;
+        }
+    }
+
+    void CheckIfPlayerIsOnPlatform()
+    {
+        RaycastHit hit;
+        float checkDistance = 1f;
+
+        if (Physics.Raycast(player.transform.position, Vector3.down, out hit, checkDistance, platformLayer))
+        {
+            playerIsOnPlatform = true;
+        }
+        else
+        {
+            playerIsOnPlatform = false;
         }
     }
 
