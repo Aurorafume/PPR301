@@ -64,10 +64,12 @@ public class Cameras : MonoBehaviour
         else if (collision.gameObject.CompareTag("Area3"))
         {//
             //camera1.depth = 0;
-            camera3.depth = 0;
-            camera4.depth = 1;
-            script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true, -90f);
+            //camera3.depth = 0;
+            //camera4.depth = 1;
+            //script.noJumpMode = true;
+            //OnEnterTopDownCamera?.Invoke(true, -90f);
+            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+            Debug.Log("RESPAWN");
         }
     }
     void OnTriggerExit(Collider collision)
