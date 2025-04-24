@@ -14,6 +14,8 @@ public class Spin_Object : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.rotation = Quaternion.Euler(0, Time.time * spinSpeed * 5, 0);
+        Vector3 eulers = transform.rotation.eulerAngles;
+        eulers.y += spinSpeed * Time.deltaTime;
+        transform.rotation = Quaternion.Euler(eulers);
     }
 }
