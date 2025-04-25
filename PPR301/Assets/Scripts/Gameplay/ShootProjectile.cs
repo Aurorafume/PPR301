@@ -10,6 +10,7 @@ public class ShootProjectile : MonoBehaviour
     public float detectionRange; //detect player
     public int projectileCount; //how many projectiles should be out at once
     public int projectileCount2;
+    public int startingSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,7 @@ public class ShootProjectile : MonoBehaviour
             if(Input.GetMouseButtonDown(0) && projectileCount2 < projectileCount)
             {
                 Debug.Log("Hello");
-                newProjectile = Instantiate(projectile, new Vector3(transform.position.x,transform.position.y,transform.position.z), Quaternion.identity);
+                newProjectile = Instantiate(projectile, new Vector3(transform.position.x - startingSpawn ,transform.position.y,transform.position.z), Quaternion.identity);
                 projectileCount2++;
             }
         }
