@@ -7,6 +7,7 @@ public class MyLight : MonoBehaviour
     public float angleStep = 15f;
     public float rayLength = 10f;
     public bool hazard;
+    public bool goThrough;
 
     public GameObject player;
     public OutOfBounds script;
@@ -41,7 +42,11 @@ public class MyLight : MonoBehaviour
 
             if (Physics.Raycast(transform.position, direction, out hit, rayLength))
             {
-                endPoint = direction * hit.distance; // Stop at collision
+                //go through certain objects
+                if (!goThrough)
+                {
+                    endPoint = direction * hit.distance; // Stop at collision
+                }
                 //detect player
                 if (hit.collider.CompareTag("Player") && hazard)
                 {
