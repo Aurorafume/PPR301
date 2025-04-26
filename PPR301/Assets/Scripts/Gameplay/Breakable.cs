@@ -39,9 +39,7 @@ public class Breakable : MonoBehaviour
 
         if (objectToReveal != null && revealLocation != null)
         {
-            objectToReveal.transform.position = revealLocation.position;
-            objectToReveal.transform.rotation = revealLocation.rotation;
-            objectToReveal.SetActive(true); // Optional: if it was hidden
+            Instantiate(objectToReveal, revealLocation.position, Quaternion.identity);
         }
 
         Destroy(gameObject); // destroy the jar or whatever object this script is on

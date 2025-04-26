@@ -6,13 +6,13 @@ using UnityEngine;
 public class Carriable : MonoBehaviour
 {
     [Header("Object Type")]
-    [SerializeField] ObjectType objectType;
+    public ObjectType objectType;
 
     [Header("Hold Parameters")]
     [SerializeField] Vector3 holdPositionOffset; [Tooltip("Offset from the position of the player's mouth when held")]
     [SerializeField] Vector3 holdOrientation; [Tooltip("Orientation of the object when held")]
 
-    enum ObjectType
+    public enum ObjectType
     {
         ordinary,
         key,
@@ -58,9 +58,9 @@ public class Carriable : MonoBehaviour
         myInteractable.SetAwaitingFurtherInteraction(true);
         held = true;
 
-        Vector3 holdPosition = mouth.position + holdPositionOffset;
-        transform.position = holdPosition;
         transform.parent = mouth;
+        transform.localPosition = holdPositionOffset;
+        
         transform.localEulerAngles = holdOrientation;
 
         if (objectType == ObjectType.ordinary)
@@ -110,6 +110,14 @@ public class Carriable : MonoBehaviour
         if (rb)
         {
             rb.isKinematic = false;
+        }
+    }
+
+    void OnDisable()
+    {
+        if (held)
+        {
+            myInteractable.SetAwaitingFurtherInteraction(false);
         }
     }
 }

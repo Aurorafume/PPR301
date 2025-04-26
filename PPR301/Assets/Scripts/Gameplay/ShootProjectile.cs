@@ -5,29 +5,16 @@ using UnityEngine;
 public class ShootProjectile : MonoBehaviour
 {
     public GameObject projectile;
-    private GameObject newProjectile;
-    public GameObject player;
-    public float detectionRange; //detect player
     public int projectileCount; //how many projectiles should be out at once
     public int projectileCount2;
     public int startingSpawn;
-    // Start is called before the first frame update
-    void Start()
-    {
 
-    }
-
-    // Update is called once per frame
-    void Update()
+    public void OnInteraction()
     {
-        if(Vector3.Distance(transform.position, player.transform.position) < detectionRange)
+        if (projectileCount2 < projectileCount)
         {
-            if(Input.GetMouseButtonDown(0) && projectileCount2 < projectileCount)
-            {
-                Debug.Log("Hello");
-                newProjectile = Instantiate(projectile, new Vector3(transform.position.x - startingSpawn ,transform.position.y,transform.position.z), Quaternion.identity);
-                projectileCount2++;
-            }
+            Instantiate(projectile, new Vector3(transform.position.x - startingSpawn ,transform.position.y,transform.position.z), Quaternion.identity);
+            projectileCount2++;
         }
     }
 }

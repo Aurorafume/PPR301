@@ -4,26 +4,27 @@ using UnityEngine;
 
 public class Lock : MonoBehaviour
 {
-    public GameObject key;
     public GameObject door;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    GameObject key;
+
     void OnTriggerEnter(Collider collider)
     {
-        if(collider.gameObject == key)
+        Carriable carriable = collider.transform.root.GetComponentInChildren<Carriable>();
+        if (carriable)
         {
-            key.SetActive(false);
-            door.SetActive(false);
-            Destroy(gameObject);
+            if (carriable.objectType == Carriable.ObjectType.key)
+            {
+                key = carriable.gameObject;
+                Unlock();
+            }
         }
+    }
+
+    void Unlock()
+    {
+        Destroy(key);
+        door.SetActive(false);
+        Destroy(gameObject);
     }
 }
