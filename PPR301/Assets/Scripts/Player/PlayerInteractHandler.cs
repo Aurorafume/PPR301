@@ -23,6 +23,14 @@ public class PlayerInteractHandler : MonoBehaviour
         HandleInput();
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Instrument"))
+        {
+            Debug.Log("HIT INSTRUMENT!!!");
+        }
+    }
+
     void HandleInput()
     {
         // Detect input and pick up or drop depending on whether something is already held.

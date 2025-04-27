@@ -20,6 +20,7 @@ TagManager:
   - Area4
   - Phase
   - Destroyable wall
+  - Instrument
   layers:
   - Default
   - TransparentFX
