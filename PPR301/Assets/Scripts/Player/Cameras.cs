@@ -8,7 +8,8 @@ public class Cameras : MonoBehaviour
     public Camera camera1;  // Reference to Camera 1
     public Camera camera2;  // Reference to Camera 2
     public Camera camera3;  // Reference to Camera 3
-    public Camera camera4;  // Reference to Camera 4
+    public Camera camera4;  
+    public Camera camera5;  
     public PlayerMovement script;
     public PlayerCamera camera;
     public OutOfBounds BoundsScript;
@@ -71,6 +72,15 @@ public class Cameras : MonoBehaviour
             //OnEnterTopDownCamera?.Invoke(true, -90f);
             BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
             Debug.Log("RESPAWN");
+        }
+        else if (collision.gameObject.CompareTag("Area4"))
+        {
+            camera1.depth = 0;
+            camera5.depth = 1;
+            //camera4.depth = 1;
+            script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true, -90f);
+            //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
         }
     }
     void OnTriggerExit(Collider collision)
