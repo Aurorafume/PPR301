@@ -9,7 +9,7 @@ public class Instrument : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //enemy = GameObject.Find("Enemy22D");
     }
 
     // Update is called once per frame
@@ -23,6 +23,7 @@ public class Instrument : MonoBehaviour
         {
             Debug.Log("Hit Instrument!!!");
             sound.Play();
+            enemy.SetActive(true);
         }
     }
 }

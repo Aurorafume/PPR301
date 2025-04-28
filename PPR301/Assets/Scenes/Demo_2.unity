@@ -288,11 +288,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -462,11 +462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
@@ -584,7 +584,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!54 &63421401
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -701,11 +701,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -727,7 +727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &66766384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -876,7 +876,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &103942978
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &113888612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1321,7 +1321,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: aggroDistance
-      value: 200
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489786, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_RootOrder
@@ -1373,7 +1373,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
@@ -1497,7 +1501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &168069327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1696,11 +1700,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
@@ -1722,7 +1726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &171174107
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2203,11 +2207,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
@@ -2234,7 +2238,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &191645245
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2636,11 +2640,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -2667,7 +2671,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &262826291
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2875,11 +2879,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -2952,11 +2956,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
@@ -3007,7 +3011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1453961131}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &310157281
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3466,11 +3470,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
@@ -4528,7 +4532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &464597277
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5249,11 +5253,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -5280,7 +5284,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &604601592
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5475,11 +5479,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -5607,11 +5611,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -5878,11 +5882,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
@@ -5904,7 +5908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &645269811
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6109,11 +6113,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
@@ -6135,7 +6139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &715550212
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6410,11 +6414,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
@@ -6441,7 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &752644807
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6701,7 +6705,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &764368053
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6914,11 +6918,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -6940,7 +6944,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &780268832
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7140,11 +7144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -7320,11 +7324,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -7351,7 +7355,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &863851035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7726,11 +7730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
@@ -7752,7 +7756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &895762989
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7915,8 +7919,8 @@ GameObject:
   m_Name: Gong (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &911035852
 MonoBehaviour:
@@ -7931,7 +7935,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &911035853
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8146,7 +8150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &926739570
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8534,11 +8538,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -8560,7 +8564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &950551732
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9118,11 +9122,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -9263,8 +9267,8 @@ GameObject:
   m_Name: Gong (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1051898710
 Transform:
@@ -9294,7 +9298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1051898712
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9944,11 +9948,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -10002,8 +10006,8 @@ GameObject:
   m_Name: Gong
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &1113088701
 MonoBehaviour:
@@ -10018,7 +10022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1113088702
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10538,11 +10542,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
@@ -10569,7 +10573,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1156215553
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10874,11 +10878,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -11007,7 +11011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1274148091
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11554,11 +11558,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -12013,11 +12017,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8aab0fe01a71114b935aa2f7f912078, type: 3}
@@ -12044,7 +12048,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1453961131}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1453961128
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12600,6 +12604,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492858035}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1493385704 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+  m_PrefabInstance: {fileID: 130873519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529212162
 GameObject:
   m_ObjectHideFlags: 0
@@ -12757,7 +12766,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1539817390
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13172,7 +13181,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!54 &1624477252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13546,11 +13555,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -13572,7 +13581,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1696792062
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13936,11 +13945,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0657226207b4ecd40856fdd97f6ca89e, type: 3}
@@ -13967,7 +13976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1714112577
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14129,7 +14138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1724023015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14329,11 +14338,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
@@ -14486,7 +14495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &1749041286
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16313,7 +16322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &2016672971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16721,11 +16730,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_NavMeshLayer
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 8
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
@@ -17004,8 +17013,8 @@ GameObject:
   m_Name: Gong (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 1
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 2
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!114 &2079438736
 MonoBehaviour:
@@ -17020,7 +17029,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 0}
+  enemy: {fileID: 1493385704}
 --- !u!82 &2079438737
 AudioSource:
   m_ObjectHideFlags: 0
