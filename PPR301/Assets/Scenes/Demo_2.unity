@@ -1319,6 +1319,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+      propertyPath: aggroDistance
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489786, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_RootOrder
       value: 12
@@ -3002,7 +3006,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea67bea1251014783a39d1787d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 1453961128}
+  sound: {fileID: 1453961131}
   enemy: {fileID: 0}
 --- !u!82 &310157281
 AudioSource:
@@ -3487,7 +3491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea67bea1251014783a39d1787d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 1453961128}
+  sound: {fileID: 1453961131}
   enemy: {fileID: 0}
 --- !u!82 &313429625
 AudioSource:
@@ -12039,7 +12043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92ea67bea1251014783a39d1787d4f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sound: {fileID: 1453961128}
+  sound: {fileID: 1453961131}
   enemy: {fileID: 0}
 --- !u!82 &1453961128
 AudioSource:
