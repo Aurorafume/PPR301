@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Instrument : MonoBehaviour
 {
-    public AudioSource sax;
+    public AudioSource sound;
+    public GameObject enemy;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,8 @@ public class Instrument : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Hit Instrument!!!");
-            sax.Play();
+            sound.Play();
+
         }
     }
 }
