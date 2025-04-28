@@ -12,6 +12,7 @@ public class Cameras : MonoBehaviour
     public PlayerMovement script;
     public PlayerCamera camera;
     public OutOfBounds BoundsScript;
+    public Camera KeyCamera;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
 
@@ -34,13 +35,13 @@ public class Cameras : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             camera1.depth = 1;
-            camera2.depth = 0;
+            KeyCamera.depth = 0;
         }
         // Switch to Camera 2 when pressing the "2" key
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             camera1.depth = 0;
-            camera2.depth = 1;
+            KeyCamera.depth = 1;
         }
     }
     void OnTriggerEnter(Collider collision)
