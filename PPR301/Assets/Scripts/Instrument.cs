@@ -23,7 +23,6 @@ public class Instrument : MonoBehaviour
         {
             Debug.Log("Hit Instrument!!!");
             sound.Play();
-
         }
     }
 }

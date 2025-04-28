@@ -99,5 +99,12 @@ public class Cameras : MonoBehaviour
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90f);
         }
+        else if (collision.gameObject.CompareTag("Area4"))
+        {
+            camera3.depth = 0;
+            camera1.depth = 1;
+            script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false, -90f);
+        }
     }
 }
