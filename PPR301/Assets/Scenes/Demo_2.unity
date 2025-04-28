@@ -1320,6 +1320,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1850088815}
+    - target: {fileID: 9002502280049489784, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: aggroDistance
       value: 1000
       objectReference: {fileID: 0}
