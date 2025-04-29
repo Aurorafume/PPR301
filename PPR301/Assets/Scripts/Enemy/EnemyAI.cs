@@ -18,7 +18,8 @@ public class EnemyAI : MonoBehaviour
     private bool right;
     public float fadeStrength = 100f;
     public bool fading;
-    
+
+    public Animator anim;
     private SpriteRenderer spriteRenderer;
     private NoiseBar noiseBar;
     public States states;
@@ -40,12 +41,13 @@ public class EnemyAI : MonoBehaviour
         noiseBar = FindObjectOfType<NoiseBar>();
 
         agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
+        anim = GetComponent<Animator>();
     }
 
     void Update()
     {   
         updatePlayerLocation();
-        billboard();
+        //billboard();
         checkAggroDistance();
         enemyChase();
         touchPlayer();
@@ -86,27 +88,17 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public void walkAnimation()
+public void walkAnimation()
+{
+    if (agent.velocity.magnitude > 0.1f)
     {
-        if(turnNum < 15 && right)
-        {
-            turnNum++;
-            if(turnNum >= 15)
-            {
-                right = false;
-            }
-        }
-        else if(turnNum > -15 && !right)
-        {
-            turnNum--;
-            if(turnNum <= -15)
-            {
-                right = true;
-            }
-        }
-        transform.rotation = Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y, turnNum);
+        anim.SetBool("isWalking", true);
     }
-
+    else
+    {
+        anim.SetBool("isWalking", false);
+    }
+}
     public void checkAggroDistance()
     {
         //checks distance between player and enemy
