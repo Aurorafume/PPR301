@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: M_env_floor1
+    second: {fileID: 2100000, guid: 50c802b78331bd148a231eab0ad2b3f8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Material
     second: {fileID: 5534319234707982403, guid: 0eb6519894c920540a622459fdec61a3, type: 3}
   - first:
