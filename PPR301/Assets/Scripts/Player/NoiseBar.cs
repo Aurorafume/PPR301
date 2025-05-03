@@ -4,8 +4,14 @@ using UnityEngine.UI;
 
 public class NoiseBar : MonoBehaviour
 {
+    [Header("Noise Bar Settings")]
+    [Tooltip("The image component for the noise bar")]
     public Image noiseBarImage;
-    public Image background; 
+
+    [Tooltip("The background image for the noise bar")]
+    public Image background;
+
+    [Tooltip("The frames for the noise bar animation")]
     public Sprite[] level1Frames;
     public Sprite[] level2Frames;
     public Sprite[] level3Frames;
@@ -13,11 +19,15 @@ public class NoiseBar : MonoBehaviour
     public Sprite[] level5Frames;
     public Sprite[] level6Frames;
     public Sprite[] chaseWarningFrames;
+
     private Sprite[][] noiseLevels;
     private int currentFrame = 0;
     private float frameRate = 0.15f;
     private float nextFrameTime;
     private bool forceMaxBackground = false;
+    
+    [Header("Noise Level Settings")]
+    [Tooltip("The maximum noise level before the enemy starts chasing")]
     public float noisePercentage = 0f;
     private float targetNoiseLevel = 0f;
     private float smoothSpeed = 5f;
@@ -29,6 +39,7 @@ public class NoiseBar : MonoBehaviour
 
     void Start()
     {   
+        // Initialise the noise bar and its components
         states = FindObjectOfType<States>();
         enemySpawning = FindObjectOfType<EnemySpawning>();
 
@@ -41,8 +52,8 @@ public class NoiseBar : MonoBehaviour
     }
 
     void Update()
-    {
-        // Smoothly interpolate noise percentage for a fluid UI update
+    {   
+        // Update the noise bar based on the current noise level
         noisePercentage = Mathf.Lerp(noisePercentage, targetNoiseLevel, Time.deltaTime * smoothSpeed);
         UpdateNoiseBarSprite();
 
@@ -71,18 +82,16 @@ public class NoiseBar : MonoBehaviour
         }
     }
 
-    // Updated to accept dynamic parameters: ambientBaseline and voiceMargin
     public void UpdateNoiseLevel(float noiseLevel, float ambientBaseline, float voiceMargin)
-    {
-        // The dynamic maximum is the ambient baseline plus the additional margin required to register talking.
+    {   
+        // Update the noise level based on the microphone input and ambient noise
         float dynamicMaxNoise = ambientBaseline + voiceMargin;
-        // Calculate the percentage relative to this dynamic maximum.
         targetNoiseLevel = Mathf.Clamp01(noiseLevel / dynamicMaxNoise);
+        Debug.Log($"[NoiseBar] Noise: {noiseLevel}, Ambient: {ambientBaseline}, Margin: {voiceMargin}, Target %: {targetNoiseLevel}");
 
-        // If the noise level reaches the top of the scale, trigger an event (e.g for enemy spawns).
         if (targetNoiseLevel >= 1f && !isChasing && states.playerIsOnPlatform)
         {   
-            // Find the specific platform and spawn point
+            // Check if the player is on a platform and trigger the chase warning
             Transform currentPlatform = enemySpawning.GetCurrentEnemySpawnPoint();
             if (currentPlatform == null)
             {
@@ -90,17 +99,15 @@ public class NoiseBar : MonoBehaviour
                 return;
             }
 
-            if (currentPlatform != null)
-            {
-                isChasing = true;
-                OnNoiseMaxed?.Invoke();
-                StartCoroutine(ChaseWarningAnimation());
-            }
+            isChasing = true;
+            OnNoiseMaxed?.Invoke();
+            StartCoroutine(ChaseWarningAnimation());
         }
     }
 
     void UpdateNoiseBarSprite()
-    {
+    {   
+        // Update the noise bar sprite based on the current noise level
         if (isChasing)
         {
             noiseBarImage.sprite = chaseWarningFrames[currentFrame];
@@ -115,16 +122,18 @@ public class NoiseBar : MonoBehaviour
     }
 
     IEnumerator ChaseWarningAnimation()
-    {
+    {   
+        // Play the chase warning animation
         while (isChasing)
         {
             noiseBarImage.sprite = chaseWarningFrames[currentFrame];
             yield return new WaitForSeconds(frameRate);
         }
-    }   
+    }
 
     public void ForceChaseVisuals(bool active)
     {   
+        // Force the chase visuals on or off
         forceMaxBackground = active;
         isChasing = active;
 
@@ -136,6 +145,7 @@ public class NoiseBar : MonoBehaviour
 
     public void StopChase()
     {   
+        // Stop the chase visuals and reset the noise bar
         isChasing = false;
         noiseBarImage.sprite = level1Frames[0];
     }

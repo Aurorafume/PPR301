@@ -3,9 +3,14 @@ using System.Linq;
 using System.Collections;
 
 public class MicrophoneInput : MonoBehaviour
-{
+{   
+    [Header("Microphone Settings")]
+    [Tooltip("The sample rate for the microphone input")]
     public int sampleRate = 44100;
+
+    [Tooltip("The selected microphone device")]
     public string selectedMic;
+
     private bool isRecording = false;
     private AudioClip micClip;
     private float[] audioSamples = new float[1024];
@@ -17,10 +22,10 @@ public class MicrophoneInput : MonoBehaviour
     }
 
     void Start()
-    {
-        // Get the default microphone
+    {   
+        // Check if any microphone devices are available and select the first one
         if (Microphone.devices.Length > 0)
-        {   
+        {
             selectedMic = Microphone.devices[0];
             StartMicrophone();
             StartCoroutine(DelayMicReadings());
@@ -33,22 +38,7 @@ public class MicrophoneInput : MonoBehaviour
 
     void Update()
     {   
-        /*
-        // Removed because recording now starts automatically
-
-        // Start recording when the user presses "R"
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartMicrophone();
-        }
-
-        // Stop recording when the user presses "T"
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            StopMicrophone();
-        }*/
-
-        // Continuously read microphone data if recording
+        // If recording, read microphone data
         if (isRecording && micClip)
         {
             ReadMicrophoneData();
@@ -57,10 +47,9 @@ public class MicrophoneInput : MonoBehaviour
 
     public void StartMicrophone()
     {   
-        // Prevent starting multiple recordings
+        // Start recording from the selected microphone
         if (isRecording) return;
 
-        // Start recording with the selected microphone
         if (selectedMic != null)
         {
             micClip = Microphone.Start(selectedMic, true, 10, sampleRate);
@@ -71,10 +60,9 @@ public class MicrophoneInput : MonoBehaviour
 
     public void StopMicrophone()
     {   
-        // Prevent stopping if not recording
+        // Stop recording from the selected microphone
         if (!isRecording) return;
 
-        // Stop recording and reset flag
         Microphone.End(selectedMic);
         isRecording = false;
         Debug.Log("Microphone recording stopped.");
@@ -82,10 +70,9 @@ public class MicrophoneInput : MonoBehaviour
 
     private void ReadMicrophoneData()
     {   
-        // Prevent reading data if clip is null
+        // Read the microphone data into the audioSamples array
         if (!micClip) return;
 
-        // Get the current position of the microphone recording
         int micPosition = Microphone.GetPosition(selectedMic);
         if (micPosition < audioSamples.Length) return;
 
@@ -94,14 +81,24 @@ public class MicrophoneInput : MonoBehaviour
 
     public float GetCurrentNoiseLevel()
     {   
-        // Compute RMS (Root Mean Square) volume level and convert to dB
+        // Calculate the current noise level in decibels
         float rms = Mathf.Sqrt(audioSamples.Select(x => x * x).Sum() / audioSamples.Length);
-        float normalisedRMS = rms / 1.0f; 
-        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); 
-
-        // Ensure positive values by offsetting
+        float normalisedRMS = rms / 1.0f;
+        float decibelLevel = 20f * Mathf.Log10(normalisedRMS + 1e-10f); // avoid log(0)
         float positiveDecibelLevel = decibelLevel + 65f;
 
         return Mathf.Max(positiveDecibelLevel, 0f);
+    }
+
+    public float GetSmoothedNoiseLevel(float[] buffer)
+    {   
+        // Calculate the average noise level from the buffer
+        float avg = 0f;
+        for (int i = 0; i < buffer.Length; i++)
+            avg += Mathf.Abs(buffer[i]);
+        avg /= buffer.Length;
+
+        float db = 20f * Mathf.Log10(avg + 1e-10f);
+        return Mathf.Max(db + 65f, 0f);
     }
 }
