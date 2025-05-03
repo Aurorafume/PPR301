@@ -57,10 +57,17 @@ public class EnemyAI : MonoBehaviour
 
     [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
+
+    public GameManager gameManager;
     
     void Start()
     {
+<<<<<<< Updated upstream
         // Get the States script
+=======
+
+        // get the States script
+>>>>>>> Stashed changes
         states = FindObjectOfType<States>();
         player = GameObject.Find("Player");
 
@@ -164,11 +171,11 @@ public void walkAnimation()
         // Check if player is touching enemy
         GameObject hidingSpot = GameObject.FindGameObjectWithTag("Hiding Spot");
 
-        if (distanceFromPlayer <= 2f)
+        if (distanceFromPlayer <= 2f && !gameManager.gameOver)
         {
-            Debug.Log("Touching Player");
+            //Debug.Log("Touching Player");
 
-            if (states.playerIsHiding)
+            if (gameManager.playerHiding)
             {
                 Debug.Log("Player is hiding. Enemy will despawn.");
                 fading = true;
@@ -184,7 +191,8 @@ public void walkAnimation()
             }
             else
             {
-                states.gameOver = true;
+                gameManager.gameOver = true;
+                Debug.Log("Player dead");
             }
         }
     }
