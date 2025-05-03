@@ -36,6 +36,8 @@ public class NoiseBar : MonoBehaviour
     public float TargetNoiseLevel { get; private set; }
     public States states;
     public EnemySpawning enemySpawning;
+    
+    public float CurrentNoisePercentage => noisePercentage;
 
     void Start()
     {   

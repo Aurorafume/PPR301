@@ -4,16 +4,9 @@ using UnityEngine;
 public class NoiseHandler : MonoBehaviour
 {   
     [Header("Noise Settings")]
-    [Tooltip("Noise generated when the player jumps")]
     public float jumpNoise;
-
-    [Tooltip("Noise generated when the player collides with an object")]
     public float collisionNoise;
-
-    [Tooltip("The amount above ambient noise required to consider the player as speaking. Higher values make it harder to trigger noise detection, which is useful in noisy environments.")] 
     public float voiceNoiseMargin;
-
-    [Tooltip("Temporary noise added by gameplay events (e.g jumping or object collisions). This value decays over time.")]
     private float additionalNoise = 0f;
 
     [Header("References")]
@@ -24,30 +17,34 @@ public class NoiseHandler : MonoBehaviour
     public EnemySpawning enemySpawning;
 
     [Header("Enemy Spawning")]
-    [Tooltip("Can the enemy spawn?")]
     public bool canSpawnEnemy = false;
-
-    [Tooltip("Is the enemy currently spawned?")]
     public static bool enemyExists = false;
-
-    [Tooltip("The cooldown time before the enemy can spawn again.")]
     public float spawnCooldown = 10f;
 
+    [Header("Audio")]
+    public AudioSource ambientAudio;
+    public AudioSource chaseAudio;
+
+    public static AudioSource staticAmbientAudio;
+    public static AudioSource staticChaseAudio;
+
     void Start()
-    {   
-        // Initialise references and check for missing components
+    {
+        staticAmbientAudio = ambientAudio;
+        staticChaseAudio = chaseAudio;
+
+        if (ambientAudio != null)
+        {
+            ambientAudio.volume = 0f;
+            ambientAudio.Play(); // Make sure loop = true and playOnAwake is off
+        }
+
         microphoneInput = GetComponent<MicrophoneInput>();
         if (microphoneInput == null)
-        {
             Debug.LogError("NoiseHandler: Missing MicrophoneInput component!");
-        }
 
         if (ambientNoise == null)
-        {
-            Debug.LogError("NoiseHandler: AmbientNoise reference not set in inspector!");
-        }
-
-        additionalNoise = 0f;
+            Debug.LogError("NoiseHandler: AmbientNoise reference not set!");
 
         if (noiseBar != null)
         {
@@ -57,15 +54,15 @@ public class NoiseHandler : MonoBehaviour
     }
 
     void Update()
-    {   
-        // Update the noise bar based on microphone input and ambient noise
+    {
+        float totalNoise = 0f;
+
         if (microphoneInput != null && ambientNoise != null && ambientNoise.isCalibrated)
         {
             float micNoise = microphoneInput.GetCurrentNoiseLevel();
             float adjustedNoise = Mathf.Max(micNoise - ambientNoise.ambientNoiseBaseline, 0f);
-            float totalNoise = adjustedNoise + additionalNoise;
+            totalNoise = adjustedNoise + additionalNoise;
 
-            // Reject clicks and low spikes
             if (adjustedNoise < 1f)
                 totalNoise = 0f;
 
@@ -74,17 +71,25 @@ public class NoiseHandler : MonoBehaviour
             noiseBar.UpdateNoiseLevel(totalNoise, ambientNoise.ambientNoiseBaseline, voiceNoiseMargin);
             additionalNoise = Mathf.Lerp(additionalNoise, 0, Time.deltaTime * 0.5f);
         }
+
+        // Use noise bar percentage directly for audio volume
+        if (!enemyExists && ambientNoise.isCalibrated && ambientAudio != null && noiseBar != null)
+        {
+            float targetVolume = Mathf.Clamp01(noiseBar.CurrentNoisePercentage);
+            Debug.Log($"[Audio] Volume target from noise bar: {targetVolume}");
+            ambientAudio.volume = targetVolume;
+            Debug.Log($"[Audio] NoiseBar %: {targetVolume} | Volume: {ambientAudio.volume}");
+
+        }
     }
 
     public void GenerateNoise(float extraNoise)
-    {   
-        // Add temporary noise from gameplay events (e.g. jumping, colliding with objects)
+    {
         additionalNoise += Mathf.Abs(extraNoise);
     }
 
     void OnEnable()
-    {   
-        // Subscribe to the noise bar event when the object is enabled
+    {
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
@@ -93,8 +98,7 @@ public class NoiseHandler : MonoBehaviour
     }
 
     void OnDisable()
-    {   
-        // Unsubscribe from the noise bar event when the object is disabled
+    {
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
@@ -102,8 +106,7 @@ public class NoiseHandler : MonoBehaviour
     }
 
     public void TrySpawnEnemyManager()
-    {   
-        // Check if the enemy can spawn and if it already exists
+    {
         if (enemySpawning == null)
         {
             Debug.LogError("EnemySpawning reference is not set!");
@@ -122,12 +125,14 @@ public class NoiseHandler : MonoBehaviour
             SpawnEnemyManager();
             enemyExists = true;
             StartCoroutine(SpawnCooldown());
+
+            if (ambientAudio != null) ambientAudio.Stop();
+            if (chaseAudio != null && !chaseAudio.isPlaying) chaseAudio.Play();
         }
     }
 
     void SpawnEnemyManager()
-    {    
-        // Check if the enemy manager prefab and enemy spawning reference are set, and spawn the enemy manager at the current platform
+    {
         if (enemyManagerPrefab != null && enemySpawning != null)
         {
             Transform spawnPoint = enemySpawning.GetCurrentEnemySpawnPoint();
@@ -138,7 +143,7 @@ public class NoiseHandler : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("No matching platform/spawn point found for current player position.");
+                Debug.LogWarning("No matching platform/spawn point found.");
             }
         }
         else
@@ -148,19 +153,24 @@ public class NoiseHandler : MonoBehaviour
     }
 
     public static void NotifyEnemyDespawned()
-    {   
-        // Notify that the enemy has been despawned and reset the enemy existence flag
+    {
         enemyExists = false;
         GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
         if (enemyManager != null)
-        {
             Destroy(enemyManager);
+
+        if (staticChaseAudio != null)
+            staticChaseAudio.Stop();
+
+        if (staticAmbientAudio != null)
+        {
+            staticAmbientAudio.volume = 0f;
+            staticAmbientAudio.Play();
         }
     }
 
     IEnumerator SpawnCooldown()
-    {   
-        // Set the spawn cooldown to prevent immediate respawning of the enemy
+    {
         canSpawnEnemy = false;
         yield return new WaitForSeconds(spawnCooldown);
         canSpawnEnemy = true;

@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-
-using UnityEngine;
-
 public class Breakable : MonoBehaviour
 {
     [Header("Break Settings")]
