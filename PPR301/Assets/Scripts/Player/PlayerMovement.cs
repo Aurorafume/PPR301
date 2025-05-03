@@ -4,47 +4,103 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Movement Settings")]
+    [Tooltip("How fast the player moves while grounded.")]
     public float playerSpeed;
+
+    [Tooltip("Amount of drag applied to the player when grounded.")]
     public float groundDrag;
+
+    [Tooltip("Upward force applied when the player jumps.")]
     public float jumpForce;
+
+    [Tooltip("Cooldown time between jumps (in seconds).")]
     public float jumpCooldown;
+
+    [Tooltip("Multiplier applied to movement while in the air.")]
     public float airMultiplier;
+
+    [Tooltip("Air control speed when the player is airborne.")]
     public float airControlSpeed = 5f;
+
+    [Header("Crouch Settings")]
+    [Tooltip("Height scale applied when the player is crouching.")]
     public float crouchHeight = 0.5f;
+
+    [Tooltip("Speed at which the player transitions between crouching and standing.")]
     public float crouchSpeed = 10f;
+
+    [Tooltip("Height of the player used for grounding and raycasts.")]
     public float playerHeight;
+
+    [Header("Rotation Settings")]
+    [Tooltip("Speed of player rotation in 3D mode.")]
     [SerializeField] private float rotationSpeed = 5f;
+
+    [Tooltip("Speed of player rotation in top-down mode.")]
     [SerializeField] private float topDownRotationSpeed = 50f;
 
+    [Header("State Flags (Runtime Only)")]
+    [Tooltip("Is the player currently crouching?")]
     public bool isCrouching = false;
+
+    [Tooltip("Is the player ready to jump (not on cooldown)?")]
     public bool readyToJump;
+
+    [Tooltip("Is the player currently grounded?")]
     public bool grounded;
+
     private bool wasGrounded;
     private float horizontalInput;
     private float verticalInput;
     private float lastNoiseTime;
 
+    [Header("Key Bindings")]
+    [Tooltip("Key used to jump.")]
     public KeyCode jumpKey = KeyCode.Space;
+
+    [Tooltip("Key used to crouch.")]
     public KeyCode crouchKey = KeyCode.LeftShift;
 
+    [Header("Component References")]
+    [Tooltip("Transform used to determine movement direction.")]
     public Transform orientation;
+
+    [Tooltip("Reference to the player's camera.")]
     public Camera playerCamera;
+
+    [Tooltip("Transform that scales vertically for crouching.")]
     public Transform crouchScaleObject;
+
+    [Tooltip("Reference to the NoiseHandler script.")]
     public NoiseHandler noiseHandler;
+
+    [Tooltip("Animator component controlling the player's animations.")]
     public Animator anim;
+
     private Vector3 moveDirection;
     private Rigidbody rb;
     private Vector3 originalScale;
 
+    [Header("Advanced State Settings")]
+    [Tooltip("Disables the ability to jump when true.")]
     public bool noJumpMode;
+
+    [Tooltip("Time in seconds before the player is considered idle.")]
     public float idleTimeThreshold = 3f;
+
     private float lastMoveTime;
 
     private delegate void MoveBehaviour();
     private MoveBehaviour moveBehaviour;
 
+    [Tooltip("Is the player currently dragging an object?")]
     public bool draggingObject;
+
+    [Tooltip("Is the player currently in top-down mode?")]
     public bool inTopDownMode;
+
+    [Tooltip("Directional offset (in degrees) from world forward in top-down mode.")]
     float forwardAngularOffsetFromWorldZ = 0;
 
     private void Start()

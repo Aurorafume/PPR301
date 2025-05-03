@@ -6,12 +6,28 @@ using UnityEngine.SceneManagement;
 
 public class States : MonoBehaviour
 {
+    [Header("Player State Flags")]
+    [Tooltip("Indicates whether the game is currently over.")]
     public bool gameOver = false;
+
+    [Tooltip("True if the player is currently hiding in a hiding spot.")]
     public bool playerIsHiding = false;
+
+    [Tooltip("True if the player is currently standing on a valid platform.")]
     public bool playerIsOnPlatform = false;
+
+    [Header("Scene References")]
+    [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
+
+    [Tooltip("Reference to the current enemy GameObject.")]
     public GameObject enemy;
+
+    [Tooltip("Reference to the EnemySpawning manager.")]
     public EnemySpawning enemySpawning;
+
+    [Header("Environment Detection")]
+    [Tooltip("Layer mask used to identify platforms the player can stand on.")]
     public LayerMask platformLayer;
 
     void start()
@@ -20,7 +36,8 @@ public class States : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        // Check if the player is in a hiding spot and set the game over state accordingly
         if (gameOver)
         {
             SceneManager.LoadScene("GameOver");
@@ -31,7 +48,8 @@ public class States : MonoBehaviour
     }
 
     void OnTriggerEnter(Collider other)
-    {
+    {   
+        // Check if the player is in a hiding spot or on a platform
         if (other.CompareTag("Hiding Spot"))
         {
             playerIsHiding = true;
@@ -44,7 +62,8 @@ public class States : MonoBehaviour
     }
 
     void CheckIfPlayerIsOnPlatform()
-    {
+    {   
+        // Check if the player is on a platform using a raycast
         RaycastHit hit;
         float checkDistance = 1f;
 
@@ -59,7 +78,8 @@ public class States : MonoBehaviour
     }
 
     void OnTriggerExit(Collider other)
-    {
+    {   
+        // Reset the player state when exiting a hiding spot or platform
         if (other.CompareTag("Hiding Spot"))
         {
             playerIsHiding = false;

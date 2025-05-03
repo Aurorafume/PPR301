@@ -5,29 +5,62 @@ using UnityEngine.AI;
 
 public class EnemyAI : MonoBehaviour
 {
-    public NavMeshAgent agent; 
-    private GameObject playerToChase;
+    [Header("Navigation & Targeting")]
+    [Tooltip("NavMeshAgent used for pathfinding.")]
+    public NavMeshAgent agent;
+
+    [Tooltip("Current position of the player.")]
     public Vector3 playerLocation;
-    public bool angry;
+
+    [Tooltip("Distance at which the enemy will become aggressive.")]
     public int aggroDistance;
+
+    [Tooltip("Distance between this enemy and the player.")]
     public float distanceFromPlayer;
-    private float whenToRespawn;
-    public float respawnTimer;
+
+    [Tooltip("Whether the enemy is currently chasing the player.")]
     public bool chasing;
-    private float turnNum;
-    private bool right;
-    public float fadeStrength = 100f;
+
+    [Tooltip("Whether the enemy is currently angry (actively hunting).")]
+    public bool angry;
+
+    private GameObject playerToChase;
+
+    [Header("Respawn & Fade Settings")]
+    [Tooltip("Time remaining until the enemy despawns after losing the player.")]
+    private float whenToRespawn;
+
+    [Tooltip("Time (in seconds) to wait before despawning after chase ends.")]
+    public float respawnTimer;
+
+    [Tooltip("Whether the enemy is currently fading out.")]
     public bool fading;
 
+    [Tooltip("Visual fade strength for the enemy's sprite (0 = invisible, 1 = opaque).")]
+    public float fadeStrength = 100f;
+
+    private float turnNum;
+    private bool right;
+
+    [Header("Components & References")]
+    [Tooltip("Animator component controlling the enemy's animations.")]
     public Animator anim;
+
+    [Tooltip("SpriteRenderer used to control visual effects like fading.")]
     private SpriteRenderer spriteRenderer;
+
+    [Tooltip("Reference to the NoiseBar used to show noise level.")]
     private NoiseBar noiseBar;
+
+    [Tooltip("Reference to the States manager for global flags.")]
     public States states;
+
+    [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
     
     void Start()
     {
-        // get the States script
+        // Get the States script
         states = FindObjectOfType<States>();
         player = GameObject.Find("Player");
 
@@ -47,7 +80,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {   
         updatePlayerLocation();
-        //billboard();
+        // billboard();
         checkAggroDistance();
         enemyChase();
         touchPlayer();
@@ -55,6 +88,7 @@ public class EnemyAI : MonoBehaviour
     }
     public void enemyChase()
     {
+        // Check if the player is hiding and set the aggro distance accordingly
         if(chasing)
         {   
             agent.SetDestination(playerLocation);
@@ -89,7 +123,8 @@ public class EnemyAI : MonoBehaviour
     }
 
 public void walkAnimation()
-{
+{   
+    // Set the walking animation based on the agent's velocity
     if (agent.velocity.magnitude > 0.1f)
     {
         anim.SetBool("isWalking", true);
@@ -101,7 +136,7 @@ public void walkAnimation()
 }
     public void checkAggroDistance()
     {
-        //checks distance between player and enemy
+        // Checks distance between player and enemy
         distanceFromPlayer = Vector3.Distance(transform.position, playerToChase.transform.position);
         if(distanceFromPlayer <= aggroDistance)
         {
@@ -111,7 +146,7 @@ public void walkAnimation()
         {
             chasing = false;
         }
-        //longer follow distance when following
+        // Longer follow distance when following
         if(angry)
         {
             aggroDistance = 20;
@@ -120,12 +155,13 @@ public void walkAnimation()
 
     public void updatePlayerLocation()
     {
-        //set playerLocation to player's current location
+        // Set playerLocation to player's current location
         playerLocation = playerToChase.transform.position;
     }
 
     public void touchPlayer()
     {   
+        // Check if player is touching enemy
         GameObject hidingSpot = GameObject.FindGameObjectWithTag("Hiding Spot");
 
         if (distanceFromPlayer <= 2f)
@@ -153,8 +189,9 @@ public void walkAnimation()
         }
     }
 
-    public void billboard()//turns enemy towards camera
+    public void billboard()
     {
+        // Make the enemy face the camera
         Vector3 lookPos = Camera.main.transform.position - transform.position; // Get direction
         lookPos.y = 0; // Keep Y-axis fixed
         transform.rotation = Quaternion.LookRotation(-lookPos);
@@ -162,7 +199,7 @@ public void walkAnimation()
 
     public void FadeTo()
     {
-        //float fadeStrength = 100f;
+        // float fadeStrength = 100f;
         if(fading == true)
         {
             fadeStrength -= Time.deltaTime / 1.5f;
@@ -175,7 +212,7 @@ public void walkAnimation()
         fadeStrength = Mathf.Clamp(fadeStrength, 0, 1);
         spriteRenderer.color = new Color(spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, fadeStrength);
 
-        if (fadeStrength <= 0.01f && fading) // small margin for float accuracy
+        if (fadeStrength <= 0.01f && fading) // Small margin for float accuracy
         {
             fading = false;
             NoiseHandler.NotifyEnemyDespawned();
