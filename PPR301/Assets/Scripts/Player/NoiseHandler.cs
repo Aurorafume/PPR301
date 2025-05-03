@@ -75,10 +75,15 @@ public class NoiseHandler : MonoBehaviour
         }
 
         // Use noise bar percentage directly for audio volume
-        if (!enemyExists && ambientNoise.isCalibrated && ambientAudio != null && noiseBar != null)
+        if (ambientNoise.isCalibrated && ambientAudio != null && noiseBar != null)
         {
             float targetVolume = Mathf.Clamp01(noiseBar.CurrentNoisePercentage);
-            ambientAudio.volume = targetVolume;
+
+            // Reduce ambient volume during chase
+            if (enemyExists)
+                targetVolume *= 0.2f;
+
+            ambientAudio.volume = Mathf.MoveTowards(ambientAudio.volume, targetVolume, Time.deltaTime * 1.5f);
         }
     }
 
@@ -129,7 +134,7 @@ public class NoiseHandler : MonoBehaviour
             enemyExists = true;
             StartCoroutine(SpawnCooldown());
 
-            if (ambientAudio != null) ambientAudio.Stop();
+            // if (ambientAudio != null) ambientAudio.Stop();
             if (chaseAudio != null && !chaseAudio.isPlaying) chaseAudio.Play();
         }
     }
