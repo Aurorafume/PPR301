@@ -78,6 +78,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Animator component controlling the player's animations.")]
     public Animator anim;
 
+    public Transform secondGroundCastLocator;
+
     private Vector3 moveDirection;
     private Rigidbody rb;
     private Vector3 originalScale;
@@ -332,14 +334,19 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGroundStatus()
     {
-        if (Physics.SphereCast(transform.position, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
+        bool groundDetected = false;
+        if(SphereCastDetectsGround(transform.position))
         {
-            grounded = hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
+            groundDetected = true;
         }
-        else
+
+        Vector3 secondCastPosition = secondGroundCastLocator.position;
+        if(SphereCastDetectsGround(secondCastPosition))
         {
-            grounded = false;
+            groundDetected = true;
         }
+
+        grounded = groundDetected;
 
         anim.SetBool("isJumping", !grounded);
 
@@ -353,6 +360,18 @@ public class PlayerMovement : MonoBehaviour
         }
 
         Debug.DrawRay(transform.position, Vector3.down * (playerHeight * 0.5f), grounded ? Color.green : Color.red);
+    }
+
+    private bool SphereCastDetectsGround(Vector3 castPosition)
+    {
+        if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
+        {
+            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
+        }
+        else
+        {
+            return false;
+        }
     }
 
     private void HandleCrouch()
