@@ -771,7 +771,7 @@ MonoBehaviour:
   noiseBar: {fileID: 758779079}
   states: {fileID: 1839871886}
   noiseHandler: {fileID: 1865363733}
-  Player: {fileID: 1839871873}
+  Player: {fileID: 1289048025}
 --- !u!4 &204259402 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8572927469185966014, guid: c3b3810b96eac7c44a2372e2ea183acd, type: 3}
@@ -8503,6 +8503,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5143839711472547772, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
   m_PrefabInstance: {fileID: 8935206571993004040}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1289048025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6770507989242591897, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+  m_PrefabInstance: {fileID: 2036865600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1290479022
 GameObject:
   m_ObjectHideFlags: 0
@@ -12578,6 +12583,10 @@ PrefabInstance:
       propertyPath: camera3
       value: 
       objectReference: {fileID: 1990331330}
+    - target: {fileID: 6770507989242591894, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: enemySpawning
+      value: 
+      objectReference: {fileID: 199334966}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: noiseHandler
       value: 

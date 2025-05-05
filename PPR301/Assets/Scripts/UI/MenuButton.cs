@@ -18,12 +18,9 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler {
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        theText.color = colour2; //Or however you do your color
+        theText.color = colour2;
     }
-    //public void OnPointerExit(PointerEventData eventData)
-    //{
-    //    theText.color = colour1; //Or however you do your color
-    //}
+
     void Update()
     {
         if (!RectTransformUtility.RectangleContainsScreenPoint(textRect, Input.mousePosition))
