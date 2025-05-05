@@ -20,10 +20,10 @@ public class Cameras : MonoBehaviour
 
     void Start()
     {
-        camera1.depth = 1;
-        camera2.depth = 0;
-        camera3.depth = 0;
-        camera4.depth = 0;
+        if (camera1) camera1.depth = 1;
+        if (camera2) camera2.depth = 0;
+        if (camera3) camera3.depth = 0;
+        if (camera4) camera4.depth = 0;
     }
 
     // Update is called once per frame
