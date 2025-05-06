@@ -16,7 +16,8 @@ public class Cameras : MonoBehaviour
     public Camera KeyCamera;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
-    public float num;//demo 2 is -90
+    private float num = -90;//demo 2 is -90
+    //private float num2 = 0;
 
     void Start()
     {
@@ -61,19 +62,27 @@ public class Cameras : MonoBehaviour
             camera1.depth = 0;
             camera3.depth = 1;
             script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true, num);
+            OnEnterTopDownCamera?.Invoke(true, -90);
             BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[1];
         }
         else if (collision.gameObject.CompareTag("Area3"))
-        {//
-            //camera1.depth = 0;
-            //camera3.depth = 0;
-            //camera4.depth = 1;
-            //script.noJumpMode = true;
-            //OnEnterTopDownCamera?.Invoke(true, -90f);
-            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
-            Debug.Log("RESPAWN");
+        {
+            camera1.depth = 0;
+            camera4.depth = 1;
+            script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true, -90);
+            BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[1];
         }
+        //else if (collision.gameObject.CompareTag("Area3"))
+        //{//
+        //    //camera1.depth = 0;
+        //    //camera3.depth = 0;
+        //    //camera4.depth = 1;
+        //    //script.noJumpMode = true;
+        //    //OnEnterTopDownCamera?.Invoke(true, -90f);
+        //    BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+        //    Debug.Log("RESPAWN");
+        //}
         else if (collision.gameObject.CompareTag("Area4"))
         {
             camera1.depth = 0;
@@ -98,14 +107,21 @@ public class Cameras : MonoBehaviour
             camera3.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false, num);
+            OnEnterTopDownCamera?.Invoke(false, -90);
+        }
+        else if (collision.gameObject.CompareTag("Area3"))
+        {
+            camera4.depth = 0;
+            camera1.depth = 1;
+            script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false, -90);
         }
         else if (collision.gameObject.CompareTag("Area4"))
         {
             camera3.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false, num);
+            OnEnterTopDownCamera?.Invoke(false, -90);
         }
     }
 }
