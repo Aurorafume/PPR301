@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Linq;
 using System.Collections;
+using Caress;
 
 public class MicrophoneInput : MonoBehaviour
 {   
@@ -15,6 +16,8 @@ public class MicrophoneInput : MonoBehaviour
     private AudioClip micClip;
     private float[] audioSamples = new float[1024];
 
+    private CaressWrapper caress;
+
     IEnumerator DelayMicReadings()
     {
         yield return new WaitForSeconds(2f);
@@ -23,6 +26,9 @@ public class MicrophoneInput : MonoBehaviour
 
     void Start()
     {   
+        caress = new CaressWrapper();
+        caress.Init(sampleRate);
+
         // Check if any microphone devices are available and select the first one
         if (Microphone.devices.Length > 0)
         {
@@ -77,6 +83,8 @@ public class MicrophoneInput : MonoBehaviour
         if (micPosition < audioSamples.Length) return;
 
         micClip.GetData(audioSamples, micPosition - audioSamples.Length);
+
+        caress.ApplyNoiseReduction(audioSamples);
     }
 
     public float GetCurrentNoiseLevel()
@@ -100,5 +108,10 @@ public class MicrophoneInput : MonoBehaviour
 
         float db = 20f * Mathf.Log10(avg + 1e-10f);
         return Mathf.Max(db + 65f, 0f);
+    }
+
+    void OnDestroy()
+    {   
+        caress?.Dispose();
     }
 }
