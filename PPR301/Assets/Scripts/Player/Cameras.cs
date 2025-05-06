@@ -87,7 +87,6 @@ public class Cameras : MonoBehaviour
         {
             camera1.depth = 0;
             camera5.depth = 1;
-            //camera4.depth = 1;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, num);
             //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
@@ -119,6 +118,13 @@ public class Cameras : MonoBehaviour
         else if (collision.gameObject.CompareTag("Area4"))
         {
             camera3.depth = 0;
+            camera1.depth = 1;
+            script.noJumpMode = false;
+            OnEnterTopDownCamera?.Invoke(false, -90);
+        }
+        else if (collision.gameObject.CompareTag("Area5"))
+        {
+            camera5.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90);
