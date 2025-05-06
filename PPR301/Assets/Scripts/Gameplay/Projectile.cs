@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
     public ShootProjectile script;
     public Vector3 direction = Vector3.forward;
     public float moveSpeed = 1f;
-    public bool vertical;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,21 +18,9 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!vertical)
-        {
-            transform.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
-            // transform.position += new Vector3(direction.x, 
-            //                                   direction.y, 
-            //                                   direction.z) * moveSpeed * Time.deltaTime;
-        }
-        else
-        {
-            transform.position += new Vector3(direction.x, 
-                                              direction.y, 
-                                              -direction.z) * moveSpeed * Time.deltaTime;
-        }
-        
+        transform.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
     }
+
     void OnTriggerEnter(Collider collision)
     {
         if(collision.CompareTag("Wall"))
