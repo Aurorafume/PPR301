@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     // An array of all dull images
-    // e.g., 0 - Resume, 1 - Settings, 2 - Leave, 3 - Back.
+    // e.g 0 - Resume, 1 - Settings, 2 - Leave, 3 - Back.
     public GameObject[] dullImages;
 
     // The index corresponding to this button's dull image.

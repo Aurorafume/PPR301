@@ -574,7 +574,7 @@ MonoBehaviour:
   normalFontSize: 50
   hoverFontSize: 60
   normalHex: '#96A85F'
-  hoverHex: '#6D7E3B'
+  hoverHex: '#536322'
 --- !u!114 &788577042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1365,7 +1365,7 @@ MonoBehaviour:
   normalFontSize: 50
   hoverFontSize: 60
   normalHex: '#96A85F'
-  hoverHex: '#6D7E3B'
+  hoverHex: '#536322'
 --- !u!114 &2009032903
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,7 +15,7 @@ public class HoverEffectText : MonoBehaviour, IPointerEnterHandler, IPointerExit
     public int hoverFontSize = 90;
 
     public string normalHex = "#96A85F";
-    public string hoverHex = "#6D7E3B";
+    public string hoverHex = "#536322";
 
     private Color normalColor;
     private Color hoverColor;
