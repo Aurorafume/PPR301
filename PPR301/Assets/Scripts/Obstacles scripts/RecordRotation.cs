@@ -6,7 +6,7 @@ using UnityEngine;
 public class RecordRotation : MonoBehaviour
 {
     public float rotationSpeed = 100f; // Adjust this to change the rotation speed
-    public int coinValue = 1; // The value of the coin
+    public int scoreValue = 1000; // The value of the coin
 
     void Update()
     {
@@ -15,9 +15,11 @@ public class RecordRotation : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
-           {
-               Destroy(gameObject); // Destroy the coin after collection
-           }
+        if  (other.CompareTag("Player"))
+        {
+            ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
+            if (scoreManager) scoreManager.AddScore(scoreValue); 
+            Destroy(gameObject); // Destroy the coin after collection
+        }
     }
 }

@@ -12,6 +12,7 @@ public class PlayerInteractHandler : MonoBehaviour
     [Header("References")]
     [SerializeField] KeyCode interactButton = KeyCode.Mouse0;
     [SerializeField] LayerMask interactableLayer;
+    [SerializeField] Transform interactPointLocator;
     public Transform mouth;
 
     Interactable interactableInUse;
@@ -53,7 +54,7 @@ public class PlayerInteractHandler : MonoBehaviour
         // Look for a collider with interactable layer to be picked up within a small region in
         // front of the player.
         RaycastHit hit;
-        bool interactableDetected = Physics.SphereCast(transform.position, grabRadius, 
+        bool interactableDetected = Physics.SphereCast(interactPointLocator.position, grabRadius, 
                                                     transform.forward, out hit, 
                                                     grabDistance, interactableLayer);
         if (interactableDetected)

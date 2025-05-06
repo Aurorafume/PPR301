@@ -5,25 +5,32 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public ShootProjectile script;
-    public int projectileSpeed;
-    public int verticalSpeed;
+    public Vector3 direction = Vector3.forward;
+    public float moveSpeed = 1f;
     public bool vertical;
     // Start is called before the first frame update
     void Start()
     {
         script = GameObject.FindObjectOfType<ShootProjectile>();
+
+        direction = direction.normalized;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(vertical == false)
+        if(!vertical)
         {
-            transform.position += new Vector3(projectileSpeed,0,verticalSpeed) * Time.deltaTime;
+            transform.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
+            // transform.position += new Vector3(direction.x, 
+            //                                   direction.y, 
+            //                                   direction.z) * moveSpeed * Time.deltaTime;
         }
         else
         {
-            transform.position += new Vector3(projectileSpeed,0,-verticalSpeed) * Time.deltaTime;
+            transform.position += new Vector3(direction.x, 
+                                              direction.y, 
+                                              -direction.z) * moveSpeed * Time.deltaTime;
         }
         
     }
@@ -43,14 +50,12 @@ public class Projectile : MonoBehaviour
         }
         else if(collision.CompareTag("Bounce"))
         {
-            if(vertical)
-            {
-                vertical = false;
-            }
-            else
-            {
-                vertical = true;
-            }
+            ChangeHorizontalDirection();
         }
+    }
+
+    void ChangeHorizontalDirection()
+    {
+        direction = new Vector3 (-direction.x, direction.y, direction.z);
     }
 }

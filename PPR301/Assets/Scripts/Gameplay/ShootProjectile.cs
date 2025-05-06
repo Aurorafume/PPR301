@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class ShootProjectile : MonoBehaviour
 {
-    public GameObject projectile;
+    public GameObject projectilePrefab;
     public int projectileCount; //how many projectiles should be out at once
     public int projectileCount2;
-    public int startingSpawn;
+    public Transform startingSpawnLocator;
+    public Vector3 projectileDirection = Vector3.forward;
 
     public void OnInteraction()
     {
         if (projectileCount2 < projectileCount)
         {
-            Instantiate(projectile, new Vector3(transform.position.x - startingSpawn ,transform.position.y,transform.position.z), Quaternion.identity);
+            GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
+            Projectile projectile = projectileInstance.GetComponent<Projectile>();
+            if (projectile)
+            {
+                projectile.direction = projectileDirection;
+            }
+            
             projectileCount2++;
         }
     }

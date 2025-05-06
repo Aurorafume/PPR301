@@ -16,7 +16,7 @@ public class GameOverMenu : MonoBehaviour
     public void RestartGame()
     {
         // Load the main game scene
-        SceneManager.LoadScene("MainDemoA2");
+        SceneManager.LoadScene("MainDemoA3");
     }
 
     public void ReturnToMainMenu()
