@@ -6,17 +6,7 @@ public class Instrument : MonoBehaviour
 {
     public AudioSource sound;
     public GameObject enemy;
-    // Start is called before the first frame update
-    void Start()
-    {
-        //enemy = GameObject.Find("Enemy22D");
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))

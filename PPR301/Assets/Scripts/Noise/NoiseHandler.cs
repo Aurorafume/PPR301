@@ -139,7 +139,7 @@ public class NoiseHandler : MonoBehaviour
         }
     }
 
-    void SpawnEnemyManager()
+    public void SpawnEnemyManager()
     {   
         // Spawn the enemy manager prefab at the current spawn point
         if (enemyManagerPrefab != null && enemySpawning != null)
