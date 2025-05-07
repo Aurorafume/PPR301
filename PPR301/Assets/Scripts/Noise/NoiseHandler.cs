@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement; // Added for reset logic if needed
+using UnityEngine.SceneManagement;
 
 public class NoiseHandler : MonoBehaviour
 {   
