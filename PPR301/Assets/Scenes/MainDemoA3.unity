@@ -10175,7 +10175,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.815
+      value: 9.791
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_LocalPosition.y
@@ -23095,6 +23095,10 @@ PrefabInstance:
       propertyPath: noiseHandler
       value: 
       objectReference: {fileID: 1865363733}
+    - target: {fileID: 7911298212542066273, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 9.62
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
 --- !u!1 &2052282018
