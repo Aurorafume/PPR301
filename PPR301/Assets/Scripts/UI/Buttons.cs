@@ -21,7 +21,7 @@ public class Buttons : MonoBehaviour
     }
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("MainDemoA3");
     }
     public void message()
     {
@@ -32,7 +32,7 @@ public class Buttons : MonoBehaviour
         // Reset the game state
         states.ResetGameState();
         // Load the demo scene
-        SceneManager.LoadScene("MainDemoA2");
+        SceneManager.LoadScene("MainDemoA3");
     }
     public void PlayDemo2()
     {
