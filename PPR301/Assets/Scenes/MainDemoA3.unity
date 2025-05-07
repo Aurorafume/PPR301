@@ -122,6 +122,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: afe9a15054425f7449aaf67fdb1185a7, type: 2}
+--- !u!135 &39965841 stripped
+SphereCollider:
+  m_CorrespondingSourceObject: {fileID: 6770507987680331416, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+  m_PrefabInstance: {fileID: 2036865600}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &77053005
 GameObject:
   m_ObjectHideFlags: 0
@@ -1127,7 +1132,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
   m_PrefabInstance: {fileID: 3806095489790412333}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 879742699}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87761d12b97130b4fa5cdfe2e2f83446, type: 3}
@@ -3302,15 +3307,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalScale.x
-      value: 59.57257
+      value: 59.57258
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalScale.y
-      value: 59.57254
+      value: 59.572548
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalScale.z
-      value: 59.57255
+      value: 59.572544
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3322,7 +3327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.19818
+      value: -11.198181
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3338,7 +3343,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.51979715
+      value: -0.5197972
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f5f397031a6b4644ca09382e38523ce3, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8278,6 +8283,57 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8572927469185966014, guid: c3b3810b96eac7c44a2372e2ea183acd, type: 3}
   m_PrefabInstance: {fileID: 480171882}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &879742699 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3806095489918376473, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+  m_PrefabInstance: {fileID: 3806095489790412333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &879742701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 879742699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 551cd50ccc3de934784a92517b59a35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instruments:
+  - {fileID: 1927283788}
+  - {fileID: 1779032157}
+  - {fileID: 1374356985}
+  - {fileID: 1458469566}
+  - {fileID: 2104310326}
+  - {fileID: 162838209}
+  - {fileID: 1950194172}
+  - {fileID: 902541582}
+  - {fileID: 451794959}
+  - {fileID: 438107401}
+  - {fileID: 209304008}
+  - {fileID: 793774897}
+  - {fileID: 1833809808}
+  - {fileID: 356542058}
+  - {fileID: 1866655466}
+  - {fileID: 726957935}
+  - {fileID: 1098875182}
+  - {fileID: 1535280244}
+  - {fileID: 2053625523}
+  - {fileID: 893124443}
+  - {fileID: 1953349977}
+  - {fileID: 1141684488}
+  - {fileID: 1857299701}
+  - {fileID: 1637493107}
+  - {fileID: 851642915}
+  - {fileID: 1421963396}
+  - {fileID: 2060801570}
+  - {fileID: 1270028073}
+  - {fileID: 1828814017}
+  - {fileID: 551668589}
+  - {fileID: 1915256832}
+  - {fileID: 922890972}
+  playerCollider: {fileID: 39965841}
 --- !u!1 &884406194
 GameObject:
   m_ObjectHideFlags: 0
