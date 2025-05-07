@@ -22764,7 +22764,6 @@ GameObject:
   - component: {fileID: 8225362765628155457}
   - component: {fileID: 8171215043500880490}
   - component: {fileID: 8225362765628155458}
-  - component: {fileID: 8225362765628155459}
   m_Layer: 11
   m_Name: RoadStreet
   m_TagString: Ground
@@ -25978,30 +25977,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 7160691057985571157, guid: 89ad7f24b5fcd204a8c6fad734e2d590, type: 3}
---- !u!114 &8225362765628155459
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 793728546029933857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  playerLocation: {x: 0, y: 0, z: 0}
-  aggroDistance: 0
-  distanceFromPlayer: 0
-  chasing: 0
-  angry: 0
-  respawnTimer: 0
-  fading: 0
-  fadeStrength: 100
-  anim: {fileID: 0}
-  states: {fileID: 0}
-  player: {fileID: 0}
 --- !u!33 &8361975290919711618
 MeshFilter:
   m_ObjectHideFlags: 0
