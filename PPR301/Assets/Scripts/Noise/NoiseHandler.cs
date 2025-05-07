@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement; // Added for reset logic if needed
 
 public class NoiseHandler : MonoBehaviour
 {   
@@ -29,8 +30,7 @@ public class NoiseHandler : MonoBehaviour
     public static AudioSource staticChaseAudio;
 
     void Start()
-    {   
-        // Initialise the microphone input and ambient noise components
+    {   // Initialise static references
         staticAmbientAudio = ambientAudio;
         staticChaseAudio = chaseAudio;
 
@@ -55,8 +55,7 @@ public class NoiseHandler : MonoBehaviour
     }
 
     void Update()
-    {   
-        // Update the noise bar and audio volume based on microphone input and ambient noise
+    {   // Update the noise level and audio volume based on the microphone input and ambient noise
         float totalNoise = 0f;
 
         if (microphoneInput != null && ambientNoise != null && ambientNoise.isCalibrated)
@@ -68,34 +67,25 @@ public class NoiseHandler : MonoBehaviour
             if (adjustedNoise < 1f)
                 totalNoise = 0f;
 
-            Debug.Log($"[NoiseHandler] Adjusted: {adjustedNoise}, Total: {totalNoise}");
-
             noiseBar.UpdateNoiseLevel(totalNoise, ambientNoise.ambientNoiseBaseline, voiceNoiseMargin);
             additionalNoise = Mathf.Lerp(additionalNoise, 0, Time.deltaTime * 0.5f);
         }
 
-        // Use noise bar percentage directly for audio volume
         if (ambientNoise.isCalibrated && ambientAudio != null && noiseBar != null)
         {
             float targetVolume = Mathf.Clamp01(noiseBar.CurrentNoisePercentage);
-
-            // Reduce ambient volume during chase
-            if (enemyExists)
-                targetVolume *= 0.2f;
-
+            if (enemyExists) targetVolume *= 0.2f;
             ambientAudio.volume = Mathf.MoveTowards(ambientAudio.volume, targetVolume, Time.deltaTime * 1.5f);
         }
     }
 
     public void GenerateNoise(float extraNoise)
-    {
-        // Generate noise based on player actions (jump, collision, etc.)
+    {   // Generate noise based on player actions
         additionalNoise += Mathf.Abs(extraNoise);
     }
 
     void OnEnable()
-    {   
-        // Subscribe to the noise bar event when enabled
+    {   // Subscribe to noise bar events
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
@@ -104,8 +94,7 @@ public class NoiseHandler : MonoBehaviour
     }
 
     void OnDisable()
-    {   
-        // Unsubscribe from the noise bar event when disabled
+    {   // Unsubscribe from noise bar events
         if (noiseBar != null)
         {
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
@@ -113,8 +102,7 @@ public class NoiseHandler : MonoBehaviour
     }
 
     public void TrySpawnEnemyManager()
-    {
-        // Attempt to spawn the enemy manager if conditions are met
+    {   // Check if the player is on a platform and spawn the enemy manager if conditions are met
         if (enemySpawning == null)
         {
             Debug.LogError("EnemySpawning reference is not set!");
@@ -134,14 +122,12 @@ public class NoiseHandler : MonoBehaviour
             enemyExists = true;
             StartCoroutine(SpawnCooldown());
 
-            // if (ambientAudio != null) ambientAudio.Stop();
             if (chaseAudio != null && !chaseAudio.isPlaying) chaseAudio.Play();
         }
     }
 
     public void SpawnEnemyManager()
-    {   
-        // Spawn the enemy manager prefab at the current spawn point
+    {   // Spawn the enemy manager prefab at the current spawn point
         if (enemyManagerPrefab != null && enemySpawning != null)
         {
             Transform spawnPoint = enemySpawning.GetCurrentEnemySpawnPoint();
@@ -162,9 +148,9 @@ public class NoiseHandler : MonoBehaviour
     }
 
     public static void NotifyEnemyDespawned()
-    {   
-        // Notify that the enemy has been despawned and reset the static variables
+    {   // Notify the handler when the enemy despawns
         enemyExists = false;
+
         GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
         if (enemyManager != null)
             Destroy(enemyManager);
@@ -180,10 +166,16 @@ public class NoiseHandler : MonoBehaviour
     }
 
     IEnumerator SpawnCooldown()
-    {   
-        // Implement a cooldown period before allowing the next enemy spawn
+    {   // Coroutine to manage spawn cooldown
         canSpawnEnemy = false;
         yield return new WaitForSeconds(spawnCooldown);
         canSpawnEnemy = true;
+    }
+
+    public static void ResetStatics()
+    {   // Reset static variables when the scene is reloaded
+        enemyExists = false;
+        staticAmbientAudio = null;
+        staticChaseAudio = null;
     }
 }

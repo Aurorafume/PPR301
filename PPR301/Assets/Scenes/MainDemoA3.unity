@@ -794,7 +794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
-  enemy: {fileID: 0}
 --- !u!82 &162838211
 AudioSource:
   m_ObjectHideFlags: 0
@@ -933,6 +932,37 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!1 &169995285
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 169995286}
+  m_Layer: 12
+  m_Name: Enemy Spawn 4
+  m_TagString: EnemySpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &169995286
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 169995285}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -37.65, y: 13.1, z: 38.32}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879742700}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &171409425
 GameObject:
   m_ObjectHideFlags: 0
@@ -1243,7 +1273,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &209304010
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1556,6 +1585,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2624508050029749842, guid: bc7646e53d6aa2645a6bea43cc106aff, type: 3}
   m_PrefabInstance: {fileID: 215058426}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &220735338
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 220735339}
+  m_Layer: 12
+  m_Name: Enemy Spawn 5
+  m_TagString: EnemySpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &220735339
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 220735338}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.13, y: 12.08, z: 14.91}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879742700}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &241276580
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2116,7 +2176,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
-  enemy: {fileID: 0}
 --- !u!82 &356542060
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2772,6 +2831,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 413328037}
   m_Mesh: {fileID: -6251412442791034813, guid: 89ad7f24b5fcd204a8c6fad734e2d590, type: 3}
+--- !u!1 &414018606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 414018607}
+  m_Layer: 12
+  m_Name: Enemy Spawn 6
+  m_TagString: EnemySpawn
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 2147483647
+  m_IsActive: 1
+--- !u!4 &414018607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 414018606}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -43.13, y: 12.08, z: 60.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 879742700}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423842016
 GameObject:
   m_ObjectHideFlags: 0
@@ -3155,7 +3245,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
-  enemy: {fileID: 0}
 --- !u!82 &438107403
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3398,7 +3487,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
-  enemy: {fileID: 0}
 --- !u!82 &451794961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4039,7 +4127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
-  enemy: {fileID: 0}
 --- !u!82 &501734834
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4605,7 +4692,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &539778666
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4841,7 +4927,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
-  enemy: {fileID: 0}
 --- !u!82 &551668591
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6846,7 +6931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &726957937
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7297,7 +7381,7 @@ GameObject:
   - component: {fileID: 784248508}
   - component: {fileID: 784248507}
   - component: {fileID: 784248506}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ground
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -7483,7 +7567,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &793774899
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7759,7 +7842,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
-  enemy: {fileID: 0}
 --- !u!82 &825104184
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8003,7 +8085,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
-  enemy: {fileID: 0}
 --- !u!82 &851642917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8286,6 +8367,11 @@ Transform:
 --- !u!1 &879742699 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3806095489918376473, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+  m_PrefabInstance: {fileID: 3806095489790412333}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &879742700 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3806095489918376472, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
   m_PrefabInstance: {fileID: 3806095489790412333}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &879742701
@@ -8593,7 +8679,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
-  enemy: {fileID: 0}
 --- !u!82 &893124445
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8929,7 +9014,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
-  enemy: {fileID: 670854526}
 --- !u!82 &902541584
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9474,7 +9558,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
-  enemy: {fileID: 0}
 --- !u!82 &922890974
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11252,7 +11335,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &1098875184
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11744,7 +11826,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &1141684490
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13035,7 +13116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &1270028075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13556,7 +13636,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
-  enemy: {fileID: 0}
 --- !u!82 &1374356988
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14005,7 +14084,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &1421963398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14181,7 +14259,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
-  enemy: {fileID: 0}
 --- !u!82 &1458469569
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15075,7 +15152,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
-  enemy: {fileID: 0}
 --- !u!82 &1535280246
 AudioSource:
   m_ObjectHideFlags: 0
@@ -15787,7 +15863,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
-  enemy: {fileID: 0}
 --- !u!82 &1637493109
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16935,7 +17010,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
-  enemy: {fileID: 0}
 --- !u!82 &1779032160
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17539,7 +17613,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &1828814019
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17770,7 +17843,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &1833809810
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18337,7 +18409,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
-  enemy: {fileID: 0}
 --- !u!82 &1857299703
 AudioSource:
   m_ObjectHideFlags: 0
@@ -18595,7 +18666,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
-  enemy: {fileID: 0}
 --- !u!82 &1866655468
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19073,7 +19143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &1915256834
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19373,7 +19442,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
-  enemy: {fileID: 0}
 --- !u!82 &1927283791
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19820,7 +19888,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &1950194174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20059,7 +20126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &1953349979
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20686,11 +20752,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -19.14
+      value: -7.1
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.19
+      value: 20.84
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21050,7 +21116,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
-  enemy: {fileID: 0}
 --- !u!82 &2053625525
 AudioSource:
   m_ObjectHideFlags: 0
@@ -21564,7 +21629,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
-  enemy: {fileID: 0}
 --- !u!82 &2060801572
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22092,7 +22156,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
-  enemy: {fileID: 0}
 --- !u!82 &2104310328
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23933,6 +23996,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 758779079}
     - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: platformSpawnPairs.Array.data[0].platform
       value: 
       objectReference: {fileID: 1579420948343145886}
@@ -23944,6 +24011,30 @@ PrefabInstance:
       propertyPath: platformSpawnPairs.Array.data[2].platform
       value: 
       objectReference: {fileID: 793728546029933857}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[3].platform
+      value: 
+      objectReference: {fileID: 784248504}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[4].platform
+      value: 
+      objectReference: {fileID: 597530711}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[5].platform
+      value: 
+      objectReference: {fileID: 1024194302}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[3].spawnPoint
+      value: 
+      objectReference: {fileID: 169995285}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[4].spawnPoint
+      value: 
+      objectReference: {fileID: 220735338}
+    - target: {fileID: 3806095489918376475, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: platformSpawnPairs.Array.data[5].spawnPoint
+      value: 
+      objectReference: {fileID: 414018606}
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: noiseBar
       value: 

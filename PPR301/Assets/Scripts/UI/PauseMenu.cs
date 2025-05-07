@@ -45,7 +45,7 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume()
-    {
+    {   
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
         // Show the Noise Bar again

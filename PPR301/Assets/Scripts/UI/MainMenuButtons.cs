@@ -24,7 +24,8 @@ public class MainMenuButtons : MonoBehaviour
     }
 
     public void OnMainSceneLoaded()
-    {
+    {   
+        NoiseHandler.ResetStatics();
         Debug.Log("Main scene loaded!");
         SceneManager.LoadScene("MainDemoA3");
     }

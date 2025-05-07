@@ -8,12 +8,13 @@ public class InstrumentCircle : MonoBehaviour
     [Tooltip("List of instrument GameObjects the player can interact with.")]
     public GameObject[] instruments;
 
+    [Header("References")]
     private NoiseHandler noiseHandler;
     private GameObject player;
     public Collider playerCollider;
 
     private void Start()
-    {
+    {   // Check for missing references
         noiseHandler = FindObjectOfType<NoiseHandler>();
         if (noiseHandler == null)
         {
@@ -28,7 +29,7 @@ public class InstrumentCircle : MonoBehaviour
     }
 
     private void Update()
-    {
+    {   // Check if the player is touching any instrument and trigger noise handler
         Debug.Log("Update called in InstrumentCircle");
         if (noiseHandler == null || player == null) return;
 
@@ -44,7 +45,7 @@ public class InstrumentCircle : MonoBehaviour
     }
 
     private bool IsTouchingInstrument(GameObject instrument)
-    {
+    {   // Check if the player is touching the instrument using colliders
         Collider instrumentCollider = instrument.GetComponent<Collider>();
 
         if (instrumentCollider == null)

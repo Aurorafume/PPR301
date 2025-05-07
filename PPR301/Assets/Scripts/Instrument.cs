@@ -5,7 +5,6 @@ using UnityEngine;
 public class Instrument : MonoBehaviour
 {
     public AudioSource sound;
-    public GameObject enemy;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -13,7 +12,6 @@ public class Instrument : MonoBehaviour
         {
             Debug.Log("Hit Instrument!!!");
             sound.Play();
-            enemy.SetActive(true);
         }
     }
 }
