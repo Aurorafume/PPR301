@@ -26,13 +26,13 @@ public class MainMenuButtons : MonoBehaviour
     public void OnMainSceneLoaded()
     {
         Debug.Log("Main scene loaded!");
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene("MainDemoA3");
     }
 
     public void OnPlayDemo1Pressed()
     {
         Debug.Log("Play Demo 1 started!");
-        SceneManager.LoadScene("MainDemoA2");
+        SceneManager.LoadScene("Main");
     }
 
     public void OnPlayDemo2Pressed()
