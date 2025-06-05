@@ -5002,6 +5002,86 @@ MonoBehaviour:
   m_ShadowLayerMask: 1
   m_LightCookieSize: {x: 1, y: 1}
   m_LightCookieOffset: {x: 0, y: 0}
+--- !u!1001 &453957000
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 772903838}
+    m_Modifications:
+    - target: {fileID: 8572927469185966002, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_Name
+      value: Mouse Key
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+--- !u!1 &453957001 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8572927469185966002, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+  m_PrefabInstance: {fileID: 453957000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &453957002 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8572927469185966014, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+  m_PrefabInstance: {fileID: 453957000}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &453957003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 453957001}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &464597275 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1e3d1a934e8e6da438a235eddb9d3961, type: 3}
@@ -7527,7 +7607,8 @@ Transform:
   m_LocalPosition: {x: -145.84, y: 3.68, z: -1.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 453957002}
   m_Father: {fileID: 0}
   m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7597,9 +7678,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e97a6f56d69d83c46b2e74a3ae6939ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  keyPrefab: {fileID: 8572927469185966002, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
-  dropOffset: {x: 0, y: 0.5, z: 0}
-  hasKey: 1
+  carriedKey: {fileID: 453957001}
+  mouthOffset: {x: 0, y: 0.3, z: 0.6}
   playerTag: Player
 --- !u!1001 &780268829
 PrefabInstance:
