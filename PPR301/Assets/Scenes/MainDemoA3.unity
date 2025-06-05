@@ -16005,7 +16005,6 @@ GameObject:
   - component: {fileID: 1514731153}
   - component: {fileID: 1514731152}
   - component: {fileID: 1514731151}
-  - component: {fileID: 1514731150}
   m_Layer: 11
   m_Name: RoadStreet (1)
   m_TagString: Ground
@@ -16029,30 +16028,6 @@ Transform:
   m_Father: {fileID: 543450652035262179}
   m_RootOrder: 101
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1514731150
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514731148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  playerLocation: {x: 0, y: 0, z: 0}
-  aggroDistance: 0
-  distanceFromPlayer: 0
-  chasing: 0
-  angry: 0
-  respawnTimer: 0
-  fading: 0
-  fadeStrength: 100
-  anim: {fileID: 0}
-  states: {fileID: 0}
-  player: {fileID: 0}
 --- !u!64 &1514731151
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21338,7 +21313,6 @@ GameObject:
   - component: {fileID: 1926786503}
   - component: {fileID: 1926786502}
   - component: {fileID: 1926786501}
-  - component: {fileID: 1926786500}
   m_Layer: 11
   m_Name: RoadStreet (3)
   m_TagString: Ground
@@ -21362,30 +21336,6 @@ Transform:
   m_Father: {fileID: 543450652035262179}
   m_RootOrder: 103
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1926786500
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1926786498}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  playerLocation: {x: 0, y: 0, z: 0}
-  aggroDistance: 0
-  distanceFromPlayer: 0
-  chasing: 0
-  angry: 0
-  respawnTimer: 0
-  fading: 0
-  fadeStrength: 100
-  anim: {fileID: 0}
-  states: {fileID: 0}
-  player: {fileID: 0}
 --- !u!64 &1926786501
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -21688,7 +21638,6 @@ GameObject:
   - component: {fileID: 1929918422}
   - component: {fileID: 1929918421}
   - component: {fileID: 1929918420}
-  - component: {fileID: 1929918419}
   m_Layer: 11
   m_Name: RoadStreet (2)
   m_TagString: Ground
@@ -21712,30 +21661,6 @@ Transform:
   m_Father: {fileID: 543450652035262179}
   m_RootOrder: 102
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1929918419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1929918417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77826cafcebe22540a62a3e2bdb20a0e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 0}
-  playerLocation: {x: 0, y: 0, z: 0}
-  aggroDistance: 0
-  distanceFromPlayer: 0
-  chasing: 0
-  angry: 0
-  respawnTimer: 0
-  fading: 0
-  fadeStrength: 100
-  anim: {fileID: 0}
-  states: {fileID: 0}
-  player: {fileID: 0}
 --- !u!64 &1929918420
 MeshCollider:
   m_ObjectHideFlags: 0
