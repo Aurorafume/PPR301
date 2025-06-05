@@ -26,6 +26,9 @@ public class LittleMouse : MonoBehaviour
     }
     void enemyAvoid()
     {
-
+        //agent.SetDestination(playerLocation);
+        Vector3 dirAway = (transform.position - playerLocation).normalized;
+        Vector3 targetPos = transform.position + dirAway * 5f;
+        agent.SetDestination(targetPos);
     }
 }
