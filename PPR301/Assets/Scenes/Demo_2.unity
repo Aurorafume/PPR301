@@ -296,6 +296,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fec88d31483ad04b9a8ba6c0c44ac75, type: 3}
+--- !u!1 &50362210
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 50362214}
+  - component: {fileID: 50362213}
+  - component: {fileID: 50362212}
+  - component: {fileID: 50362211}
+  m_Layer: 11
+  m_Name: Floor (2)
+  m_TagString: Ground
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 1
+  m_StaticEditorFlags: 8
+  m_IsActive: 1
+--- !u!65 &50362211
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50362210}
+  m_Material: {fileID: 13400000, guid: f7542d1dd825d55418161d291298e110, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!23 &50362212
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50362210}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 875fea53379169c4db798cc1683d8795, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!33 &50362213
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50362210}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &50362214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50362210}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -160.2176, y: 2.686489, z: -4.7780037}
+  m_LocalScale: {x: 30.9422, y: 0.64998996, z: 31.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &62993119
 GameObject:
   m_ObjectHideFlags: 0
@@ -584,7 +681,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 1493385704}
 --- !u!54 &63421401
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -727,7 +823,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &66766384
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1071,7 +1166,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &113888612
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1329,7 +1423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489786, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 9002502280049489786, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1527,7 +1621,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &168069327
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1752,7 +1845,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 1493385704}
 --- !u!82 &171174107
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2264,7 +2356,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 1493385704}
 --- !u!82 &191645245
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2697,7 +2788,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &262826291
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3037,7 +3127,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1453961131}
-  enemy: {fileID: 1493385704}
 --- !u!82 &310157281
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3522,7 +3611,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1453961131}
-  enemy: {fileID: 0}
 --- !u!82 &313429625
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4558,7 +4646,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &464597277
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5312,7 +5399,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &604601592
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5742,7 +5828,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &624404053
 GameObject:
@@ -5936,7 +6022,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 1493385704}
 --- !u!82 &645269811
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6167,7 +6252,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &715550212
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6473,7 +6557,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 1493385704}
 --- !u!82 &752644807
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6733,7 +6816,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 1493385704}
 --- !u!82 &764368053
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6972,7 +7054,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &780268832
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7383,7 +7464,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &863851035
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7784,7 +7864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 1493385704}
 --- !u!82 &895762989
 AudioSource:
   m_ObjectHideFlags: 0
@@ -7963,7 +8042,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 1493385704}
 --- !u!82 &911035853
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8178,7 +8256,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &926739570
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8354,7 +8431,7 @@ Transform:
   - {fileID: 948385741}
   - {fileID: 1529212166}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &943395566
 GameObject:
@@ -8593,7 +8670,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &950551732
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9327,7 +9403,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1051898712
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10051,7 +10126,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1113088702
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10363,7 +10437,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 0}
 --- !u!82 &1144852820
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10602,7 +10675,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1156215553}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1156215553
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11038,7 +11110,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 153.5
+      value: 84.66
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -11046,7 +11118,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -4.2
+      value: -7.75
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -11181,7 +11253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1274148091}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1274148091
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12218,7 +12289,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1453961131}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1453961128
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12774,11 +12844,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1492858035}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1493385704 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
-  m_PrefabInstance: {fileID: 130873519}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1529212162
 GameObject:
   m_ObjectHideFlags: 0
@@ -12936,7 +13001,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1144852820}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1539817390
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13367,7 +13431,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 1493385704}
 --- !u!54 &1624477252
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13767,7 +13830,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1696792062
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14162,7 +14224,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1714112577}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1714112577
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14324,7 +14385,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1724023015
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14681,7 +14741,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &1749041286
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16511,7 +16570,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1724023015}
-  enemy: {fileID: 1493385704}
 --- !u!82 &2016672971
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17218,7 +17276,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1051898712}
-  enemy: {fileID: 1493385704}
 --- !u!82 &2079438737
 AudioSource:
   m_ObjectHideFlags: 0
