@@ -21,6 +21,7 @@ TagManager:
   - Phase
   - Destroyable wall
   - Instrument
+  - Mouse
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - EnemySpawn
   - Phase
   - Enemy
-  - 
+  - Mouse
   - 
   - 
   - 

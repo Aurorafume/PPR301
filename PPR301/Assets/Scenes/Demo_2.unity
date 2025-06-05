@@ -7445,9 +7445,10 @@ GameObject:
   - component: {fileID: 772903839}
   - component: {fileID: 772903840}
   - component: {fileID: 772903841}
-  m_Layer: 0
+  - component: {fileID: 772903842}
+  m_Layer: 15
   m_Name: mouse
-  m_TagString: Untagged
+  m_TagString: Mouse
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7460,7 +7461,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 772903834}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -7584,6 +7585,22 @@ MonoBehaviour:
   pawOffsetX: 0.2
   negatePawHeight: 0.4
   spawnedPaws: []
+--- !u!114 &772903842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 772903834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e97a6f56d69d83c46b2e74a3ae6939ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPrefab: {fileID: 8572927469185966002, guid: 80737c20ea7636143bc27a5bbffcdb37, type: 3}
+  dropOffset: {x: 0, y: 0.5, z: 0}
+  hasKey: 1
+  playerTag: Player
 --- !u!1001 &780268829
 PrefabInstance:
   m_ObjectHideFlags: 0
