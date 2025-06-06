@@ -25,56 +25,44 @@ public class LittleMouse : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        currentPatrolPointIndex = -1;
+        currentPatrolPointIndex = 0;
         maxWaitingTime = 0;
         currentWaitingTime = 0;
-        GoToNextPoint();
+        //GoToNextPoint();
     }
 
     // Update is called once per frame
     void Update()
     {
-        //updatePlayerLocation();
-        //enemyAvoid();
-        MousePatrol();
-    }
-    void MousePatrol()
-    {
-        if(agent.remainingDistance < 0.5f)
+        playerLocation = player.transform.position;
+        if(Vector3.Distance(gameObject.transform.position, playerLocation) < 3f)
         {
-            if(maxWaitingTime == 0)
-            maxWaitingTime = Random.Range(2, 5);
-
-            if(currentWaitingTime >= maxWaitingTime)
-            {
-                maxWaitingTime = 0;
-                currentWaitingTime = 0;
-                GoToNextPoint();
-            }
-            else currentWaitingTime += Time.deltaTime;
+            // run away
+            agent.SetDestination(playerLocation);
+            Vector3 dirAway = (transform.position - playerLocation).normalized;
+            Vector3 targetPos = transform.position + dirAway * 5f;
+            agent.SetDestination(targetPos);
+        }
+        else
+        {
+            RatPatrol();
         }
     }
+    void RatPatrol()
+    {
+        agent.SetDestination(patrolPoints[currentPatrolPointIndex].position);
+        if(agent.remainingDistance < 0.5f)
+        {
+            GoToNextPoint();
+        }
+    }
+
     void GoToNextPoint()
     {
         if(patrolPoints.Length != 0)
         {
-            currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
-            agent.SetDestination(patrolPoints[currentPatrolPointIndex].position);
-        }
-    }
-    void updatePlayerLocation()
-    {
-        playerLocation = player.transform.position;
-    }
-    void enemyAvoid()
-    {
-        if (Vector3.Distance(transform.position, playerLocation) < 3f)
-        {
-            // move away
-            //agent.SetDestination(playerLocation);
-            Vector3 dirAway = (transform.position - playerLocation).normalized;
-            Vector3 targetPos = transform.position + dirAway * 5f;
-            agent.SetDestination(targetPos);
+            //currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
+            currentPatrolPointIndex = Random.Range(0, patrolPoints.Length);
         }
     }
 }
