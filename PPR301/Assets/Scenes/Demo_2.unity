@@ -7722,6 +7722,9 @@ MonoBehaviour:
   patrolPoints:
   - {fileID: 519977365}
   - {fileID: 543197859}
+  - {fileID: 1648563834}
+  - {fileID: 52489472}
+  - {fileID: 2045409710}
   currentPatrolPointIndex: 0
   maxWaitingTime: 0
   currentWaitingTime: 0
