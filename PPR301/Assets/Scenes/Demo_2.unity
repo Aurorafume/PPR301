@@ -386,8 +386,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50362210}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.7912903, y: -1.0006108, z: -0.058903694}
-  m_LocalScale: {x: 10.602649, y: 0.64998996, z: 31.5}
+  m_LocalPosition: {x: -7.0861, y: -1.0006108, z: -0.058903694}
+  m_LocalScale: {x: 36.357544, y: 0.64998996, z: 31.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1848942949}
@@ -1586,7 +1586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 131489233}
   m_LocalRotation: {x: -0, y: 0.36343125, z: -0, w: 0.931621}
-  m_LocalPosition: {x: 0.8551941, y: -0.52709985, z: 15.181}
+  m_LocalPosition: {x: -24.78, y: -0.53, z: 14.94}
   m_LocalScale: {x: 1.8416, y: 1.8416, z: 2.9779475}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7728,6 +7728,7 @@ MonoBehaviour:
   currentPatrolPointIndex: 0
   maxWaitingTime: 0
   currentWaitingTime: 0
+  mouseState: 0
 --- !u!195 &772903840
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -10333,7 +10334,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1016419389}
   m_LocalRotation: {x: -0, y: 0.9219891, z: -0, w: 0.38721597}
-  m_LocalPosition: {x: 1.1635895, y: -0.52709985, z: -15.199}
+  m_LocalPosition: {x: -24.19, y: -0.53, z: -15.18}
   m_LocalScale: {x: 1.8416, y: 1.8416, z: 3.7724643}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11537,7 +11538,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1126522076
 BoxCollider:
   m_ObjectHideFlags: 0
