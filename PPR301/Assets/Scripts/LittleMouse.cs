@@ -8,6 +8,10 @@ public class LittleMouse : MonoBehaviour
     public Vector3 playerLocation;
     public GameObject player;
     public NavMeshAgent agent;
+    //patrolling
+    public Vector3 walkPoint;
+    public bool walkPointSet;
+    public float walkPointRange;
     // Start is called before the first frame update
     void Start()
     {
