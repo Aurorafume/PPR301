@@ -40,7 +40,7 @@ public class LittleMouse : MonoBehaviour
             // run away
             agent.SetDestination(playerLocation);
             Vector3 dirAway = (transform.position - playerLocation).normalized;
-            Vector3 targetPos = transform.position + dirAway * 5f;
+            Vector3 targetPos = transform.position + dirAway * 15f;
             agent.SetDestination(targetPos);
         }
         else
