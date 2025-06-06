@@ -348,7 +348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 95c7c222eb699cf409086577570ef48b, type: 2}
+  - {fileID: 2100000, guid: f82f04775854cba4d9a67dba34bc185e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -7661,7 +7661,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a269aeec78f73f48b400f769a7c81f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pawPrefab: {fileID: 1457549849816157032, guid: 79612556f8f51fe48b1d46f39a7e4d47, type: 3}
+  pawPrefab: {fileID: 3159310392932923037, guid: bde07d7a760cb484c899660332e9d5e6, type: 3}
   stepInterval: 0.1
   pawOffsetX: 0.2
   negatePawHeight: 0.4
