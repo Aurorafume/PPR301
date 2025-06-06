@@ -13,6 +13,13 @@ public class LittleMouse : MonoBehaviour
     public int currentPatrolPointIndex;
     public float maxWaitingTime;
     public float currentWaitingTime;
+    public MouseStates mouseState;
+
+    public enum MouseStates
+    {
+        Patroling,
+        RunningAway
+    }
    
     // Start is called before the first frame update
     void Start()
