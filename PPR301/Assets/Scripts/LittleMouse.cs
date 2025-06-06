@@ -29,6 +29,10 @@ public class LittleMouse : MonoBehaviour
     {
         //updatePlayerLocation();
         //enemyAvoid();
+        MousePatrol();
+    }
+    void MousePatrol()
+    {
         if(agent.remainingDistance < 0.5f)
         {
             if(maxWaitingTime == 0)
