@@ -15,7 +15,7 @@ public class LittleMouse : MonoBehaviour
     public float currentWaitingTime;
     public MouseStates mouseState;
     //run
-    public int mousePatrolWait;
+    public float mousePatrolWait;
 
     public enum MouseStates
     {
@@ -36,24 +36,48 @@ public class LittleMouse : MonoBehaviour
     void Update()
     {
         playerLocation = player.transform.position;
-        if(Vector3.Distance(gameObject.transform.position, playerLocation) < 3f)
+        DistanceBehaviour();
+        switch(mouseState)
         {
-            // run away
-            agent.SetDestination(playerLocation);
-            Vector3 dirAway = (transform.position - playerLocation).normalized;
-            Vector3 targetPos = transform.position + dirAway * 15f;
-            agent.SetDestination(targetPos);
+            case MouseStates.Patroling:
+            RatPatrol();
+            break;
+            case MouseStates.RunningAway:
+            RatRunaway();
+            break;
+            default:
+            Debug.Log("Unknown State");
+            break;
+        }
+    }
+    void DistanceBehaviour()
+    {
+        if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
+        {
+            mouseState = MouseStates.RunningAway;
+            mousePatrolWait = 5f;
+            GoToNextPoint();
         }
         else
         {
-            //StartCoroutine();
-            RatPatrol();
+            WaitAndPatrol();
         }
     }
-    IEnumerator WaitAndPatrol()
+    void WaitAndPatrol()
     {
-        
-        return;
+        mousePatrolWait -= Time.deltaTime;
+        if(mousePatrolWait <= 0)
+        {
+            mouseState = MouseStates.Patroling;
+        }
+    }
+    void RatRunaway()
+    {
+        // run away
+        agent.SetDestination(playerLocation);
+        Vector3 dirAway = (transform.position - playerLocation).normalized;
+        Vector3 targetPos = transform.position + dirAway * 15f;
+        agent.SetDestination(targetPos);
     }
     void RatPatrol()
     {
@@ -63,7 +87,6 @@ public class LittleMouse : MonoBehaviour
             GoToNextPoint();
         }
     }
-
     void GoToNextPoint()
     {
         if(patrolPoints.Length != 0)
