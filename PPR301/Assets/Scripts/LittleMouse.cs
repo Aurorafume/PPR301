@@ -74,10 +74,19 @@ public class LittleMouse : MonoBehaviour
     void RatRunaway()
     {
         // run away
-        agent.SetDestination(playerLocation);
+        //agent.SetDestination(playerLocation);
+        //Vector3 dirAway = (transform.position - playerLocation).normalized;
+        //Vector3 targetPos = transform.position + dirAway * 15f;
+        //agent.SetDestination(targetPos);
+        //run away 2
         Vector3 dirAway = (transform.position - playerLocation).normalized;
-        Vector3 targetPos = transform.position + dirAway * 15f;
-        agent.SetDestination(targetPos);
+        Vector3 rawTarget = transform.position + dirAway * 5f;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(rawTarget, out hit, 5f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
+
     }
     void RatPatrol()
     {
