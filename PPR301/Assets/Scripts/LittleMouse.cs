@@ -14,6 +14,8 @@ public class LittleMouse : MonoBehaviour
     public float maxWaitingTime;
     public float currentWaitingTime;
     public MouseStates mouseState;
+    //run
+    public int mousePatrolWait;
 
     public enum MouseStates
     {
@@ -28,7 +30,6 @@ public class LittleMouse : MonoBehaviour
         currentPatrolPointIndex = 0;
         maxWaitingTime = 0;
         currentWaitingTime = 0;
-        //GoToNextPoint();
     }
 
     // Update is called once per frame
@@ -45,8 +46,14 @@ public class LittleMouse : MonoBehaviour
         }
         else
         {
+            //StartCoroutine();
             RatPatrol();
         }
+    }
+    IEnumerator WaitAndPatrol()
+    {
+        
+        return;
     }
     void RatPatrol()
     {
