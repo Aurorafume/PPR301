@@ -18,7 +18,7 @@ public class LittleMouse : MonoBehaviour
     public float mousePatrolWait;
     //stuck
     Vector3 lastPosition;
-    float stuckTimer = 0f;
+    public float stuckTimer = 0f;
     public float stuckThreshold = 0.1f; // small movement = stuck
 
 
@@ -26,7 +26,8 @@ public class LittleMouse : MonoBehaviour
     public enum MouseStates
     {
         Patroling,
-        RunningAway
+        RunningAway,
+        TurningCorner
     }
    
     // Start is called before the first frame update
@@ -51,6 +52,9 @@ public class LittleMouse : MonoBehaviour
             case MouseStates.RunningAway:
             RatRunaway();
             break;
+            case MouseStates.TurningCorner:
+            TurnCorner();
+            break;
             default:
             Debug.Log("Unknown State");
             break;
@@ -58,23 +62,36 @@ public class LittleMouse : MonoBehaviour
     }
     void CheckIfStuck()
     {
+        lastPosition = transform.position;
         float distanceMoved = Vector3.Distance(transform.position, lastPosition);
         if (distanceMoved < stuckThreshold)
         {
-            Debug.Log("Enemy stuck. Picking new direction...");
-            //TurnAroundAndMove();
+            stuckTimer -= Time.deltaTime;
+            Debug.Log("Enemy stuck");
         }
-
-        lastPosition = transform.position;
+        //else
+        //{
+        //    stuckTimer = 3;
+        //}
+        //if(stuckTimer > 0)
+        //{
+        //    Debug.Log("Picking new direction...");
+        //    mouseState = MouseStates.TurningCorner;
+        //}
     }
-    void TurnAroundAndMove()
+    void TurnCorner()
     {
-        
+        RatPatrol();
     }
 
     void DistanceBehaviour()
     {
-        if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
+        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+        if(distanceMoved < stuckThreshold)
+        {
+            mouseState = MouseStates.TurningCorner;
+        }
+        else if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
         {
             mouseState = MouseStates.RunningAway;
             mousePatrolWait = 5f;
