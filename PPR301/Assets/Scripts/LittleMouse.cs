@@ -14,8 +14,14 @@ public class LittleMouse : MonoBehaviour
     public float maxWaitingTime;
     public float currentWaitingTime;
     public MouseStates mouseState;
-    //run
+    //wait for mouse patrol after running
     public float mousePatrolWait;
+    //stuck
+    Vector3 lastPosition;
+    float stuckTimer = 0f;
+    public float stuckThreshold = 0.1f; // small movement = stuck
+
+
 
     public enum MouseStates
     {
@@ -50,6 +56,22 @@ public class LittleMouse : MonoBehaviour
             break;
         }
     }
+    void CheckIfStuck()
+    {
+        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
+        if (distanceMoved < stuckThreshold)
+        {
+            Debug.Log("Enemy stuck. Picking new direction...");
+            //TurnAroundAndMove();
+        }
+
+        lastPosition = transform.position;
+    }
+    void TurnAroundAndMove()
+    {
+        
+    }
+
     void DistanceBehaviour()
     {
         if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
@@ -91,6 +113,8 @@ public class LittleMouse : MonoBehaviour
             Debug.LogWarning("No valid NavMesh point found near: " + rawTarget);
             agent.ResetPath();
         }
+        //if stuck
+        CheckIfStuck();
     }
     void RatPatrol()
     {
