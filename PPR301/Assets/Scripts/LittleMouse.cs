@@ -86,7 +86,11 @@ public class LittleMouse : MonoBehaviour
         {
             agent.SetDestination(hit.position);
         }
-
+        else
+        {
+            Debug.LogWarning("No valid NavMesh point found near: " + rawTarget);
+            agent.ResetPath();
+        }
     }
     void RatPatrol()
     {
