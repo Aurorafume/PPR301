@@ -81,7 +81,7 @@ public class LittleMouse : MonoBehaviour
     }
     void TurnCorner()
     {
-        RatPatrol();
+        //RatPatrol();
     }
 
     void DistanceBehaviour()
