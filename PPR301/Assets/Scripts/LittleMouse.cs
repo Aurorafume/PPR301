@@ -26,8 +26,7 @@ public class LittleMouse : MonoBehaviour
     public enum MouseStates
     {
         Patroling,
-        RunningAway,
-        TurningCorner
+        RunningAway
     }
    
     // Start is called before the first frame update
@@ -52,46 +51,14 @@ public class LittleMouse : MonoBehaviour
             case MouseStates.RunningAway:
             RatRunaway();
             break;
-            case MouseStates.TurningCorner:
-            TurnCorner();
-            break;
             default:
             Debug.Log("Unknown State");
             break;
         }
     }
-    void CheckIfStuck()
-    {
-        lastPosition = transform.position;
-        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
-        if (distanceMoved < stuckThreshold)
-        {
-            stuckTimer -= Time.deltaTime;
-            Debug.Log("Enemy stuck");
-        }
-        //else
-        //{
-        //    stuckTimer = 3;
-        //}
-        //if(stuckTimer > 0)
-        //{
-        //    Debug.Log("Picking new direction...");
-        //    mouseState = MouseStates.TurningCorner;
-        //}
-    }
-    void TurnCorner()
-    {
-        //RatPatrol();
-    }
-
     void DistanceBehaviour()
     {
-        float distanceMoved = Vector3.Distance(transform.position, lastPosition);
-        if(distanceMoved < stuckThreshold)
-        {
-            mouseState = MouseStates.TurningCorner;
-        }
-        else if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
+        if(Vector3.Distance(gameObject.transform.position, playerLocation) < 5f)
         {
             mouseState = MouseStates.RunningAway;
             mousePatrolWait = 5f;
@@ -130,8 +97,6 @@ public class LittleMouse : MonoBehaviour
             Debug.LogWarning("No valid NavMesh point found near: " + rawTarget);
             agent.ResetPath();
         }
-        //if stuck
-        CheckIfStuck();
     }
     void RatPatrol()
     {
@@ -147,6 +112,13 @@ public class LittleMouse : MonoBehaviour
         {
             //currentPatrolPointIndex = (currentPatrolPointIndex + 1) % patrolPoints.Length;
             currentPatrolPointIndex = Random.Range(0, patrolPoints.Length);
+        }
+    }
+    void OnTriggerEnter(Collider collider)
+    {
+        if(collider.gameObject.CompareTag("Portal"))
+        {
+            Debug.Log("Teleport!!");
         }
     }
 }

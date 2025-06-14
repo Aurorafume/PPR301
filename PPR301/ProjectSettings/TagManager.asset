@@ -23,6 +23,7 @@ TagManager:
   - Instrument
   - Mouse
   - Ghost Cat
+  - Portal
   layers:
   - Default
   - TransparentFX
