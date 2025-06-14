@@ -3334,7 +3334,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!195 &260975285
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3364,7 +3364,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260975284}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9f57881efe0087419e55b46b78af68f, type: 3}
   m_Name: 
@@ -3470,19 +3470,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 260975284}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba5bb8e299a2f3543bb22f7b8daed3f4, type: 3}
+  m_Script: {fileID: 11500000, guid: b5968d9a5173d7f4bbc6d137d8f4afd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayCount: 50
-  angleStep: 7.35
-  rayLength: 10
-  hazard: 0
-  goThrough: 0
-  lightType: 0
-  player: {fileID: 0}
-  script: {fileID: 0}
+  patrolPoints:
+  - {fileID: 761796065}
+  - {fileID: 2105226901}
+  - {fileID: 626953520}
+  - {fileID: 763935383}
+  - {fileID: 668829055}
+  player: {fileID: 836674946}
+  dangerAvoidanceRadius: 7
+  navigationWeight: 15
+  dangerAvoidanceWeight: 20
 --- !u!1001 &262826287
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3742,7 +3744,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &285221412
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3828,13 +3830,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285221410}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5968d9a5173d7f4bbc6d137d8f4afd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  patrolPoints:
+  - {fileID: 761796065}
+  - {fileID: 2105226901}
+  - {fileID: 626953520}
+  - {fileID: 763935383}
+  - {fileID: 668829055}
   player: {fileID: 836674946}
-  fleeDistance: 8
+  dangerAvoidanceRadius: 7
+  navigationWeight: 15
+  dangerAvoidanceWeight: 20
 --- !u!195 &285221417
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -3864,7 +3874,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 285221410}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b9f57881efe0087419e55b46b78af68f, type: 3}
   m_Name: 
@@ -12209,8 +12219,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5968d9a5173d7f4bbc6d137d8f4afd9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 836674946}
-  fleeDistance: 8
+  patrolPoints: []
+  player: {fileID: 0}
+  dangerAvoidanceRadius: 5
+  navigationWeight: 1
+  dangerAvoidanceWeight: 3
 --- !u!65 &987114284
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15109,11 +15122,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -223.63
+      value: -227.5
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.92
+      value: 0.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
