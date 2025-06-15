@@ -196,11 +196,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void UpdateMoveBehaviour()
     {
-        if (draggingObject)
-        {
-            moveBehaviour = DragMovement;
-        }
-        else if (inTopDownMode)
+        if (inTopDownMode)
         {
             //moveBehaviour = TopDownMovement;
             StartCoroutine(MyCoroutine());
@@ -237,9 +233,13 @@ public class PlayerMovement : MonoBehaviour
             Vector3 velocityChange = airMove - horizontalVelocity;
             velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
             rb.AddForce(velocityChange, ForceMode.Acceleration);
+            //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
         }
 
-        DefaultPlayerRotation();
+        if (!draggingObject)
+        {
+            DefaultPlayerRotation();
+        }
     }
 
     private void DefaultPlayerRotation()
@@ -252,45 +252,18 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void DragMovement()
-    {
-        verticalInput = Mathf.Clamp(verticalInput, float.MinValue, 0f);
-        horizontalInput = 0f;
-
-        moveDirection = (transform.forward * verticalInput + transform.right * horizontalInput).normalized;
-
-        anim.SetBool("isWalking", moveDirection.magnitude > 0);
-
-        if (grounded)
-        {
-            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(targetPosition);
-        }
-        else
-        {
-            float adjustedAirMultiplier = Mathf.Lerp(5f, airMultiplier, rb.velocity.magnitude / playerSpeed);
-            Vector3 airMove = moveDirection * playerSpeed * airMultiplier;
-            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-            Vector3 velocityChange = airMove - horizontalVelocity;
-            velocityChange = Vector3.ClampMagnitude(velocityChange, playerSpeed); // prevent too much
-
-            rb.AddForce(velocityChange, ForceMode.Acceleration);
-        }
-    }
-
     private void TopDownMovement()
     {
         // forwardAngularOffsetFromWorldZ is an angle in degrees determining which world direction is forwards,
         // with the default (0) being world positive Z.
         Vector3 forwardDirection = new Vector3(0f, forwardAngularOffsetFromWorldZ, 0f);
 
-        moveDirection = new Vector3 (horizontalInput, 0f, verticalInput).normalized;
+        moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
 
         moveDirection = Quaternion.Euler(forwardDirection) * moveDirection;
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
-        
+
 
         Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
         rb.MovePosition(targetPosition);
