@@ -7247,7 +7247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalPoints: []
-  point: {fileID: 761796065}
+  script: {fileID: 0}
   portalType: 0
 --- !u!65 &617347921
 BoxCollider:
@@ -11502,8 +11502,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   portalPoints:
+  - {fileID: 763935383}
+  - {fileID: 626953520}
+  - {fileID: 2105226901}
   - {fileID: 761796065}
-  point: {fileID: 761796065}
+  script: {fileID: 260975286}
   portalType: 1
 --- !u!54 &929300571
 Rigidbody:
@@ -15879,8 +15882,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75e9648271d1d4b91691d912069527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalPoints: []
-  point: {fileID: 0}
+  portalPoints:
+  - {fileID: 763935383}
+  - {fileID: 626953520}
+  - {fileID: 2105226901}
+  - {fileID: 761796065}
+  script: {fileID: 260975286}
   portalType: 0
 --- !u!65 &1297646411
 BoxCollider:
@@ -16435,8 +16442,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75e9648271d1d4b91691d912069527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalPoints: []
-  point: {fileID: 761796065}
+  portalPoints:
+  - {fileID: 763935383}
+  - {fileID: 626953520}
+  - {fileID: 2105226901}
+  - {fileID: 761796065}
+  script: {fileID: 260975286}
   portalType: 3
 --- !u!54 &1387402621
 Rigidbody:
@@ -18100,8 +18111,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bb75e9648271d1d4b91691d912069527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  portalPoints: []
-  point: {fileID: 0}
+  portalPoints:
+  - {fileID: 763935383}
+  - {fileID: 626953520}
+  - {fileID: 2105226901}
+  - {fileID: 761796065}
+  script: {fileID: 260975286}
   portalType: 2
 --- !u!65 &1583339140
 BoxCollider:
