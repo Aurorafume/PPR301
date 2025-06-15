@@ -29,8 +29,8 @@ public class Portal : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Mouse"))
         {
-            Debug.Log("Teleporting Mouse");
-            collider.gameObject.transform.position = new Vector3(point.position.x, 3.55f, point.position.z);
+            //Debug.Log("Teleporting Mouse");
+            //collider.gameObject.transform.position = new Vector3(point.position.x, 3.55f, point.position.z);
 
             switch(portalType)
             {
