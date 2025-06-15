@@ -9,11 +9,13 @@ public class Cameras : MonoBehaviour
     public Camera camera2;  // Reference to Camera 2
     public Camera camera3;  // Reference to Camera 3
     public Camera camera4;  
-    public Camera camera5;  
+    public Camera camera5;
+    public Camera camera6;
     public PlayerMovement script;
     public PlayerCamera camera;
     public OutOfBounds BoundsScript;
     public Camera KeyCamera;
+    public int number = -180;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -91,6 +93,14 @@ public class Cameras : MonoBehaviour
             OnEnterTopDownCamera?.Invoke(true, -90);
             //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
         }
+        else if (collision.gameObject.CompareTag("Area5"))
+        {
+            camera1.depth = 0;
+            camera6.depth = 1;
+            script.noJumpMode = true;
+            OnEnterTopDownCamera?.Invoke(true, number);
+            //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+        }
     }
     void OnTriggerExit(Collider collision)
     {
@@ -124,7 +134,7 @@ public class Cameras : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Area5"))
         {
-            camera5.depth = 0;
+            camera6.depth = 0;
             camera1.depth = 1;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90);
