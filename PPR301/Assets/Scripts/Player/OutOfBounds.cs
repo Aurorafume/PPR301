@@ -32,16 +32,16 @@ public class OutOfBounds : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision collision)
-{
-    if (collision.gameObject.CompareTag("Out of bounds"))
     {
-        Debug.Log("Respawn");
-        transform.position = currentRespawnLocation;
+        if (collision.gameObject.CompareTag("Out of bounds"))
+        {
+            Debug.Log("Respawn");
+            transform.position = currentRespawnLocation;
+        }
+        if (collision.gameObject.CompareTag("Light"))
+        {
+            Debug.Log("Respawn");
+            transform.position = currentRespawnLocation;
+        }
     }
-    if (collision.gameObject.CompareTag("Light"))
-    {
-        Debug.Log("Respawn");
-        transform.position = currentRespawnLocation;
-    }
-}
 }

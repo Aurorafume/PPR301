@@ -37,12 +37,12 @@ public class PawPrint : MonoBehaviour
         else if(((vInput == 0 && hInput != 0) && (script.grounded || script.isCrouching)))
         {
             sideSteps();
-            Debug.Log("side stepping");
+           // Debug.Log("side stepping");
         }
         else if(((vInput != 0 && hInput != 0) && (script.grounded || script.isCrouching)))
         {
             sideSteps();
-            Debug.Log("diagonal stepping");
+            //Debug.Log("diagonal stepping");
         }
         fade();
         if(script.isCrouching)
