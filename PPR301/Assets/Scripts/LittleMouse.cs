@@ -16,12 +16,6 @@ public class LittleMouse : MonoBehaviour
     public MouseStates mouseState;
     //wait for mouse patrol after running
     public float mousePatrolWait;
-    //stuck
-    Vector3 lastPosition;
-    public float stuckTimer = 0f;
-    public float stuckThreshold = 0.1f; // small movement = stuck
-
-
 
     public enum MouseStates
     {
