@@ -1247,8 +1247,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &104186378
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -3038,8 +3036,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!23 &260975288
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -3425,8 +3421,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &287750625
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -5061,8 +5055,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &391446776
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -7127,8 +7119,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &625191527
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -8064,8 +8054,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &723233073
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -11006,8 +10994,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &945796605
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -15213,7 +15199,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378989095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.804291, y: 0.4512596, z: 21.59479}
+  m_LocalPosition: {x: -4.804291, y: 0.4512596, z: 21.17}
   m_LocalScale: {x: 1, y: 1, z: 5.3599143}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19540,8 +19526,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &1791166048
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -19863,8 +19847,6 @@ MonoBehaviour:
   currentWaitingTime: 0
   mouseState: 0
   mousePatrolWait: 0
-  stuckTimer: 0
-  stuckThreshold: 0.1
 --- !u!135 &1821928947
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -21347,7 +21329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964714889}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.484283, y: 0.4512596, z: 6.744787}
+  m_LocalPosition: {x: -21.484283, y: 0.4512596, z: 7.81}
   m_LocalScale: {x: 1, y: 1, z: 5.3599143}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22851,6 +22833,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.49
       objectReference: {fileID: 0}
+    - target: {fileID: 7224942786440170277, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7531512808159593938, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_Radius
       value: 0.62849426
@@ -22876,9 +22862,17 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7531512808159593942, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 2066481325}
+    - target: {fileID: 7531512808159593942, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 836674940}
+    - target: {fileID: 7531512808159593942, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: material1
+      value: 
+      objectReference: {fileID: 2100000, guid: a63cd28e5d8364c448f7016b6702bd7e, type: 2}
     - target: {fileID: 7531512808159593942, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: patrolPoints.Array.size
       value: 5
