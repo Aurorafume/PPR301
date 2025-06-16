@@ -19143,7 +19143,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1754643309}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9.19429, y: 0.4512596, z: 14.644789}
+  m_LocalPosition: {x: -9.17, y: 0.4512596, z: 14.644789}
   m_LocalScale: {x: 1, y: 1, z: 5.3599143}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -22827,6 +22827,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2196743840653876345, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 2196743840653876351, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.5
@@ -22866,6 +22870,10 @@ PrefabInstance:
     - target: {fileID: 7531512808159593939, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531512808159593941, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7531512808159593942, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: player
@@ -22968,6 +22976,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7531512808159593961, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: m_Speed
+      value: 5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531512808159593961, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_Radius
       value: 0.3
       objectReference: {fileID: 0}
@@ -22983,6 +22995,18 @@ PrefabInstance:
       propertyPath: m_AngularSpeed
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 7531512808159593963, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: obj
+      value: 
+      objectReference: {fileID: 1778481960}
+    - target: {fileID: 7531512808159593963, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: nightVision
+      value: 
+      objectReference: {fileID: 754354331}
+    - target: {fileID: 7531512808159593963, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: glowMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: a63cd28e5d8364c448f7016b6702bd7e, type: 2}
     - target: {fileID: 7531512808239955497, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: spinSpeed
       value: 40

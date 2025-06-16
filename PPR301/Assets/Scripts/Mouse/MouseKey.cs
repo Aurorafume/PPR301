@@ -15,6 +15,11 @@ public class MouseKey : MonoBehaviour
     public string playerTag = "Player";
 
     private bool hasKey = true;
+    //material
+    public Material glowMaterial;
+    public GameObject obj;
+    //night vision
+    public GameObject nightVision;
 
     void Start()
     {   
@@ -66,5 +71,9 @@ public class MouseKey : MonoBehaviour
 
         hasKey = false;
         Debug.Log("Mouse dropped the key!");
+        //change material
+        obj.GetComponent<MeshRenderer>().material = glowMaterial;
+        //disable cat's night vision
+        nightVision.SetActive(false);
     }
 }
