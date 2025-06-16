@@ -5,7 +5,7 @@ using UnityEngine;
 public class Portal : MonoBehaviour
 {
     public Transform[] portalPoints;
-    public LittleMouse script;
+    //public LittleMouse[] miceScripts;
     public PortalTypes portalType;
     public enum PortalTypes
     {
@@ -31,7 +31,6 @@ public class Portal : MonoBehaviour
         {
             //Debug.Log("Teleporting Mouse");
             //collider.gameObject.transform.position = new Vector3(portalPoints[0].position.x, collider.gameObject.transform.position.y, portalPoints[0].position.z);
-            script.mousePatrolWait = 0f;
 
             switch(portalType)
             {

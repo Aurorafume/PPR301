@@ -118,7 +118,8 @@ public class LittleMouse : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Portal"))
         {
-            Debug.Log("Teleport!!");
+            Debug.Log("setting wait time to 0");
+            mousePatrolWait = 0;
         }
     }
 }
