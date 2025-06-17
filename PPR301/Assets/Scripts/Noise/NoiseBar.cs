@@ -89,7 +89,7 @@ public class NoiseBar : MonoBehaviour
         // Update the noise level based on the microphone input and ambient noise
         float dynamicMaxNoise = ambientBaseline + voiceMargin;
         targetNoiseLevel = Mathf.Clamp01(noiseLevel / dynamicMaxNoise);
-        Debug.Log($"[NoiseBar] Noise: {noiseLevel}, Ambient: {ambientBaseline}, Margin: {voiceMargin}, Target %: {targetNoiseLevel}");
+        //Debug.Log($"[NoiseBar] Noise: {noiseLevel}, Ambient: {ambientBaseline}, Margin: {voiceMargin}, Target %: {targetNoiseLevel}");
 
         if (targetNoiseLevel >= 1f && !isChasing && states.playerIsOnPlatform)
         {   

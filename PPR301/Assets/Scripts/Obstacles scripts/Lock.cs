@@ -5,7 +5,6 @@ using UnityEngine;
 public class Lock : MonoBehaviour
 {
     public GameObject door;
-
     GameObject key;
 
     void OnTriggerEnter(Collider collider)
@@ -26,5 +25,6 @@ public class Lock : MonoBehaviour
         Destroy(key);
         door.SetActive(false);
         Destroy(gameObject);
+        Debug.Log("OPEN DOOR!!");
     }
 }

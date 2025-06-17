@@ -18,19 +18,19 @@ public class InstrumentCircle : MonoBehaviour
         noiseHandler = FindObjectOfType<NoiseHandler>();
         if (noiseHandler == null)
         {
-            Debug.LogError("InstrumentCircle: NoiseHandler not found in scene.");
+            //Debug.LogError("InstrumentCircle: NoiseHandler not found in scene.");
         }
 
         player = GameObject.FindGameObjectWithTag("Player");
         if (player == null)
         {
-            Debug.LogError("InstrumentCircle: No GameObject with tag 'Player' found.");
+            //Debug.LogError("InstrumentCircle: No GameObject with tag 'Player' found.");
         }
     }
 
     private void Update()
     {   // Check if the player is touching any instrument and trigger noise handler
-        Debug.Log("Update called in InstrumentCircle");
+        //Debug.Log("Update called in InstrumentCircle");
         if (noiseHandler == null || player == null) return;
 
         foreach (GameObject instrument in instruments)
