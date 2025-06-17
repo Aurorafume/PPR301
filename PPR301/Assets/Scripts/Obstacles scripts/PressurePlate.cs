@@ -4,38 +4,83 @@ using UnityEngine;
 
 public class PressurePlate : MonoBehaviour
 {
+    public bool activated;
+    //door to unlock
     public GameObject door;
-    public bool touchButton;
-    private bool activated;
     //materials
     public Material offMaterial;
     public Material glowMaterial;
+    //button type
+    public ButtonType buttonType;
+    //touched by player or object?
+    public TouchType touchBy;
+    public GameObject obj;
+
+    public enum ButtonType
+    {
+        TouchButton,
+        HoldButton
+    }
+    public enum TouchType
+    {
+        Player,
+        Object
+    }
 
     void OnTriggerEnter(Collider collider)
     {
-        if(activated == false)
+        switch (touchBy)
         {
-            activated = true;
-            //transform.localScale = new Vector3(1,0.26f,1);
-            GetComponent<Renderer>().material = glowMaterial;
-            door.SetActive(false);
+            case TouchType.Player:
+            if(collider.gameObject.CompareTag("Player") && !activated)
+            {
+                Debug.Log("Touched button");
+                activated = true;
+                //change colour
+                GetComponent<MeshRenderer>().material = glowMaterial;
+                door.SetActive(false);
+            }
+            break;
+            case TouchType.Object:
+            if(collider.gameObject == obj && !activated)
+            {
+                Debug.Log("Touched object");
+                activated = true;
+                //change colour
+                GetComponent<MeshRenderer>().material = glowMaterial;
+                door.SetActive(false);
+            }
+            break;
         }
-        else
-        {
-            activated = false;
-            //transform.localScale = new Vector3(1,1,1);
-            GetComponent<Renderer>().material = offMaterial;
-            door.SetActive(true);
-        }
+        
     }
     void OnTriggerExit(Collider collider)
     {
-        if(touchButton == false)
+        if(buttonType == ButtonType.HoldButton)
         {
-            activated = false;
-            //transform.localScale = new Vector3(1,1,1);
-            GetComponent<Renderer>().material = offMaterial;
-            door.SetActive(true);
+            switch (touchBy)
+            {
+                case TouchType.Player:
+                if(collider.gameObject.CompareTag("Player"))
+                {
+                    Debug.Log("Letting go of button");
+                    activated = false;
+                    //change colour
+                    GetComponent<MeshRenderer>().material = offMaterial;
+                    door.SetActive(true);
+                }
+                break;
+                case TouchType.Object:
+                if(collider.gameObject == obj)
+                {
+                    Debug.Log("Object Letting go of button");
+                    activated = false;
+                    //change colour
+                    GetComponent<MeshRenderer>().material = offMaterial;
+                    door.SetActive(true);
+                }
+                break;
+            }
         }
     }
 }

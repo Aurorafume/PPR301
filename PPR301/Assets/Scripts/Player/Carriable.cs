@@ -82,7 +82,8 @@ public class Carriable : MonoBehaviour
     {
         foreach(Collider collider in colliders)
         {
-            collider.enabled = false;
+            //collider.enabled = false;
+            collider.isTrigger = true;
         }
     }
 

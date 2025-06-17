@@ -39,7 +39,7 @@ public class EnemySpawning : MonoBehaviour
     public Transform GetCurrentEnemySpawnPoint()
     {
         // Check if the player is on a platform and return the corresponding spawn point
-        Debug.Log("GetCurrentEnemySpawnPoint called");
+        //Debug.Log("GetCurrentEnemySpawnPoint called");
 
         if (states == null || Player == null || platformSpawnPairs == null || platformSpawnPairs.Length == 0)
             return null;
@@ -51,7 +51,7 @@ public class EnemySpawning : MonoBehaviour
         if (Physics.Raycast(Player.transform.position, Vector3.down, out hit, checkDistance, PlatformLayer))
         {
             GameObject platformHit = hit.collider.gameObject;
-            Debug.Log("Platform Hit: " + platformHit.name);
+            //Debug.Log("Platform Hit: " + platformHit.name);
 
             foreach (var pair in platformSpawnPairs)
             {
