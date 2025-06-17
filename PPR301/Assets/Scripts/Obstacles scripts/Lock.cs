@@ -5,7 +5,13 @@ using UnityEngine;
 public class Lock : MonoBehaviour
 {
     public GameObject door;
+    public LockType lockType;
     GameObject key;
+    public enum LockType
+    {
+        GreenLock,
+        BlueLock
+    }
 
     void OnTriggerEnter(Collider collider)
     {
@@ -15,7 +21,16 @@ public class Lock : MonoBehaviour
             if (carriable.objectType == Carriable.ObjectType.key)
             {
                 key = carriable.gameObject;
-                Unlock();
+                if(key.CompareTag("Blue Key") && lockType == LockType.BlueLock)
+                {
+                    Debug.Log("OPENING BLUE DOOR");
+                    Unlock();
+                }
+                else if(key.CompareTag("Green Key") && lockType == LockType.GreenLock)
+                {
+                    Debug.Log("OPENING Green DOOR");
+                    Unlock();
+                }
             }
         }
     }
@@ -25,6 +40,6 @@ public class Lock : MonoBehaviour
         Destroy(key);
         door.SetActive(false);
         Destroy(gameObject);
-        Debug.Log("OPEN DOOR!!");
+        //Debug.Log("OPEN DOOR!!");
     }
 }

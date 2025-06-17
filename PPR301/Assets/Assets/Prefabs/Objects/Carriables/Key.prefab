@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7738577061201921383, guid: a2521698f079bf9499571a10e2c67239, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Green Key
       objectReference: {fileID: 0}
     - target: {fileID: 7738577061201921387, guid: a2521698f079bf9499571a10e2c67239, type: 3}
       propertyPath: m_RootOrder
