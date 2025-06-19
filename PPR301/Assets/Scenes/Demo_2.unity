@@ -12700,6 +12700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1707596917}
+  lockType: 0
 --- !u!212 &1088828667
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -14547,6 +14548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   door: {fileID: 1287471456}
+  lockType: 0
 --- !u!1 &1295823792
 GameObject:
   m_ObjectHideFlags: 0
@@ -22808,6 +22810,10 @@ PrefabInstance:
     - target: {fileID: 2196743840653876339, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2196743840653876339, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
+      propertyPath: m_TagString
+      value: Green Key
       objectReference: {fileID: 0}
     - target: {fileID: 2196743840653876345, guid: 50c1ce34677256d4fab3d0e1ff5c62f2, type: 3}
       propertyPath: m_Constraints
