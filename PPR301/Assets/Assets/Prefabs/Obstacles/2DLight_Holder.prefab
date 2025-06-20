@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 95c7c222eb699cf409086577570ef48b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -212,5 +212,7 @@ MonoBehaviour:
   angleStep: 2.5
   rayLength: 15
   hazard: 1
+  goThrough: 0
+  lightType: 0
   player: {fileID: 0}
   script: {fileID: 0}
