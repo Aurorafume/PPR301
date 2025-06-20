@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+    public enum ProjectileType
+    {
+        Straight,
+        Diagonal
+    }
+
 public class ShootProjectile : MonoBehaviour
 {
     public GameObject projectilePrefab;
@@ -12,6 +18,8 @@ public class ShootProjectile : MonoBehaviour
     public float dist;
     public Transform player;
     public GameObject PlayerMouseIcon;
+    public ProjectileType projectileType;
+
 
     void Update()
     {
@@ -29,9 +37,15 @@ public class ShootProjectile : MonoBehaviour
                 {
                     GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
                     Projectile projectile = projectileInstance.GetComponent<Projectile>();
-                    if (projectile)
+                    switch(projectileType)
                     {
+                        case ProjectileType.Straight:
+                        Debug.Log("Straight projectile");
+                        break;
+                        case ProjectileType.Diagonal:
+                        Debug.Log("Diagonal projectile");
                         projectile.direction = projectileDirection;
+                        break;
                     }
                     projectileCount2++;
                 }

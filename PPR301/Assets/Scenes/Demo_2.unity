@@ -22765,6 +22765,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1476135128}
     m_Modifications:
+    - target: {fileID: 329218366084193504, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
+      propertyPath: m_Name
+      value: Projectile_Spawner
+      objectReference: {fileID: 0}
     - target: {fileID: 329218366084193506, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
       propertyPath: player
       value: 
@@ -22824,6 +22828,10 @@ PrefabInstance:
     - target: {fileID: 329218366242836547, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
       propertyPath: m_Name
       value: Pedestal
+      objectReference: {fileID: 0}
+    - target: {fileID: 599250938823158216, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
+      propertyPath: m_Name
+      value: trumpet
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 329218366242836558, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
