@@ -9,19 +9,30 @@ public class ShootProjectile : MonoBehaviour
     public int projectileCount2;
     public Transform startingSpawnLocator;
     public Vector3 projectileDirection = Vector3.forward;
+    public Transform player;
+    public float dist;
 
-    public void OnInteraction()
+    void Update()
     {
-        if (projectileCount2 < projectileCount)
+        //if(Input.MouseButtonDown(0))
+        //{
+        //    
+        //}
+        dist = Vector3.Distance(transform.position, player.position);
+        if(dist < 2)
         {
-            GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
-            Projectile projectile = projectileInstance.GetComponent<Projectile>();
-            if (projectile)
-            {
-                projectile.direction = projectileDirection;
-            }
-            
-            projectileCount2++;
+            Debug.Log("close");
         }
+        //if (projectileCount2 < projectileCount)
+        //{
+        //    GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
+        //    Projectile projectile = projectileInstance.GetComponent<Projectile>();
+        //    if (projectile)
+        //    {
+        //        projectile.direction = projectileDirection;
+        //    }
+        //    
+        //    projectileCount2++;
+        //}
     }
 }

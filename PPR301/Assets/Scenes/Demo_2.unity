@@ -8465,7 +8465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &754354332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14184,11 +14184,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -227.5
+      value: -160.85
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.54
+      value: 2.79
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
@@ -22682,6 +22682,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1476135128}
     m_Modifications:
     - target: {fileID: 329218366084193506, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 836674946}
+    - target: {fileID: 329218366084193506, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
       propertyPath: projectileDirection.x
       value: 1
       objectReference: {fileID: 0}
@@ -22733,7 +22737,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pedestal
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 329218366242836558, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
 --- !u!1001 &6886128338978962429
 PrefabInstance:
