@@ -12,7 +12,6 @@ public class ShootProjectile : MonoBehaviour
     public float dist;
     public Transform player;
     public GameObject PlayerMouseIcon;
-    public Camera cam;
 
     void Update()
     {
@@ -25,7 +24,7 @@ public class ShootProjectile : MonoBehaviour
         {
             Debug.Log("close");
             PlayerMouseIcon.SetActive(true);
-            //IconBillboard();
+            //icon faces camera
             PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, -Vector3.down);
             //click to activate projectile
         }
@@ -42,12 +41,5 @@ public class ShootProjectile : MonoBehaviour
         //    
         //    projectileCount2++;
         //}
-    }
-    public void IconBillboard()
-    {
-        // Make the icon face the camera
-        Vector3 lookPos = cam.transform.position - transform.position; // Get direction
-        //lookPos.y = 0; // Keep Y-axis fixed
-        PlayerMouseIcon.transform.rotation = Quaternion.LookRotation(-lookPos);
     }
 }
