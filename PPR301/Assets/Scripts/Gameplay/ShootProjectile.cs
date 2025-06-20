@@ -9,8 +9,10 @@ public class ShootProjectile : MonoBehaviour
     public int projectileCount2;
     public Transform startingSpawnLocator;
     public Vector3 projectileDirection = Vector3.forward;
-    public Transform player;
     public float dist;
+    public Transform player;
+    public GameObject PlayerMouseIcon;
+    public Camera cam;
 
     void Update()
     {
@@ -19,10 +21,16 @@ public class ShootProjectile : MonoBehaviour
         //    
         //}
         dist = Vector3.Distance(transform.position, player.position);
-        if(dist < 2)
+        if(dist < 3)
         {
             Debug.Log("close");
+            PlayerMouseIcon.SetActive(true);
+            //IconBillboard();
+            PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, -Vector3.down);
+            //click to activate projectile
         }
+        else
+        PlayerMouseIcon.SetActive(false);
         //if (projectileCount2 < projectileCount)
         //{
         //    GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
@@ -34,5 +42,12 @@ public class ShootProjectile : MonoBehaviour
         //    
         //    projectileCount2++;
         //}
+    }
+    public void IconBillboard()
+    {
+        // Make the icon face the camera
+        Vector3 lookPos = cam.transform.position - transform.position; // Get direction
+        //lookPos.y = 0; // Keep Y-axis fixed
+        PlayerMouseIcon.transform.rotation = Quaternion.LookRotation(-lookPos);
     }
 }
