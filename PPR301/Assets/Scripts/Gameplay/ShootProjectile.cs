@@ -12,13 +12,14 @@ public class ShootProjectile : MonoBehaviour
 {
     public GameObject projectilePrefab;
     public int projectileCount; //how many projectiles should be out at once
-    public int projectileCount2;
     public Transform startingSpawnLocator;
     public Vector3 projectileDirection = Vector3.forward;
     public float dist;
     public Transform player;
     public GameObject PlayerMouseIcon;
     public ProjectileType projectileType;
+    //list of projectiles
+    public List<GameObject> projectileList = new List<GameObject>();
 
 
     void Update()
@@ -33,10 +34,12 @@ public class ShootProjectile : MonoBehaviour
             //click to activate projectile
             if(Input.GetMouseButtonDown(0))
             {
-                if (projectileCount2 < projectileCount)
+                projectileList.RemoveAll(item => item == null);
+                if (projectileList.Count < projectileCount)
                 {
                     GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
                     Projectile projectile = projectileInstance.GetComponent<Projectile>();
+                    projectileList.Add(projectileInstance);
                     switch(projectileType)
                     {
                         case ProjectileType.Straight:
@@ -47,7 +50,7 @@ public class ShootProjectile : MonoBehaviour
                         projectile.direction = projectileDirection;
                         break;
                     }
-                    projectileCount2++;
+                    //projectileCount2++;
                 }
             }
         }

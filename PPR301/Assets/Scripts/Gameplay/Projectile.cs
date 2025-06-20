@@ -25,7 +25,7 @@ public class Projectile : MonoBehaviour
         if(lifespan <= 0)
         {
             Destroy(gameObject);
-            script.projectileCount2--;
+            //script.projectileCount2--;
         }
     }
 
@@ -35,13 +35,13 @@ public class Projectile : MonoBehaviour
         {
             //Debug.Log("Destroy");
             Destroy(gameObject);
-            script.projectileCount2--;
+            //script.projectileCount2--;
         }
         if(collision.CompareTag("Destroyable wall"))
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
-            script.projectileCount2--;
+            //script.projectileCount2--;
         }
         else if(collision.CompareTag("Bounce"))
         {
