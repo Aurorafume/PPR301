@@ -31,12 +31,6 @@ public class Projectile : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.CompareTag("Wall"))
-        {
-            //Debug.Log("Destroy");
-            Destroy(gameObject);
-            //script.projectileCount2--;
-        }
         if(collision.CompareTag("Destroyable wall"))
         {
             Destroy(gameObject);
@@ -46,6 +40,12 @@ public class Projectile : MonoBehaviour
         else if(collision.CompareTag("Bounce"))
         {
             ChangeHorizontalDirection();
+            lifespan = 5;
+            Debug.Log("bouunce");
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -53,4 +53,8 @@ public class Projectile : MonoBehaviour
     {
         direction = new Vector3 (-direction.x, direction.y, direction.z);
     }
+    //void BounceDirection()
+    //{
+    //    direction = new Vector3 (-direction.x, direction.y, direction.z);
+    //}
 }
