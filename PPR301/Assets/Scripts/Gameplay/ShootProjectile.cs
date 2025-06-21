@@ -24,7 +24,7 @@ public class ShootProjectile : MonoBehaviour
 
     void Start()
     {
-        trumpetList.Add(this);
+       //trumpetList.Add(this);
     }
 
     void Update()
@@ -43,7 +43,8 @@ public class ShootProjectile : MonoBehaviour
         {
             PlayerMouseIcon.SetActive(true);
             //icon faces camera
-            PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, -Vector3.down);
+            PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, Vector3.up);
+            PlayerMouseIcon.transform.Rotate(0f, 180f, 0f);
         }
         else
         PlayerMouseIcon.SetActive(false);
@@ -74,5 +75,13 @@ public class ShootProjectile : MonoBehaviour
                 }
             }
         }
+    }
+       void Awake()
+    {
+        trumpetList.Add(this);
+    }
+    void OnDestroy()
+    {
+        trumpetList.Remove(this);
     }
 }
