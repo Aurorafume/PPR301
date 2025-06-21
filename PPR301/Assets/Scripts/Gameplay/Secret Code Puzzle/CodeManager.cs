@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 
 public class CodeManager : MonoBehaviour
@@ -35,7 +36,22 @@ public class CodeManager : MonoBehaviour
             }
         }
 
-        // If it made it through the loop, correct sequence,
+        // If it made it through the loop, code is correct.
         Debug.Log("Code complete!");
+        codeIndex++;
+
+        if (codeIndex == codes.Count)
+        {
+            HandlePuzzleComplete();
+        }
+        else
+        {
+            SetNewCode(codeIndex);
+        }
+    }
+
+    void HandlePuzzleComplete()
+    {
+        Debug.Log("You did it!");
     }
 }

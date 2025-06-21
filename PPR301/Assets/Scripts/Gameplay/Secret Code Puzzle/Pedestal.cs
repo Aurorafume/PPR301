@@ -10,6 +10,8 @@ public class Pedestal : MonoBehaviour
 
     CodeManager codeManager;
 
+    LetterCube myLetterCube;
+
     void Awake()
     {
         codeManager = FindObjectOfType<CodeManager>();
@@ -17,6 +19,19 @@ public class Pedestal : MonoBehaviour
 
     public void SetLetterCube(LetterCube letterCube)
     {
+        if (!letterCube)
+        {
+            myLetterCube = null;
+            givenLetter = "\0"[0];
+            return;
+        }
+
+        if (myLetterCube)
+        {
+            SwapLetterCubes();
+        }
+
+        myLetterCube = letterCube;
         // Passes first letter of the string into the char.
         givenLetter = letterCube.myLetter[0];
 
@@ -26,8 +41,20 @@ public class Pedestal : MonoBehaviour
         }
     }
 
+    void SwapLetterCubes()
+    {
+        Carriable carriable = myLetterCube.GetComponent<Carriable>();
+        if (carriable)
+        {
+            carriable.OnInteraction();
+        }
+        myLetterCube.OnInteraction();
+    }
+
     public char GetGivenLetter()
     {
         return givenLetter;
     }
+
+    
 }
