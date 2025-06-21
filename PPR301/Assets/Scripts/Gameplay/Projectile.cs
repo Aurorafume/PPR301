@@ -43,9 +43,11 @@ public class Projectile : MonoBehaviour
             lifespan = 5;
             Debug.Log("bouunce");
         }
-        else
+        if(collision.CompareTag("Wall"))
         {
+            //Debug.Log("Destroy");
             Destroy(gameObject);
+            //script.projectileCount2--;
         }
     }
 
@@ -53,8 +55,4 @@ public class Projectile : MonoBehaviour
     {
         direction = new Vector3 (-direction.x, direction.y, direction.z);
     }
-    //void BounceDirection()
-    //{
-    //    direction = new Vector3 (-direction.x, direction.y, direction.z);
-    //}
 }
