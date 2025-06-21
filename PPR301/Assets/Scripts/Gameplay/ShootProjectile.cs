@@ -20,17 +20,38 @@ public class ShootProjectile : MonoBehaviour
     public ProjectileType projectileType;
     //list of projectiles
     public List<GameObject> projectileList = new List<GameObject>();
+    public static List<ShootProjectile> trumpetList = new List<ShootProjectile>();
 
+    void Start()
+    {
+        trumpetList.Add(this);
+    }
 
     void Update()
     {
-        dist = Vector3.Distance(transform.position, player.position);
-        if(dist < 3)
+        bool isNearAny = false;
+        foreach (ShootProjectile obj in trumpetList)
         {
-            //Debug.Log("close");
+            float dist = Vector3.Distance(player.position, obj.transform.position);
+            if (dist <= 3f)
+            {
+                isNearAny = true;
+                break; // Stop checking after finding one nearby
+            }
+        }
+        if(isNearAny)
+        {
             PlayerMouseIcon.SetActive(true);
             //icon faces camera
             PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, -Vector3.down);
+        }
+        else
+        PlayerMouseIcon.SetActive(false);
+
+        //next to spacific trumpet
+        dist = Vector3.Distance(transform.position, player.position);
+        if(dist < 3)
+        {
             //click to activate projectile
             if(Input.GetMouseButtonDown(0))
             {
@@ -50,11 +71,8 @@ public class ShootProjectile : MonoBehaviour
                         projectile.direction = projectileDirection;
                         break;
                     }
-                    //projectileCount2++;
                 }
             }
         }
-        else
-        PlayerMouseIcon.SetActive(false);
     }
 }
