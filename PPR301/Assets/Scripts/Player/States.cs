@@ -16,6 +16,9 @@ public class States : MonoBehaviour
     [Tooltip("True if the player is currently standing on a valid platform.")]
     public bool playerIsOnPlatform = false;
 
+    [Tooltip("True if the player is in the Memory Room Game")]
+    public bool InMemoryRoomGame = false;
+
     [Header("Scene References")]
     [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
