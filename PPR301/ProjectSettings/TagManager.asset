@@ -27,6 +27,7 @@ TagManager:
   - Area5
   - Green Key
   - Blue Key
+  - Memory Room
   layers:
   - Default
   - TransparentFX
