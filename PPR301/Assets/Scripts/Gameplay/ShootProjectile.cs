@@ -29,29 +29,9 @@ public class ShootProjectile : MonoBehaviour
 
     void Update()
     {
-        bool isNearAny = false;
-        foreach (ShootProjectile obj in trumpetList)
-        {
-            float dist = Vector3.Distance(player.position, obj.transform.position);
-            if (dist <= 3f)
-            {
-                isNearAny = true;
-                break; // Stop checking after finding one nearby
-            }
-        }
-        if(isNearAny)
-        {
-            PlayerMouseIcon.SetActive(true);
-            //icon faces camera
-            PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, Vector3.up);
-            PlayerMouseIcon.transform.Rotate(0f, 180f, 0f);
-        }
-        else
-        PlayerMouseIcon.SetActive(false);
-
         //next to spacific trumpet
         dist = Vector3.Distance(transform.position, player.position);
-        if(dist < 3)
+        if(dist <= 3)
         {
             //click to activate projectile
             if(Input.GetMouseButtonDown(0))
