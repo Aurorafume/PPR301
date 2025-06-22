@@ -17,12 +17,18 @@ public class Draggable : MonoBehaviour
     Interactable myInteractable;
     PlayerInteractHandler playerInteractHandler;
 
+    Rigidbody rb;
+
+    bool defaultFreezeRotation;
+
     public static event Action<bool> OnDragObject;
 
     void Awake()
     {
         myInteractable = GetComponent<Interactable>();
         playerInteractHandler = FindObjectOfType<PlayerInteractHandler>();
+        rb = GetComponent<Rigidbody>();
+        defaultFreezeRotation = rb.freezeRotation;
     }
 
     public void OnInteraction()
@@ -42,6 +48,7 @@ public class Draggable : MonoBehaviour
         myInteractable.SetAwaitingFurtherInteraction(true);
         grabbed = true;
         OnDragObject?.Invoke(true);
+        rb.freezeRotation = true;
 
         grabPoint = playerInteractHandler.hitPoint;
 
@@ -84,6 +91,7 @@ public class Draggable : MonoBehaviour
         myInteractable.SetAwaitingFurtherInteraction(false);
         grabbed = false;
         OnDragObject?.Invoke(false);
+        rb.freezeRotation = defaultFreezeRotation;
 
         if (joint)
         {
