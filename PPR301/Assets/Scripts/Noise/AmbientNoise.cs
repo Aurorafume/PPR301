@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class AmbientNoise : MonoBehaviour
 {
-    [Header("Calibration Settings")]
+    /*[Header("Calibration Settings")]
     [Tooltip("How long to sample ambient mic noise on startup")]
     public float calibrationDuration = 5f;
 
@@ -58,5 +58,5 @@ public class AmbientNoise : MonoBehaviour
     {
         float adjusted = Mathf.Max(currentNoise - ambientNoiseBaseline, 0f);
         return Mathf.Clamp01(adjusted / margin);
-    }
+    }*/
 }

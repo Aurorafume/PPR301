@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class CaressWrapper
 {
-    private NoiseReducer reducer;
+    /*private NoiseReducer reducer;
 
     public void Init(int sampleRate) 
     {
@@ -28,5 +28,5 @@ public class CaressWrapper
     {
         reducer?.Destroy();
         reducer = null;
-    }
+    }*/
 }

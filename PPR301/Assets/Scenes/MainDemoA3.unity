@@ -26112,6 +26112,18 @@ PrefabInstance:
       propertyPath: noiseBar
       value: 
       objectReference: {fileID: 758779079}
+    - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: jumpNoise
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: maxNoiseLevel
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: collisionNoise
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158206, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: m_Enabled
       value: 0

@@ -5,7 +5,7 @@ using Caress;
 
 public class MicrophoneInput : MonoBehaviour
 {   
-    [Header("Microphone Settings")]
+    /*[Header("Microphone Settings")]
     [Tooltip("The sample rate for the microphone input")]
     public int sampleRate = 44100;
 
@@ -113,5 +113,5 @@ public class MicrophoneInput : MonoBehaviour
     void OnDestroy()
     {   
         caress?.Dispose();
-    }
+    }*/
 }

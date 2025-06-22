@@ -3,16 +3,181 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class NoiseHandler : MonoBehaviour
-{   
+{
     [Header("Noise Settings")]
+    public float jumpNoise;
+    public float collisionNoise;
+    public float maxNoiseLevel = 100f; // The noise level required to max out the bar
+    private float additionalNoise = 0f;
+
+    [Header("References")]
+    public NoiseBar noiseBar;
+    public GameObject enemyManagerPrefab;
+    public EnemySpawning enemySpawning;
+
+    [Header("Enemy Spawning")]
+    public bool canSpawnEnemy = false;
+    public static bool enemyExists = false;
+    public float spawnCooldown = 10f;
+
+    [Header("Audio")]
+    public AudioSource ambientAudio;
+    public AudioSource chaseAudio;
+
+    public static AudioSource staticAmbientAudio;
+    public static AudioSource staticChaseAudio;
+
+    void Start()
+    {   // Initialise static references
+        staticAmbientAudio = ambientAudio;
+        staticChaseAudio = chaseAudio;
+
+        if (ambientAudio != null)
+        {
+            ambientAudio.volume = 0f;
+            ambientAudio.Play();
+        }
+
+        if (noiseBar != null)
+        {
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
+            noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
+        }
+    }
+
+    void Update()
+    {
+        // Decay the generated noise over time
+        additionalNoise = Mathf.Lerp(additionalNoise, 0, Time.deltaTime * 0.5f);
+        if (additionalNoise < 0.01f)
+        {
+            additionalNoise = 0f;
+        }
+
+        // Update the noise bar with the current gameplay-generated noise
+        if (noiseBar != null)
+        {
+            noiseBar.UpdateNoiseLevel(additionalNoise, maxNoiseLevel);
+        }
+
+        // Adjust ambient audio volume based on the noise percentage
+        if (ambientAudio != null && noiseBar != null)
+        {
+            float targetVolume = Mathf.Clamp01(noiseBar.CurrentNoisePercentage);
+            if (enemyExists) targetVolume *= 0.2f;
+            ambientAudio.volume = Mathf.MoveTowards(ambientAudio.volume, targetVolume, Time.deltaTime * 1.5f);
+        }
+    }
+
+    public void GenerateNoise(float extraNoise)
+    {   // Generate noise based on player actions
+        additionalNoise += Mathf.Abs(extraNoise);
+    }
+
+    void OnEnable()
+    {   // Subscribe to noise bar events
+        if (noiseBar != null)
+        {
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
+            noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
+        }
+    }
+
+    void OnDisable()
+    {   // Unsubscribe from noise bar events
+        if (noiseBar != null)
+        {
+            noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
+        }
+    }
+
+    public void TrySpawnEnemyManager()
+    {   // Check if the player is on a platform and spawn the enemy manager if conditions are met
+        if (enemySpawning == null)
+        {
+            Debug.LogError("EnemySpawning reference is not set!");
+            return;
+        }
+
+        Transform currentPlatform = enemySpawning.GetCurrentEnemySpawnPoint();
+        if (currentPlatform == null)
+        {
+            Debug.LogWarning("No platform found for enemy spawn.");
+            return;
+        }
+
+        if (canSpawnEnemy && !enemyExists)
+        {
+            SpawnEnemyManager();
+            enemyExists = true;
+            StartCoroutine(SpawnCooldown());
+
+            if (chaseAudio != null && !chaseAudio.isPlaying) chaseAudio.Play();
+        }
+    }
+
+    public void SpawnEnemyManager()
+    {   // Spawn the enemy manager prefab at the current spawn point
+        if (enemyManagerPrefab != null && enemySpawning != null)
+        {
+            Transform spawnPoint = enemySpawning.GetCurrentEnemySpawnPoint();
+            if (spawnPoint != null)
+            {
+                Instantiate(enemyManagerPrefab, spawnPoint.position, spawnPoint.rotation);
+                Debug.Log("Enemy Manager Spawned at " + spawnPoint.position);
+            }
+            else
+            {
+                Debug.LogWarning("No matching platform/spawn point found.");
+            }
+        }
+        else
+        {
+            Debug.LogError("Enemy Manager Prefab or EnemySpawning is not assigned!");
+        }
+    }
+
+    public static void NotifyEnemyDespawned()
+    {   // Notify the handler when the enemy despawns
+        enemyExists = false;
+
+        GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
+        if (enemyManager != null)
+            Destroy(enemyManager);
+
+        if (staticChaseAudio != null)
+            staticChaseAudio.Stop();
+
+        if (staticAmbientAudio != null)
+        {
+            staticAmbientAudio.volume = 0f;
+            staticAmbientAudio.Play();
+        }
+    }
+
+    IEnumerator SpawnCooldown()
+    {   // Coroutine to manage spawn cooldown
+        canSpawnEnemy = false;
+        yield return new WaitForSeconds(spawnCooldown);
+        canSpawnEnemy = true;
+    }
+
+    public static void ResetStatics()
+    {   // Reset static variables when the scene is reloaded
+        enemyExists = false;
+        staticAmbientAudio = null;
+        staticChaseAudio = null;
+    }
+    
+    /*[Header("Noise Settings")]
     public float jumpNoise;
     public float collisionNoise;
     public float voiceNoiseMargin;
     private float additionalNoise = 0f;
 
     [Header("References")]
-    public AmbientNoise ambientNoise;
-    private MicrophoneInput microphoneInput;
+    //public AmbientNoise ambientNoise;
+    //private MicrophoneInput microphoneInput;
     public NoiseBar noiseBar;
     public GameObject enemyManagerPrefab;
     public EnemySpawning enemySpawning;
@@ -177,5 +342,5 @@ public class NoiseHandler : MonoBehaviour
         enemyExists = false;
         staticAmbientAudio = null;
         staticChaseAudio = null;
-    }
+    }*/
 }
