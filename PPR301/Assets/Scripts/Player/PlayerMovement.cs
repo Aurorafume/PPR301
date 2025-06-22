@@ -60,6 +60,9 @@ public class PlayerMovement : MonoBehaviour
 
     [Tooltip("Is the player currently grounded?")]
     public bool grounded;
+    
+    [Tooltip("Forces the player to be grounded, useful for stairs.")]
+    public bool groundedAlwaysTrue = false;
 
     private bool isTouchingObject = false;
 
@@ -118,8 +121,6 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Directional offset (in degrees) from world forward in top-down mode.")]
     float forwardAngularOffsetFromWorldZ = 0;
 
-    public bool groundedAlwaysTrue;
-
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -128,7 +129,6 @@ public class PlayerMovement : MonoBehaviour
 
         readyToJump = true;
         originalScale = crouchScaleObject.localScale;
-        //playerCamera = Camera.main;
         anim = GetComponentInChildren<Animator>();
 
         moveBehaviour = DefaultMovement;
@@ -140,7 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         CheckGroundStatus();
 
-        if (!wasGrounded && grounded)
+        if (!wasGrounded && grounded && !groundedAlwaysTrue)
             GenerateLandingNoise();
 
         GetPlayerInput();
@@ -182,28 +182,25 @@ public class PlayerMovement : MonoBehaviour
     void SetDraggingObject(bool state)
     {
         draggingObject = state;
-
         UpdateMoveBehaviour();
     }
 
     void SetInTopDownMode(bool state, float forwardAngularDirection)
     {
         inTopDownMode = state;
-
         forwardAngularOffsetFromWorldZ = forwardAngularDirection;
-
         UpdateMoveBehaviour();
     }
+
     IEnumerator MyCoroutine()
     {
-        // suspend execution for 5 seconds
         yield return new WaitForSeconds(0.5f);
         moveBehaviour = TopDownMovement;
         Debug.Log("Changing walk mode");
     }
+
     IEnumerator MyCoroutine2()
     {
-        // suspend execution for 5 seconds
         yield return new WaitForSeconds(0.5f);
         moveBehaviour = DefaultMovement;
         Debug.Log("Changing walk mode");
@@ -213,12 +210,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (inTopDownMode)
         {
-            //moveBehaviour = TopDownMovement;
             StartCoroutine(MyCoroutine());
         }
         else
         {
-            //moveBehaviour = DefaultMovement;
             StartCoroutine(MyCoroutine2());
         }
     }
@@ -236,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
 
-        if (grounded)
+        if (grounded || groundedAlwaysTrue)
         {
             Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
             rb.MovePosition(targetPosition);
@@ -248,7 +243,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 velocityChange = airMove - horizontalVelocity;
             velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
             rb.AddForce(velocityChange, ForceMode.Acceleration);
-            //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
         }
 
         if (!draggingObject)
@@ -269,16 +263,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void TopDownMovement()
     {
-        // forwardAngularOffsetFromWorldZ is an angle in degrees determining which world direction is forwards,
-        // with the default (0) being world positive Z.
         Vector3 forwardDirection = new Vector3(0f, forwardAngularOffsetFromWorldZ, 0f);
-
         moveDirection = new Vector3(horizontalInput, 0f, verticalInput).normalized;
-
         moveDirection = Quaternion.Euler(forwardDirection) * moveDirection;
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
-
 
         Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
         rb.MovePosition(targetPosition);
@@ -288,13 +277,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void SpeedControl()
     {
-        /*Vector3 flatVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-
-        if (flatVelocity.magnitude > playerSpeed)
-        {
-            Vector3 limitedVelocity = flatVelocity.normalized * playerSpeed;
-            rb.velocity = new Vector3(limitedVelocity.x, rb.velocity.y, limitedVelocity.z);
-        }*/
     }
 
     private void Jump()
@@ -302,7 +284,7 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 
-        Vector3 jumpBoost = moveDirection * playerSpeed * 1f; // tweak multiplier
+        Vector3 jumpBoost = moveDirection * playerSpeed * 1f;
         rb.AddForce(jumpBoost, ForceMode.Impulse);
 
         anim.SetBool("isJumping", true);
@@ -322,18 +304,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGroundStatus()
     {
-        bool groundDetected = false;
-        if(SphereCastDetectsGround(transform.position))
-        {
-            groundDetected = true;
-        }
-
-        Vector3 secondCastPosition = secondGroundCastLocator.position;
-        if(SphereCastDetectsGround(secondCastPosition))
-        {
-            groundDetected = true;
-        }
-
+        bool groundDetected = SphereCastDetectsGround(transform.position) || SphereCastDetectsGround(secondGroundCastLocator.position);
         grounded = groundDetected;
 
         anim.SetBool("isJumping", !grounded);
@@ -354,12 +325,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
         {
-            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
+            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object") || hit.collider.CompareTag("Stairs");
         }
-        else
-        {
-            return false;
-        }
+        return false;
     }
 
     private void HandleCrouch()
@@ -378,13 +346,12 @@ public class PlayerMovement : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
         bool currentlyInContact = false;
 
-        // Check if any of the nearby colliders is a valid object
         foreach (var collider in colliders)
         {
             if (collider.CompareTag("Object"))
             {
                 currentlyInContact = true;
-                break; 
+                break;
             }
         }
 
@@ -393,20 +360,15 @@ public class PlayerMovement : MonoBehaviour
             GenerateObjectNoise();
         }
 
-        // Update the state for the next frame
         isTouchingObject = currentlyInContact;
     }
 
     private void GenerateObjectNoise()
     {
-        // Only generate noise if the player is not currently dragging an object
-        if (!draggingObject)
+        if (!draggingObject && Time.time - lastNoiseTime > 0.5f)
         {
-            if (Time.time - lastNoiseTime > 0.5f)
-            {
-                noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
-                lastNoiseTime = Time.time;
-            }
+            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
+            lastNoiseTime = Time.time;
         }
     }
 
@@ -448,7 +410,6 @@ public class PlayerMovement : MonoBehaviour
     private void HandleIdleAndSoundStates()
     {
         bool isMoving = horizontalInput != 0 || verticalInput != 0 || rb.velocity.magnitude > 0.1f;
-
         HandleDraggingSound(isMoving);
 
         if (isMoving)
@@ -459,6 +420,24 @@ public class PlayerMovement : MonoBehaviour
         else if (Time.time - lastMoveTime > idleTimeThreshold)
         {
             anim.SetBool("isIdle", true);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Stairs"))
+        {
+            rb.useGravity = false;
+            groundedAlwaysTrue = true;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Stairs"))
+        {
+            rb.useGravity = true;
+            groundedAlwaysTrue = false;
         }
     }
 
