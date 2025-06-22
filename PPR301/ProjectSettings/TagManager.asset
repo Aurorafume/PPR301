@@ -28,6 +28,7 @@ TagManager:
   - Green Key
   - Blue Key
   - Memory Room
+  - Stairs
   layers:
   - Default
   - TransparentFX

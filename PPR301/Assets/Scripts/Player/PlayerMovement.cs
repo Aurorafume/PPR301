@@ -105,6 +105,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Directional offset (in degrees) from world forward in top-down mode.")]
     float forwardAngularOffsetFromWorldZ = 0;
 
+    public bool groundedAlwaysTrue;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -221,20 +223,25 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
 
+        if (groundedAlwaysTrue)
+        {
+            grounded = true;
+        }
+
         if (grounded)
-        {
-            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
-            rb.MovePosition(targetPosition);
-        }
-        else
-        {
-            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-            Vector3 airMove = moveDirection * airControlSpeed;
-            Vector3 velocityChange = airMove - horizontalVelocity;
-            velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
-            rb.AddForce(velocityChange, ForceMode.Acceleration);
-            //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
-        }
+            {
+                Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+                rb.MovePosition(targetPosition);
+            }
+            else
+            {
+                Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+                Vector3 airMove = moveDirection * airControlSpeed;
+                Vector3 velocityChange = airMove - horizontalVelocity;
+                velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
+                rb.AddForce(velocityChange, ForceMode.Acceleration);
+                //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
+            }
 
         if (!draggingObject)
         {
@@ -339,7 +346,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
         {
-            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
+            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object") || hit.collider.CompareTag("Stairs");
         }
         else
         {
@@ -402,6 +409,22 @@ public class PlayerMovement : MonoBehaviour
         else if (Time.time - lastMoveTime > idleTimeThreshold)
         {
             anim.SetBool("isIdle", true);
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Stairs")
+        {
+            rb.useGravity = false;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Stairs")
+        {
+            rb.useGravity = true;
         }
     }
 
