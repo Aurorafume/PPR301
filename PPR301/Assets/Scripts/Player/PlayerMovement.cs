@@ -61,6 +61,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Is the player currently grounded?")]
     public bool grounded;
 
+    private bool isTouchingObject = false;
+
     private bool wasGrounded;
     private float horizontalInput;
     private float verticalInput;
@@ -374,15 +376,25 @@ public class PlayerMovement : MonoBehaviour
     {
         float detectionRadius = 0.5f;
         Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+        bool currentlyInContact = false;
 
-        foreach (Collider collider in colliders)
+        // Check if any of the nearby colliders is a valid object
+        foreach (var collider in colliders)
         {
             if (collider.CompareTag("Object"))
             {
-                GenerateObjectNoise();
-                break;
+                currentlyInContact = true;
+                break; 
             }
         }
+
+        if (currentlyInContact && !isTouchingObject)
+        {
+            GenerateObjectNoise();
+        }
+
+        // Update the state for the next frame
+        isTouchingObject = currentlyInContact;
     }
 
     private void GenerateObjectNoise()
