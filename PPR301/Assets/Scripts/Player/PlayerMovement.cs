@@ -40,6 +40,17 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Speed of player rotation in top-down mode.")]
     [SerializeField] private float topDownRotationSpeed = 50f;
 
+    [Header("Audio Settings")]
+    [Tooltip("The AudioSource component used for playing the dragging sound.")]
+    public AudioSource draggingAudioSource;
+
+    [Tooltip("The sound clip that loops while dragging a moving object.")]
+    public AudioClip draggingSoundClip;
+
+    [Tooltip("Volume of the dragging sound.")]
+    [Range(0f, 1f)]
+    public float draggingSoundVolume = 0.5f;
+
     [Header("State Flags (Runtime Only)")]
     [Tooltip("Is the player currently crouching?")]
     public bool isCrouching = false;
@@ -132,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
 
         GetPlayerInput();
         HandleCrouch();
-        HandleIdleState();
+        HandleIdleAndSoundStates();
         CheckForObjectContact();
         SpeedControl();
 
@@ -223,25 +234,20 @@ public class PlayerMovement : MonoBehaviour
 
         anim.SetBool("isWalking", moveDirection.magnitude > 0);
 
-        if (groundedAlwaysTrue)
-        {
-            grounded = true;
-        }
-
         if (grounded)
-            {
-                Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
-                rb.MovePosition(targetPosition);
-            }
-            else
-            {
-                Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-                Vector3 airMove = moveDirection * airControlSpeed;
-                Vector3 velocityChange = airMove - horizontalVelocity;
-                velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
-                rb.AddForce(velocityChange, ForceMode.Acceleration);
-                //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
-            }
+        {
+            Vector3 targetPosition = rb.position + moveDirection * playerSpeed * Time.fixedDeltaTime;
+            rb.MovePosition(targetPosition);
+        }
+        else
+        {
+            Vector3 horizontalVelocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            Vector3 airMove = moveDirection * airControlSpeed;
+            Vector3 velocityChange = airMove - horizontalVelocity;
+            velocityChange = Vector3.ClampMagnitude(velocityChange, airControlSpeed);
+            rb.AddForce(velocityChange, ForceMode.Acceleration);
+            //rb.velocity = new Vector3 (velocityChange.x, rb.velocity.y, velocityChange.z);
+        }
 
         if (!draggingObject)
         {
@@ -346,7 +352,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
         {
-            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object") || hit.collider.CompareTag("Stairs");
+            return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object");
         }
         else
         {
@@ -381,10 +387,14 @@ public class PlayerMovement : MonoBehaviour
 
     private void GenerateObjectNoise()
     {
-        if (Time.time - lastNoiseTime > 0.5f)
+        // Only generate noise if the player is not currently dragging an object
+        if (!draggingObject)
         {
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
-            lastNoiseTime = Time.time;
+            if (Time.time - lastNoiseTime > 0.5f)
+            {
+                noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
+                lastNoiseTime = Time.time;
+            }
         }
     }
 
@@ -397,9 +407,37 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void HandleIdleState()
+    private void HandleDraggingSound(bool isMoving)
+    {
+        if (draggingAudioSource == null || draggingSoundClip == null)
+        {
+            return;
+        }
+
+        if (draggingObject && isMoving)
+        {
+            if (!draggingAudioSource.isPlaying)
+            {
+                draggingAudioSource.clip = draggingSoundClip;
+                draggingAudioSource.volume = draggingSoundVolume;
+                draggingAudioSource.loop = true;
+                draggingAudioSource.Play();
+            }
+        }
+        else
+        {
+            if (draggingAudioSource.isPlaying)
+            {
+                draggingAudioSource.Stop();
+            }
+        }
+    }
+
+    private void HandleIdleAndSoundStates()
     {
         bool isMoving = horizontalInput != 0 || verticalInput != 0 || rb.velocity.magnitude > 0.1f;
+
+        HandleDraggingSound(isMoving);
 
         if (isMoving)
         {
@@ -409,22 +447,6 @@ public class PlayerMovement : MonoBehaviour
         else if (Time.time - lastMoveTime > idleTimeThreshold)
         {
             anim.SetBool("isIdle", true);
-        }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.tag == "Stairs")
-        {
-            rb.useGravity = false;
-        }
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.tag == "Stairs")
-        {
-            rb.useGravity = true;
         }
     }
 
