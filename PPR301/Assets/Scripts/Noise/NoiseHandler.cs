@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -141,7 +142,7 @@ public class NoiseHandler : MonoBehaviour
     {   // Notify the handler when the enemy despawns
         enemyExists = false;
 
-        GameObject enemyManager = GameObject.Find("Enemy2D(Clone)");
+        GameObject enemyManager = FindObjectOfType<EnemyAI>().gameObject;
         if (enemyManager != null)
             Destroy(enemyManager);
 
