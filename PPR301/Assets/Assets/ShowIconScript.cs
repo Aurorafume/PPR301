@@ -7,7 +7,7 @@ public class ShowIconScript : MonoBehaviour
 
     public Transform player;
     public GameObject PlayerMouseIcon;
-    private float dist;
+    public float dist;
     public float howFarShowIcon;
     public static List<ShowIconScript> objectList = new List<ShowIconScript>();
     // Start is called before the first frame update
