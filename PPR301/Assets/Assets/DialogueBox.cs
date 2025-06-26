@@ -36,7 +36,7 @@ public class DialogueBox : MonoBehaviour
     void Talk()
     {
         dist = Vector3.Distance(player.position, transform.position);
-        if(dist < 2)
+        if(dist < 3)
         {
             //icon
             icon.SetActive(true);
@@ -61,6 +61,9 @@ public class DialogueBox : MonoBehaviour
         else
         {
             icon.SetActive(false);
+            //reset speech
+            sentenceIndex = 0;
+            speechBubble.SetActive(false);
         }
     }
 }
