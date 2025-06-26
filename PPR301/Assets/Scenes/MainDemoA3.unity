@@ -2819,13 +2819,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1123728439}
+  m_Father: {fileID: 1596673237}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.81211853}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.5025635, y: -0.25}
-  m_SizeDelta: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -0.5025635, y: -40.78546}
+  m_SizeDelta: {x: 1084, y: 81.07086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351728267
 MonoBehaviour:
@@ -8325,10 +8325,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textSign: {fileID: 351728267}
+  speechBubble: {fileID: 1596673236}
   sentenceList:
-  - Hello, how are you? Im Rex the Racoon!
-  - 
+  - Hello, who are you? Im Rex the Raccoon!
+  - I am REAAAAAALLY hungry!! I need something to eat!
+  - I know! Cats like fish, right? There is a can of tuna in the Rat's lair.
+  - Use the left mouse click to  pick up keys and drag heavy objects.
+  - You also have a sound meter on the top of the screen.
+  - Beware that the Giant Rat! He will start Chasing you if your sound meter gets
+    too high!
+  - Thanks a lot for the favour!
   sentenceIndex: 0
+  dist: 0
+  player: {fileID: 1289048034}
+  icon: {fileID: 2090002963}
 --- !u!1 &704816338
 GameObject:
   m_ObjectHideFlags: 0
@@ -20042,13 +20052,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1123728439}
+  m_Father: {fileID: 1596673237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.81211853}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.25}
-  m_SizeDelta: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -40.78546}
+  m_SizeDelta: {x: 1083.5, y: 81.57086}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1587066878
 MonoBehaviour:
@@ -20103,7 +20113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1596673237
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20115,14 +20125,16 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1587066877}
+  - {fileID: 351728266}
   m_Father: {fileID: 1123728439}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 215.75}
-  m_SizeDelta: {x: 200, y: 100}
+  m_AnchorMin: {x: 0, y: 0.8103556}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0.25}
+  m_SizeDelta: {x: -1082, y: -1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1598053247
 GameObject:
@@ -29037,6 +29049,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2157725852634280266, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2157725853210087388, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
       propertyPath: m_Name
       value: UI
