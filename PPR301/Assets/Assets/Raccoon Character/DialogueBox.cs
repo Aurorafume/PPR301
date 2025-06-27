@@ -5,6 +5,7 @@ using TMPro;
 
 public class DialogueBox : MonoBehaviour
 {
+    private Animator anim;
     //talk
     public TMP_Text textSign;
     public GameObject speechBubble;
@@ -19,7 +20,8 @@ public class DialogueBox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
+        //anim.SetBool("talking", false);
     }
 
     // Update is called once per frame
@@ -45,6 +47,8 @@ public class DialogueBox : MonoBehaviour
             //talk
             if(Input.GetMouseButtonDown(0))
             {
+                anim.SetBool("talking", true);
+                //talking = true;
                 speechBubble.SetActive(true);
                 if(sentenceIndex < sentenceList.Count)
                 {
@@ -53,6 +57,8 @@ public class DialogueBox : MonoBehaviour
                 }
                 else
                 {
+                    anim.SetBool("talking", false);
+                    //talking = false;
                     sentenceIndex = 0;
                     speechBubble.SetActive(false);
                 }
@@ -60,8 +66,10 @@ public class DialogueBox : MonoBehaviour
         }
         else
         {
+            anim.SetBool("talking", false);
             icon.SetActive(false);
             //reset speech
+            //talking = false;
             sentenceIndex = 0;
             speechBubble.SetActive(false);
         }
