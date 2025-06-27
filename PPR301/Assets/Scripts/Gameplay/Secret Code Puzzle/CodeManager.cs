@@ -12,6 +12,7 @@ public class CodeManager : MonoBehaviour
 
     char[] answerCode;
 
+    [SerializeField] PoemManager poemManager;
     void Start()
     {
         SetNewCode(codeIndex);
@@ -37,21 +38,23 @@ public class CodeManager : MonoBehaviour
         }
 
         // If it made it through the loop, code is correct.
-        Debug.Log("Code complete!");
         codeIndex++;
 
         if (codeIndex == codes.Count)
         {
+            // Completed all codes.
             HandlePuzzleComplete();
         }
         else
         {
+            // Completed code, move on to the next one.
             SetNewCode(codeIndex);
+            poemManager.SetNewPoem(codeIndex);
         }
     }
 
     void HandlePuzzleComplete()
     {
-        Debug.Log("You did it!");
+        poemManager.PuzzleComplete();
     }
 }

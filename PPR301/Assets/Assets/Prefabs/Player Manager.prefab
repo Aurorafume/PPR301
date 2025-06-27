@@ -540,11 +540,16 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSpeed: 2
   playerHeight: 1
+  playerCollider: {fileID: 6770507987680331416}
   rotationSpeed: 5
   topDownRotationSpeed: 50
+  draggingAudioSource: {fileID: 0}
+  draggingSoundClip: {fileID: 0}
+  draggingSoundVolume: 0.5
   isCrouching: 0
   readyToJump: 0
   grounded: 0
+  groundedAlwaysTrue: 0
   jumpKey: 32
   crouchKey: 304
   orientation: {fileID: 6770507987706067009}
@@ -621,10 +626,12 @@ MonoBehaviour:
   camera3: {fileID: 0}
   camera4: {fileID: 0}
   camera5: {fileID: 0}
+  camera6: {fileID: 0}
   script: {fileID: 6770507989242591903}
   camera: {fileID: 6770507987828908141}
   BoundsScript: {fileID: 6770507989242591893}
   KeyCamera: {fileID: 0}
+  number: -180
   topDownForwardDirection: -90
 --- !u!114 &6770507989242591893
 MonoBehaviour:
@@ -661,6 +668,7 @@ MonoBehaviour:
   gameOver: 0
   playerIsHiding: 0
   playerIsOnPlatform: 0
+  InMemoryRoomGame: 0
   player: {fileID: 6770507989242591897}
   enemy: {fileID: 9002502280049489788, guid: 332e064a8fb88df4690d3c1070686338, type: 3}
   enemySpawning: {fileID: 0}

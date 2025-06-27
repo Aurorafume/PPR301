@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Height of the player used for grounding and raycasts.")]
     public float playerHeight;
 
+    public SphereCollider playerCollider;
+
     [Header("Rotation Settings")]
     [Tooltip("Speed of player rotation in 3D mode.")]
     [SerializeField] private float rotationSpeed = 5f;
