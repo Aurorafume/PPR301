@@ -9,7 +9,10 @@ public class DialogueBox : MonoBehaviour
     //talk
     public TMP_Text textSign;
     public GameObject speechBubble;
+    public int listIndex;
+    public List<List<string>> sentenceListList = new List<List<string>>();
     public List<string> sentenceList = new List<string>();
+    public List<string> sentenceList2 = new List<string>();
     public int sentenceIndex;
     //distance
     public float dist;
@@ -21,6 +24,8 @@ public class DialogueBox : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        sentenceListList.Add(sentenceList);
+        sentenceListList.Add(sentenceList2);
         //anim.SetBool("talking", false);
     }
 
@@ -48,20 +53,38 @@ public class DialogueBox : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 anim.SetBool("talking", true);
-                //talking = true;
                 speechBubble.SetActive(true);
-                if(sentenceIndex < sentenceList.Count)
+                if(sentenceIndex < sentenceListList[listIndex].Count)
                 {
                     sentenceIndex = sentenceIndex + 1;
-                    textSign.text = sentenceList[sentenceIndex - 1];
+                    textSign.text = sentenceListList[listIndex][sentenceIndex - 1];
+                }
+                else if(listIndex < sentenceListList.Count - 1)
+                {
+                    listIndex = listIndex + 1;
+                    sentenceIndex = 0;
+                    speechBubble.SetActive(false);
+                    anim.SetBool("talking", false);
                 }
                 else
                 {
-                    anim.SetBool("talking", false);
-                    //talking = false;
+                    Debug.Log("Reached end of dialogue");
                     sentenceIndex = 0;
                     speechBubble.SetActive(false);
+                    anim.SetBool("talking", false);
                 }
+
+                //if(sentenceIndex < sentenceList.Count)
+                //{
+                //    sentenceIndex = sentenceIndex + 1;
+                //    textSign.text = sentenceList[sentenceIndex - 1];
+                //}
+                //else
+                //{
+                //    anim.SetBool("talking", false);
+                //    sentenceIndex = 0;
+                //    speechBubble.SetActive(false);
+                //}
             }
         }
         else
@@ -69,7 +92,6 @@ public class DialogueBox : MonoBehaviour
             anim.SetBool("talking", false);
             icon.SetActive(false);
             //reset speech
-            //talking = false;
             sentenceIndex = 0;
             speechBubble.SetActive(false);
         }

@@ -8327,6 +8327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSign: {fileID: 351728267}
   speechBubble: {fileID: 1596673236}
+  listIndex: 0
   sentenceList:
   - Hello, who are you? Im Rex the Raccoon!
   - I am REAAAAAALLY hungry!! I need something to eat!
@@ -8338,6 +8339,14 @@ MonoBehaviour:
   - Beware the Giant Rat! He will start Chasing anything that disturbs his peace
     and quiet!
   - Thanks a lot for the favour!
+  sentenceList2:
+  - Use the left mouse click to grab keys or interact with objects with the <sprite
+    name="cat_paw"> icon on them.
+  - You also have a sound meter on the top of the screen. It measures the sound you're
+    making.
+  - Beware the Giant Rat! He will start Chasing anything that disturbs his peace
+    and quiet!
+  - Goodluck Buddy!
   sentenceIndex: 0
   dist: 0
   player: {fileID: 1289048034}
