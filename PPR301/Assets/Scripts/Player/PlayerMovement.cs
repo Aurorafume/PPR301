@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
 
     public SphereCollider playerCollider;
 
+    float originalColliderRadius;
+
     [Header("Rotation Settings")]
     [Tooltip("Speed of player rotation in 3D mode.")]
     [SerializeField] private float rotationSpeed = 5f;
@@ -134,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
 
         moveBehaviour = DefaultMovement;
+        originalColliderRadius = playerCollider.radius;
     }
 
     private void Update()
@@ -340,6 +343,11 @@ public class PlayerMovement : MonoBehaviour
             Mathf.MoveTowards(crouchScaleObject.localScale.y, targetHeight, crouchSpeed * Time.deltaTime),
             originalScale.z
         );
+
+        float heightScalar = crouchHeight / originalScale.y;
+        float targetRadius = isCrouching ? originalColliderRadius * heightScalar : originalColliderRadius;
+
+        playerCollider.radius = Mathf.MoveTowards(playerCollider.radius, targetRadius, crouchSpeed * Time.deltaTime);
     }
 
     private void CheckForObjectContact()
