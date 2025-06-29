@@ -10,6 +10,10 @@ public class ShowIconScript : MonoBehaviour
     public float dist;
     public float howFarShowIcon;
     public static List<ShowIconScript> objectList = new List<ShowIconScript>();
+    //scripts
+    public Draggable draggableScript;
+
+    public bool isNearAny;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,14 +23,14 @@ public class ShowIconScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        bool isNearAny = false;
+        isNearAny = false;
         foreach (ShowIconScript obj in objectList)
         {
             dist = Vector3.Distance(player.position, obj.transform.position);
             if (dist <= howFarShowIcon)
             {
                 isNearAny = true;
-                break; // Stop checking after finding one nearby
+                //break; // Stop checking after finding one nearby
             }
         }
         if(isNearAny)
@@ -38,6 +42,12 @@ public class ShowIconScript : MonoBehaviour
         }
         else
         PlayerMouseIcon.SetActive(false);
+        //
+        if(draggableScript != null && draggableScript.grabbed)
+        {
+            //Debug.Log("grabbed");
+            PlayerMouseIcon.SetActive(false);
+        }
     }
     void Awake()
     {

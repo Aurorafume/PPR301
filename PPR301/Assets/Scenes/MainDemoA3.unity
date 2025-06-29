@@ -639,6 +639,7 @@ MonoBehaviour:
   jointLimit: 0.1
   jointSpring: 100
   jointDamper: 5
+  grabbed: 0
 --- !u!114 &96356148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3459,6 +3460,7 @@ MonoBehaviour:
   jointLimit: 0.1
   jointSpring: 100
   jointDamper: 5
+  grabbed: 0
 --- !u!114 &366640076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6153,6 +6155,8 @@ MonoBehaviour:
   PlayerMouseIcon: {fileID: 390306889}
   dist: 0
   howFarShowIcon: 3
+  draggableScript: {fileID: 0}
+  isNearAny: 0
 --- !u!4 &525849910 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2624508050029749842, guid: 0806bf88ef5bd1f4ba4bfbaecd4f75c0, type: 3}
@@ -15367,6 +15371,7 @@ MonoBehaviour:
   jointLimit: 0.1
   jointSpring: 100
   jointDamper: 5
+  grabbed: 0
 --- !u!65 &1184894949
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16452,6 +16457,8 @@ MonoBehaviour:
   PlayerMouseIcon: {fileID: 390306889}
   dist: 0
   howFarShowIcon: 2
+  draggableScript: {fileID: 0}
+  isNearAny: 0
 --- !u!1 &1348532484
 GameObject:
   m_ObjectHideFlags: 0
@@ -17162,6 +17169,8 @@ MonoBehaviour:
   PlayerMouseIcon: {fileID: 390306889}
   dist: 0
   howFarShowIcon: 3
+  draggableScript: {fileID: 0}
+  isNearAny: 0
 --- !u!1 &1399600127
 GameObject:
   m_ObjectHideFlags: 0
@@ -18279,6 +18288,7 @@ MonoBehaviour:
   objectType: 0
   holdPositionOffset: {x: 0, y: 0, z: 0.3}
   holdOrientation: {x: 0, y: 0, z: 0}
+  held: 0
 --- !u!1 &1487646188
 GameObject:
   m_ObjectHideFlags: 0
@@ -19042,6 +19052,7 @@ MonoBehaviour:
   jointLimit: 0.1
   jointSpring: 100
   jointDamper: 5
+  grabbed: 0
 --- !u!54 &1533682304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24959,6 +24970,19 @@ MonoBehaviour:
   PlayerMouseIcon: {fileID: 390306889}
   dist: 0
   howFarShowIcon: 2
+  draggableScript: {fileID: 1979320810}
+  isNearAny: 0
+--- !u!114 &1979320810 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5025722977293245942, guid: bc7646e53d6aa2645a6bea43cc106aff, type: 3}
+  m_PrefabInstance: {fileID: 521372102153156637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979320805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beac3bd332f1df34d87b0cec11824adc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1987056693 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2624508050029749842, guid: 0806bf88ef5bd1f4ba4bfbaecd4f75c0, type: 3}
@@ -25431,7 +25455,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.764
+      value: 1.61
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: jumpForce

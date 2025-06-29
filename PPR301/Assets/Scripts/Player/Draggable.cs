@@ -10,7 +10,7 @@ public class Draggable : MonoBehaviour
     [SerializeField] float jointSpring = 100f;
     [SerializeField] float jointDamper = 5f;
     
-    bool grabbed;
+    public bool grabbed;
     Vector3 grabPoint;
     ConfigurableJoint joint;
 
