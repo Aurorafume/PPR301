@@ -12,6 +12,9 @@ public class MainMenuButtons : MonoBehaviour
 
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         mainMenuPanel.SetActive(true);
         instructionsPanel.SetActive(false);
         settingsPanel.SetActive(false);

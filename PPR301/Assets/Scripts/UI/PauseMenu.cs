@@ -13,11 +13,9 @@ public class PauseMenu : MonoBehaviour
 
     void Start()
     {
-        // Hide pause menu and settings menu
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
 
-        // Ensure Noise Bar is visible at the start
         noiseBar.SetActive(true);
 
         Time.timeScale = 1f;
@@ -27,7 +25,6 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
-        // Pause game when escape key is pressed
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (settingsMenuUI.activeSelf)
@@ -48,9 +45,7 @@ public class PauseMenu : MonoBehaviour
     {   
         pauseMenuUI.SetActive(false);
         settingsMenuUI.SetActive(false);
-        // Show the Noise Bar again
         noiseBar.SetActive(true);
-
         Time.timeScale = 1f;
         isPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -60,29 +55,26 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenuUI.SetActive(true);
         settingsMenuUI.SetActive(false);
-        // Hide the Noise Bar when paused
         noiseBar.SetActive(false);
-
         Time.timeScale = 0f;
         isPaused = true;
         Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     public void OpenSettings()
     {
-        // Show settings menu
         settingsMenuUI.SetActive(true);
         pauseMenuUI.SetActive(false);
-        // Also hide the Noise Bar when in settings
         noiseBar.SetActive(false);
+        Cursor.lockState = CursorLockMode.None; 
+        Cursor.visible = true;
     }
 
     public void CloseSettings()
     {
-        // Hide settings menu and show pause menu again
         settingsMenuUI.SetActive(false);
         pauseMenuUI.SetActive(true);
-        // Keep Noise Bar hidden if we’re still in the pause menu
         noiseBar.SetActive(false);
     }
 
