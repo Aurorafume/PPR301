@@ -22939,6 +22939,7 @@ MonoBehaviour:
   crouchHeight: 0.7
   crouchSpeed: 2
   playerHeight: 1
+  playerCollider: {fileID: 0}
   rotationSpeed: 5
   topDownRotationSpeed: 50
   draggingAudioSource: {fileID: 0}
@@ -26184,9 +26185,21 @@ PrefabInstance:
       value: 15.764
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: jumpForce
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: noiseHandler
       value: 
       objectReference: {fileID: 1865363733}
+    - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: airMultiplier
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: airControlSpeed
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: draggingSoundClip
       value: 
