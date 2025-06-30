@@ -18,6 +18,8 @@ public class PawPrint : MonoBehaviour
     public int pawIndex3;
     public List<GameObject> spawnedPaws = new List<GameObject>();//list of paw prints
     public bool horizontalMovement;
+    //transform
+    //public Transfom 
 
     // Start is called before the first frame update
     void Start()

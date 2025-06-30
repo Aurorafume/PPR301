@@ -16373,6 +16373,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1289048050
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289048025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a269aeec78f73f48b400f769a7c81f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawPrefab: {fileID: 1457549849816157032, guid: 79612556f8f51fe48b1d46f39a7e4d47, type: 3}
+  stepInterval: 0.15
+  pawOffsetX: 0.2
+  negatePawHeight: 0.5
+  spawnedPaws: []
 --- !u!1 &1291442151
 GameObject:
   m_ObjectHideFlags: 0
@@ -18288,7 +18305,6 @@ MonoBehaviour:
   objectType: 0
   holdPositionOffset: {x: 0, y: 0, z: 0.3}
   holdOrientation: {x: 0, y: 0, z: 0}
-  held: 0
 --- !u!1 &1487646188
 GameObject:
   m_ObjectHideFlags: 0
@@ -25417,6 +25433,10 @@ PrefabInstance:
       propertyPath: grabRadius
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6770507989242591890, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591892, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: num
       value: 0
@@ -25489,7 +25509,8 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 9.62
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6770507989242591890, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
 --- !u!1 &2038813907
 GameObject:
