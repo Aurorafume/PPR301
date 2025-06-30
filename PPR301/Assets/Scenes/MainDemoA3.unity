@@ -1526,6 +1526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
+  noiseHandler: {fileID: 0}
 --- !u!82 &162838211
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2190,6 +2191,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &209304010
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3025,6 +3027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
+  noiseHandler: {fileID: 0}
 --- !u!82 &356542060
 AudioSource:
   m_ObjectHideFlags: 0
@@ -4780,6 +4783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
+  noiseHandler: {fileID: 0}
 --- !u!82 &438107403
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5022,6 +5026,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
+  noiseHandler: {fileID: 0}
 --- !u!82 &451794961
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5678,6 +5683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
+  noiseHandler: {fileID: 0}
 --- !u!82 &501734834
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6335,6 +6341,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &539778666
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6642,6 +6649,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
+  noiseHandler: {fileID: 0}
 --- !u!82 &551668591
 AudioSource:
   m_ObjectHideFlags: 0
@@ -8939,6 +8947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &726957937
 AudioSource:
   m_ObjectHideFlags: 0
@@ -9877,6 +9886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &793774899
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10176,6 +10186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
+  noiseHandler: {fileID: 0}
 --- !u!82 &825104184
 AudioSource:
   m_ObjectHideFlags: 0
@@ -10580,6 +10591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
+  noiseHandler: {fileID: 0}
 --- !u!82 &851642917
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11319,6 +11331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
+  noiseHandler: {fileID: 0}
 --- !u!82 &893124445
 AudioSource:
   m_ObjectHideFlags: 0
@@ -11763,6 +11776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
+  noiseHandler: {fileID: 0}
 --- !u!82 &902541584
 AudioSource:
   m_ObjectHideFlags: 0
@@ -12294,6 +12308,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
+  noiseHandler: {fileID: 0}
 --- !u!82 &922890974
 AudioSource:
   m_ObjectHideFlags: 0
@@ -13924,6 +13939,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1098875184
 AudioSource:
   m_ObjectHideFlags: 0
@@ -14332,6 +14348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1141684490
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16142,6 +16159,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1270028075
 AudioSource:
   m_ObjectHideFlags: 0
@@ -16380,9 +16398,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1289048025}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a269aeec78f73f48b400f769a7c81f2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pawPrefab: {fileID: 1457549849816157032, guid: 79612556f8f51fe48b1d46f39a7e4d47, type: 3}
+  stepInterval: 0.15
+  pawOffsetX: 0.2
+  negatePawHeight: 0.5
+  spawnedPaws: []
+--- !u!114 &1289048051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289048025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5360309b7841c214d9dfe5eecf058929, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   pawPrefab: {fileID: 1457549849816157032, guid: 79612556f8f51fe48b1d46f39a7e4d47, type: 3}
@@ -16894,6 +16929,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1374356988
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17557,6 +17593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1421963398
 AudioSource:
   m_ObjectHideFlags: 0
@@ -17732,6 +17769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1458469569
 AudioSource:
   m_ObjectHideFlags: 0
@@ -19239,6 +19277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 922890974}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1535280246
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20191,6 +20230,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1637493109
 AudioSource:
   m_ObjectHideFlags: 0
@@ -20717,6 +20757,116 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!82 &1662101325
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662101315}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: e74dd8f187c75234fb9423fb8234347a, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &1662101326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662101315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92ea67bea1251014783a39d1787d4f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sound: {fileID: 1662101325}
+  noiseHandler: {fileID: 0}
 --- !u!1001 &1671666845
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21382,6 +21532,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1779032160
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22037,6 +22188,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1828814019
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22267,6 +22419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1833809810
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22683,6 +22836,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 551668591}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1857299703
 AudioSource:
   m_ObjectHideFlags: 0
@@ -22940,6 +23094,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 851642917}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1866655468
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23500,6 +23655,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1915256834
 AudioSource:
   m_ObjectHideFlags: 0
@@ -23898,6 +24054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1779032160}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1927283791
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24487,6 +24644,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1950194174
 AudioSource:
   m_ObjectHideFlags: 0
@@ -24725,6 +24883,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &1953349979
 AudioSource:
   m_ObjectHideFlags: 0
@@ -25849,6 +26008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1637493109}
+  noiseHandler: {fileID: 0}
 --- !u!82 &2053625525
 AudioSource:
   m_ObjectHideFlags: 0
@@ -26362,6 +26522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1915256834}
+  noiseHandler: {fileID: 0}
 --- !u!82 &2060801572
 AudioSource:
   m_ObjectHideFlags: 0
@@ -27186,6 +27347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sound: {fileID: 1828814019}
+  noiseHandler: {fileID: 0}
 --- !u!82 &2104310328
 AudioSource:
   m_ObjectHideFlags: 0

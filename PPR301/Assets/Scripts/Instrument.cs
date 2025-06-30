@@ -5,7 +5,7 @@ using UnityEngine;
 public class Instrument : MonoBehaviour
 {
     public AudioSource sound;
-    //private NoiseHandler noiseHandler;
+    public NoiseHandler noiseHandler;
 
     void OnCollisionEnter(Collision collision)
     {
@@ -17,7 +17,7 @@ public class Instrument : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Hit Instrument!!!");
-            //noiseHandler.TrySpawnEnemyManager(); 
+            noiseHandler.TrySpawnEnemyManager(); 
             sound.Play();
         }
     }
