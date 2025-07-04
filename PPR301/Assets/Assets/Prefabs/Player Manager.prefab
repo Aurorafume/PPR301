@@ -575,7 +575,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabRadius: 0.5
-  grabDistance: 1
+  grabDistance: 1.25
   interactButton: 323
   interactableLayer:
     serializedVersion: 2

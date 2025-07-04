@@ -12,6 +12,8 @@ public class CodeManager : MonoBehaviour
 
     char[] answerCode;
 
+    bool puzzleComplete;
+
     [SerializeField] PoemManager poemManager;
     void Start()
     {
@@ -20,13 +22,18 @@ public class CodeManager : MonoBehaviour
 
     void SetNewCode(int codeIndex)
     {
-        string codeString = codes[this.codeIndex];
+        if (codeIndex < codes.Count)
+        {
+            string codeString = codes[this.codeIndex];
 
-        answerCode = codeString.ToCharArray();
+            answerCode = codeString.ToCharArray();
+        }
     }
 
     public void CheckCode()
     {
+        if (puzzleComplete) return;
+        
         for (int i = 0; i < pedestals.Length; i++)
         {
             bool correctLetter = answerCode[i] == pedestals[i].GetGivenLetter();
@@ -56,5 +63,6 @@ public class CodeManager : MonoBehaviour
     void HandlePuzzleComplete()
     {
         poemManager.PuzzleComplete();
+        puzzleComplete = true;
     }
 }

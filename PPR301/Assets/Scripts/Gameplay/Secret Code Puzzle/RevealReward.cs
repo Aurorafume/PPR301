@@ -1,8 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RevealKey : MonoBehaviour
+public class RevealReward : MonoBehaviour
 {
     public float moveSpeed;
     public AnimationCurve moveCurve;
@@ -25,10 +24,10 @@ public class RevealKey : MonoBehaviour
         startPostion = transform.position;
         endPostion = transform.position + localEndPosition;
 
-        SetKeyInteractable(false);
+        SetRewardInteractable(false);
     }
 
-    void SetKeyInteractable(bool isActive)
+    void SetRewardInteractable(bool isActive)
     {
         if (isActive)
         {
@@ -62,6 +61,6 @@ public class RevealKey : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
 
-        SetKeyInteractable(true);
+        SetRewardInteractable(true);
     }
 }

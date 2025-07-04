@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System;
 
 public class PoemManager : MonoBehaviour
 {
     public List<Poem> poems = new List<Poem>();
     public Poem finalText;
 
-    public RevealKey revealKey;
+    public RevealReward revealReward;
 
     [Header("Fading")]
     public float fadeSpeed = 1f;
@@ -153,10 +152,10 @@ public class PoemManager : MonoBehaviour
         float fadeInDelay = delayBeforeFadeInNew + (1 / fadeSpeed); // Note: Reveals key after first line.
         yield return new WaitForSeconds(fadeInDelay);
 
-        // Now reveal the key.
-        if (revealKey)
+        // Now reveal the reward.
+        if (revealReward)
         {
-            revealKey.Reveal();
+            revealReward.Reveal();
         }
 
         // Hold the final words.
