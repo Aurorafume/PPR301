@@ -1,11 +1,5 @@
 using UnityEngine;
 
-public enum TypeOfLight
-{
-    regular,
-    mouse
-}
-
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class MyLight : MonoBehaviour
 {
@@ -14,7 +8,6 @@ public class MyLight : MonoBehaviour
     public float rayLength = 10f;
     public bool hazard;
     public bool goThrough;
-    public TypeOfLight lightType;
 
     public GameObject player;
     public OutOfBounds script;
@@ -78,9 +71,5 @@ public class MyLight : MonoBehaviour
         mesh.vertices = vertices;
         mesh.triangles = triangles;
         mesh.RecalculateNormals();
-    }
-    void MouseLight()
-    {
-        
     }
 }
