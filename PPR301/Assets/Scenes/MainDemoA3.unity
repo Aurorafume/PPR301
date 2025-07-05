@@ -11630,7 +11630,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.414
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16518,7 +16518,7 @@ GameObject:
   - component: {fileID: 1008583196}
   m_Layer: 0
   m_Name: Poem Slab
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18905,7 +18905,7 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 0.9622642, g: 0.8784314, b: 0.73985404, a: 1}
-  m_Intensity: 40
+  m_Intensity: 20
   m_Range: 20
   m_SpotAngle: 179
   m_InnerSpotAngle: 57.055298
@@ -22081,7 +22081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.417
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.z
@@ -22268,7 +22268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.27999997
+      value: -0.414
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093257, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_LocalPosition.z
