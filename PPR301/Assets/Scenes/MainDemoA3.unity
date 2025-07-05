@@ -19606,7 +19606,7 @@ MonoBehaviour:
   sentenceList2:
   - Make sure to keep out of the orange lights.
   - If you get caught, you'll be spotted by the Killer Rat!
-  - Be careful!!
+  - Stay safe!
   sentenceIndex: 0
   dist: 0
   player: {fileID: 1289048034}
@@ -19619,7 +19619,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174494783}
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -43.3, y: 10.69, z: 43.6}
+  m_LocalPosition: {x: -42.75, y: 10.62, z: 42.92}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -33704,11 +33704,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 30.27
+      value: 42.07
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.94
+      value: 58.41
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: jumpForce
