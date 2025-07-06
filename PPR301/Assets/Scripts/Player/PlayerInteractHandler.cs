@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteractHandler : MonoBehaviour
@@ -15,14 +16,13 @@ public class PlayerInteractHandler : MonoBehaviour
     [SerializeField] Transform interactPointLocator;
     public Transform mouth;
 
+    RaycastHit hit;
+    bool interactableDetected;
+
     Interactable interactableInUse;
+    ShowIconScript activeClickIcon;
 
     [HideInInspector] public Vector3 hitPoint;
-
-    void Update()
-    {
-        HandleInput();
-    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -30,6 +30,13 @@ public class PlayerInteractHandler : MonoBehaviour
         {
             Debug.Log("HIT INSTRUMENT!!!");
         }
+    }
+
+    void Update()
+    {
+        HandleInput();
+        DetectInteractable();
+        TryShowClickIcon();
     }
 
     void HandleInput()
@@ -49,18 +56,59 @@ public class PlayerInteractHandler : MonoBehaviour
         }
     }
 
-    void TryInteract()
+    void DetectInteractable()
     {
         // Look for a collider with interactable layer to be picked up within a small region in
         // front of the player.
-        RaycastHit hit;
-        bool interactableDetected = Physics.SphereCast(interactPointLocator.position, grabRadius, 
-                                                    transform.forward, out hit, 
+        interactableDetected = Physics.SphereCast(interactPointLocator.position, grabRadius,
+                                                    transform.forward, out hit,
                                                     grabDistance, interactableLayer);
+    }
+
+    void TryShowClickIcon()
+    {
+        if (interactableInUse)
+        {
+            if (activeClickIcon)
+            {
+                activeClickIcon.SetIconActive(false);
+                activeClickIcon = null;
+            }
+            return;
+        }
+        
+        if (interactableDetected)
+        {
+            ShowIconScript showIconScript = hit.transform.GetComponentInChildren<ShowIconScript>();
+
+            // If there is no active icon, but the icon script detected, set it active
+            if (showIconScript && !activeClickIcon)
+            {
+                showIconScript.SetIconActive(true);
+                activeClickIcon = showIconScript;
+            }
+            // If there is an active icon, but the icon script is not detected, set it inactive.
+            else if (!showIconScript && activeClickIcon)
+            {
+                activeClickIcon.SetIconActive(false);
+                activeClickIcon = null;
+            }
+        }
+        // If no interactable is detected but an icon was active, set it inactive.
+        else if (!interactableDetected && activeClickIcon)
+        {
+            activeClickIcon.SetIconActive(false);
+            activeClickIcon = null;
+        }
+    }
+
+    void TryInteract()
+    {
+
         if (interactableDetected)
         {
             Interactable interactable = hit.transform.GetComponent<Interactable>();
-            if (interactable != null)
+            if (interactable)
             {
                 hitPoint = hit.point;
                 interactable.Interact();

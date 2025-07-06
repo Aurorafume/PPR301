@@ -3148,7 +3148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1289048034}
-  PlayerMouseIcon: {fileID: 390306889}
+  playerMouseIcon: {fileID: 0}
   dist: 0
   howFarShowIcon: 2
   draggableScript: {fileID: 0}
@@ -7771,7 +7771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1289048034}
-  PlayerMouseIcon: {fileID: 390306889}
+  playerMouseIcon: {fileID: 0}
   dist: 0
   howFarShowIcon: 3
   draggableScript: {fileID: 0}
@@ -22027,7 +22027,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1289048034}
-  PlayerMouseIcon: {fileID: 390306889}
+  playerMouseIcon: {fileID: 0}
   dist: 0
   howFarShowIcon: 2
   draggableScript: {fileID: 0}
@@ -23172,7 +23172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1289048034}
-  PlayerMouseIcon: {fileID: 390306889}
+  playerMouseIcon: {fileID: 0}
   dist: 0
   howFarShowIcon: 3
   draggableScript: {fileID: 0}
@@ -32841,7 +32841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1289048034}
-  PlayerMouseIcon: {fileID: 390306889}
+  playerMouseIcon: {fileID: 0}
   dist: 0
   howFarShowIcon: 2
   draggableScript: {fileID: 1979320810}
@@ -33624,11 +33624,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -29.89
+      value: -41.42
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.62
+      value: -60.71
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w

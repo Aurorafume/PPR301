@@ -44,7 +44,6 @@ public class States : MonoBehaviour
         if (gameOver)
         {
             SceneManager.LoadScene("GameOver");
-            ShowIconScript.objectList.RemoveAll(obj => obj == null);
             ShootProjectile.trumpetList.RemoveAll(obj => obj == null);
             gameOver = false;
         }

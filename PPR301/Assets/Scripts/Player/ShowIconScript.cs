@@ -5,57 +5,34 @@ using UnityEngine;
 public class ShowIconScript : MonoBehaviour
 {
 
-    public Transform player;
-    public GameObject PlayerMouseIcon;
-    public float dist;
-    public float howFarShowIcon;
-    public static List<ShowIconScript> objectList = new List<ShowIconScript>();
-    //scripts
-    public Draggable draggableScript;
-
-    public bool isNearAny;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject playerMouseIcon;
 
     // Update is called once per frame
     void Update()
     {
-        isNearAny = false;
-        foreach (ShowIconScript obj in objectList)
+        if (playerMouseIcon.activeInHierarchy)
         {
-            dist = Vector3.Distance(player.position, obj.transform.position);
-            if (dist <= howFarShowIcon)
-            {
-                isNearAny = true;
-                //break; // Stop checking after finding one nearby
-            }
+            ContinuouslyFaceCamera();
         }
-        if(isNearAny)
-        {
-            PlayerMouseIcon.SetActive(true);
-            //icon faces camera
-            PlayerMouseIcon.transform.LookAt(Camera.main.transform.position, Vector3.up);
-            PlayerMouseIcon.transform.Rotate(0f, 180f, 0f);
-        }
-        else
-        PlayerMouseIcon.SetActive(false);
-        //
-        if(draggableScript != null && draggableScript.grabbed)
-        {
-            //Debug.Log("grabbed");
-            PlayerMouseIcon.SetActive(false);
-        }
-    }
-    void Awake()
-    {
-        objectList.Add(this);
-    }
-    void OnDestroy()
-    {
-        objectList.Remove(this);
     }
 
+    void ContinuouslyFaceCamera()
+    {
+        // Make sure icon always faces the camera.
+        playerMouseIcon.transform.LookAt(Camera.main.transform.position, Vector3.up);
+        playerMouseIcon.transform.Rotate(0f, 180f, 0f);
+    }
+
+    // Called by input manager to turn on/off icon.
+    public void SetIconActive(bool active)
+    {
+        if (active)
+        {
+            playerMouseIcon.SetActive(true);
+        }
+        else
+        {
+            playerMouseIcon.SetActive(false);
+        }
+    }
 }
