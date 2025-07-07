@@ -40,7 +40,6 @@ public class DialogueBox : MonoBehaviour
         Billboard();
         //Talk();
         Talk2();
-        Debug.Log(isTalking);
     }
     void Billboard()
     {

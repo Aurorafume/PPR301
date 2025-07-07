@@ -31,6 +31,10 @@ public class Lock : MonoBehaviour
                     Debug.Log("OPENING Green DOOR");
                     Unlock();
                 }
+                else
+                {
+                    Debug.Log("not key");
+                }
             }
         }
     }
