@@ -3663,7 +3663,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1596673237}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.305, y: 0.7137986}
   m_AnchorMax: {x: 0.69566274, y: 1}
@@ -3692,15 +3692,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 08d68936206a9f444a56e5031e825f8b, type: 2}
+  m_sharedMaterial: {fileID: 8036709413785791929, guid: 08d68936206a9f444a56e5031e825f8b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4280352512
+  m_fontColor: {r: 0, g: 1, b: 0.12695718, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -4015,7 +4015,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_RootOrder
-      value: 87
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_LocalScale.x
@@ -10638,21 +10638,22 @@ MonoBehaviour:
     name="cat_paw"> icon on them.
   - You also have a sound meter on the top of the screen. It measures the sound you're
     making.
-  - Beware the Giant Rat! He will start Chasing anything that disturbs his peace
-    and quiet!
+  - Beware the Rat King! He will start Chasing anything that disturbs his peace and
+    quiet!
   - Thanks a lot for the favour!
   sentenceList2:
   - Use the left mouse click to grab keys or interact with objects with the <sprite
     name="cat_paw"> icon on them.
   - You also have a sound meter on the top of the screen. It measures the sound you're
     making.
-  - Beware the Giant Rat! He will start Chasing anything that disturbs his peace
-    and quiet!
+  - Beware the Rat King! He will start Chasing anything that disturbs his peace and
+    quiet!
   - Goodluck Buddy!
   sentenceIndex: 0
   dist: 0
   player: {fileID: 1289048034}
   icon: {fileID: 2090002963}
+  letters: 19
 --- !u!95 &701214247
 Animator:
   serializedVersion: 5
@@ -11270,7 +11271,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e680a85f3424291478275ea46ddb490f, type: 2}
+  - {fileID: 2100000, guid: 85f7af072a62b7440b3ec4ad2c05a36a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -12347,7 +12348,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -3114559576734998185, guid: 0eb6519894c920540a622459fdec61a3, type: 3}
+  - {fileID: 2100000, guid: 26586ce3a8a656e45b193ab4ccb997cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -18383,6 +18384,82 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
   m_PrefabInstance: {fileID: 1178139098}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1076252797
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1076252798}
+  - component: {fileID: 1076252800}
+  - component: {fileID: 1076252799}
+  m_Layer: 5
+  m_Name: bubble_2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1076252798
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076252797}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1596673237}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.42588353, y: 0.72826695}
+  m_AnchorMax: {x: 0.7331046, y: 0.9861963}
+  m_AnchoredPosition: {x: 84.107666, y: -63.965332}
+  m_SizeDelta: {x: 334.1338, y: 137.17944}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1076252799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076252797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2413806693520163455, guid: 0fd1866c1a0c6324da314fb8611e6af4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1076252800
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1076252797}
+  m_CullTransparentMesh: 1
 --- !u!4 &1076469287 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 329218366242836546, guid: e0b541a06b3779e4bb8e369fa742d2b3, type: 3}
@@ -19988,16 +20065,17 @@ MonoBehaviour:
   - '*Huff...Puff...*'
   - Sorry, had some trouble climbing up the stairs...
   - Make sure to keep out of the orange lights.
-  - If you get caught, you'll be spotted by the Killer Rat!
+  - If you get caught, you'll be spotted by the Rat King!
   - Be careful!!
   sentenceList2:
   - Make sure to keep out of the orange lights.
-  - If you get caught, you'll be spotted by the Killer Rat!
+  - If you get caught, you'll be spotted by the Rat King!
   - Stay safe!
   sentenceIndex: 0
   dist: 0
   player: {fileID: 1289048034}
   icon: {fileID: 27166804}
+  letters: 0
 --- !u!4 &1174494786
 Transform:
   m_ObjectHideFlags: 0
@@ -23608,7 +23686,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_RootOrder
-      value: 88
+      value: 87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e8230321b4dbd6f4aa4608caaf849089, type: 3}
       propertyPath: m_LocalScale.x
@@ -25999,7 +26077,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1514731149
 Transform:
   m_ObjectHideFlags: 0
@@ -26909,7 +26987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1587066877
 RectTransform:
   m_ObjectHideFlags: 0
@@ -26922,13 +27000,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1596673237}
+  m_Father: {fileID: 1123728439}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28244177, y: 0.7012371}
   m_AnchorMax: {x: 0.71822095, y: 1}
-  m_AnchoredPosition: {x: -0.14141846, y: -64.22925}
-  m_SizeDelta: {x: 467.96777, y: 128.45844}
+  m_AnchoredPosition: {x: -0.20904541, y: 13.173706}
+  m_SizeDelta: {x: -4.000122, y: -26.847504}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1587066878
 MonoBehaviour:
@@ -26996,10 +27074,11 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1587066877}
+  - {fileID: 1888325412}
+  - {fileID: 1076252798}
   - {fileID: 351728266}
   m_Father: {fileID: 1123728439}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.28345388, y: 0.71139574}
   m_AnchorMax: {x: 0.7177791, y: 1}
@@ -31710,6 +31789,82 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1888006763}
   m_Mesh: {fileID: 8733429697405204941, guid: 89ad7f24b5fcd204a8c6fad734e2d590, type: 3}
+--- !u!1 &1888325411
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1888325412}
+  - component: {fileID: 1888325414}
+  - component: {fileID: 1888325413}
+  m_Layer: 5
+  m_Name: bubble_1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1888325412
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888325411}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1596673237}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.26766264, y: 0.7267332}
+  m_AnchorMax: {x: 0.57577914, y: 0.99053377}
+  m_AnchoredPosition: {x: -85.76752, y: -64.23651}
+  m_SizeDelta: {x: 334.1036, y: 136.23145}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1888325413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888325411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.3679245, g: 0.3679245, b: 0.3679245, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -2413806693520163455, guid: 0fd1866c1a0c6324da314fb8611e6af4, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &1888325414
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1888325411}
+  m_CullTransparentMesh: 1
 --- !u!1 &1890667041
 GameObject:
   m_ObjectHideFlags: 0
@@ -32401,7 +32556,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1926786499
 Transform:
   m_ObjectHideFlags: 0
@@ -34732,11 +34887,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 52.77
+      value: 52.65
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 71.92
+      value: 116.13
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: jumpForce
@@ -37906,6 +38061,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2157725853083144530, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2157725853210087388, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
       propertyPath: m_Name
       value: UI
@@ -37961,6 +38120,14 @@ PrefabInstance:
     - target: {fileID: 2157725853210087391, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157725853364594579, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2157725853451131750, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0cb6ce0541b77a547b77401f06d54d75, type: 3}
@@ -40284,7 +40451,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1b67912f2b935ff4b9b000cbe8c9669e, type: 2}
+  - {fileID: 2100000, guid: 26586ce3a8a656e45b193ab4ccb997cc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

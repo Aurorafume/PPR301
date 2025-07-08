@@ -23,6 +23,8 @@ public class DialogueBox : MonoBehaviour
     public GameObject icon;
     //raccoon list
     public static List<DialogueBox> raccoonList = new List<DialogueBox>(); 
+    //
+    public float letters;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class DialogueBox : MonoBehaviour
         Billboard();
         //Talk();
         Talk2();
+        //talk3();
     }
     void Billboard()
     {
@@ -164,5 +167,12 @@ public class DialogueBox : MonoBehaviour
             }
             
         }
+    }
+    void talk3()
+    {
+        string text = "Hello how are you?";
+        speechBubble.SetActive(true);
+        letters -= Time.deltaTime;
+        textSign.text = text.Substring(0, text.Length - (int)letters);
     }
 }
