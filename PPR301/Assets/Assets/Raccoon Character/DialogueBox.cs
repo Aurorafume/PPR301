@@ -6,6 +6,7 @@ using TMPro;
 public class DialogueBox : MonoBehaviour
 {
     private Animator anim;
+    private Animator anim2;
     //talk
     public TMP_Text textSign;
     public GameObject speechBubble;
@@ -30,6 +31,7 @@ public class DialogueBox : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        anim2 = speechBubble.GetComponent<Animator>();
         sentenceListList.Add(sentenceList);
         sentenceListList.Add(sentenceList2);
 
@@ -129,9 +131,10 @@ public class DialogueBox : MonoBehaviour
             //reset talking
             isTalking = false;
             anim.SetBool("talking", false);
+            anim2.SetBool("isTalking", false);
             //reset speech
             sentenceIndex = 0;
-            speechBubble.SetActive(false);
+            //speechBubble.SetActive(false);
         }
         else
         {
@@ -144,7 +147,8 @@ public class DialogueBox : MonoBehaviour
             if(Input.GetMouseButtonDown(0))
             {
                 anim.SetBool("talking", true);
-                speechBubble.SetActive(true);
+                anim2.SetBool("isTalking", true);
+                //speechBubble.SetActive(true);
                 if(sentenceIndex < sentenceListList[listIndex].Count)
                 {
                     sentenceIndex = sentenceIndex + 1;
@@ -154,15 +158,17 @@ public class DialogueBox : MonoBehaviour
                 {
                     listIndex = listIndex + 1;
                     sentenceIndex = 0;
-                    speechBubble.SetActive(false);
+                    //speechBubble.SetActive(false);
                     anim.SetBool("talking", false);
+                    anim2.SetBool("isTalking", false);
                 }
                 else
                 {
                     Debug.Log("Reached end of dialogue");
                     sentenceIndex = 0;
-                    speechBubble.SetActive(false);
+                    //speechBubble.SetActive(false);
                     anim.SetBool("talking", false);
+                    anim2.SetBool("isTalking", false);
                 }
             }
             
