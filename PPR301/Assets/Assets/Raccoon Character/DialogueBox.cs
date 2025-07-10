@@ -34,8 +34,14 @@ public class DialogueBox : MonoBehaviour
         anim2 = speechBubble.GetComponent<Animator>();
         sentenceListList.Add(sentenceList);
         sentenceListList.Add(sentenceList2);
-
+    }
+    void OnEnable()
+    {
         raccoonList.Add(this);
+    }
+    void OnDisable()
+    {
+        raccoonList.Clear();
     }
 
     // Update is called once per frame

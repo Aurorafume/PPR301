@@ -17,7 +17,7 @@ public class Instrument : MonoBehaviour
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Hit Instrument!!!");
-            noiseHandler.TrySpawnEnemyManager(); 
+            //noiseHandler.TrySpawnEnemyManager(); 
             sound.Play();
         }
     }

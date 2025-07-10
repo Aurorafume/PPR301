@@ -15484,7 +15484,6 @@ MonoBehaviour:
   - {fileID: 551668589}
   - {fileID: 1915256832}
   - {fileID: 922890972}
-  - {fileID: 1662101315}
   playerCollider: {fileID: 39965841}
 --- !u!1001 &880239527
 PrefabInstance:
@@ -23411,20 +23410,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a441c6caabd56d41b109958d7d459c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1289048059
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1289048025}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ca4b54acee821e4b86fb5fbb6572b35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera1: {fileID: 1878523027}
-  camera2: {fileID: 749028214}
 --- !u!114 &1289048060 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6770507989242591894, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
@@ -29433,15 +29418,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.2258296
+      value: 4.618
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.29891682
+      value: 0.299
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.3661048
+      value: 3.242
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 98a36038cdc74564fa0709712c4047e5, type: 3}
       propertyPath: m_LocalRotation.w
@@ -32939,11 +32924,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!20 &1878523027 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 6770507987828908139, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
-  m_PrefabInstance: {fileID: 2036865600}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1884405462
 GameObject:
   m_ObjectHideFlags: 0
