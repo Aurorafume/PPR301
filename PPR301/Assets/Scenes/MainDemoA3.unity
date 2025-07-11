@@ -16407,8 +16407,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887989143}
   m_LocalRotation: {x: -0.0000004842878, y: -0.00000046938652, z: 0.70710677, w: 0.7071068}
-  m_LocalPosition: {x: -0.33955193, y: 0.99459124, z: 0.5413017}
-  m_LocalScale: {x: 1, y: 5.959629, z: 8.014213}
+  m_LocalPosition: {x: -0.33955193, y: 0.99459124, z: 0.5985}
+  m_LocalScale: {x: 1, y: 5.959629, z: 7.900154}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 678794660}
@@ -22298,6 +22298,7 @@ MonoBehaviour:
   sentenceList:
   - '*Huff...Puff...*'
   - Sorry, had some trouble climbing up the stairs...
+  - The attic can get pretty dark and scary!
   - 'Make sure to keep out of the orange lights. '
   - If you get caught, you'll be spotted by the Rat King!
   - Be careful!!
@@ -22576,8 +22577,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1179115289}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.17, y: -1.4639001, z: 0.5371971}
-  m_LocalScale: {x: 1, y: 3.929363, z: 7.9218106}
+  m_LocalPosition: {x: 2.17, y: -0.9876, z: 0.5371971}
+  m_LocalScale: {x: 1, y: 4.882191, z: 7.9218106}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 678794660}
@@ -22616,7 +22617,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 804efacea377883499b732b1a0972d40, type: 2}
+  - {fileID: 2100000, guid: b5037d3d17fcfba4497139df412d5c31, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23485,8 +23486,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1210097755}
   m_LocalRotation: {x: -0, y: 0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.34000206, y: -1.4639001, z: -2.9399986}
-  m_LocalScale: {x: 1, y: 3.929363, z: 5.959627}
+  m_LocalPosition: {x: -0.34000206, y: -0.9858, z: -2.9399986}
+  m_LocalScale: {x: 1, y: 4.8856616, z: 5.959627}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 678794660}
