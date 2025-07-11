@@ -8,11 +8,26 @@ public class Projectile : MonoBehaviour
     public Vector3 direction = Vector3.forward;
     public float moveSpeed = 1f;
     //lifespan
-    private float lifespan2;
-    // Start is called before the first frame update
+    public float lifespan2;
+    //
+
     void Start()
     {
-        script = GameObject.FindObjectOfType<ShootProjectile>();
+    ShootProjectile closest = null;
+    float closestDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+        foreach (ShootProjectile sp in GameObject.FindObjectsOfType<ShootProjectile>())
+        {
+            float distance = Vector3.Distance(sp.transform.position, currentPosition);
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = sp;
+                script = sp;
+            }
+        }
+
+        
         direction = direction.normalized;
         lifespan2 = script.projectileLifeSpan;
     }
