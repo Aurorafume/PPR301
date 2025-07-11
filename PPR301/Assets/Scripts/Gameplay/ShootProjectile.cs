@@ -21,6 +21,8 @@ public class ShootProjectile : MonoBehaviour
     //list of projectiles
     public List<GameObject> projectileList = new List<GameObject>();
     public static List<ShootProjectile> trumpetList = new List<ShootProjectile>();
+    //projectile life span;
+    public float projectileLifeSpan;
 
     void Start()
     {

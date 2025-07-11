@@ -8,12 +8,13 @@ public class Projectile : MonoBehaviour
     public Vector3 direction = Vector3.forward;
     public float moveSpeed = 1f;
     //lifespan
-    private float lifespan = 5;
+    private float lifespan2;
     // Start is called before the first frame update
     void Start()
     {
         script = GameObject.FindObjectOfType<ShootProjectile>();
         direction = direction.normalized;
+        lifespan2 = script.projectileLifeSpan;
     }
 
     // Update is called once per frame
@@ -21,8 +22,8 @@ public class Projectile : MonoBehaviour
     {
         transform.Translate(direction * moveSpeed * Time.deltaTime, Space.Self);
 
-        lifespan -= Time.deltaTime;
-        if(lifespan <= 0)
+        lifespan2 -= Time.deltaTime;
+        if(lifespan2 <= 0)
         {
             Destroy(gameObject);
             //script.projectileCount2--;
@@ -41,7 +42,7 @@ public class Projectile : MonoBehaviour
         else if(collision.CompareTag("Bounce"))
         {
             ChangeHorizontalDirection();
-            lifespan = 5;
+            lifespan2 = script.projectileLifeSpan;
             Debug.Log("bouunce");
         }
         if(collision.CompareTag("Wall"))
