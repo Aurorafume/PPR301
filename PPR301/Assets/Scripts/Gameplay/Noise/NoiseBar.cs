@@ -20,22 +20,22 @@ public class NoiseBar : MonoBehaviour
     private float frameRate = 0.15f;
     private float nextFrameTime;
     private bool forceMaxBackground = false;
-    
+
     [Header("Noise Level Settings")]
     private float noisePercentage = 0f;
     private float targetNoiseLevel = 0f;
     private float smoothSpeed = 5f;
     private bool isChasing = false;
     public event System.Action OnNoiseMaxed;
-    
+
     [Header("References")]
     public States states;
     public EnemySpawning enemySpawning;
-    
+
     public float CurrentNoisePercentage => noisePercentage;
 
     void Start()
-    {   
+    {
         states = FindObjectOfType<States>();
         enemySpawning = FindObjectOfType<EnemySpawning>();
 
@@ -51,7 +51,7 @@ public class NoiseBar : MonoBehaviour
     }
 
     void Update()
-    {   
+    {
         noisePercentage = Mathf.Lerp(noisePercentage, targetNoiseLevel, Time.deltaTime * smoothSpeed);
         UpdateNoiseBarSprite();
 
@@ -78,13 +78,13 @@ public class NoiseBar : MonoBehaviour
 
         if (Time.time >= nextFrameTime)
         {
-            currentFrame = (currentFrame + 1) % 4; 
+            currentFrame = (currentFrame + 1) % 4;
             nextFrameTime = Time.time + frameRate;
         }
     }
 
     public void UpdateNoiseLevel(float currentNoise, float maxNoise)
-    {   
+    {
         if (maxNoise <= 0)
         {
             targetNoiseLevel = 0f;
@@ -94,7 +94,7 @@ public class NoiseBar : MonoBehaviour
         targetNoiseLevel = Mathf.Clamp01(currentNoise / maxNoise);
 
         if (targetNoiseLevel >= 1f && !isChasing && states != null && states.playerIsOnPlatform)
-        {   
+        {
             if (enemySpawning == null || enemySpawning.GetCurrentEnemySpawnPoint() == null)
             {
                 Debug.LogWarning("No platform found for enemy spawn.");
@@ -108,7 +108,7 @@ public class NoiseBar : MonoBehaviour
     }
 
     void UpdateNoiseBarSprite()
-    {   
+    {
         if (isChasing)
         {
             if (chaseWarningFrames.Length > 0)
@@ -117,18 +117,18 @@ public class NoiseBar : MonoBehaviour
         }
 
         int levelIndex = Mathf.Clamp(Mathf.FloorToInt(noisePercentage * noiseLevels.Length), 0, noiseLevels.Length - 1);
-        
+
         if (noiseLevels[levelIndex] != null && noiseLevels[levelIndex].Length > 0)
         {
             noiseBarImage.sprite = noiseLevels[levelIndex][currentFrame % noiseLevels[levelIndex].Length];
         }
-        
+
         float alpha = Mathf.Lerp(0.5f, 1f, noisePercentage);
         noiseBarImage.color = new Color(1f, 1f, 1f, alpha);
     }
 
     IEnumerator ChaseWarningAnimation()
-    {   
+    {
         while (isChasing)
         {
             if (chaseWarningFrames.Length > 0)
@@ -140,7 +140,7 @@ public class NoiseBar : MonoBehaviour
     }
 
     public void ForceChaseVisuals(bool active)
-    {   
+    {
         forceMaxBackground = active;
         isChasing = active;
 
@@ -151,11 +151,24 @@ public class NoiseBar : MonoBehaviour
     }
 
     public void StopChase()
-    {   
+    {
         isChasing = false;
         if (level1Frames.Length > 0)
         {
             noiseBarImage.sprite = level1Frames[0];
+        }
+    }
+    
+    public void ForceNoiseSpikeFromLight()
+    {
+        targetNoiseLevel = 1f;
+        noisePercentage = 1f;
+
+        if (!isChasing && states.playerIsOnPlatform)
+        {
+            isChasing = true;
+            OnNoiseMaxed?.Invoke();
+            StartCoroutine(ChaseWarningAnimation());
         }
     }
 

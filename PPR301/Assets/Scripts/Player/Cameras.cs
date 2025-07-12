@@ -101,7 +101,7 @@ public class Cameras : MonoBehaviour
             }
             else if(robotFollow)
             obj.transform.position = camera1.transform.position;
-            Debug.Log("robotFollow");
+            //Debug.Log("robotFollow");
         }
         if(!move)
         {

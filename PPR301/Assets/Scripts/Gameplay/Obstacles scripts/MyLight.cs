@@ -12,6 +12,7 @@ public class MyLight : MonoBehaviour
     public GameObject player;
     public OutOfBounds script;
     public EnemySpawning enemySpawning;
+    public NoiseBar noiseBar; // Reference to the NoiseBar script
 
     private Mesh mesh;
 
@@ -51,16 +52,13 @@ public class MyLight : MonoBehaviour
                 //detect player
                 if (hit.collider.CompareTag("Player") && hazard)
                 {
-                    Debug.Log("Hit Player!");
-                    player.transform.position = script.respawnLocation2;
-
-                    if (enemySpawning != null)
+                    if (noiseBar != null)
                     {
-                        enemySpawning.SpawnEnemyFromLight();
+                        noiseBar.ForceNoiseSpikeFromLight();
                     }
                     else
                     {
-                        Debug.LogWarning("EnemySpawner reference is missing.");
+                        Debug.LogWarning("NoiseBar reference is missing on light: " + gameObject.name);
                     }
                 }
             }

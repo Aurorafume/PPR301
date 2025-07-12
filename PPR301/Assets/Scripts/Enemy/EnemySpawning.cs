@@ -11,9 +11,20 @@ public class EnemySpawning : MonoBehaviour
         public GameObject spawnPoint;
     }
 
+    [System.Serializable]
+    public class LightSpawnPair
+    {
+        public MyLight lightSource;
+        public Transform spawnPoint;
+    }
+
     [Header("Enemy Spawning Pairs")]
     [Tooltip("Pairs of platforms and their corresponding spawn points.")]
     public PlatformSpawnPair[] platformSpawnPairs;
+
+    [Header("Light to Spawn Point Mapping")]
+    public LightSpawnPair[] lightSpawnPairs;
+
 
     [Header("Layer Masks")]
     [Tooltip("Layer mask for platforms.")]
@@ -26,27 +37,12 @@ public class EnemySpawning : MonoBehaviour
     public NoiseHandler noiseHandler;
     public GameObject Player;
 
-
     void Start()
     {   
         // Check for missing references
         foreach (var pair in platformSpawnPairs)
         {
             Debug.Log($"Platform: {pair.platform.name} paired with Spawn: {pair.spawnPoint.name}");
-        }
-    }
-
-    public void SpawnEnemyFromLight()
-    {
-        Transform spawnPoint = GetCurrentEnemySpawnPoint();
-        if (spawnPoint != null)
-        {
-            Instantiate(enemyAI, spawnPoint.position, spawnPoint.rotation);
-            Debug.Log("Enemy Spawned at: " + spawnPoint.name);
-        }
-        else
-        {
-            Debug.LogWarning("No spawn point found for enemy.");
         }
     }
 
