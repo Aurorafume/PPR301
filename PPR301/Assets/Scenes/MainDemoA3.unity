@@ -40320,7 +40320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -64.02
+      value: -64.224
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -44975,7 +44975,7 @@ PrefabInstance:
       objectReference: {fileID: 758779079}
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: jumpNoise
-      value: 30
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: maxNoiseLevel
@@ -44983,7 +44983,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: collisionNoise
-      value: 45
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158206, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: m_Enabled
