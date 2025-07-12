@@ -51,6 +51,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("The sound clip that loops while dragging a moving object.")]
     public AudioClip draggingSoundClip;
 
+    public AudioClip playerJumpLandingAudioSource;
+
     [Tooltip("Volume of the dragging sound.")]
     [Range(0f, 1f)]
     public float draggingSoundVolume = 0.5f;
