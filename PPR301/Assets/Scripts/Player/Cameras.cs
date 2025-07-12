@@ -22,6 +22,8 @@ public class Cameras : MonoBehaviour
     public GameObject pos2;
     public bool move;
     private Vector3 velocity = Vector3.zero;
+    public float smoothSpeed;
+    public bool robotFollow;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -35,6 +37,7 @@ public class Cameras : MonoBehaviour
         if (camera4) camera4.depth = 0;
 
         pos1 = obj.transform.position;
+        move = true;
     }
 
     // Update is called once per frame
@@ -47,27 +50,44 @@ public class Cameras : MonoBehaviour
         // Switch to Camera 1 when pressing the "1" key
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            move = false;
+            move = true;
             //camera1.depth = 1;
             //KeyCamera.depth = 0;
         }
         // Switch to Camera 2 when pressing the "2" key
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            move = true;
+            move = false;
             //obj.transform.position = pos2.transform.position;
             //camera1.depth = 0;
             //KeyCamera.depth = 1;
         }
-        if(!move)
-        {
-            obj.transform.position = pos1;
-        }
         else if(move)
         {
-            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, pos2.transform.position, ref velocity, 0.3f);
+            //bool robotFollow = false;
+            if(!robotFollow)
+            {
+                obj.transform.position = Vector3.SmoothDamp(obj.transform.position, camera1.transform.position, ref velocity, smoothSpeed);
+                smoothSpeed -= Time.deltatime *
+            }
+            if (Vector3.Distance(obj.transform.position, camera1.transform.position) < 0.01f)
+            {
+                obj.transform.position = camera1.transform.position; // snap to final position
+                robotFollow = true;
+            }
+            else if(robotFollow)
+            obj.transform.position = camera1.transform.position;
+            Debug.Log("robotFollow");
         }
-
+        if(!move)
+        {
+            robotFollow = false;
+            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, pos2.transform.position, ref velocity, smoothSpeed);
+            if (Vector3.Distance(obj.transform.position, pos2.transform.position) < 0.01f)
+            {
+                obj.transform.position = pos2.transform.position; // snap to final position
+            }
+        }
     }
     void OnTriggerEnter(Collider collision)
     {
