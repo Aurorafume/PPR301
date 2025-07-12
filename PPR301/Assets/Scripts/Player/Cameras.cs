@@ -17,13 +17,17 @@ public class Cameras : MonoBehaviour
     public Camera KeyCamera;
     public int number = -180;
     //smooth camera
-    public GameObject obj;
     public Vector3 pos1;
     public GameObject pos2;
     public bool move;
     private Vector3 velocity = Vector3.zero;
     public float smoothSpeed;
     public bool robotFollow;
+    public float number2;
+    //followCamera
+    public GameObject obj;
+    public Camera followCamera;
+    public List<Camera> cameraList = new List<Camera>();
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -37,13 +41,21 @@ public class Cameras : MonoBehaviour
         if (camera4) camera4.depth = 0;
 
         pos1 = obj.transform.position;
+        cameraList.Add(camera2);
+        cameraList.Add(camera3);
+        cameraList.Add(camera4);
         move = true;
+    }
+    void Number()
+    {
+        number2 -= Time.deltaTime * 0.1f;
     }
 
     // Update is called once per frame
     void Update()
     {
         keyCameras();
+        //Number();
     }
     void keyCameras()
     {
@@ -62,13 +74,25 @@ public class Cameras : MonoBehaviour
             //camera1.depth = 0;
             //KeyCamera.depth = 1;
         }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            //obj.transform.position = pos2.transform.position;
+            camera1.depth = 0;
+            followCamera.depth = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            //obj.transform.position = pos2.transform.position;
+            camera1.depth = 1;
+            followCamera.depth = 0;
+        }
         else if(move)
         {
             //bool robotFollow = false;
             if(!robotFollow)
             {
                 obj.transform.position = Vector3.SmoothDamp(obj.transform.position, camera1.transform.position, ref velocity, smoothSpeed);
-                smoothSpeed -= Time.deltatime *
+                smoothSpeed -= Time.deltaTime * 0.5f;
             }
             if (Vector3.Distance(obj.transform.position, camera1.transform.position) < 0.01f)
             {
@@ -82,6 +106,7 @@ public class Cameras : MonoBehaviour
         if(!move)
         {
             robotFollow = false;
+            smoothSpeed = 0.3f;
             obj.transform.position = Vector3.SmoothDamp(obj.transform.position, pos2.transform.position, ref velocity, smoothSpeed);
             if (Vector3.Distance(obj.transform.position, pos2.transform.position) < 0.01f)
             {
