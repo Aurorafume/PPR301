@@ -11,6 +11,7 @@ public class MyLight : MonoBehaviour
 
     public GameObject player;
     public OutOfBounds script;
+    public EnemySpawning enemySpawning;
 
     private Mesh mesh;
 
@@ -52,6 +53,15 @@ public class MyLight : MonoBehaviour
                 {
                     Debug.Log("Hit Player!");
                     player.transform.position = script.respawnLocation2;
+
+                    if (enemySpawning != null)
+                    {
+                        enemySpawning.SpawnEnemyFromLight();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("EnemySpawner reference is missing.");
+                    }
                 }
             }
             vertices[i + 1] = transform.InverseTransformPoint(transform.position + endPoint);

@@ -36,6 +36,20 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 
+    public void SpawnEnemyFromLight()
+    {
+        Transform spawnPoint = GetCurrentEnemySpawnPoint();
+        if (spawnPoint != null)
+        {
+            Instantiate(enemyAI, spawnPoint.position, spawnPoint.rotation);
+            Debug.Log("Enemy Spawned at: " + spawnPoint.name);
+        }
+        else
+        {
+            Debug.LogWarning("No spawn point found for enemy.");
+        }
+    }
+
     public Transform GetCurrentEnemySpawnPoint()
     {
         // Check if the player is on a platform and return the corresponding spawn point
