@@ -44065,7 +44065,7 @@ PrefabInstance:
     - target: {fileID: 6770507989242591892, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: obj
       value: 
-      objectReference: {fileID: 1309707774}
+      objectReference: {fileID: 1485840799}
     - target: {fileID: 6770507989242591892, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: pos2
       value: 
@@ -44094,6 +44094,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6770507989242591892, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: followCamera
+      value: 
+      objectReference: {fileID: 1485840802}
     - target: {fileID: 6770507989242591892, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: topDownForwardDirection
       value: 0
