@@ -727,7 +727,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Return to last checkpoint
+  m_text: Try Again!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 55fe96471b1e9914496d63584bdc74be, type: 2}
   m_sharedMaterial: {fileID: 5676645240960065235, guid: 55fe96471b1e9914496d63584bdc74be, type: 2}
