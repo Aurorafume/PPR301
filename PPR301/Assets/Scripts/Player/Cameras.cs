@@ -16,6 +16,12 @@ public class Cameras : MonoBehaviour
     public OutOfBounds BoundsScript;
     public Camera KeyCamera;
     public int number = -180;
+    //smooth camera
+    public GameObject obj;
+    public Vector3 pos1;
+    public GameObject pos2;
+    public bool move;
+    private Vector3 velocity = Vector3.zero;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -27,6 +33,8 @@ public class Cameras : MonoBehaviour
         if (camera2) camera2.depth = 0;
         if (camera3) camera3.depth = 0;
         if (camera4) camera4.depth = 0;
+
+        pos1 = obj.transform.position;
     }
 
     // Update is called once per frame
@@ -39,15 +47,27 @@ public class Cameras : MonoBehaviour
         // Switch to Camera 1 when pressing the "1" key
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            camera1.depth = 1;
-            KeyCamera.depth = 0;
+            move = false;
+            //camera1.depth = 1;
+            //KeyCamera.depth = 0;
         }
         // Switch to Camera 2 when pressing the "2" key
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            camera1.depth = 0;
-            KeyCamera.depth = 1;
+            move = true;
+            //obj.transform.position = pos2.transform.position;
+            //camera1.depth = 0;
+            //KeyCamera.depth = 1;
         }
+        if(!move)
+        {
+            obj.transform.position = pos1;
+        }
+        else if(move)
+        {
+            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, pos2.transform.position, ref velocity, 0.3f);
+        }
+
     }
     void OnTriggerEnter(Collider collision)
     {
