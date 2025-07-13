@@ -15186,7 +15186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1577715834651403146, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
       propertyPath: respawnTimer
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1811649782736950693, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
       propertyPath: m_Name
@@ -36405,6 +36405,10 @@ PrefabInstance:
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: maxNoiseLevel
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: spawnCooldown
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158200, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: collisionNoise

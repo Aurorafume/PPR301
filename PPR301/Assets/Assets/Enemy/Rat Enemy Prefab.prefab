@@ -11336,7 +11336,7 @@ MonoBehaviour:
   distanceFromPlayer: 0
   chasing: 0
   angry: 0
-  respawnTimer: 3
+  respawnTimer: 0
   fading: 0
   fadeStrength: 100
   anim: {fileID: 0}
