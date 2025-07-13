@@ -9,7 +9,9 @@ public class Projectile : MonoBehaviour
     public float moveSpeed = 1f;
     //lifespan
     public float lifespan2;
-    //
+    
+    [Header("Effects")]
+    public GameObject lingeringLight;
 
     void Start()
     {
@@ -40,21 +42,19 @@ public class Projectile : MonoBehaviour
         lifespan2 -= Time.deltaTime;
         if(lifespan2 <= 0)
         {
-            Destroy(gameObject);
-            //script.projectileCount2--;
+            Explode();
         }
     }
 
     void OnTriggerEnter(Collider collision)
     {
-        if(collision.CompareTag("Destroyable wall"))
+        if (collision.CompareTag("Destroyable wall"))
         {
-            Destroy(gameObject);
-            //Destroy(collision.gameObject);
             Destroy(collision.transform.parent.gameObject);
-            //script.projectileCount2--;
+            
+            Explode();
         }
-        else if(collision.CompareTag("Bounce"))
+        else if (collision.CompareTag("Bounce"))
         {
             ChangeHorizontalDirection();
             lifespan2 = script.projectileLifeSpan;
@@ -62,10 +62,18 @@ public class Projectile : MonoBehaviour
         }
         if(collision.CompareTag("Wall"))
         {
-            //Debug.Log("Destroy");
-            Destroy(gameObject);
-            //script.projectileCount2--;
+            Explode();
         }
+    }
+
+    void Explode()
+    {
+        if (lingeringLight != null)
+        {
+            Instantiate(lingeringLight, transform.position, Quaternion.identity);
+        }
+
+        Destroy(gameObject);
     }
 
     void ChangeHorizontalDirection()
