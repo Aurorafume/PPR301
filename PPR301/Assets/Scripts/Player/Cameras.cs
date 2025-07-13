@@ -28,6 +28,7 @@ public class Cameras : MonoBehaviour
     public GameObject obj;
     public Camera followCamera;
     public List<Camera> cameraList = new List<Camera>();
+    public float smoothingFactor;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -91,8 +92,26 @@ public class Cameras : MonoBehaviour
             //bool robotFollow = false;
             if(!robotFollow)
             {
-                obj.transform.position = Vector3.SmoothDamp(obj.transform.position, camera1.transform.position, ref velocity, smoothSpeed);
-                smoothSpeed -= Time.deltaTime * 0.5f;
+                ////rotate
+                //obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, camera1.transform.rotation, Time.deltaTime * 3);
+                ////move
+                //obj.transform.position = Vector3.SmoothDamp(obj.transform.position, camera1.transform.position, ref velocity, smoothSpeed);
+                //smoothSpeed -= Time.deltaTime * 0.5f;
+                // Calculate interpolation factor
+                float t = 1 - Mathf.Exp(-smoothingFactor * Time.deltaTime);
+                // Smoothly rotate
+                obj.transform.rotation = Quaternion.Slerp(
+                    obj.transform.rotation,
+                    camera1.transform.rotation,
+                    t
+                );
+                // Smoothly move
+                obj.transform.position = Vector3.Lerp(
+                    obj.transform.position,
+                    camera1.transform.position,
+                    t
+                );
+                smoothingFactor += Time.deltaTime * 100;
             }
             if (Vector3.Distance(obj.transform.position, camera1.transform.position) < 0.01f)
             {
@@ -100,18 +119,26 @@ public class Cameras : MonoBehaviour
                 robotFollow = true;
             }
             else if(robotFollow)
-            obj.transform.position = camera1.transform.position;
+            {
+                smoothingFactor = 0;
+                obj.transform.position = camera1.transform.position;
+                obj.transform.rotation = camera1.transform.rotation;
+                //switch camera
+                camera1.depth = 1;
+                followCamera.depth = 0;
+            }
             //Debug.Log("robotFollow");
         }
         if(!move)
         {
             robotFollow = false;
             smoothSpeed = 0.3f;
-            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, pos2.transform.position, ref velocity, smoothSpeed);
-            if (Vector3.Distance(obj.transform.position, pos2.transform.position) < 0.01f)
+            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, cameraList[0].transform.position, ref velocity, smoothSpeed);
+            if (Vector3.Distance(obj.transform.position, cameraList[0].transform.position) < 0.01f)
             {
-                obj.transform.position = pos2.transform.position; // snap to final position
+                obj.transform.position = cameraList[0].transform.position; // snap to final position
             }
+            obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, cameraList[0].transform.rotation, Time.deltaTime * 3);
         }
     }
     void OnTriggerEnter(Collider collision)
