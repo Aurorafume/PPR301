@@ -29,6 +29,7 @@ public class Cameras : MonoBehaviour
     public Camera followCamera;
     public List<Camera> cameraList = new List<Camera>();
     public float smoothingFactor;
+    public int followCamArray;
 
     public static event Action<bool, float> OnEnterTopDownCamera;
     public float topDownForwardDirection = -90;//demo 2 is -90
@@ -136,36 +137,36 @@ public class Cameras : MonoBehaviour
             //move cam
             robotFollow = false;
             smoothSpeed = 0.3f;
-            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, cameraList[0].transform.position, ref velocity, smoothSpeed);
-            if (Vector3.Distance(obj.transform.position, cameraList[0].transform.position) < 0.01f)
+            obj.transform.position = Vector3.SmoothDamp(obj.transform.position, cameraList[followCamArray].transform.position, ref velocity, smoothSpeed);
+            if (Vector3.Distance(obj.transform.position, cameraList[followCamArray].transform.position) < 0.01f)
             {
-                obj.transform.position = cameraList[0].transform.position; // snap to final position
+                obj.transform.position = cameraList[followCamArray].transform.position; // snap to final position
             }
-            obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, cameraList[0].transform.rotation, Time.deltaTime * 3);
+            obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, cameraList[followCamArray].transform.rotation, Time.deltaTime * 3);
         }
     }
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Area1"))
         {
-            camera1.depth = 0;
-            camera2.depth = 1;
+            followCamArray = 0;
+            move = false;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, topDownForwardDirection);
             BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[0];
         }
         else if (collision.gameObject.CompareTag("Area2"))
         {
-            camera1.depth = 0;
-            camera3.depth = 1;
+            followCamArray = 1;
+            move = false;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90);
             BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[1];
         }
         else if (collision.gameObject.CompareTag("Area3"))
         {
-            camera1.depth = 0;
-            camera4.depth = 1;
+            followCamArray = 2;
+            move = false;
             script.noJumpMode = true;
             OnEnterTopDownCamera?.Invoke(true, -90);
             BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[1];
@@ -180,59 +181,56 @@ public class Cameras : MonoBehaviour
         //    BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
         //    Debug.Log("RESPAWN");
         //}
-        else if (collision.gameObject.CompareTag("Area4"))
-        {
-            camera1.depth = 0;
-            camera5.depth = 1;
-            script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true, -90);
-            //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
-        }
-        else if (collision.gameObject.CompareTag("Area5"))
-        {
-            camera1.depth = 0;
-            camera6.depth = 1;
-            script.noJumpMode = true;
-            OnEnterTopDownCamera?.Invoke(true, number);
-            //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
-        }
+        //else if (collision.gameObject.CompareTag("Area4"))
+        //{
+        //    camera1.depth = 0;
+        //    camera5.depth = 1;
+        //    script.noJumpMode = true;
+        //    OnEnterTopDownCamera?.Invoke(true, -90);
+        //    //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+        //}
+        //else if (collision.gameObject.CompareTag("Area5"))
+        //{
+        //    camera1.depth = 0;
+        //    camera6.depth = 1;
+        //    script.noJumpMode = true;
+        //    OnEnterTopDownCamera?.Invoke(true, number);
+        //    //BoundsScript.currentRespawnLocation = BoundsScript.spawnLocationsArray[2];
+        //}
     }
     void OnTriggerExit(Collider collision)
     {
         if (collision.gameObject.CompareTag("Area1"))
         {
-            camera2.depth = 0;
-            camera1.depth = 1;
+            move = true;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, topDownForwardDirection);
         }
         else if (collision.gameObject.CompareTag("Area2"))
         {
-            camera3.depth = 0;
-            camera1.depth = 1;
+            move = true;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90);
         }
         else if (collision.gameObject.CompareTag("Area3"))
         {
-            camera4.depth = 0;
-            camera1.depth = 1;
+            move = true;
             script.noJumpMode = false;
             OnEnterTopDownCamera?.Invoke(false, -90);
         }
-        else if (collision.gameObject.CompareTag("Area4"))
-        {
-            camera3.depth = 0;
-            camera1.depth = 1;
-            script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false, -90);
-        }
-        else if (collision.gameObject.CompareTag("Area5"))
-        {
-            camera6.depth = 0;
-            camera1.depth = 1;
-            script.noJumpMode = false;
-            OnEnterTopDownCamera?.Invoke(false, -90);
-        }
+        //else if (collision.gameObject.CompareTag("Area4"))
+        //{
+        //    camera3.depth = 0;
+        //    camera1.depth = 1;
+        //    script.noJumpMode = false;
+        //    OnEnterTopDownCamera?.Invoke(false, -90);
+        //}
+        //else if (collision.gameObject.CompareTag("Area5"))
+        //{
+        //    camera6.depth = 0;
+        //    camera1.depth = 1;
+        //    script.noJumpMode = false;
+        //    OnEnterTopDownCamera?.Invoke(false, -90);
+        //}
     }
 }
