@@ -125,6 +125,9 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Directional offset (in degrees) from world forward in top-down mode.")]
     float forwardAngularOffsetFromWorldZ = 0;
 
+    //ali stuff
+    private bool jumpPressed;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -160,6 +163,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         moveBehaviour();
+        //ali stuff
+        if (jumpPressed)
+        {
+            Jump();
+            jumpPressed = false;
+        }
     }
 
     private void GetPlayerInput()
@@ -169,11 +178,11 @@ public class PlayerMovement : MonoBehaviour
 
         if (!noJumpMode && Input.GetKey(jumpKey) && readyToJump && grounded)
         {
+            jumpPressed = true;
             readyToJump = false;
-            Jump();
             Invoke(nameof(ResetJump), jumpCooldown);
         }
-
+        //
         if (Input.GetKeyDown(crouchKey) && grounded)
         {
             isCrouching = true;
