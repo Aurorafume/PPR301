@@ -62,7 +62,7 @@ public class DialogueBox : MonoBehaviour
         Quaternion targetRotation = Quaternion.LookRotation(direction);
         // Flip 180 degrees around Y axis
         targetRotation *= Quaternion.Euler(0, 180f, 0);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 12);
 
 
 
