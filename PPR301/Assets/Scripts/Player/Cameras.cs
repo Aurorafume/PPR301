@@ -89,7 +89,6 @@ public class Cameras : MonoBehaviour
         }
         else if(move)
         {
-            //bool robotFollow = false;
             if(!robotFollow)
             {
                 ////rotate
@@ -131,6 +130,10 @@ public class Cameras : MonoBehaviour
         }
         if(!move)
         {
+            //switch cams
+            camera1.depth = 0;
+            followCamera.depth = 1;
+            //move cam
             robotFollow = false;
             smoothSpeed = 0.3f;
             obj.transform.position = Vector3.SmoothDamp(obj.transform.position, cameraList[0].transform.position, ref velocity, smoothSpeed);
