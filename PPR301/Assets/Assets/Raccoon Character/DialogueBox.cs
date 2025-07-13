@@ -26,6 +26,8 @@ public class DialogueBox : MonoBehaviour
     public static List<DialogueBox> raccoonList = new List<DialogueBox>(); 
     //
     public float letters;
+    //
+    public Camera camera1;
 
     // Start is called before the first frame update
     void Start()
@@ -54,8 +56,16 @@ public class DialogueBox : MonoBehaviour
     }
     void Billboard()
     {
-        transform.LookAt(Camera.main.transform.position, Vector3.up);
-        transform.Rotate(0f, 180f, 0f);
+        //transform.LookAt(Camera.main.transform.position, Vector3.up);
+        //smooth rotation
+        Vector3 direction = camera1.transform.position - transform.position;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        // Flip 180 degrees around Y axis
+        targetRotation *= Quaternion.Euler(0, 180f, 0);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 6);
+
+
+
     }
     void Talk()
     {

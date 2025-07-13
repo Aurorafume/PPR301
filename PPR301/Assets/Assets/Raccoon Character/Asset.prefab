@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 7785601656979466202}
   - component: {fileID: 7785601656979466203}
   m_Layer: 0
-  m_Name: Racoon_Friend
+  m_Name: Asset
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
