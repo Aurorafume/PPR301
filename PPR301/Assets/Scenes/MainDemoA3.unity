@@ -2836,7 +2836,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12008,10 +12008,10 @@ Transform:
   m_Children:
   - {fileID: 20575238}
   - {fileID: 1076066046}
+  - {fileID: 1008583195}
   - {fileID: 394636990}
   - {fileID: 1946934437}
   - {fileID: 471166860}
-  - {fileID: 1008583195}
   m_Father: {fileID: 1259168155}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -15212,7 +15212,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16306,7 +16306,7 @@ Transform:
   m_Children:
   - {fileID: 948214243}
   m_Father: {fileID: 771635468}
-  m_RootOrder: 5
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1008583196
 BoxCollider:
@@ -16403,19 +16403,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poems:
   - peomLines:
-    - Scavenging creatures, seldom show,
-    - Hiding from the feline foe,
-    - When the cat comes out to play,
-    - Drop the cheese and scurry away.
-  - peomLines:
     - Many in a deep dark world below,
     - Some in glass, nowhere to go,
     - Others head upstream aplenty,
     - For me, in bowl, until licked empty.
-  - peomLines:
-    - A cry for food,
-    - A cry for water,
-    - A cry for love from your kitty-cat daughter.
   finalText:
     peomLines:
     - Well done.
@@ -19117,29 +19108,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 771635468}
     m_Modifications:
-    - target: {fileID: 990762658365559870, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 2662413942301673826, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_Name
       value: Pedestal
-      objectReference: {fileID: 0}
-    - target: {fileID: 4202079758754170006, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6540724659636172126, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8001078975171097909, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8549473418483794826, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_RootOrder
@@ -28463,7 +28434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8665086378684647985, guid: 35ef2ad352b4b12449921574ed272518, type: 3}
       propertyPath: m_LocalPosition.x
@@ -32341,7 +32312,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 228.18
+      value: 210.01
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -32349,7 +32320,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -186.88
+      value: -171.86
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w
