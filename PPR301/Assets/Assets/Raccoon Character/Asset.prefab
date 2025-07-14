@@ -254,6 +254,7 @@ MonoBehaviour:
   player: {fileID: 0}
   icon: {fileID: 7785601658266674159}
   letters: 19
+  camera1: {fileID: 0}
 --- !u!95 &7785601656979466203
 Animator:
   serializedVersion: 5

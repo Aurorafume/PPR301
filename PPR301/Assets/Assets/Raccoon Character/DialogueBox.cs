@@ -28,6 +28,9 @@ public class DialogueBox : MonoBehaviour
     public float letters;
     //
     public Camera camera1;
+    //
+    public GameObject key;
+    public GameObject light;
 
     // Start is called before the first frame update
     void Start()
@@ -177,6 +180,10 @@ public class DialogueBox : MonoBehaviour
                     //speechBubble.SetActive(false);
                     anim.SetBool("talking", false);
                     anim2.SetBool("isTalking", false);
+                    if(key != null)
+                    key.SetActive(true);
+                    if(light != null)
+                    light.SetActive(false);
                 }
                 else
                 {
