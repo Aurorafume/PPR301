@@ -1,7 +1,5 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NoiseHandler : MonoBehaviour
 {
@@ -71,7 +69,8 @@ public class NoiseHandler : MonoBehaviour
     }
 
     public void GenerateNoise(float extraNoise)
-    {   // Generate noise based on player actions
+    {
+        // Generate noise based on player actions
         additionalNoise += Mathf.Abs(extraNoise);
     }
 

@@ -154,7 +154,7 @@ public class PlayerMovement : MonoBehaviour
         GetPlayerInput();
         HandleCrouch();
         HandleIdleAndSoundStates();
-        CheckForObjectContact();
+        //CheckForObjectContact();
         SpeedControl();
 
         rb.drag = grounded ? groundDrag : 0;
@@ -359,37 +359,37 @@ public class PlayerMovement : MonoBehaviour
         playerCollider.radius = Mathf.MoveTowards(playerCollider.radius, targetRadius, crouchSpeed * Time.deltaTime);
     }
 
-    private void CheckForObjectContact()
-    {
-        float detectionRadius = 0.5f;
-        Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
-        bool currentlyInContact = false;
+    // private void CheckForObjectContact()
+    // {
+    //     float detectionRadius = 0.5f;
+    //     Collider[] colliders = Physics.OverlapSphere(transform.position, detectionRadius);
+    //     bool currentlyInContact = false;
 
-        foreach (var collider in colliders)
-        {
-            if (collider.CompareTag("Object"))
-            {
-                currentlyInContact = true;
-                break;
-            }
-        }
+    //     foreach (var collider in colliders)
+    //     {
+    //         if (collider.CompareTag("Object"))
+    //         {
+    //             currentlyInContact = true;
+    //             break;
+    //         }
+    //     }
 
-        if (currentlyInContact && !isTouchingObject)
-        {
-            GenerateObjectNoise();
-        }
+    //     if (currentlyInContact && !isTouchingObject)
+    //     {
+    //         GenerateObjectNoise();
+    //     }
 
-        isTouchingObject = currentlyInContact;
-    }
+    //     isTouchingObject = currentlyInContact;
+    // }
 
-    private void GenerateObjectNoise()
-    {
-        if (!draggingObject && Time.time - lastNoiseTime > 0.5f)
-        {
-            noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
-            lastNoiseTime = Time.time;
-        }
-    }
+    // private void GenerateObjectNoise()
+    // {
+    //     if (!draggingObject && Time.time - lastNoiseTime > 0.5f)
+    //     {
+    //         noiseHandler.GenerateNoise(Mathf.Abs(noiseHandler.collisionNoise));
+    //         lastNoiseTime = Time.time;
+    //     }
+    // }
 
     private void GenerateLandingNoise()
     {
@@ -444,6 +444,12 @@ public class PlayerMovement : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        ContactNoise contactNoise = collision.gameObject.GetComponent<ContactNoise>();
+        if (contactNoise != null)
+        {
+            contactNoise.GenerateContactNoise();
+        }
+        
         if (collision.gameObject.CompareTag("Stairs"))
         {
             rb.useGravity = false;
