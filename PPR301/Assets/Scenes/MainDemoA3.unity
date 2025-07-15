@@ -12180,9 +12180,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   codes:
-  - MICE
   - FISH
-  - MEOW
   pedestals:
   - {fileID: 1076066045}
   - {fileID: 394636989}
@@ -13317,6 +13315,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.412
       objectReference: {fileID: 0}
+    - target: {fileID: 9065361405895452611, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
+      propertyPath: noiseAmount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2633289287632123684, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
     - {fileID: 4058971472733143544, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
@@ -14434,7 +14436,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 884245686}
   m_LocalRotation: {x: 0.7071068, y: -0.00000000745053, z: -0.00000008940696, w: 0.70710677}
-  m_LocalPosition: {x: -39.753075, y: 0.38001585, z: -6.574559}
+  m_LocalPosition: {x: -39.753075, y: 0.38, z: -7.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -27159,6 +27161,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9065361405895452611, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
+      propertyPath: noiseAmount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
 --- !u!1 &1627231899
@@ -28022,8 +28028,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 5.8259597, y: 2.2091763, z: 5.16169}
-  m_Center: {x: 0.021713018, y: 0.60458815, z: -2.0808446}
+  m_Size: {x: 5.8259597, y: 2.2091763, z: 9.9430685}
+  m_Center: {x: 0.021713018, y: 0.6045882, z: -4.4715343}
 --- !u!4 &1693768857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 85bb3275ad0dcc040b1a0b7f4de4b945, type: 3}
@@ -32883,6 +32889,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9065361405895452611, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
+      propertyPath: noiseAmount
+      value: 30
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c20563487e899a54d90f6062b8cf3c87, type: 3}
 --- !u!4 &2028438194 stripped
@@ -36456,6 +36466,10 @@ PrefabInstance:
       propertyPath: collisionNoise
       value: 50
       objectReference: {fileID: 0}
+    - target: {fileID: 3806095490509158202, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3806095490509158206, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -38317,11 +38331,15 @@ PrefabInstance:
       objectReference: {fileID: 1587795522}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList.Array.size
-      value: 8
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
+      propertyPath: sentenceList.Array.data[6]
+      value: Here, I snagged this from his pockets!
       objectReference: {fileID: 0}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList.Array.data[7]
-      value: Here, I snagged this from his pockets!
+      value: good luck!
       objectReference: {fileID: 0}
     - target: {fileID: 7785601657246879383, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: m_Color.b
