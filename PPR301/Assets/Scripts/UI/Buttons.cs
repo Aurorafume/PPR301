@@ -11,6 +11,10 @@ public class Buttons : MonoBehaviour
     public int musicIndex;
     public List<AudioSource> musicList = new List<AudioSource>();
     public GameObject musicObj;
+    public bool mute;
+    public Image audioButton;
+    public Sprite audioUI;
+    public Sprite mutedUI;
     void Start()
     {
         musicList[musicIndex].Play();
@@ -53,5 +57,21 @@ public class Buttons : MonoBehaviour
             musicIndex = 0;
         }
         musicList[musicIndex].Play();
+    }
+    public void MuteMusic()
+    {
+        Debug.Log("Muted!!!");
+        if(!mute)
+        {
+            musicList[musicIndex].mute = true;
+            mute = true;
+            audioButton.sprite = mutedUI;
+        }
+        else
+        {
+            musicList[musicIndex].mute = false;
+            mute = false;
+            audioButton.sprite = audioUI;
+        }
     }
 }
