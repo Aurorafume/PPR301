@@ -15,6 +15,8 @@ public class Buttons : MonoBehaviour
     public Image audioButton;
     public Sprite audioUI;
     public Sprite mutedUI;
+    //stylus animator
+    public Animator stylusAnimator;  
     void Start()
     {
         musicList[musicIndex].Play();
@@ -45,18 +47,21 @@ public class Buttons : MonoBehaviour
     }
     public void ChangeMusic()
     {
-        Debug.Log("Music changed!!");
-        if(musicIndex < musicList.Count - 1)
+        if(!mute)
         {
-            musicList[musicIndex].Stop();
-            musicIndex++;
+            Debug.Log("Music changed!!");
+            if(musicIndex < musicList.Count - 1)
+            {
+                musicList[musicIndex].Stop();
+                musicIndex++;
+            }
+            else
+            {
+                musicList[musicIndex].Stop();
+                musicIndex = 0;
+            }
+            musicList[musicIndex].Play();
         }
-        else
-        {
-            musicList[musicIndex].Stop();
-            musicIndex = 0;
-        }
-        musicList[musicIndex].Play();
     }
     public void MuteMusic()
     {
@@ -65,12 +70,14 @@ public class Buttons : MonoBehaviour
         {
             musicList[musicIndex].mute = true;
             mute = true;
+            stylusAnimator.SetBool("Mute", true);
             audioButton.sprite = mutedUI;
         }
         else
         {
             musicList[musicIndex].mute = false;
             mute = false;
+            stylusAnimator.SetBool("Mute", false);
             audioButton.sprite = audioUI;
         }
     }
