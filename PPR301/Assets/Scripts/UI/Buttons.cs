@@ -8,17 +8,6 @@ public class Buttons : MonoBehaviour
 {
     public States states;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void Play()
     {
         SceneManager.LoadScene("MainDemoA3");
@@ -38,5 +27,9 @@ public class Buttons : MonoBehaviour
     {
         // Load the demo scene
         SceneManager.LoadScene("Demo_2");
+    }
+    public void ChangeMusic()
+    {
+        Debug.Log("Music changed!!");
     }
 }
