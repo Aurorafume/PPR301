@@ -7,7 +7,18 @@ using UnityEngine.UI;
 public class Buttons : MonoBehaviour
 {
     public States states;
-
+    //music
+    public int musicIndex;
+    public List<AudioSource> musicList = new List<AudioSource>();
+    public GameObject musicObj;
+    void Start()
+    {
+        musicList[musicIndex].Play();
+    }
+    void Awake()
+    {
+        DontDestroyOnLoad(musicObj);
+    }
     public void Play()
     {
         SceneManager.LoadScene("MainDemoA3");
@@ -31,5 +42,16 @@ public class Buttons : MonoBehaviour
     public void ChangeMusic()
     {
         Debug.Log("Music changed!!");
+        if(musicIndex < musicList.Count - 1)
+        {
+            musicList[musicIndex].Stop();
+            musicIndex++;
+        }
+        else
+        {
+            musicList[musicIndex].Stop();
+            musicIndex = 0;
+        }
+        musicList[musicIndex].Play();
     }
 }
