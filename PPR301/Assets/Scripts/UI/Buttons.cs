@@ -16,14 +16,39 @@ public class Buttons : MonoBehaviour
     public Sprite audioUI;
     public Sprite mutedUI;
     //stylus animator
-    public Animator stylusAnimator;  
+    public Animator stylusAnimator;
+    //slider
+    public Slider musicSlider;
     void Start()
     {
         musicList[musicIndex].Play();
+        //slider
+        musicSlider.value = musicList[musicIndex].volume;
+        musicSlider.onValueChanged.AddListener(SetVolume);
+    }
+    void Update()
+    {
+        //musicSlider.onValueV
     }
     void Awake()
     {
         DontDestroyOnLoad(musicObj);
+    }
+    public void SetVolume(float volume)
+    {
+        musicList[musicIndex].volume = volume;
+        if(musicList[musicIndex].volume == 0)
+        {
+            mute = true;
+            stylusAnimator.SetBool("Mute", true);
+            audioButton.sprite = mutedUI;
+        }
+        else if(musicList[musicIndex].volume > 0)
+        {
+            mute = false;
+            stylusAnimator.SetBool("Mute", false);
+            audioButton.sprite = audioUI;
+        }
     }
     public void Play()
     {
@@ -75,10 +100,13 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            musicList[musicIndex].mute = false;
-            mute = false;
-            stylusAnimator.SetBool("Mute", false);
-            audioButton.sprite = audioUI;
+            if(musicList[musicIndex].volume > 0)
+            {
+                musicList[musicIndex].mute = false;
+                mute = false;
+                stylusAnimator.SetBool("Mute", false);
+                audioButton.sprite = audioUI;
+            }
         }
     }
 }
