@@ -33,7 +33,13 @@ public class Buttons : MonoBehaviour
     }
     void Awake()
     {
-        DontDestroyOnLoad(musicObj);
+        if (FindObjectsOfType<Buttons>().Length > 1)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+    DontDestroyOnLoad(gameObject);
     }
     public void SetVolume(float volume)
     {
