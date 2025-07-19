@@ -92,6 +92,7 @@ public class Buttons : MonoBehaviour
                 musicList[musicIndex].Stop();
                 musicIndex = 0;
             }
+            musicList[musicIndex].volume = musicSlider.value;
             musicList[musicIndex].Play();
         }
     }
