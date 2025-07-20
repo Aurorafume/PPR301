@@ -22,10 +22,13 @@ public class Buttons : MonoBehaviour
     public float lastVaue;
     void Start()
     {
-        musicList[musicIndex].Play();
+        musicObj = GameObject.Find("Button Manager"); // or use a tag
+        stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
+
         //slider
         musicSlider.value = musicList[musicIndex].volume;
         musicSlider.onValueChanged.AddListener(SetVolume);
+        musicList[musicIndex].Play();
     }
     void Update()
     {
@@ -33,6 +36,8 @@ public class Buttons : MonoBehaviour
     }
     void Awake()
     {
+        //musicObj = GameObject.Find("Button Manager"); // or use a tag
+        musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
         if (FindObjectsOfType<Buttons>().Length > 1)
         {
             Destroy(gameObject);
@@ -40,6 +45,7 @@ public class Buttons : MonoBehaviour
         }
 
     DontDestroyOnLoad(gameObject);
+    stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
     }
     public void SetVolume(float volume)
     {
@@ -128,4 +134,48 @@ public class Buttons : MonoBehaviour
             }
         }
     }
+    void OnEnable()
+{
+    SceneManager.sceneLoaded += OnSceneLoaded;
+}
+
+void OnDisable()
+{
+    SceneManager.sceneLoaded -= OnSceneLoaded;
+}
+
+void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+{
+    // Re-assign scene objects after each load
+    musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
+    stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
+    audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>(); // optional
+
+    if (musicSlider != null)
+    {
+        musicSlider.value = musicList[musicIndex].volume;
+        musicSlider.onValueChanged.RemoveAllListeners();
+        musicSlider.onValueChanged.AddListener(SetVolume);
+    }
+    //buttons
+    Button stylusButton = GameObject.Find("Stylus")?.GetComponent<Button>();
+    if (stylusButton != null)
+    {
+        stylusButton.onClick.RemoveAllListeners();
+        stylusButton.onClick.AddListener(MuteMusic);
+    }
+    Button audioB = GameObject.Find("Music Icon")?.GetComponent<Button>();
+    if (audioB != null)
+    {
+        audioB.onClick.RemoveAllListeners();
+        audioB.onClick.AddListener(MuteMusic);
+    }
+    Button RecordButton = GameObject.Find("Logo Vynyl")?.GetComponent<Button>();
+    if (RecordButton != null)
+    {
+        RecordButton.onClick.RemoveAllListeners();
+        RecordButton.onClick.AddListener(ChangeMusic);
+    }
+}
+
 }
