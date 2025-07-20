@@ -24,11 +24,17 @@ public class Buttons : MonoBehaviour
     {
         musicObj = GameObject.Find("Button Manager"); // or use a tag
         stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
-
         //slider
         musicSlider.value = musicList[musicIndex].volume;
         musicSlider.onValueChanged.AddListener(SetVolume);
         musicList[musicIndex].Play();
+        //record
+        Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
+if (img != null)
+{
+    img.alphaHitTestMinimumThreshold = 0.5f;
+}
+
     }
     void Update()
     {
