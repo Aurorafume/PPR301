@@ -4333,7 +4333,7 @@ MonoBehaviour:
   clickPosition: {x: 0, y: 0}
   cursorClickImagePrefab: {fileID: 329645544376865746, guid: c8197d9c6ca842d41be59b22b4bf84ec, type: 3}
   canvas: {fileID: 1087315749}
-  fadeDuration: 1
+  fadeDuration: 2
 --- !u!4 &1656900846
 Transform:
   m_ObjectHideFlags: 0
