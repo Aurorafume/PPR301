@@ -4791,7 +4791,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1871830450
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4833,14 +4833,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.3066038, g: 0.3066038, b: 0.3066038, a: 1}
+  m_Color: {r: 0.5518868, g: 0.5518868, b: 0.5518868, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: fd3363f8ce18a834caafbed69c294b6b, type: 3}
+  m_Texture: {fileID: 2800000, guid: c8c4711ee41a559439ba679d9fe4ae3b, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
