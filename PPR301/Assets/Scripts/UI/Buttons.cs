@@ -26,15 +26,14 @@ public class Buttons : MonoBehaviour
         stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
         //slider
         musicSlider.value = musicList[musicIndex].volume;
-        musicSlider.onValueChanged.AddListener(SetVolume);
+        //musicSlider.onValueChanged.AddListener(SetVolume);
         musicList[musicIndex].Play();
         //record
         Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
-if (img != null)
-{
-    img.alphaHitTestMinimumThreshold = 0.5f;
-}
-
+        if (img != null)
+        {
+            img.alphaHitTestMinimumThreshold = 0.5f;
+        }
     }
     void Update()
     {
@@ -63,16 +62,18 @@ if (img != null)
             //musicSlider.value = 0;
             //lastVaue = Mathf.Round(lastVaue);
             mute = true;
-            stylusAnimator.SetBool("Mute", true);
             audioButton.sprite = mutedUI;
+            if(stylusAnimator != null)
+            stylusAnimator.SetBool("Mute", true);
         }
         else if(musicList[musicIndex].volume > 0)
         {
             //Debug.Log("unmute??");
             mute = false;
-            stylusAnimator.SetBool("Mute", false);
             audioButton.sprite = audioUI;
             lastVaue = musicSlider.value;
+            if(stylusAnimator != null)
+            stylusAnimator.SetBool("Mute", false);
         }
     }
     public void Play()
