@@ -125,8 +125,9 @@ public class Buttons : MonoBehaviour
             musicList[musicIndex].volume = musicSlider.value;
             //musicList[musicIndex].mute = true;
             mute = true;
-            stylusAnimator.SetBool("Mute", true);
             audioButton.sprite = mutedUI;
+            if(stylusAnimator != null)
+            stylusAnimator.SetBool("Mute", true);
         }
         else
         {
@@ -136,8 +137,9 @@ public class Buttons : MonoBehaviour
                 musicSlider.value = lastVaue;
                 //musicList[musicIndex].mute = false;
                 mute = false;
-                stylusAnimator.SetBool("Mute", false);
                 audioButton.sprite = audioUI;
+                if(stylusAnimator != null)
+                stylusAnimator.SetBool("Mute", false);
             }
         }
     }
