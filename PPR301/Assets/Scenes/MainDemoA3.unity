@@ -2403,7 +2403,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1575490714, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: myLetter
-      value: P
+      value: R
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093253, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_Name
@@ -4718,7 +4718,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &366583545
 Transform:
   m_ObjectHideFlags: 0
@@ -17267,16 +17267,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poems:
-  - peomLines:
-    - Many in a deep dark world below,
-    - Some in glass, nowhere to go,
-    - Others head upstream aplenty,
-    - For me, in bowl, until licked empty.
+  - poemLines:
+    - Out in a deep dark world below
+    - Some in glass, nowhere to go
+    - Others swim upstream aplenty
+    - For me, in bowl, until licked empty
   finalText:
-    peomLines:
-    - Well done.
-    - Your reward is granted.
-  revealReward: {fileID: 1475447167}
+    poemLines:
+    - Well done!
+    - Your reward is granted
   fadeSpeed: 1
   delayBetweenLineFadesIn: 2
   delayBetweenLineFadesOut: 0.25
@@ -17286,6 +17285,7 @@ MonoBehaviour:
   - {fileID: 806826196}
   - {fileID: 1055971894}
   - {fileID: 2104403197}
+  revealReward: {fileID: 1475447167}
 --- !u!224 &1017029845
 RectTransform:
   m_ObjectHideFlags: 0
@@ -18747,7 +18747,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1575490714, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: myLetter
-      value: E
+      value: S
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093253, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_Name
@@ -23582,7 +23582,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1575490714, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: myLetter
-      value: S
+      value: E
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093253, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_Name
@@ -28160,6 +28160,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 102340972}
     m_Modifications:
+    - target: {fileID: 1575490714, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
+      propertyPath: myLetter
+      value: 'T '
+      objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093253, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_Name
       value: Letter Cube
@@ -32513,8 +32517,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectType: 0
-  holdPositionOffset: {x: 0, y: 0, z: 0}
-  holdOrientation: {x: 0, y: 0, z: 0}
+  holdPositionOffset: {x: 0.7, y: 0, z: 0.5}
+  holdOrientation: {x: 180, y: 0, z: 90}
 --- !u!65 &1982329965
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -33348,15 +33352,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 210.01
+      value: 217.941
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -65.4
+      value: -75.696
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -171.86
+      value: -181.396
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -33472,7 +33476,7 @@ PrefabInstance:
       objectReference: {fileID: 1865363733}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: airMultiplier
-      value: 3
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: sfxAudioSource
@@ -34042,7 +34046,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1575490714, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: myLetter
-      value: W
+      value: F
       objectReference: {fileID: 0}
     - target: {fileID: 4241804792271093253, guid: d6e33aa5495db7145bcf9ee200b5452f, type: 3}
       propertyPath: m_Name
