@@ -43,7 +43,8 @@ public class States : MonoBehaviour
         // Check if the player is in a hiding spot and set the game over state accordingly
         if (gameOver)
         {
-            SceneManager.LoadScene("GameOver");
+            FindObjectOfType<GameOverMenu>().ShowGameOverMenu();
+            
             ShootProjectile.trumpetList.RemoveAll(obj => obj == null);
             gameOver = false;
         }

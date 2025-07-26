@@ -184,21 +184,23 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceFromPlayer <= 2f)
         {
+            noiseBar.StopChase();
+
+            if (noiseBar != null)
+            {
+                noiseBar.ForceChaseVisuals(false);
+            }
+
             if (states.playerIsHiding)
             {
                 fading = true;
-                noiseBar.StopChase();
-
-                if (noiseBar != null)
-                {
-                    noiseBar.ForceChaseVisuals(false);
-                }
 
                 FadeTo();  // Begin fading out if player is hiding
             }
             else
             {
                 states.gameOver = true;  // Player caught
+                NoiseHandler.NotifyEnemyDespawned();
             }
         }
     }
