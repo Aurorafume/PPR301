@@ -32861,7 +32861,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf388d8829c95b340b69b671c6a0ec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  states: {fileID: 0}
+  states: {fileID: 1289048060}
   musicIndex: 0
   musicList: []
   musicObj: {fileID: 0}
@@ -38871,7 +38871,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3806095490509158207, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+    - {fileID: 3806095490509158206, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+    - {fileID: 3806095490509158203, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
+    - {fileID: 3806095490509158201, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5aa6b93ca84f37646979edb371e3c57f, type: 3}
 --- !u!33 &3835422855645140321
 MeshFilter:
