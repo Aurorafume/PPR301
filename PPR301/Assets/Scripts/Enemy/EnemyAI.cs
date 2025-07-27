@@ -80,6 +80,25 @@ public class EnemyAI : MonoBehaviour
         noiseBar = FindObjectOfType<NoiseBar>();
         anim = GetComponent<Animator>();
 
+        // --- START DEBUG CHECKS ---
+        Debug.Log("--- EnemyAI Start() Initialising ---");
+        states = FindObjectOfType<States>();
+        if (states == null) { Debug.LogError("EnemyAI: Could not find 'States' object in scene!"); return; }
+        else { Debug.Log("EnemyAI: Found 'States' object."); }
+
+        player = GameObject.Find("Player");
+        if (player == null) { Debug.LogError("EnemyAI: Could not find GameObject named 'Player'!"); return; }
+        else { Debug.Log("EnemyAI: Found 'Player' object by name."); }
+
+        playerToChase = GameObject.Find("Player");
+        // No need to check playerToChase again, but good practice to be robust
+        if (playerToChase == null) { Debug.LogError("EnemyAI: Could not find 'playerToChase' object!"); return; }
+
+        noiseBar = FindObjectOfType<NoiseBar>();
+        if (noiseBar == null) { Debug.LogError("EnemyAI: Could not find 'NoiseBar' object in scene!"); return; }
+        else { Debug.Log("EnemyAI: Found 'NoiseBar' object."); }
+        // --- END DEBUG CHECKS ---
+
         // Set the enemy to walk on defined area masks
         agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
     }

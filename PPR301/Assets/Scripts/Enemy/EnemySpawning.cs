@@ -84,7 +84,20 @@ public class EnemySpawning : MonoBehaviour
     /// </summary>
     /// <returns>The corresponding enemy spawn point, or null if no match found.</returns>
     public Transform GetCurrentEnemySpawnPoint()
-    {
+    {   
+        // --- START DEBUG CHECKS ---
+        if (Player == null)
+        {
+            Debug.LogError("EnemySpawning: The 'Player' GameObject reference is NULL. Re-finding it now.");
+            Player = GameObject.Find("Player"); // Attempt to re-find it
+            if (Player == null)
+            {
+                Debug.LogError("FATAL: EnemySpawning could NOT find the 'Player' object even after re-trying. Spawning is impossible.");
+                return null;
+            }
+        }
+        // --- END DEBUG CHECKS ---
+        
         // Validate required references
         if (states == null || Player == null || platformSpawnPairs == null || platformSpawnPairs.Length == 0)
             return null;

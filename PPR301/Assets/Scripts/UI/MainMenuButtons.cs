@@ -22,6 +22,7 @@ public class MainMenuButtons : MonoBehaviour
 
     public void OnPlayPressed()
     {
+        NoiseHandler.ResetStatics();
         mainMenuPanel.SetActive(false);
         instructionsPanel.SetActive(true);
     }

@@ -54,6 +54,8 @@ public class NoiseHandler : MonoBehaviour
     public static bool enemyExists = false;
     [Tooltip("The duration (in seconds) to wait before another enemy can be spawned.")]
     public float spawnCooldown = 10f;
+    [Tooltip("Whether the enemy spawning is currently enabled.")]
+    private bool isSpawningEnabled = false;
 
     [Header("Audio Sources")]
     [Tooltip("AudioSource for the ambient background sound.")]
@@ -70,6 +72,15 @@ public class NoiseHandler : MonoBehaviour
     /// </summary>
     void Start()
     {
+        // --- START DEBUG CHECKS ---
+        if (noiseBar == null) { Debug.LogError("NoiseHandler: NoiseBar reference is NOT SET in the Inspector!"); return; }
+        if (enemyManagerPrefab == null) { Debug.LogError("NoiseHandler: Enemy Manager Prefab is NOT SET in the Inspector!"); return; }
+        if (enemySpawning == null) { Debug.LogError("NoiseHandler: EnemySpawning reference is NOT SET in the Inspector!"); return; }
+        if (ambientAudio == null) { Debug.LogWarning("NoiseHandler: Ambient Audio is not set."); }
+        if (chaseAudio == null) { Debug.LogWarning("NoiseHandler: Chase Audio is not set."); }
+        Debug.Log("NoiseHandler: All initial references are assigned in the Inspector.");
+        // --- END DEBUG CHECKS ---
+    
         // Initialise static references for global access
         staticAmbientAudio = ambientAudio;
         staticChaseAudio = chaseAudio;
@@ -86,6 +97,8 @@ public class NoiseHandler : MonoBehaviour
             noiseBar.OnNoiseMaxed -= TrySpawnEnemyManager;
             noiseBar.OnNoiseMaxed += TrySpawnEnemyManager;
         }
+
+        StartCoroutine(EnableSpawningAfterDelay(0.5f));
     }
 
     /// <summary>
@@ -114,6 +127,16 @@ public class NoiseHandler : MonoBehaviour
             if (enemyExists) targetVolume *= 0.2f;
             ambientAudio.volume = Mathf.MoveTowards(ambientAudio.volume, targetVolume, Time.deltaTime * 1.5f);
         }
+    }
+
+    /// <summary>
+    /// Coroutine to enable enemy spawning after a short delay to allow the scene to fully load.
+    /// </summary>
+    private IEnumerator EnableSpawningAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        isSpawningEnabled = true;
+        Debug.Log("Spawning is now enabled.");
     }
 
     /// <summary>
@@ -152,7 +175,15 @@ public class NoiseHandler : MonoBehaviour
     /// Called when the noise bar is maxed. Checks conditions and triggers enemy spawning.
     /// </summary>
     public void TrySpawnEnemyManager()
-    {
+    {   
+        Debug.Log($"--- Attempting to spawn enemy. Conditions: canSpawnEnemy = {canSpawnEnemy}, enemyExists = {enemyExists}, isSpawningEnabled = {isSpawningEnabled}");
+
+        if (!isSpawningEnabled)
+        {
+            Debug.LogWarning("Attempted to spawn enemy, but spawning is not yet enabled.");
+            return;
+        }
+
         if (enemySpawning == null)
         {
             Debug.LogError("EnemySpawning reference is not set!");
@@ -175,6 +206,10 @@ public class NoiseHandler : MonoBehaviour
             StartCoroutine(SpawnCooldown());
 
             if (chaseAudio != null && !chaseAudio.isPlaying) chaseAudio.Play();
+        }
+        else
+        {
+            Debug.LogWarning($"Spawn blocked! canSpawnEnemy={canSpawnEnemy}, enemyExists={enemyExists}");
         }
     }
 
@@ -245,5 +280,6 @@ public class NoiseHandler : MonoBehaviour
         enemyExists = false;
         staticAmbientAudio = null;
         staticChaseAudio = null;
+        Debug.Log("NoiseHandler: Static variables reset.");
     }
 }
