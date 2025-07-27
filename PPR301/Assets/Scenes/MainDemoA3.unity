@@ -16423,7 +16423,7 @@ PrefabInstance:
       objectReference: {fileID: 1289048060}
     - target: {fileID: 1577715834651403146, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1577715834651403146, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
       propertyPath: respawnTimer
