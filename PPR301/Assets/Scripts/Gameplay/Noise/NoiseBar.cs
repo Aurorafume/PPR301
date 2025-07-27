@@ -80,7 +80,15 @@ public class NoiseBar : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
+        // --- START MANUAL TRIGGER TEST ---
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Debug.LogWarning("MANUAL SPAWN TRIGGERED! Firing OnNoiseMaxed event now...");
+            OnNoiseMaxed?.Invoke();
+        }
+        // --- END MANUAL TRIGGER TEST ---
+    
         // Smoothly interpolate current noise towards target
         noisePercentage = Mathf.Lerp(noisePercentage, targetNoiseLevel, Time.deltaTime * smoothSpeed);
 
