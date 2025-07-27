@@ -2154,7 +2154,6 @@ GameObject:
   m_Component:
   - component: {fileID: 646616702}
   - component: {fileID: 646616701}
-  - component: {fileID: 646616703}
   - component: {fileID: 646616705}
   - component: {fileID: 646616704}
   - component: {fileID: 646616707}
@@ -2178,7 +2177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf388d8829c95b340b69b671c6a0ec2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  states: {fileID: 646616703}
+  states: {fileID: 0}
   musicIndex: 0
   musicList:
   - {fileID: 646616705}
@@ -2208,28 +2207,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &646616703
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 646616700}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2dde900539c08324898dbc2af39f4501, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameOver: 0
-  playerIsHiding: 0
-  playerIsOnPlatform: 0
-  InMemoryRoomGame: 0
-  player: {fileID: 0}
-  enemy: {fileID: 0}
-  enemySpawning: {fileID: 0}
-  platformLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!82 &646616704
 AudioSource:
   m_ObjectHideFlags: 0
