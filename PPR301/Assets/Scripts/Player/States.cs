@@ -46,7 +46,6 @@ public class States : MonoBehaviour
             FindObjectOfType<GameOverMenu>().ShowGameOverMenu();
             
             ShootProjectile.trumpetList.RemoveAll(obj => obj == null);
-            gameOver = false;
         }
 
         CheckIfPlayerIsOnPlatform();

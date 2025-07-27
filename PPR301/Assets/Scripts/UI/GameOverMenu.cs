@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,18 +8,23 @@ public class GameOverMenu : MonoBehaviour
 
     CheckpointManager checkpointManager;
     GameObject player;
+    States states;
+
+    NoiseBar noiseBar;
 
     void Awake()
     {
         checkpointManager = CheckpointManager.Instance;
-        player = FindObjectOfType<PlayerMovement>().gameObject;
+        states = FindObjectOfType<States>();
+        noiseBar = FindObjectOfType<NoiseBar>();
+        player = states.gameObject;
     }
 
     void Start()
     {
         gameOverMenu.SetActive(false);
     }
-    
+
     public void ShowGameOverMenu()
     {
         gameOverMenu.SetActive(true);
@@ -34,8 +40,8 @@ public class GameOverMenu : MonoBehaviour
         {
             if (player != null)
             {
-                CloseGameOverMenu();
                 checkpointManager.SendPlayerToLastCheckpoint();
+                CloseGameOverMenu();
             }
         }
         else
@@ -51,6 +57,7 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f; // Resume the game time
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
+        states.gameOver = false; // Reset game over state
     }
 
     public void ReturnToMainMenu()

@@ -184,10 +184,9 @@ public class EnemyAI : MonoBehaviour
 
         if (distanceFromPlayer <= 2f)
         {
-            noiseBar.StopChase();
-
             if (noiseBar != null)
             {
+                noiseBar.StopChase();
                 noiseBar.ForceChaseVisuals(false);
             }
 
