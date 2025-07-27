@@ -78,13 +78,28 @@ public class EnemySpawning : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        // --- DEBUG CHECKS ---
+        // Find what platform the player is currently on
+        Transform currentSpawnPoint = GetCurrentEnemySpawnPoint();
+        if (currentSpawnPoint != null)
+        {
+            Debug.Log($"Current Spawn Point: {currentSpawnPoint.name}");
+        }
+        else
+        {
+            Debug.LogWarning("No valid spawn point found for the player.");
+        }
+    }
+
     /// <summary>
     /// Checks if the player is currently standing on a platform,
     /// and if so, returns the spawn point assigned to that platform.
     /// </summary>
     /// <returns>The corresponding enemy spawn point, or null if no match found.</returns>
     public Transform GetCurrentEnemySpawnPoint()
-    {   
+    {
         // --- START DEBUG CHECKS ---
         if (Player == null)
         {
@@ -97,7 +112,7 @@ public class EnemySpawning : MonoBehaviour
             }
         }
         // --- END DEBUG CHECKS ---
-        
+
         // Validate required references
         if (states == null || Player == null || platformSpawnPairs == null || platformSpawnPairs.Length == 0)
             return null;

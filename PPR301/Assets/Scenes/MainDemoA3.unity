@@ -34930,6 +34930,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591894, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: enemy
+      value: 
+      objectReference: {fileID: 1811649782736950693, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
+    - target: {fileID: 6770507989242591894, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: enemySpawning
       value: 
       objectReference: {fileID: 199334966}
