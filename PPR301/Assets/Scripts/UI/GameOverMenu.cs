@@ -8,15 +8,16 @@ public class GameOverMenu : MonoBehaviour
 
     CheckpointManager checkpointManager;
     GameObject player;
-    PlayerMovement playerMovement;
-    NoiseHandler noiseHandler;
+    States states;
+
+    NoiseBar noiseBar;
 
     void Awake()
     {
         checkpointManager = CheckpointManager.Instance;
-        playerMovement = FindObjectOfType<PlayerMovement>();
-        player = playerMovement.gameObject;
-        noiseHandler = FindObjectOfType<NoiseHandler>();
+        states = FindObjectOfType<States>();
+        noiseBar = FindObjectOfType<NoiseBar>();
+        player = states.gameObject;
     }
 
     void Start()
@@ -26,28 +27,20 @@ public class GameOverMenu : MonoBehaviour
 
     public void ShowGameOverMenu()
     {
-        checkpointManager.SendPlayerToLastCheckpoint();
-        playerMovement.playerCollider.enabled = false; // Disable player collider to prevent further movement
-
-        // Ensure camera resets to a normal state if in a top-down area
-        Cameras cameras = FindObjectOfType<Cameras>();
-        if (cameras != null)
-        {
-            cameras.ForceNoTopDownCamera(); // Ensure the camera is not in top-down mode
-        }
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f; // Pause the game
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
-        noiseHandler.SetZeroAdditionalNoise(); // Reset additional noise to zero
     }
 
     public void RestartGame()
     {
+
         if (checkpointManager.HasCheckpoint())
         {
             if (player != null)
             {
+                checkpointManager.SendPlayerToLastCheckpoint();
                 CloseGameOverMenu();
             }
         }
@@ -55,12 +48,7 @@ public class GameOverMenu : MonoBehaviour
         {
             // Load the main game scene
             SceneManager.LoadScene("MainDemoA3");
-        }
-        
-        if (playerMovement != null)
-        {
-            playerMovement.playerCollider.enabled = true;
-        }
+        }      
     }
 
     void CloseGameOverMenu()
@@ -69,6 +57,7 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f; // Resume the game time
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
+        states.gameOver = false; // Reset game over state
     }
 
     public void ReturnToMainMenu()

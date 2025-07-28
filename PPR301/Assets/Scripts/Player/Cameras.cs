@@ -8,7 +8,7 @@ public class Cameras : MonoBehaviour
     public Camera camera1;  // Reference to Camera 1
     public Camera camera2;  // Reference to Camera 2
     public Camera camera3;  // Reference to Camera 3
-    public Camera camera4;
+    public Camera camera4;  
     public Camera camera5;
     public Camera camera6;
     public PlayerMovement script;
@@ -88,9 +88,9 @@ public class Cameras : MonoBehaviour
             camera1.depth = 1;
             followCamera.depth = 0;
         }
-        else if (move)
+        else if(move)
         {
-            if (!robotFollow)
+            if(!robotFollow)
             {
                 ////rotate
                 //obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, camera1.transform.rotation, Time.deltaTime * 3);
@@ -118,7 +118,7 @@ public class Cameras : MonoBehaviour
                 obj.transform.position = camera1.transform.position; // snap to final position
                 robotFollow = true;
             }
-            else if (robotFollow)
+            else if(robotFollow)
             {
                 smoothingFactor = 0;
                 obj.transform.position = camera1.transform.position;
@@ -129,7 +129,7 @@ public class Cameras : MonoBehaviour
             }
             //Debug.Log("robotFollow");
         }
-        if (!move)
+        if(!move)
         {
             //switch cams
             camera1.depth = 0;
@@ -232,12 +232,5 @@ public class Cameras : MonoBehaviour
         //    script.noJumpMode = false;
         //    OnEnterTopDownCamera?.Invoke(false, -90);
         //}
-    }
-
-    public void ForceNoTopDownCamera()
-    {
-        move = true;
-        script.noJumpMode = false;
-        OnEnterTopDownCamera?.Invoke(false, topDownForwardDirection);
     }
 }

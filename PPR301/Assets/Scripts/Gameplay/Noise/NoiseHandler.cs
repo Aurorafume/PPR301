@@ -37,7 +37,7 @@ public class NoiseHandler : MonoBehaviour
     public float collisionNoise;
     [Tooltip("The noise level required to max out the bar and trigger an enemy spawn.")]
     public float maxNoiseLevel = 100f;
-    public float additionalNoise = 0f;
+    private float additionalNoise = 0f;
 
     [Header("Component & Object References")]
     [Tooltip("Reference to the NoiseBar script to update the visual feedback.")]
@@ -80,7 +80,7 @@ public class NoiseHandler : MonoBehaviour
         if (chaseAudio == null) { Debug.LogWarning("NoiseHandler: Chase Audio is not set."); }
         Debug.Log("NoiseHandler: All initial references are assigned in the Inspector.");
         // --- END DEBUG CHECKS ---
-
+    
         // Initialise static references for global access
         staticAmbientAudio = ambientAudio;
         staticChaseAudio = chaseAudio;
@@ -175,7 +175,7 @@ public class NoiseHandler : MonoBehaviour
     /// Called when the noise bar is maxed. Checks conditions and triggers enemy spawning.
     /// </summary>
     public void TrySpawnEnemyManager()
-    {
+    {   
         Debug.Log($"--- Attempting to spawn enemy. Conditions: canSpawnEnemy = {canSpawnEnemy}, enemyExists = {enemyExists}, isSpawningEnabled = {isSpawningEnabled}");
 
         if (!isSpawningEnabled)
@@ -189,7 +189,7 @@ public class NoiseHandler : MonoBehaviour
             Debug.LogError("EnemySpawning reference is not set!");
             return;
         }
-
+        
         // Ensure there is a valid platform to spawn on
         Transform currentPlatform = enemySpawning.GetCurrentEnemySpawnPoint();
         if (currentPlatform == null)
@@ -243,12 +243,12 @@ public class NoiseHandler : MonoBehaviour
     public static void NotifyEnemyDespawned()
     {
         enemyExists = false;
-
+        
         // Find and destroy the enemy object instance
         EnemyAI enemyAI = FindObjectOfType<EnemyAI>();
         if (enemyAI != null)
         {
-            Destroy(enemyAI.gameObject);
+             Destroy(enemyAI.gameObject);
         }
 
         // Stop chase music and resume ambient audio
@@ -281,10 +281,5 @@ public class NoiseHandler : MonoBehaviour
         staticAmbientAudio = null;
         staticChaseAudio = null;
         Debug.Log("NoiseHandler: Static variables reset.");
-    }
-    
-    public void SetZeroAdditionalNoise()
-    {
-        additionalNoise = 0f;
     }
 }
