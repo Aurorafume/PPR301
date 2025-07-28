@@ -217,6 +217,8 @@ public class EnemyAI : MonoBehaviour
             }
             else
             {
+                FindObjectOfType<GameOverMenu>().ShowGameOverMenu();
+                //FindObjectOfType<PlayerMovement>().playerCollider.enabled = false; 
                 states.gameOver = true;  // Player caught
                 NoiseHandler.NotifyEnemyDespawned();
             }
