@@ -159,7 +159,6 @@ void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
     stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
     audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>(); // optional
-    Time.timeScale = 1f;
 
     if (musicSlider != null)
     {
