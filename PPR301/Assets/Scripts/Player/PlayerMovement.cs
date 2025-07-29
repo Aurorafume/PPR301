@@ -42,8 +42,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce;
     [Tooltip("Cooldown time in seconds between jumps.")]
     public float jumpCooldown;
-    [Tooltip("Speed multiplier for movement while airborne.")]
-    public float airMultiplier;
+    [Tooltip("Additional force applied when falling.")]
+    public float fallMultiplier = 2.5f;
     [Tooltip("How much control the player has over movement while in the air.")]
     public float airControlSpeed = 5f;
 
@@ -185,12 +185,29 @@ public class PlayerMovement : MonoBehaviour
     {
         // Execute the current movement behavior (Default or TopDown).
         moveBehaviour();
-        
+
         // Apply jump force in FixedUpdate for consistent physics.
         if (jumpPressed)
         {
             Jump();
             jumpPressed = false;
+        }
+
+        HandleJumpDownwardForce();
+    }
+
+    private void HandleJumpDownwardForce()
+    {
+        // Apply a downward force to increase fall speed when not holding the jump key.
+        if (!grounded && rb.velocity.y > 0 && !Input.GetKey(jumpKey))
+        {
+            rb.AddForce(Vector3.up * Physics.gravity.y * fallMultiplier * rb.mass);
+        }
+
+        // Apply fall multiplier to increase downward force when falling.
+        if (!grounded && rb.velocity.y < 0)
+        {
+            rb.AddForce(Vector3.up * Physics.gravity.y * fallMultiplier * rb.mass);
         }
     }
 
@@ -261,18 +278,22 @@ public class PlayerMovement : MonoBehaviour
         {
             jumpPressed = true;
             readyToJump = false;
-            Invoke(nameof(ResetJump), jumpCooldown);
+            //Invoke(nameof(ResetJump), jumpCooldown);
+        }
+        if (Input.GetKeyUp(jumpKey))
+        {
+            readyToJump = true;
         }
         
         // Handle crouch input.
-        if (Input.GetKeyDown(crouchKey) && grounded)
-        {
-            isCrouching = true;
-        }
-        else if (Input.GetKeyUp(crouchKey))
-        {
-            isCrouching = false;
-        }
+            if (Input.GetKeyDown(crouchKey) && grounded)
+            {
+                isCrouching = true;
+            }
+            else if (Input.GetKeyUp(crouchKey))
+            {
+                isCrouching = false;
+            }
     }
     
     /// <summary>
@@ -474,7 +495,7 @@ public class PlayerMovement : MonoBehaviour
     /// <returns>True if ground is detected, false otherwise.</returns>
     private bool SphereCastDetectsGround(Vector3 castPosition)
     {
-        if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerHeight * 0.5f))
+        if (Physics.SphereCast(castPosition, 0.3f, Vector3.down, out RaycastHit hit, playerCollider.radius))
         {
             return hit.collider.CompareTag("Ground") || hit.collider.CompareTag("Object") || hit.collider.CompareTag("Stairs");
         }
