@@ -11331,17 +11331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   agent: {fileID: 1577715834651403148}
-  playerLocation: {x: 0, y: 0, z: 0}
-  aggroDistance: 100
+  idleAggroDistance: 10
+  chaseAggroDistance: 20
   distanceFromPlayer: 0
   chasing: 0
-  angry: 0
-  respawnTimer: 0
+  timeUntilDespawn: 5
   fading: 0
+  fadeOutTime: 1.5
   fadeStrength: 100
   anim: {fileID: 0}
   states: {fileID: 0}
   player: {fileID: 0}
+  renderer: {fileID: 1702192282215358208}
 --- !u!212 &7759337085915449213
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28065,8 +28066,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: -1675036478175467863, guid: 71faf376520d4c349abf851ebde1bc4f, type: 3}
-  - {fileID: 8064417019806598577, guid: 71faf376520d4c349abf851ebde1bc4f, type: 3}
+  - {fileID: 2100000, guid: 767e76e1f72475f4393ef39984ac3a9f, type: 2}
+  - {fileID: 2100000, guid: 09a6ef4b77324f64e8348d7c9f54c7fe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
