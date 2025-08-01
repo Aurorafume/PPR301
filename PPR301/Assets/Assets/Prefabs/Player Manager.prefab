@@ -535,7 +535,7 @@ MonoBehaviour:
   groundDrag: 6
   jumpForce: 9
   jumpCooldown: 1
-  airMultiplier: 3
+  fallMultiplier: 2.5
   airControlSpeed: 5
   crouchHeight: 0.7
   crouchSpeed: 2
@@ -546,10 +546,6 @@ MonoBehaviour:
   draggingAudioSource: {fileID: 0}
   draggingSoundClip: {fileID: 0}
   draggingSoundVolume: 0.5
-  isCrouching: 0
-  readyToJump: 0
-  grounded: 0
-  groundedAlwaysTrue: 0
   jumpKey: 32
   crouchKey: 304
   orientation: {fileID: 6770507987706067009}
@@ -560,6 +556,10 @@ MonoBehaviour:
   secondGroundCastLocator: {fileID: 6770507987839904829}
   noJumpMode: 0
   idleTimeThreshold: 7
+  isCrouching: 0
+  readyToJump: 0
+  grounded: 0
+  groundedAlwaysTrue: 0
   draggingObject: 0
   inTopDownMode: 0
 --- !u!114 &6770507989242591889
@@ -575,7 +575,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   grabRadius: 0.5
-  grabDistance: 1.25
+  grabDistance: 1.55
+  showGrabAreaGizmo: 0
   interactButton: 323
   interactableLayer:
     serializedVersion: 2
@@ -632,6 +633,17 @@ MonoBehaviour:
   BoundsScript: {fileID: 6770507989242591893}
   KeyCamera: {fileID: 0}
   number: -180
+  pos1: {x: 0, y: 0, z: 0}
+  pos2: {fileID: 0}
+  move: 0
+  smoothSpeed: 0
+  robotFollow: 0
+  number2: 0
+  obj: {fileID: 0}
+  followCamera: {fileID: 0}
+  cameraList: []
+  smoothingFactor: 0
+  followCamArray: 0
   topDownForwardDirection: -90
 --- !u!114 &6770507989242591893
 MonoBehaviour:

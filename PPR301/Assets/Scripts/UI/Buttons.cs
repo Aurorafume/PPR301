@@ -23,11 +23,13 @@ public class Buttons : MonoBehaviour
     void Start()
     {
         musicObj = GameObject.Find("Button Manager"); // or use a tag
-        stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
-        //slider
-        musicSlider.value = musicList[musicIndex].volume;
-        //musicSlider.onValueChanged.AddListener(SetVolume);
-        musicList[musicIndex].Play();
+                                                      //slider
+        if (musicList.Count > musicIndex)
+        {
+            musicSlider.value = musicList[musicIndex].volume;
+            musicList[musicIndex].Play();
+        }
+        
         //record
         Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
         if (img != null)
@@ -49,8 +51,12 @@ public class Buttons : MonoBehaviour
             return;
         }
 
-    DontDestroyOnLoad(gameObject);
-    stylusAnimator = GameObject.Find("Stylus").GetComponent<Animator>();
+        DontDestroyOnLoad(gameObject);
+        GameObject stylus = GameObject.Find("Stylus");
+        if (stylus != null)
+        {
+            stylusAnimator = stylus.GetComponent<Animator>();
+        }
     }
     public void SetVolume(float volume)
     {
@@ -159,11 +165,15 @@ void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
     stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
     audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>(); // optional
-    Time.timeScale = 1f;
 
     if (musicSlider != null)
     {
-        musicSlider.value = musicList[musicIndex].volume;
+        if (musicList.Count > musicIndex)
+        {
+            musicSlider.value = musicList[musicIndex].volume;
+            musicSlider.value = musicList[musicIndex].volume;
+        }
+        
         musicSlider.onValueChanged.RemoveAllListeners();
         musicSlider.onValueChanged.AddListener(SetVolume);
     }

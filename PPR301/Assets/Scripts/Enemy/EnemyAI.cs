@@ -24,8 +24,6 @@
 //
 // ==========================================================================
 
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -59,8 +57,6 @@ public class EnemyAI : MonoBehaviour
     [Header("Components & References")]
     [Tooltip("Animator component controlling the enemy's animations.")]
     public Animator anim;
-    [Tooltip("SpriteRenderer used to control visual effects like fading.")]
-    private SpriteRenderer spriteRenderer;
     [Tooltip("Reference to the NoiseBar used to show noise level.")]
     private NoiseBar noiseBar;
     [Tooltip("Reference to the States manager for global flags.")]
@@ -77,7 +73,6 @@ public class EnemyAI : MonoBehaviour
         states = FindObjectOfType<States>();
         player = GameObject.Find("Player");
         playerToChase = GameObject.Find("Player");
-        spriteRenderer = GetComponent<SpriteRenderer>();
         noiseBar = FindObjectOfType<NoiseBar>();
         anim = GetComponent<Animator>();
 
@@ -103,7 +98,8 @@ public class EnemyAI : MonoBehaviour
         // Set the enemy to walk on defined area masks
         agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
 
-        aggroDistance = idleAggroDistance;
+        aggroDistance = chaseAggroDistance;
+        despawnTimer = timeUntilDespawn;
     }
 
     void Update()
@@ -113,10 +109,10 @@ public class EnemyAI : MonoBehaviour
         // Main behavior loop
         if (!despawning)
         {
-            CheckAggroDistance();
-            EnemyChase();
+            DetermineIfChasing();
+            HandleChasing();
             HandleIdling();
-            TouchPlayer();
+            HandleCatchPlayer();
         }
         else
         {
@@ -127,7 +123,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Controls enemy chasing logic based on player location and aggro state.
     /// </summary>
-    public void EnemyChase()
+    public void HandleChasing()
     {
         if (chasing)
         {
@@ -193,7 +189,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Checks the distance from player and toggles chasing state.
     /// </summary>
-    public void CheckAggroDistance()
+    public void DetermineIfChasing()
     {
         if (states.playerIsHiding) return;
 
@@ -206,7 +202,7 @@ public class EnemyAI : MonoBehaviour
     /// Checks if the enemy is close enough to the player to trigger an interaction.
     /// If the player is hiding, enemy despawns. Otherwise, game over.
     /// </summary>
-    public void TouchPlayer()
+    public void HandleCatchPlayer()
     {
         if (distanceFromPlayer <= 2f && !states.playerIsHiding)
         {

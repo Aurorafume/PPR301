@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerInteractHandler : MonoBehaviour
@@ -9,6 +5,8 @@ public class PlayerInteractHandler : MonoBehaviour
     [Header("Interact Parameters")]
     [SerializeField] float grabRadius = 0.5f;
     [SerializeField] float grabDistance = 1f;
+
+    [SerializeField] bool showGrabAreaGizmo;
     
     [Header("References")]
     [SerializeField] KeyCode interactButton = KeyCode.Mouse0;
@@ -24,12 +22,32 @@ public class PlayerInteractHandler : MonoBehaviour
 
     [HideInInspector] public Vector3 hitPoint;
 
-    void OnCollisionEnter(Collision collision)
+    // Gizmo to visualize the grab area
+    void OnDrawGizmos()
     {
-        if(collision.gameObject.CompareTag("Instrument"))
-        {
-            Debug.Log("HIT INSTRUMENT!!!");
-        }
+        if (!showGrabAreaGizmo) return;
+        if (interactPointLocator == null) return;
+
+        Gizmos.color = Color.cyan;
+
+        Vector3 start = interactPointLocator.position;
+        Vector3 direction = transform.forward;
+        float radius = grabRadius;
+        float distance = grabDistance;
+
+        // Draw the start sphere
+        Gizmos.DrawWireSphere(start, radius);
+
+        // Draw the end sphere
+        Vector3 end = start + direction * distance;
+        Gizmos.DrawWireSphere(end, radius);
+
+        // Draw a cylinder between start and end to visualize the sweep
+        // (approximate with a line for simplicity)
+        Gizmos.DrawLine(start + Vector3.up * radius, end + Vector3.up * radius);
+        Gizmos.DrawLine(start - Vector3.up * radius, end - Vector3.up * radius);
+        Gizmos.DrawLine(start + Vector3.right * radius, end + Vector3.right * radius);
+        Gizmos.DrawLine(start - Vector3.right * radius, end - Vector3.right * radius);
     }
 
     void Update()

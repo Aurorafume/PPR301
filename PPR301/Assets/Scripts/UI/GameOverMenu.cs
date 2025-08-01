@@ -10,13 +10,13 @@ public class GameOverMenu : MonoBehaviour
     GameObject player;
     States states;
 
-    NoiseBar noiseBar;
+    NoiseHandler noiseHandler;
 
     void Awake()
     {
         checkpointManager = CheckpointManager.Instance;
         states = FindObjectOfType<States>();
-        noiseBar = FindObjectOfType<NoiseBar>();
+        noiseHandler = FindObjectOfType<NoiseHandler>();
         player = states.gameObject;
     }
 
@@ -27,10 +27,13 @@ public class GameOverMenu : MonoBehaviour
 
     public void ShowGameOverMenu()
     {
+        Debug.Log("Game over");
         gameOverMenu.SetActive(true);
         Time.timeScale = 0f; // Pause the game
+        checkpointManager.SendPlayerToLastCheckpoint();
         Cursor.lockState = CursorLockMode.None; // Unlock the cursor
         Cursor.visible = true; // Make the cursor visible
+        noiseHandler.ClearNoise(); // Clear any noise effects
     }
 
     public void RestartGame()
@@ -40,7 +43,6 @@ public class GameOverMenu : MonoBehaviour
         {
             if (player != null)
             {
-                checkpointManager.SendPlayerToLastCheckpoint();
                 CloseGameOverMenu();
             }
         }
@@ -57,7 +59,6 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f; // Resume the game time
         Cursor.lockState = CursorLockMode.Locked; // Lock the cursor
         Cursor.visible = false; // Hide the cursor
-        states.gameOver = false; // Reset game over state
     }
 
     public void ReturnToMainMenu()
