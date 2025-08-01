@@ -16085,6 +16085,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1577715834651403146, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
+      propertyPath: fading
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1577715834651403146, guid: 1c80471d09028454bb36034d86bb0aae, type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 1289048025}
@@ -35261,6 +35265,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5001199290680640534, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5001199290680640534, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6770507987828908138, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -35318,8 +35330,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591889, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
-      propertyPath: grabRadius
-      value: 0.5
+      propertyPath: showGrabAreaGizmo
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591890, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_Enabled

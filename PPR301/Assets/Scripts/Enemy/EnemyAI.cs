@@ -47,12 +47,12 @@ public class EnemyAI : MonoBehaviour
     private float despawnTimer;
     [Tooltip("Time (in seconds) to wait before despawning after losing the player.")]
     public float timeUntilDespawn = 5f;
-    [Tooltip("Whether the enemy is currently fading out.")]
-    public bool fading;
-    [Tooltip("Time (in seconds) for the enemy to fully fade out.")]
+    [Tooltip("Time taken to fade out the enemy.")]
     public float fadeOutTime = 1.5f;
-    [Tooltip("Visual fade strength for the enemy's sprite (0 = invisible, 1 = opaque).")]
-    public float fadeStrength = 100f;
+    [Tooltip("Time taken to fade in the enemy.")]
+    public float fadeInTime = 1.5f;
+    private float fadeOutSpeed;
+    private float fadeInSpeed;
 
     [Header("Components & References")]
     [Tooltip("Animator component controlling the enemy's animations.")]
@@ -63,9 +63,14 @@ public class EnemyAI : MonoBehaviour
     public States states;
     [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
-
+    [Tooltip("Renderer component.")]
+    public Renderer enemyRenderer;
+    private bool spawning;
     private bool despawning;
     private int aggroDistance;
+    private Material[] enemyMaterials;
+    private float enemyAlpha;
+
 
     void Start()
     {
@@ -100,11 +105,27 @@ public class EnemyAI : MonoBehaviour
 
         aggroDistance = chaseAggroDistance;
         despawnTimer = timeUntilDespawn;
+        enemyMaterials = enemyRenderer.materials;
+        fadeOutSpeed = 1f / fadeOutTime;
+        fadeInSpeed = 1f / fadeInTime;
+        enemyAlpha = 0f;
+        foreach (Material mat in enemyMaterials)
+        {
+            mat.SetFloat("_Alpha", enemyAlpha);
+        }
+
+        spawning = true;
     }
 
     void Update()
     {
-        HandleWalkAnimation();
+        HandleAnimations();
+
+        if (spawning)
+        {
+            SpawnIn();
+            return;
+        }
 
         // Main behavior loop
         if (!despawning)
@@ -117,6 +138,21 @@ public class EnemyAI : MonoBehaviour
         else
         {
             Despawn();
+        }
+    }
+
+    void SpawnIn()
+    {
+        enemyAlpha += fadeInSpeed * Time.deltaTime;
+        enemyAlpha = Mathf.Clamp01(enemyAlpha);
+
+        foreach (Material mat in enemyMaterials)
+        {
+            mat.SetFloat("_Alpha", enemyAlpha);
+        }
+        if (enemyAlpha >= 1f)
+        {
+            spawning = false;
         }
     }
 
@@ -167,6 +203,11 @@ public class EnemyAI : MonoBehaviour
 
         if (despawnTimer <= 0)
         {
+            if (noiseBar != null)
+            {
+                noiseBar.ForceChaseVisuals(false);
+            }
+
             despawning = true;
         }
     }
@@ -174,7 +215,7 @@ public class EnemyAI : MonoBehaviour
     /// <summary>
     /// Plays or stops walking animation depending on velocity.
     /// </summary>
-    public void HandleWalkAnimation()
+    public void HandleAnimations()
     {
         if (agent.velocity.magnitude > 0.1f)
         {
@@ -223,12 +264,20 @@ public class EnemyAI : MonoBehaviour
     /// </summary>
     void Despawn()
     {
-        // Fade enemy or some other visual effect
-        if (noiseBar != null)
+        if (enemyAlpha <= 0)
         {
-            noiseBar.ForceChaseVisuals(false);
+            NoiseHandler.NotifyEnemyDespawned();
         }
 
-        NoiseHandler.NotifyEnemyDespawned();
+        enemyAlpha -= fadeOutSpeed * Time.deltaTime;
+        if (enemyAlpha < 0)
+        {
+            enemyAlpha = 0;
+        }
+        
+        foreach (Material mat in enemyMaterials)
+        {
+            mat.SetFloat("_Alpha", enemyAlpha);
+        }
     }
 }

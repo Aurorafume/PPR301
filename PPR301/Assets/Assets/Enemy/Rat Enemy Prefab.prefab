@@ -11336,13 +11336,12 @@ MonoBehaviour:
   distanceFromPlayer: 0
   chasing: 0
   timeUntilDespawn: 5
-  fading: 0
   fadeOutTime: 1.5
-  fadeStrength: 100
+  fadeInTime: 1
   anim: {fileID: 0}
   states: {fileID: 0}
   player: {fileID: 0}
-  renderer: {fileID: 1702192282215358208}
+  enemyRenderer: {fileID: 1702192282215358208}
 --- !u!212 &7759337085915449213
 SpriteRenderer:
   m_ObjectHideFlags: 0
