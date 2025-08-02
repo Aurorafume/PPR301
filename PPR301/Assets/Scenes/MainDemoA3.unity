@@ -41187,19 +41187,21 @@ PrefabInstance:
       objectReference: {fileID: 1587795522}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList.Array.size
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList.Array.data[6]
-      value: Here, I snagged this from his pockets!
+      value: Use the Shift button to crouch & hide in the Mice holes with the eye
+        icon.
       objectReference: {fileID: 0}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList.Array.data[7]
-      value: good luck!
+      value: Here, I snagged this from his pockets!
       objectReference: {fileID: 0}
     - target: {fileID: 7785601656979466202, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: sentenceList2.Array.data[3]
-      value: Use the Shift button to hide in the Mice holes in some of the rooms.
+      value: Use the Shift button to crouch & hide in the Mice holes with the eye
+        icon.
       objectReference: {fileID: 0}
     - target: {fileID: 7785601657246879383, guid: f9117750441a2ec4f93e95201a075c5f, type: 3}
       propertyPath: m_Color.b
