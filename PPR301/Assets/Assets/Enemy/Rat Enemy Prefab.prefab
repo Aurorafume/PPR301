@@ -11272,6 +11272,7 @@ Transform:
   m_Children:
   - {fileID: 3503401694959695616}
   - {fileID: 4372989917618335182}
+  - {fileID: 7278817232057296327}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -11333,11 +11334,12 @@ MonoBehaviour:
   agent: {fileID: 1577715834651403148}
   idleAggroDistance: 10
   chaseAggroDistance: 20
-  distanceFromPlayer: 0
-  chasing: 0
   timeUntilDespawn: 5
   fadeOutTime: 1.5
   fadeInTime: 1
+  effectLocator: {fileID: 7278817232057296327}
+  spawnEffect: {fileID: 1044484899920424993, guid: 655e8064b48fc844b9a6ab59a5e7184c, type: 3}
+  despawnEffect: {fileID: 5655982945969810463, guid: 1d97ee334e8458a4ab08bef715d36ff5, type: 3}
   anim: {fileID: 0}
   states: {fileID: 0}
   player: {fileID: 0}
@@ -42365,6 +42367,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 5902320492646789544}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6630633301591119806
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7278817232057296327}
+  m_Layer: 14
+  m_Name: Effect Locator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7278817232057296327
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6630633301591119806}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1328444570488491807}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6636527614529022561
 GameObject:

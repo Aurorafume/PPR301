@@ -37,14 +37,12 @@ public class EnemyAI : MonoBehaviour
     [Tooltip("Distance between this enemy and the player.")]
     public int chaseAggroDistance = 20;
     [Tooltip("Distance between this enemy and the player.")]
-    public float distanceFromPlayer;
+    private float distanceFromPlayer;
     [Tooltip("Whether the enemy is currently chasing the player.")]
-    public bool chasing;
+    private bool chasing;
     private GameObject playerToChase;
 
     [Header("Respawn & Fade Settings")]
-    [Tooltip("Time remaining until the enemy despawns after losing the player.")]
-    private float despawnTimer;
     [Tooltip("Time (in seconds) to wait before despawning after losing the player.")]
     public float timeUntilDespawn = 5f;
     [Tooltip("Time taken to fade out the enemy.")]
@@ -53,6 +51,14 @@ public class EnemyAI : MonoBehaviour
     public float fadeInTime = 1.5f;
     private float fadeOutSpeed;
     private float fadeInSpeed;
+    [Tooltip("Time remaining until the enemy despawns after losing the player.")]
+    private float despawnTimer;
+
+    [Header("Effects & Visuals")]
+    [Tooltip("Particle effect played when the enemy spawns in.")]
+    public Transform effectLocator;
+    public ParticleSystem spawnEffect;
+    public ParticleSystem despawnEffect;
 
     [Header("Components & References")]
     [Tooltip("Animator component controlling the enemy's animations.")]
@@ -115,6 +121,20 @@ public class EnemyAI : MonoBehaviour
         }
 
         spawning = true;
+
+        CreateSpawnEffect();
+    }
+
+    void CreateSpawnEffect()
+    {
+        if (spawnEffect != null)
+        {
+            ParticleSystem effect = Instantiate(spawnEffect, effectLocator.position, Quaternion.identity);
+            effect.transform.SetParent(effectLocator);
+            ParticleSystem.MainModule main = effect.main;
+            main.duration = fadeInTime;
+            effect.Play();
+        }
     }
 
     void Update()
@@ -209,7 +229,16 @@ public class EnemyAI : MonoBehaviour
             }
 
             despawning = true;
+            CreateDespawnEffect();
         }
+    }
+
+    void CreateDespawnEffect()
+    {
+        ParticleSystem effect = Instantiate(despawnEffect, effectLocator.position, Quaternion.identity);
+        ParticleSystem.MainModule main = effect.main;
+        main.duration = fadeOutTime;
+        effect.Play();
     }
 
     /// <summary>
