@@ -3429,7 +3429,7 @@ GameObject:
   - component: {fileID: 274044338}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -4721,11 +4721,11 @@ GameObject:
   - component: {fileID: 366583546}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &366583545
 Transform:
   m_ObjectHideFlags: 0
@@ -11529,7 +11529,7 @@ GameObject:
   - component: {fileID: 705023369}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -15754,7 +15754,7 @@ GameObject:
   - component: {fileID: 894718426}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -20387,7 +20387,7 @@ GameObject:
   - component: {fileID: 1112182355}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -20418,8 +20418,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.01587369, y: 1.017842, z: 0.01851475}
-  m_Center: {x: -0.0052123694, y: 0.16089182, z: 0.000043972716}
+  m_Size: {x: 0.01587369, y: 0.61268824, z: 0.01851475}
+  m_Center: {x: -0.0052123694, y: -0.041685954, z: 0.000043972734}
 --- !u!1001 &1123447394
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21775,7 +21775,7 @@ GameObject:
   - component: {fileID: 1174358293}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -21999,7 +21999,7 @@ GameObject:
   - component: {fileID: 1178801500}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -24592,7 +24592,7 @@ GameObject:
   - component: {fileID: 1336657535}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -28933,7 +28933,7 @@ GameObject:
   - component: {fileID: 1564573644}
   m_Layer: 11
   m_Name: Collider1
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -28991,7 +28991,7 @@ GameObject:
   - component: {fileID: 1566017556}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -29263,7 +29263,7 @@ GameObject:
   - component: {fileID: 1595784105}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -30502,7 +30502,7 @@ GameObject:
   - component: {fileID: 1650797974}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 8
@@ -34960,7 +34960,7 @@ GameObject:
   - component: {fileID: 1953185061}
   m_Layer: 11
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: Spawn Collider
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

@@ -29,6 +29,7 @@ TagManager:
   - Blue Key
   - Memory Room
   - Stairs
+  - Spawn Collider
   layers:
   - Default
   - TransparentFX

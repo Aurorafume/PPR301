@@ -48,7 +48,7 @@ public class PlayerCamera : MonoBehaviour
 
         // Collision handling
         RaycastHit hit;
-        if (Physics.Raycast(player.position, desiredPosition - player.position, out hit, currentZoom + 1f))
+        if (Physics.Raycast(player.position, desiredPosition - player.position, out hit, currentZoom + 1f) && hit.collider.tag != "Spawn Collider")
         {
             desiredPosition = hit.point;
         }
