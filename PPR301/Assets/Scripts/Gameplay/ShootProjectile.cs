@@ -61,6 +61,10 @@ public class ShootProjectile : MonoBehaviour
     [Tooltip("The distance between this launcher and the player.")]
     public float dist;
 
+    public GameObject lingeringLight;
+
+    //public AudioSource shootTrumpet;
+
     // A list of active projectiles fired by this specific launcher.
     private List<GameObject> projectileList = new List<GameObject>();
     // A static list of all ShootProjectile instances in the scene.
@@ -81,7 +85,6 @@ public class ShootProjectile : MonoBehaviour
     {
         trumpetList.Remove(this);
     }
-
     /// <summary>
     /// Called every frame. Checks for player proximity and input to fire a projectile.
     /// </summary>
@@ -105,6 +108,9 @@ public class ShootProjectile : MonoBehaviour
                 // Only fire if the number of active projectiles is below the limit.
                 if (projectileList.Count < projectileCount)
                 {
+                    //create note effect
+                    Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y,transform.position.z + 1), Quaternion.identity);
+
                     // Create a new projectile instance.
                     GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
                     Projectile projectile = projectileInstance.GetComponent<Projectile>();

@@ -49,6 +49,7 @@ public class Projectile : MonoBehaviour
     private float lifespanTimer;
 
     public AudioSource bounceSound;
+    public AudioSource breakDoorSound;
 
 
     /// <summary>
@@ -80,6 +81,9 @@ public class Projectile : MonoBehaviour
 
         // Ensure the direction vector is a unit vector.
         direction = direction.normalized;
+
+        bounceSound = GameObject.Find("Sound effects")?.GetComponent<AudioSource>();
+        breakDoorSound = GameObject.Find("Sound effects")?.GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -108,6 +112,7 @@ public class Projectile : MonoBehaviour
         {
             // Destroy the wall's parent object (assuming the collider is a child).
             Destroy(other.transform.parent.gameObject);
+            breakDoorSound.Play();
             Explode();
         }
         else if (other.CompareTag("Bounce"))
@@ -119,6 +124,7 @@ public class Projectile : MonoBehaviour
                 lifespanTimer = script.projectileLifeSpan;
             }
             bounceSound.Play();
+            Instantiate(lingeringLight, transform.position, Quaternion.identity);
         }
         else if (other.CompareTag("Wall"))
         {
