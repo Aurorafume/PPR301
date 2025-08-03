@@ -83,7 +83,8 @@ public class PlayerInteractHandler : MonoBehaviour
         Gizmos.DrawLine(start + Vector3.up * grabRadius, end + Vector3.up * grabRadius);
         Gizmos.DrawLine(start - Vector3.up * grabRadius, end - Vector3.up * grabRadius);
         Gizmos.DrawLine(start + Vector3.right * grabRadius, end + Vector3.right * grabRadius);
-        Gizmos.DrawLine(start - Vector3.right * grabRadius, end - Vector3.right * radius);
+        // This line is corrected to use 'grabRadius' instead of the non-existent 'radius'.
+        Gizmos.DrawLine(start - Vector3.right * grabRadius, end - Vector3.right * grabRadius);
     }
 
     /// <summary>

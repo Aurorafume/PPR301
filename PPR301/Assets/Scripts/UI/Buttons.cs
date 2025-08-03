@@ -1,201 +1,273 @@
+// ==========================================================================
+// Meowt of Tune - Buttons
+// Owned and contributed to by: brookcoli (Itch.io) - Aurorafume (GitHub), donkzilla03 (Itch.io) - AliAK03 (GitHub), JaydenFielderTorrens (Itch.io) - Squib35 (GitHub), komorebimoriko (Itch.io), TheRealCrizz (GitHub), LordVGahn (GitHub)
+// itch.io listing: https://brookcoli.itch.io/meowt-of-tune - GitHub Repository: https://github.com/Aurorafume/PPR301
+// ==========================================================================
+//
+// WHAT DOES THIS DO:
+// This script is a persistent singleton manager for UI buttons and background
+// music. It ensures that music playback and volume settings are maintained
+// across different scenes. It handles volume control via a UI slider, a
+// mute/unmute toggle, changing tracks, and executing actions like loading
+// new game scenes when buttons are clicked.
+//
+// Core functionalities include:
+// - A singleton pattern with DontDestroyOnLoad to persist between scenes.
+// - Managing a playlist of audio tracks.
+// - Controlling music volume via a UI slider.
+// - Muting/unmuting functionality that remembers the last volume level.
+// - Cycling through the available music tracks.
+// - Updating UI visuals (button sprites, animators) to reflect the audio state.
+// - Public methods for UI buttons to call to load different game scenes.
+// - Re-hooking UI references automatically after a scene loads to maintain
+//   functionality.
+//
+// Dependencies:
+// - Requires UI elements in each scene with specific names (e.g. "Slider",
+//   "Stylus") for re-hooking functionality.
+// - Relies on a 'States' script for resetting the game state before loading a level.
+// - The 'musicList' must be populated with AudioSource components in the Inspector.
+//
+// ==========================================================================
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+/// <summary>
+/// A persistent singleton that manages music, volume, and main menu button actions.
+/// </summary>
 public class Buttons : MonoBehaviour
 {
+    [Header("Component References")]
+    [Tooltip("Reference to the main game state manager.")]
     public States states;
-    //music
-    public int musicIndex;
-    public List<AudioSource> musicList = new List<AudioSource>();
-    public GameObject musicObj;
-    public bool mute;
+    [Tooltip("The UI Image for the audio button, to swap its sprite.")]
     public Image audioButton;
-    public Sprite audioUI;
-    public Sprite mutedUI;
-    //stylus animator
+    [Tooltip("The animator for the record player stylus.")]
     public Animator stylusAnimator;
-    //slider
+    [Tooltip("The UI Slider for controlling music volume.")]
     public Slider musicSlider;
-    public float lastVaue;
-    void Start()
-    {
-        musicObj = GameObject.Find("Button Manager"); // or use a tag
-                                                      //slider
-        if (musicList.Count > musicIndex)
-        {
-            musicSlider.value = musicList[musicIndex].volume;
-            musicList[musicIndex].Play();
-        }
-        
-        //record
-        Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
-        if (img != null)
-        {
-            img.alphaHitTestMinimumThreshold = 0.5f;
-        }
-    }
-    void Update()
-    {
-        //musicSlider.onValueV
-    }
+    
+    [Header("Music & Audio")]
+    [Tooltip("The index of the currently playing track in the musicList.")]
+    public int musicIndex;
+    [Tooltip("A list of all available music tracks (AudioSource components).")]
+    public List<AudioSource> musicList = new List<AudioSource>();
+    [Tooltip("The sprite to display when audio is enabled.")]
+    public Sprite audioUI;
+    [Tooltip("The sprite to display when audio is muted.")]
+    public Sprite mutedUI;
+
+    // --- Private State Variables ---
+    private bool mute; // Tracks if the music is currently muted.
+    private float lastVaue; // Stores the volume level before muting.
+
+    /// <summary>
+    /// Implements the singleton pattern to ensure only one instance of this manager exists.
+    /// </summary>
     void Awake()
     {
-        //musicObj = GameObject.Find("Button Manager"); // or use a tag
-        musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
+        // If more than one instance of this script exists, destroy the new one.
         if (FindObjectsOfType<Buttons>().Length > 1)
         {
             Destroy(gameObject);
             return;
         }
 
+        // Mark this instance to not be destroyed when loading new scenes.
         DontDestroyOnLoad(gameObject);
-        GameObject stylus = GameObject.Find("Stylus");
-        if (stylus != null)
-        {
-            stylusAnimator = stylus.GetComponent<Animator>();
-        }
     }
-    public void SetVolume(float volume)
-    {
-        musicList[musicIndex].volume = volume;
-        if(musicList[musicIndex].volume == 0)
-        {
-            //Debug.Log("muuute");
-            //volume = 0;
-            //musicSlider.value = 0;
-            //lastVaue = Mathf.Round(lastVaue);
-            mute = true;
-            audioButton.sprite = mutedUI;
-            if(stylusAnimator != null)
-            stylusAnimator.SetBool("Mute", true);
-        }
-        else if(musicList[musicIndex].volume > 0)
-        {
-            //Debug.Log("unmute??");
-            mute = false;
-            audioButton.sprite = audioUI;
-            lastVaue = musicSlider.value;
-            if(stylusAnimator != null)
-            stylusAnimator.SetBool("Mute", false);
-        }
-    }
-    public void Play()
-    {
-        SceneManager.LoadScene("MainDemoA3");
-    }
-    public void message()
-    {
-        Debug.Log("hello");
-    }
-    public void PlayDemo()
-    {   
-        // Reset the game state
-        states.ResetGameState();
-        // Load the demo scene
-        SceneManager.LoadScene("MainDemoA3");
-    }
-    public void PlayDemo2()
-    {
-        // Load the demo scene
-        SceneManager.LoadScene("Demo_2");
-    }
-    public void ChangeMusic()
-    {
-        if(!mute)
-        {
-            Debug.Log("Music changed!!");
-            if(musicIndex < musicList.Count - 1)
-            {
-                musicList[musicIndex].Stop();
-                musicIndex++;
-            }
-            else
-            {
-                musicList[musicIndex].Stop();
-                musicIndex = 0;
-            }
-            musicList[musicIndex].volume = musicSlider.value;
-            musicList[musicIndex].Play();
-        }
-    }
-    public void MuteMusic()
-    {
-        //Debug.Log("Muted!!!");
-        if(!mute)
-        {
-            lastVaue = musicSlider.value;
-            musicSlider.value = 0;
-            musicList[musicIndex].volume = musicSlider.value;
-            //musicList[musicIndex].mute = true;
-            mute = true;
-            audioButton.sprite = mutedUI;
-            if(stylusAnimator != null)
-            stylusAnimator.SetBool("Mute", true);
-        }
-        else
-        {
-            if(lastVaue > 0)
-            {
-                musicList[musicIndex].volume = lastVaue;
-                musicSlider.value = lastVaue;
-                //musicList[musicIndex].mute = false;
-                mute = false;
-                audioButton.sprite = audioUI;
-                if(stylusAnimator != null)
-                stylusAnimator.SetBool("Mute", false);
-            }
-        }
-    }
+
+    /// <summary>
+    /// Subscribes to the sceneLoaded event when this object is enabled.
+    /// </summary>
     void OnEnable()
-{
-    SceneManager.sceneLoaded += OnSceneLoaded;
-}
-
-void OnDisable()
-{
-    SceneManager.sceneLoaded -= OnSceneLoaded;
-}
-
-void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-{
-    // Re-assign scene objects after each load
-    musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
-    stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
-    audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>(); // optional
-
-    if (musicSlider != null)
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Unsubscribes from the sceneLoaded event when this object is disabled.
+    /// </summary>
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    /// <summary>
+    /// Initialises music and UI elements when the script first starts.
+    /// </summary>
+    void Start()
+    {
+        // Play the initial music track if available.
         if (musicList.Count > musicIndex)
         {
             musicSlider.value = musicList[musicIndex].volume;
-            musicSlider.value = musicList[musicIndex].volume;
+            musicList[musicIndex].Play();
         }
         
-        musicSlider.onValueChanged.RemoveAllListeners();
-        musicSlider.onValueChanged.AddListener(SetVolume);
+        // Configure the vinyl record image to ignore clicks on its transparent areas.
+        Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
+        if (img != null)
+        {
+            img.alphaHitTestMinimumThreshold = 0.5f;
+        }
     }
-    //buttons
-    Button stylusButton = GameObject.Find("Stylus")?.GetComponent<Button>();
-    if (stylusButton != null)
-    {
-        stylusButton.onClick.RemoveAllListeners();
-        stylusButton.onClick.AddListener(MuteMusic);
-    }
-    Button audioB = GameObject.Find("Music Icon")?.GetComponent<Button>();
-    if (audioB != null)
-    {
-        audioB.onClick.RemoveAllListeners();
-        audioB.onClick.AddListener(MuteMusic);
-    }
-    Button RecordButton = GameObject.Find("Logo Vynyl")?.GetComponent<Button>();
-    if (RecordButton != null)
-    {
-        RecordButton.onClick.RemoveAllListeners();
-        RecordButton.onClick.AddListener(ChangeMusic);
-    }
-}
 
+    /// <summary>
+    /// This method is called every time a new scene is loaded. It re-acquires
+    /// references to scene-specific UI elements to ensure functionality is maintained.
+    /// </summary>
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Re-find UI elements in the newly loaded scene.
+        musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
+        stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
+        audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>();
+        states = FindObjectOfType<States>();
+
+        // Re-configure the volume slider.
+        if (musicSlider != null)
+        {
+            if (musicList.Count > musicIndex)
+            {
+                musicSlider.value = musicList[musicIndex].volume;
+            }
+            
+            // Re-assign the listener to prevent errors from old scene references.
+            musicSlider.onValueChanged.RemoveAllListeners();
+            musicSlider.onValueChanged.AddListener(SetVolume);
+        }
+
+        // Re-assign button listeners.
+        Button stylusButton = GameObject.Find("Stylus")?.GetComponent<Button>();
+        if (stylusButton != null)
+        {
+            stylusButton.onClick.RemoveAllListeners();
+            stylusButton.onClick.AddListener(MuteMusic);
+        }
+        Button audioB = GameObject.Find("Music Icon")?.GetComponent<Button>();
+        if (audioB != null)
+        {
+            audioB.onClick.RemoveAllListeners();
+            audioB.onClick.AddListener(MuteMusic);
+        }
+        Button recordButton = GameObject.Find("Logo Vynyl")?.GetComponent<Button>();
+        if (recordButton != null)
+        {
+            recordButton.onClick.RemoveAllListeners();
+            recordButton.onClick.AddListener(ChangeMusic);
+        }
+    }
+
+    /// <summary>
+    /// Public method for UI buttons to load the main demo scene after resetting the game state.
+    /// </summary>
+    public void PlayDemo()
+    {
+        if (states != null)
+        {
+            states.ResetGameState();
+        }
+        SceneManager.LoadScene("MainDemoA3");
+    }
+
+    /// <summary>
+    /// Public method for UI buttons to load the second demo scene.
+    /// </summary>
+    public void PlayDemo2()
+    {
+        SceneManager.LoadScene("Demo_2");
+    }
+
+    /// <summary>
+    /// Sets the music volume. This is intended to be called by the UI slider's OnValueChanged event.
+    /// </summary>
+    /// <param name="volume">The new volume level, from 0.0 to 1.0.</param>
+    public void SetVolume(float volume)
+    {
+        if (musicList.Count > musicIndex)
+        {
+            musicList[musicIndex].volume = volume;
+        }
+
+        // Update the mute state and visuals based on the new volume.
+        if (volume == 0)
+        {
+            UpdateMuteState(true);
+        }
+        else
+        {
+            lastVaue = volume;
+            UpdateMuteState(false);
+        }
+    }
+    
+    /// <summary>
+    /// Cycles to the next music track in the playlist.
+    /// </summary>
+    public void ChangeMusic()
+    {
+        if (mute || musicList.Count == 0) return;
+
+        // Stop the current track.
+        musicList[musicIndex].Stop();
+
+        // Increment the index, wrapping around to the start if at the end of the list.
+        musicIndex = (musicIndex + 1) % musicList.Count;
+        
+        // Play the new track with the current volume setting.
+        musicList[musicIndex].volume = musicSlider.value;
+        musicList[musicIndex].Play();
+    }
+
+    /// <summary>
+    /// Toggles the music mute state.
+    /// </summary>
+    public void MuteMusic()
+    {
+        // If not muted, mute the music.
+        if (!mute)
+        {
+            // Store the current volume before setting it to 0.
+            lastVaue = musicSlider.value;
+            musicSlider.value = 0;
+            UpdateMuteState(true);
+        }
+        // If already muted, unmute the music.
+        else
+        {
+            // Restore the volume to its last known value (if it was greater than 0).
+            if (lastVaue > 0)
+            {
+                musicSlider.value = lastVaue;
+            }
+            // If the last value was 0, set it to a default audible level.
+            else
+            {
+                musicSlider.value = 0.5f;
+            }
+            UpdateMuteState(false);
+        }
+    }
+
+    /// <summary>
+    /// Updates the mute flag and all related UI visuals.
+    /// </summary>
+    /// <param name="isMuted">The new mute state.</param>
+    private void UpdateMuteState(bool isMuted)
+    {
+        mute = isMuted;
+        if (audioButton != null)
+        {
+            audioButton.sprite = isMuted ? mutedUI : audioUI;
+        }
+        if (stylusAnimator != null)
+        {
+            stylusAnimator.SetBool("Mute", isMuted);
+        }
+    }
 }

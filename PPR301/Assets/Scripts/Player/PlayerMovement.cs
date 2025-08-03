@@ -60,8 +60,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("Rotation Settings")]
     [Tooltip("How quickly the player rotates to face the movement direction in 3D mode.")]
     [SerializeField] private float rotationSpeed = 5f;
-    [Tooltip("How quickly the player rotates to face the movement direction in top-down mode.")]
-    [SerializeField] private float topDownRotationSpeed = 50f;
 
     [Header("Audio Settings")]
     [Tooltip("The AudioSource component used for playing the object dragging sound.")]
