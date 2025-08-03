@@ -48,6 +48,9 @@ public class Projectile : MonoBehaviour
     // The remaining time before the projectile destroys itself.
     private float lifespanTimer;
 
+    public AudioSource bounceSound;
+
+
     /// <summary>
     /// Called on startup. Finds the closest projectile shooter to inherit its settings.
     /// NOTE: This search can be performance-intensive if many shooters exist.
@@ -115,6 +118,7 @@ public class Projectile : MonoBehaviour
             {
                 lifespanTimer = script.projectileLifeSpan;
             }
+            bounceSound.Play();
         }
         else if (other.CompareTag("Wall"))
         {
