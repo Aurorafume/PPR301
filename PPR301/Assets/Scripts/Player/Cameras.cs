@@ -56,6 +56,7 @@ public class Cameras : MonoBehaviour
     public Camera KeyCamera;
     [Tooltip("A camera object that is smoothly moved between different camera positions.")]
     public GameObject obj;
+    public Camera followCamera;
 
     [Header("Component References")]
     [Tooltip("Reference to the PlayerMovement script to modify player state.")]
@@ -149,7 +150,7 @@ public class Cameras : MonoBehaviour
 
                 // Ensure the player camera is active and the fixed camera is not.
                 camera1.depth = 1;
-                camera2.depth = 0; // Assuming followCamera was intended to be camera2 or similar
+                followCamera.depth = 0; // Assuming followCamera was intended to be camera2 or similar
             }
         }
         // --- STATE 2: Moving to a Fixed Camera ---
@@ -157,7 +158,7 @@ public class Cameras : MonoBehaviour
         {
             // Switch active camera depth to the selected fixed camera.
             camera1.depth = 0;
-            cameraList[followCamArray].depth = 1;
+            followCamera.depth = 1;
 
             // Reset state flags from the other mode.
             robotFollow = false;
@@ -212,13 +213,18 @@ public class Cameras : MonoBehaviour
     /// </summary>
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Area1") ||
-            collision.gameObject.CompareTag("Area2") ||
+        if (collision.gameObject.CompareTag("Area1"))
+        {
+            move = true; // Switch back to player-following camera mode.
+            script.noJumpMode = false; // Re-enable player jumping.
+            OnEnterTopDownCamera?.Invoke(false, 0); // Notify systems we are leaving top-down view.
+        } 
+        if (collision.gameObject.CompareTag("Area2") ||
             collision.gameObject.CompareTag("Area3"))
         {
             move = true; // Switch back to player-following camera mode.
             script.noJumpMode = false; // Re-enable player jumping.
-            OnEnterTopDownCamera?.Invoke(false, topDownForwardDirection); // Notify systems we are leaving top-down view.
+            OnEnterTopDownCamera?.Invoke(false, -90); // Notify systems we are leaving top-down view.
         }
     }
     
