@@ -47,6 +47,8 @@ public class Carriable : MonoBehaviour
     [Tooltip("Orientation of the object when held.")]
     [SerializeField] Vector3 holdOrientation;
 
+    public SoundEffects soundEffects;
+
     /// <summary>
     /// Defines the category of the carriable object.
     /// </summary>
@@ -82,6 +84,7 @@ public class Carriable : MonoBehaviour
     {
         colliders = GetComponentsInChildren<Collider>();
         mouth = playerInteractHandler.mouth;
+        soundEffects = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
     }
 
     /// <summary>
@@ -104,6 +107,8 @@ public class Carriable : MonoBehaviour
     /// </summary>
     void Carry()
     {
+        //play key sound
+        soundEffects.soundEffects[2].Play();
         // Update state flags.
         myInteractable.SetAwaitingFurtherInteraction(true);
         held = true;
