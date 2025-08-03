@@ -5,22 +5,27 @@
 // ==========================================================================
 //
 // WHAT DOES THIS DO:
-// This script controls the AI behavior for an enemy character in a Unity game.
-// It includes logic for the enemy to detect, chase, and respond to the player's
-// presence, as well as fade away when the player escapes or hides.
-// 
+// This script defines the behavior for the main enemy AI. It manages the
+// enemy's entire lifecycle, from spawning with a fade-in effect to despawning
+// when the player escapes. The AI uses a NavMeshAgent for pathfinding to
+// pursue the player.
+//
 // Core functionalities include:
-// - Pathfinding to follow the player using NavMeshAgent.
-// - Distance-based aggro detection and chase initiation.
-// - Animation control for walking behavior.
-// - Fade-out effect for despawning after chase ends.
-// - Game state updates when the player is caught or hides.
-// - Integration with a noise meter system to visually indicate chase state.
+// - State-driven behavior for spawning, chasing, idling, and despawning.
+// - Pathfinding using Unity's NavMeshAgent system.
+// - Distance-based detection to initiate and maintain a chase.
+// - Dynamic animation control based on movement speed.
+// - Fade-in and fade-out effects managed via material alpha properties.
+// - Integration with game state systems (States, NoiseBar) to handle player
+//   hiding, game over conditions, and UI feedback.
+// - Particle effects for spawning and despawning events.
 //
 // Dependencies:
-// - UnityEngine.AI for navigation.
-// - Animator and SpriteRenderer for visual behavior.
-// - States and NoiseBar custom scripts for gameplay logic and feedback.
+// - UnityEngine.AI for NavMeshAgent pathfinding.
+// - Animator, Renderer, and ParticleSystem for visual effects.
+// - Custom scripts: States, NoiseBar, and NoiseHandler for core game logic.
+// - A scene with a baked NavMesh and a GameObject tagged "Player".
+// - NavMesh Areas named "Walkable" and "PhaseWalkable".
 //
 // ==========================================================================
 
@@ -32,15 +37,13 @@ public class EnemyAI : MonoBehaviour
     [Header("Navigation & Targeting")]
     [Tooltip("NavMeshAgent used for pathfinding.")]
     public NavMeshAgent agent;
-    [Tooltip("Distance at which the enemy will become aggressive.")]
+    [Tooltip("Distance at which the enemy will become aggressive when idle.")]
     public int idleAggroDistance = 10;
-    [Tooltip("Distance between this enemy and the player.")]
+    [Tooltip("Distance at which the enemy will maintain a chase.")]
     public int chaseAggroDistance = 20;
-    [Tooltip("Distance between this enemy and the player.")]
-    private float distanceFromPlayer;
-    [Tooltip("Whether the enemy is currently chasing the player.")]
-    private bool chasing;
-    private GameObject playerToChase;
+    private float distanceFromPlayer;       // Current distance between this enemy and the player.
+    private bool chasing;                   // Tracks if the enemy is actively chasing the player.
+    private GameObject playerToChase;       // A direct reference to the player's GameObject for targeting.
 
     [Header("Respawn & Fade Settings")]
     [Tooltip("Time (in seconds) to wait before despawning after losing the player.")]
@@ -49,82 +52,70 @@ public class EnemyAI : MonoBehaviour
     public float fadeOutTime = 1.5f;
     [Tooltip("Time taken to fade in the enemy.")]
     public float fadeInTime = 1.5f;
-    private float fadeOutSpeed;
-    private float fadeInSpeed;
-    [Tooltip("Time remaining until the enemy despawns after losing the player.")]
-    private float despawnTimer;
+    private float fadeOutSpeed;             // Calculated speed for the fade-out effect.
+    private float fadeInSpeed;              // Calculated speed for the fade-in effect.
+    private float despawnTimer;             // Countdown timer for despawning when idle.
 
     [Header("Effects & Visuals")]
-    [Tooltip("Particle effect played when the enemy spawns in.")]
+    [Tooltip("Transform defining the position for particle effects.")]
     public Transform effectLocator;
+    [Tooltip("Particle effect played when the enemy spawns in.")]
     public ParticleSystem spawnEffect;
+    [Tooltip("Particle effect played when the enemy despawns.")]
     public ParticleSystem despawnEffect;
 
     [Header("Components & References")]
     [Tooltip("Animator component controlling the enemy's animations.")]
     public Animator anim;
-    [Tooltip("Reference to the NoiseBar used to show noise level.")]
-    private NoiseBar noiseBar;
-    [Tooltip("Reference to the States manager for global flags.")]
-    public States states;
     [Tooltip("Reference to the player GameObject.")]
     public GameObject player;
-    [Tooltip("Renderer component.")]
+    [Tooltip("Renderer component used for fade effects.")]
     public Renderer enemyRenderer;
-    private bool spawning;
-    private bool despawning;
-    private int aggroDistance;
-    private Material[] enemyMaterials;
-    private float enemyAlpha;
+    private NoiseBar noiseBar;              // Reference to the NoiseBar for UI feedback.
+    private States states;                  // Reference to the States manager for global flags.
+    private bool spawning;                  // State flag for the initial spawn-in sequence.
+    private bool despawning;                // State flag for the despawn sequence.
+    private int aggroDistance;              // The current aggro distance, which changes based on state.
+    private Material[] enemyMaterials;      // Array of materials for the fade effect.
+    private float enemyAlpha;               // The current alpha (transparency) value of the enemy materials.
 
-
+    /// <summary>
+    /// Initialises components, references, and state variables at the start.
+    /// </summary>
     void Start()
     {
-        // Initialise references
+        // Cache component and object references for performance.
         states = FindObjectOfType<States>();
         player = GameObject.Find("Player");
-        playerToChase = GameObject.Find("Player");
+        playerToChase = GameObject.Find("Player"); // Target the player object
         noiseBar = FindObjectOfType<NoiseBar>();
         anim = GetComponent<Animator>();
 
-        // --- START DEBUG CHECKS ---
-        Debug.Log("--- EnemyAI Start() Initialising ---");
-        states = FindObjectOfType<States>();
-        if (states == null) { Debug.LogError("EnemyAI: Could not find 'States' object in scene!"); return; }
-        else { Debug.Log("EnemyAI: Found 'States' object."); }
-
-        player = GameObject.Find("Player");
-        if (player == null) { Debug.LogError("EnemyAI: Could not find GameObject named 'Player'!"); return; }
-        else { Debug.Log("EnemyAI: Found 'Player' object by name."); }
-
-        playerToChase = GameObject.Find("Player");
-        // No need to check playerToChase again, but good practice to be robust
-        if (playerToChase == null) { Debug.LogError("EnemyAI: Could not find 'playerToChase' object!"); return; }
-
-        noiseBar = FindObjectOfType<NoiseBar>();
-        if (noiseBar == null) { Debug.LogError("EnemyAI: Could not find 'NoiseBar' object in scene!"); return; }
-        else { Debug.Log("EnemyAI: Found 'NoiseBar' object."); }
-        // --- END DEBUG CHECKS ---
-
-        // Set the enemy to walk on defined area masks
+        // Configure the NavMeshAgent to use specific walkable areas.
         agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
 
+        // Initialise state variables and calculate fade speeds.
         aggroDistance = chaseAggroDistance;
         despawnTimer = timeUntilDespawn;
         enemyMaterials = enemyRenderer.materials;
         fadeOutSpeed = 1f / fadeOutTime;
         fadeInSpeed = 1f / fadeInTime;
-        enemyAlpha = 0f;
+        enemyAlpha = 0f; // Start fully transparent
+
+        // Set the initial alpha of all materials to transparent for the fade-in.
         foreach (Material mat in enemyMaterials)
         {
             mat.SetFloat("_Alpha", enemyAlpha);
         }
 
+        // Trigger the spawn-in sequence and its visual effect.
         spawning = true;
-
         CreateSpawnEffect();
     }
 
+    /// <summary>
+    /// Instantiates and configures the spawn particle system.
+    /// </summary>
     void CreateSpawnEffect()
     {
         if (spawnEffect != null)
@@ -132,44 +123,57 @@ public class EnemyAI : MonoBehaviour
             ParticleSystem effect = Instantiate(spawnEffect, effectLocator.position, Quaternion.identity);
             effect.transform.SetParent(effectLocator);
             ParticleSystem.MainModule main = effect.main;
-            main.duration = fadeInTime;
+            main.duration = fadeInTime; // Sync particle duration with fade-in time
             effect.Play();
         }
     }
 
+    /// <summary>
+    /// Main update loop, called once per frame. Directs the enemy's state.
+    /// </summary>
     void Update()
     {
+        // Always update animations based on movement.
         HandleAnimations();
 
+        // If spawning, handle the fade-in and skip other logic.
         if (spawning)
         {
             SpawnIn();
             return;
         }
 
-        // Main behavior loop
-        if (!despawning)
+        // If currently despawning, handle the fade-out process.
+        if (despawning)
+        {
+            Despawn();
+        }
+        // Otherwise, run the main AI behavior loop.
+        else
         {
             DetermineIfChasing();
             HandleChasing();
             HandleIdling();
             HandleCatchPlayer();
         }
-        else
-        {
-            Despawn();
-        }
     }
-
+    
+    /// <summary>
+    /// Handles the fade-in effect and transitions the state from spawning to active.
+    /// </summary>
     void SpawnIn()
     {
+        // Increase alpha over time to fade in.
         enemyAlpha += fadeInSpeed * Time.deltaTime;
-        enemyAlpha = Mathf.Clamp01(enemyAlpha);
+        enemyAlpha = Mathf.Clamp01(enemyAlpha); // Keep alpha between 0 and 1
 
+        // Apply the new alpha value to all materials.
         foreach (Material mat in enemyMaterials)
         {
             mat.SetFloat("_Alpha", enemyAlpha);
         }
+
+        // Once fully visible, exit the spawning state.
         if (enemyAlpha >= 1f)
         {
             spawning = false;
@@ -183,69 +187,90 @@ public class EnemyAI : MonoBehaviour
     {
         if (chasing)
         {
+            // Set the NavMeshAgent's destination to the player's current location.
             Vector3 playerLocation = playerToChase.transform.position;
-            agent.SetDestination(playerLocation);  // Move toward player
-            aggroDistance = chaseAggroDistance;
+            agent.SetDestination(playerLocation);
+            aggroDistance = chaseAggroDistance; // Use the larger chase aggro distance
 
+            // Update the noise bar to show the chase is active.
             if (noiseBar != null)
             {
-                noiseBar.ForceChaseVisuals(true);   // Enable visual alert
+                noiseBar.ForceChaseVisuals(true);
             }
         }
     }
 
+    /// <summary>
+    /// Manages behavior when not actively chasing, such as when the player hides or is out of range.
+    /// </summary>
     void HandleIdling()
     {
-        // If was chasing, but player is hiding, stop chasing
+        // If the enemy was chasing but the player is now hiding, stop the chase.
         if (chasing && states.playerIsHiding)
         {
             StopChasing();
         }
 
-        // If not chasing, handle despawn timer
+        // If not chasing for any reason, start the countdown to despawn.
         if (!chasing)
         {
             HandleDespawnTimer();
         }
     }
 
+    /// <summary>
+    /// Resets the enemy's state from chasing to idle.
+    /// </summary>
     void StopChasing()
     {
         chasing = false;
-        agent.SetDestination(transform.position);  // Stop moving
-        despawnTimer = timeUntilDespawn;
-        aggroDistance = idleAggroDistance;
+        agent.SetDestination(transform.position); // Stop moving
+        despawnTimer = timeUntilDespawn;          // Reset despawn timer
+        aggroDistance = idleAggroDistance;        // Revert to smaller idle aggro distance
     }
 
+    /// <summary>
+    /// Counts down the despawn timer and initiates the despawn sequence when it reaches zero.
+    /// </summary>
     void HandleDespawnTimer()
     {
         despawnTimer -= Time.deltaTime;
 
+        // When the timer runs out, begin despawning.
         if (despawnTimer <= 0)
         {
+            // Turn off the chase visuals on the noise bar.
             if (noiseBar != null)
             {
                 noiseBar.ForceChaseVisuals(false);
             }
 
+            // Set the despawning flag and create the visual effect.
             despawning = true;
             CreateDespawnEffect();
         }
     }
 
+    /// <summary>
+    /// Instantiates and plays the despawn particle effect.
+    /// </summary>
     void CreateDespawnEffect()
     {
-        ParticleSystem effect = Instantiate(despawnEffect, effectLocator.position, Quaternion.identity);
-        ParticleSystem.MainModule main = effect.main;
-        main.duration = fadeOutTime;
-        effect.Play();
+        if (despawnEffect != null)
+        {
+            ParticleSystem effect = Instantiate(despawnEffect, effectLocator.position, Quaternion.identity);
+            ParticleSystem.MainModule main = effect.main;
+            main.duration = fadeOutTime; // Sync particle duration with fade-out time
+            effect.Play();
+        }
     }
 
     /// <summary>
-    /// Plays or stops walking animation depending on velocity.
+    /// Toggles the walking animation based on the NavMeshAgent's velocity.
     /// </summary>
     public void HandleAnimations()
     {
+        // If the agent is moving, play the walking animation.
         if (agent.velocity.magnitude > 0.1f)
         {
             anim.SetBool("isWalking", true);
@@ -257,56 +282,60 @@ public class EnemyAI : MonoBehaviour
     }
 
     /// <summary>
-    /// Checks the distance from player and toggles chasing state.
+    /// Checks the distance to the player and toggles the chasing state accordingly.
     /// </summary>
     public void DetermineIfChasing()
     {
+        // Do not start a chase if the player is currently hidden.
         if (states.playerIsHiding) return;
 
         distanceFromPlayer = Vector3.Distance(transform.position, playerToChase.transform.position);
 
+        // Start or continue chasing if the player is within the current aggro distance.
         chasing = distanceFromPlayer <= aggroDistance;
     }
 
     /// <summary>
-    /// Checks if the enemy is close enough to the player to trigger an interaction.
-    /// If the player is hiding, enemy despawns. Otherwise, game over.
+    /// Checks if the enemy is close enough to catch the player and triggers the game over state.
     /// </summary>
     public void HandleCatchPlayer()
     {
+        // Check if the enemy is very close and the player is not hiding.
         if (distanceFromPlayer <= 2f && !states.playerIsHiding)
         {
+            // Reset the noise bar visuals.
             if (noiseBar != null)
             {
                 noiseBar.StopChase();
                 noiseBar.ForceChaseVisuals(false);
             }
             
-            states.gameOver = true;  // Player caught
-            NoiseHandler.NotifyEnemyDespawned();
+            // Player is caught, trigger game over.
+            states.gameOver = true;
+            NoiseHandler.NotifyEnemyDespawned(); // Notify that this enemy is no longer active.
         }
     }
 
     /// <summary>
-    /// Gradually fades enemy sprite out when despawning.
-    /// Also triggers global enemy despawn notification.
+    /// Gradually fades the enemy out and notifies the system upon completion.
     /// </summary>
     void Despawn()
     {
-        if (enemyAlpha <= 0)
-        {
-            NoiseHandler.NotifyEnemyDespawned();
-        }
-
+        // Decrease alpha over time to fade out.
         enemyAlpha -= fadeOutSpeed * Time.deltaTime;
-        if (enemyAlpha < 0)
-        {
-            enemyAlpha = 0;
-        }
-        
+        enemyAlpha = Mathf.Clamp01(enemyAlpha);
+
+        // Apply the new alpha value to all materials.
         foreach (Material mat in enemyMaterials)
         {
             mat.SetFloat("_Alpha", enemyAlpha);
+        }
+
+        // Once fully faded, notify the system and destroy the GameObject.
+        if (enemyAlpha <= 0)
+        {
+            NoiseHandler.NotifyEnemyDespawned();
+            Destroy(gameObject); // Remove the enemy from the scene.
         }
     }
 }

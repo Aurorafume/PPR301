@@ -69,28 +69,10 @@ public class EnemySpawning : MonoBehaviour
     [Tooltip("Reference to the player object.")]
     public GameObject Player;
 
-    void Start()
-    {
-        // Log platform/spawn mappings at start for validation
-        foreach (var pair in platformSpawnPairs)
-        {
-            Debug.Log($"Platform: {pair.platform.name} paired with Spawn: {pair.spawnPoint.name}");
-        }
-    }
-
     void Update()
     {
-        // --- DEBUG CHECKS ---
         // Find what platform the player is currently on
         Transform currentSpawnPoint = GetCurrentEnemySpawnPoint();
-        if (currentSpawnPoint != null)
-        {
-            Debug.Log($"Current Spawn Point: {currentSpawnPoint.name}");
-        }
-        else
-        {
-            Debug.LogWarning("No valid spawn point found for the player.");
-        }
     }
 
     /// <summary>
@@ -100,19 +82,6 @@ public class EnemySpawning : MonoBehaviour
     /// <returns>The corresponding enemy spawn point, or null if no match found.</returns>
     public Transform GetCurrentEnemySpawnPoint()
     {
-        // --- START DEBUG CHECKS ---
-        if (Player == null)
-        {
-            Debug.LogError("EnemySpawning: The 'Player' GameObject reference is NULL. Re-finding it now.");
-            Player = GameObject.Find("Player"); // Attempt to re-find it
-            if (Player == null)
-            {
-                Debug.LogError("FATAL: EnemySpawning could NOT find the 'Player' object even after re-trying. Spawning is impossible.");
-                return null;
-            }
-        }
-        // --- END DEBUG CHECKS ---
-
         // Validate required references
         if (states == null || Player == null || platformSpawnPairs == null || platformSpawnPairs.Length == 0)
             return null;
@@ -130,7 +99,6 @@ public class EnemySpawning : MonoBehaviour
             {
                 if (pair.platform == platformHit)
                 {
-                    Debug.Log("Enemy Spawn Point Found: " + pair.spawnPoint.name);
                     return pair.spawnPoint.transform;
                 }
             }
