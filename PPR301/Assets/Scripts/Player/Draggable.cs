@@ -52,6 +52,7 @@ public class Draggable : MonoBehaviour
     private PlayerInteractHandler playerInteractHandler;
     private Rigidbody rb;
     private bool defaultFreezeRotation; // Stores the initial freezeRotation state of the Rigidbody.
+    public SoundEffects soundEffects;
 
     /// <summary>
     /// Event invoked when an object starts or stops being dragged.
@@ -70,6 +71,9 @@ public class Draggable : MonoBehaviour
         
         // Store the default rotation constraint to restore it later.
         defaultFreezeRotation = rb.freezeRotation;
+
+        //assign sound effects
+        soundEffects = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
     }
 
     /// <summary>
@@ -92,6 +96,7 @@ public class Draggable : MonoBehaviour
     /// </summary>
     void Drag()
     {
+        soundEffects.soundEffects[2].Play();
         myInteractable.SetAwaitingFurtherInteraction(true);
         grabbed = true;
         OnDragObject?.Invoke(true); // Notify other systems that dragging has started.

@@ -84,7 +84,6 @@ public class Projectile : MonoBehaviour
         // Ensure the direction vector is a unit vector.
         direction = direction.normalized;
         soundEffects = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
-
         //bounceSound = SoundEffects;
         //breakDoorSound = GameObject.Find("Sound effects")?.GetComponent<AudioSource>();
     }
