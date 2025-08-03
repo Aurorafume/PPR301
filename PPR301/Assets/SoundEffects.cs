@@ -5,6 +5,7 @@ using UnityEngine;
 public class SoundEffects : MonoBehaviour
 {
     public List<AudioSource> soundEffects = new List<AudioSource>();
+    public List<AudioSource> meowList = new List<AudioSource>();
     public List<AudioSource> instruments = new List<AudioSource>();
     // Start is called before the first frame update
     void Start()
@@ -16,5 +17,9 @@ public class SoundEffects : MonoBehaviour
     void Update()
     {
         
+    }
+    public void Meow()
+    {
+        meowList[Random.Range(0,3)].Play();
     }
 }

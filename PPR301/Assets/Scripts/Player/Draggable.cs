@@ -96,7 +96,8 @@ public class Draggable : MonoBehaviour
     /// </summary>
     void Drag()
     {
-        soundEffects.soundEffects[2].Play();
+        //play sound effect
+        soundEffects.Meow();
         myInteractable.SetAwaitingFurtherInteraction(true);
         grabbed = true;
         OnDragObject?.Invoke(true); // Notify other systems that dragging has started.
