@@ -62,7 +62,7 @@ public class Cameras : MonoBehaviour
     public PlayerMovement script;
     [Tooltip("Reference to the OutOfBounds script to set respawn points.")]
     public OutOfBounds BoundsScript;
-    
+
     [Header("Camera State & Movement")]
     [Tooltip("When true, the camera object moves towards the player camera. When false, it moves towards a fixed camera.")]
     public bool move;
@@ -100,11 +100,11 @@ public class Cameras : MonoBehaviour
         cameraList.Add(camera2);
         cameraList.Add(camera3);
         cameraList.Add(camera4);
-        
+
         // Start in the default player-following camera mode.
         move = true;
     }
-    
+
     /// <summary>
     /// Main update loop, called once per frame.
     /// </summary>
@@ -120,10 +120,10 @@ public class Cameras : MonoBehaviour
     void HandleCameraState()
     {
         // --- STATE 1: Moving to or following the Player Camera ---
-        if(move)
+        if (move)
         {
             // If the camera is still transitioning back to the player...
-            if(!robotFollow)
+            if (!robotFollow)
             {
                 // Smoothly interpolate the camera holder's position and rotation towards the player camera.
                 float t = 1 - Mathf.Exp(-smoothingFactor * Time.deltaTime);
@@ -140,20 +140,20 @@ public class Cameras : MonoBehaviour
                 robotFollow = true;
             }
             // If the camera is in the 'robotFollow' state...
-            else if(robotFollow)
+            else if (robotFollow)
             {
                 // Hard-lock the camera holder's transform to the player camera's transform.
                 smoothingFactor = 0;
                 obj.transform.position = camera1.transform.position;
                 obj.transform.rotation = camera1.transform.rotation;
-                
+
                 // Ensure the player camera is active and the fixed camera is not.
                 camera1.depth = 1;
                 camera2.depth = 0; // Assuming followCamera was intended to be camera2 or similar
             }
         }
         // --- STATE 2: Moving to a Fixed Camera ---
-        else if(!move)
+        else if (!move)
         {
             // Switch active camera depth to the selected fixed camera.
             camera1.depth = 0;
@@ -161,16 +161,16 @@ public class Cameras : MonoBehaviour
 
             // Reset state flags from the other mode.
             robotFollow = false;
-            
+
             // Smoothly move the camera object towards the target fixed camera's position.
             obj.transform.position = Vector3.SmoothDamp(obj.transform.position, cameraList[followCamArray].transform.position, ref velocity, 0.3f);
-            
+
             // Snap to position when very close.
             if (Vector3.Distance(obj.transform.position, cameraList[followCamArray].transform.position) < 0.01f)
             {
                 obj.transform.position = cameraList[followCamArray].transform.position;
             }
-            
+
             // Smoothly rotate towards the fixed camera's orientation.
             obj.transform.rotation = Quaternion.Slerp(obj.transform.rotation, cameraList[followCamArray].transform.rotation, Time.deltaTime * 3);
         }
@@ -212,13 +212,20 @@ public class Cameras : MonoBehaviour
     /// </summary>
     void OnTriggerExit(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Area1") || 
-            collision.gameObject.CompareTag("Area2") || 
+        if (collision.gameObject.CompareTag("Area1") ||
+            collision.gameObject.CompareTag("Area2") ||
             collision.gameObject.CompareTag("Area3"))
         {
             move = true; // Switch back to player-following camera mode.
             script.noJumpMode = false; // Re-enable player jumping.
             OnEnterTopDownCamera?.Invoke(false, topDownForwardDirection); // Notify systems we are leaving top-down view.
         }
+    }
+    
+    public void ForceNoTopDownCamera()
+    {
+        move = true;
+        script.noJumpMode = false;
+        OnEnterTopDownCamera?.Invoke(false, topDownForwardDirection);
     }
 }

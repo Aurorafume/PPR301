@@ -20289,6 +20289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverMenu: {fileID: 1872003595}
+  musicFadeInTime: 2.5
 --- !u!4 &1075079395
 Transform:
   m_ObjectHideFlags: 0
@@ -32272,7 +32273,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1075079394}
         m_TargetAssemblyTypeName: GameOverMenu, Assembly-CSharp
-        m_MethodName: RestartGame
+        m_MethodName: ResumeFromLastCheckpoint
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -34753,16 +34754,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states: {fileID: 1289048060}
-  musicIndex: 0
-  musicList: []
-  musicObj: {fileID: 0}
-  mute: 0
   audioButton: {fileID: 0}
-  audioUI: {fileID: 0}
-  mutedUI: {fileID: 0}
   stylusAnimator: {fileID: 0}
   musicSlider: {fileID: 0}
-  lastVaue: 0
+  musicIndex: 0
+  musicList: []
+  audioUI: {fileID: 0}
+  mutedUI: {fileID: 0}
 --- !u!4 &1921804668
 Transform:
   m_ObjectHideFlags: 0
@@ -36696,15 +36694,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 217.941
+      value: 217.805
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -65.04
+      value: -63.368
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -124.53
+      value: -99.899
       objectReference: {fileID: 0}
     - target: {fileID: 6770507988614217969, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalRotation.w

@@ -73,6 +73,7 @@ public class EnemyAI : MonoBehaviour
     public Renderer enemyRenderer;
     private NoiseBar noiseBar;              // Reference to the NoiseBar for UI feedback.
     private States states;                  // Reference to the States manager for global flags.
+    private Buttons buttons;                // Reference to the Buttons script for music fading.
     private bool spawning;                  // State flag for the initial spawn-in sequence.
     private bool despawning;                // State flag for the despawn sequence.
     private int aggroDistance;              // The current aggro distance, which changes based on state.
@@ -90,6 +91,7 @@ public class EnemyAI : MonoBehaviour
         playerToChase = GameObject.Find("Player"); // Target the player object
         noiseBar = FindObjectOfType<NoiseBar>();
         anim = GetComponent<Animator>();
+        buttons = FindObjectOfType<Buttons>();
 
         // Configure the NavMeshAgent to use specific walkable areas.
         agent.areaMask = NavMesh.GetAreaFromName("Walkable") | NavMesh.GetAreaFromName("PhaseWalkable");
@@ -111,6 +113,11 @@ public class EnemyAI : MonoBehaviour
         // Trigger the spawn-in sequence and its visual effect.
         spawning = true;
         CreateSpawnEffect();
+        // Fade out music
+        if (buttons != null)
+        {
+            buttons.FadeMusic(0f, fadeInSpeed);
+        }
     }
 
     /// <summary>
@@ -248,6 +255,11 @@ public class EnemyAI : MonoBehaviour
             // Set the despawning flag and create the visual effect.
             despawning = true;
             CreateDespawnEffect();
+            // Fade music back in
+            if (buttons != null)
+            {
+                buttons.FadeMusic(1f, fadeOutSpeed);
+            }
         }
     }
 

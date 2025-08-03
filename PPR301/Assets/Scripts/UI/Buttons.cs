@@ -50,7 +50,7 @@ public class Buttons : MonoBehaviour
     public Animator stylusAnimator;
     [Tooltip("The UI Slider for controlling music volume.")]
     public Slider musicSlider;
-    
+
     [Header("Music & Audio")]
     [Tooltip("The index of the currently playing track in the musicList.")]
     public int musicIndex;
@@ -61,9 +61,12 @@ public class Buttons : MonoBehaviour
     [Tooltip("The sprite to display when audio is muted.")]
     public Sprite mutedUI;
 
+    private float volumeOverrideMultiplier = 1f;
+    private Coroutine fadeMusicCoroutine;
+
     // --- Private State Variables ---
     private bool mute; // Tracks if the music is currently muted.
-    private float lastVaue; // Stores the volume level before muting.
+    private float lastValue; // Stores the volume level before muting.
 
     /// <summary>
     /// Implements the singleton pattern to ensure only one instance of this manager exists.
@@ -106,9 +109,10 @@ public class Buttons : MonoBehaviour
         if (musicList.Count > musicIndex)
         {
             musicSlider.value = musicList[musicIndex].volume;
+            lastValue = musicList[musicIndex].volume;
             musicList[musicIndex].Play();
         }
-        
+
         // Configure the vinyl record image to ignore clicks on its transparent areas.
         Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
         if (img != null)
@@ -134,9 +138,9 @@ public class Buttons : MonoBehaviour
         {
             if (musicList.Count > musicIndex)
             {
-                musicSlider.value = musicList[musicIndex].volume;
+                musicSlider.value = lastValue;
             }
-            
+
             // Re-assign the listener to prevent errors from old scene references.
             musicSlider.onValueChanged.RemoveAllListeners();
             musicSlider.onValueChanged.AddListener(SetVolume);
@@ -191,7 +195,7 @@ public class Buttons : MonoBehaviour
     {
         if (musicList.Count > musicIndex)
         {
-            musicList[musicIndex].volume = volume;
+            musicList[musicIndex].volume = volume * volumeOverrideMultiplier;
         }
 
         // Update the mute state and visuals based on the new volume.
@@ -201,11 +205,11 @@ public class Buttons : MonoBehaviour
         }
         else
         {
-            lastVaue = volume;
+            lastValue = volume;
             UpdateMuteState(false);
         }
     }
-    
+
     /// <summary>
     /// Cycles to the next music track in the playlist.
     /// </summary>
@@ -218,7 +222,7 @@ public class Buttons : MonoBehaviour
 
         // Increment the index, wrapping around to the start if at the end of the list.
         musicIndex = (musicIndex + 1) % musicList.Count;
-        
+
         // Play the new track with the current volume setting.
         musicList[musicIndex].volume = musicSlider.value;
         musicList[musicIndex].Play();
@@ -233,7 +237,7 @@ public class Buttons : MonoBehaviour
         if (!mute)
         {
             // Store the current volume before setting it to 0.
-            lastVaue = musicSlider.value;
+            lastValue = musicSlider.value;
             musicSlider.value = 0;
             UpdateMuteState(true);
         }
@@ -241,9 +245,9 @@ public class Buttons : MonoBehaviour
         else
         {
             // Restore the volume to its last known value (if it was greater than 0).
-            if (lastVaue > 0)
+            if (lastValue > 0)
             {
-                musicSlider.value = lastVaue;
+                musicSlider.value = lastValue;
             }
             // If the last value was 0, set it to a default audible level.
             else
@@ -269,5 +273,31 @@ public class Buttons : MonoBehaviour
         {
             stylusAnimator.SetBool("Mute", isMuted);
         }
+    }
+
+    public void FadeMusic(float target, float fadeSpeed)
+    {
+        Debug.Log("Fading Music");
+        if (fadeMusicCoroutine != null)
+        {
+            StopCoroutine(fadeMusicCoroutine);
+            fadeMusicCoroutine = null;
+        }
+        fadeMusicCoroutine = StartCoroutine(FadeMusicCoroutine(target, fadeSpeed));
+    }
+
+    IEnumerator FadeMusicCoroutine(float target, float fadeSpeed)
+    {
+        while (volumeOverrideMultiplier != target)
+        {
+            volumeOverrideMultiplier = Mathf.MoveTowards(volumeOverrideMultiplier, target, fadeSpeed * Time.deltaTime);
+            SetVolume(lastValue);
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        volumeOverrideMultiplier = target;
+        SetVolume(lastValue);
+        fadeMusicCoroutine = null;
     }
 }

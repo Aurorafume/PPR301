@@ -40,11 +40,17 @@ public class GameOverMenu : MonoBehaviour
     [Tooltip("The parent GameObject for the game over menu UI panel.")]
     public GameObject gameOverMenu;
 
+    [Header("Music")]
+    [Tooltip("Time taken for the music to fully fade back in after being caught")]
+    public float musicFadeInTime = 2.5f;
+    private float volumeFadeSpeed;
+
     // --- Cached Component References ---
     private CheckpointManager checkpointManager;
     private GameObject playerObject;
     private States states;
     private NoiseHandler noiseHandler;
+    private Buttons buttons;
 
     /// <summary>
     /// Caches references to other manager components in the scene.
@@ -55,6 +61,7 @@ public class GameOverMenu : MonoBehaviour
         states = FindObjectOfType<States>();
         noiseHandler = FindObjectOfType<NoiseHandler>();
         playerObject = states.gameObject;
+        buttons = FindObjectOfType<Buttons>();
     }
 
     /// <summary>
@@ -63,6 +70,7 @@ public class GameOverMenu : MonoBehaviour
     void Start()
     {
         gameOverMenu.SetActive(false);
+        volumeFadeSpeed = 1f / musicFadeInTime;
     }
 
     /// <summary>
@@ -76,12 +84,19 @@ public class GameOverMenu : MonoBehaviour
         // Immediately move the player to the last checkpoint while the game is paused.
         checkpointManager.SendPlayerToLastCheckpoint();
 
+        // Ensure camera resets to a normal state if in a top-down area
+        Cameras cameras = FindObjectOfType<Cameras>();
+        if (cameras != null)
+        {
+            cameras.ForceNoTopDownCamera(); // Ensure the camera is not in top-down mode
+        }
+
         // Unlock and show the cursor to allow UI interaction.
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
-        
+
         // Reset any active noise effects.
-        if(noiseHandler != null)
+        if (noiseHandler != null)
         {
             noiseHandler.ClearNoise();
         }
@@ -90,7 +105,7 @@ public class GameOverMenu : MonoBehaviour
     /// <summary>
     /// Handles the logic for the 'Restart' or 'Continue' button.
     /// </summary>
-    public void RestartGame()
+    public void ResumeFromLastCheckpoint()
     {
         // If the player has reached a checkpoint, resume the game from that point.
         if (checkpointManager.HasCheckpoint())
@@ -104,6 +119,7 @@ public class GameOverMenu : MonoBehaviour
         else
         {
             Time.timeScale = 1f; // Ensure time is resumed before loading a new scene.
+            buttons.FadeMusic(1f, volumeFadeSpeed);
             SceneManager.LoadScene("MainDemoA3");
         }
     }
@@ -121,6 +137,7 @@ public class GameOverMenu : MonoBehaviour
 
         gameOverMenu.SetActive(false);
         Time.timeScale = 1f; // Resume game time.
+        buttons.FadeMusic(1f, volumeFadeSpeed);
         
         // Re-lock and hide the cursor for gameplay.
         Cursor.lockState = CursorLockMode.Locked;
@@ -133,6 +150,7 @@ public class GameOverMenu : MonoBehaviour
     public void ReturnToMainMenu()
     {
         Time.timeScale = 1f; // Ensure time is resumed before loading a new scene.
+        buttons.FadeMusic(1f, volumeFadeSpeed);
         SceneManager.LoadScene("StartMenu");
     }
 }
