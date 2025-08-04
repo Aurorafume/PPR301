@@ -7,6 +7,7 @@ public class SoundEffects : MonoBehaviour
     public List<AudioSource> soundEffects = new List<AudioSource>();
     public List<AudioSource> meowList = new List<AudioSource>();
     public List<AudioSource> instruments = new List<AudioSource>();
+    public AudioSource raccoonLaugh;
     // Start is called before the first frame update
     void Start()
     {

@@ -70,6 +70,9 @@ public class DialogueBox : MonoBehaviour
     private int sentenceIndex; // The index of the current sentence within the list.
     private List<List<string>> sentenceListList = new List<List<string>>(); // A list containing the other sentence lists.
     private static List<DialogueBox> raccoonList = new List<DialogueBox>(); // A static list of all dialogue NPCs in the scene.
+
+    public SoundEffects raccoonLaugh;
+    public int audioPoint;
     
     /// <summary>
     /// Caches components and initialises the dialogue structure.
@@ -82,6 +85,9 @@ public class DialogueBox : MonoBehaviour
         // Combine the individual sentence lists into a master list for easier progression.
         sentenceListList.Add(sentenceList);
         sentenceListList.Add(sentenceList2);
+
+        //assign raccoon laugh
+        raccoonLaugh = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
     }
 
     /// <summary>
@@ -149,6 +155,7 @@ public class DialogueBox : MonoBehaviour
             anim.SetBool("talking", false);
             speechBubbleAnim.SetBool("isTalking", false);
             sentenceIndex = 0;
+            audioPoint = 1;
         }
         // If the player is near at least one raccoon, handle interaction logic.
         else
@@ -161,6 +168,11 @@ public class DialogueBox : MonoBehaviour
             // If the player is close to THIS specific raccoon and clicks...
             if (Vector3.Distance(player.position, transform.position) < 3f && Input.GetMouseButtonDown(0))
             {
+                if(audioPoint == 1)
+                {
+                    raccoonLaugh.raccoonLaugh.Play();
+                    audioPoint = 0;
+                }
                 // ...start the talking animations.
                 anim.SetBool("talking", true);
                 speechBubbleAnim.SetBool("isTalking", true);
@@ -182,6 +194,8 @@ public class DialogueBox : MonoBehaviour
                     // Trigger game events after completing a dialogue stage.
                     if (key != null) key.SetActive(true);
                     if (indicatorLight != null) indicatorLight.SetActive(false);
+
+                    audioPoint = 1;
                 }
                 // If at the end of all dialogue, reset.
                 else
@@ -189,6 +203,7 @@ public class DialogueBox : MonoBehaviour
                     sentenceIndex = 0;
                     anim.SetBool("talking", false);
                     speechBubbleAnim.SetBool("isTalking", false);
+                    audioPoint = 1;
                 }
             }
         }
