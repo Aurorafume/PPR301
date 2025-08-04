@@ -11,7 +11,7 @@ public class SoundEffects : MonoBehaviour
     public AudioSource pickUpKey;
     public AudioSource unlockDoor;
     public AudioSource trumpetBang;
-    public AudioSource trumpetMusic;
+    public List<AudioSource> saxLicks;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +26,9 @@ public class SoundEffects : MonoBehaviour
     public void Meow()
     {
         meowList[Random.Range(0,3)].Play();
+    }
+    public void Sax()
+    {
+        saxLicks[Random.Range(0,3)].Play();
     }
 }

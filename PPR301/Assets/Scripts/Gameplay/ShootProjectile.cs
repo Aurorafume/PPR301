@@ -116,7 +116,7 @@ public class ShootProjectile : MonoBehaviour
                 {
                     //play sounds
                     soundEffects.trumpetBang.Play();
-                    soundEffects.trumpetMusic.Play();
+                    soundEffects.Sax();
                     //create note effect
                     Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y,transform.position.z + 1), Quaternion.identity);
 
