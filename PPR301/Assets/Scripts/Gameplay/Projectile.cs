@@ -114,7 +114,7 @@ public class Projectile : MonoBehaviour
         {
             // Destroy the wall's parent object (assuming the collider is a child).
             Destroy(other.transform.parent.gameObject);
-            soundEffects.soundEffects[1].Play();
+            soundEffects.gongsBreakDoor[1].Play();
             Explode();
         }
         else if (other.CompareTag("Bounce"))
@@ -125,7 +125,7 @@ public class Projectile : MonoBehaviour
             {
                 lifespanTimer = script.projectileLifeSpan;
             }
-            soundEffects.soundEffects[0].Play();
+            soundEffects.gongsBreakDoor[0].Play();
             Instantiate(lingeringLight, transform.position, Quaternion.identity);
         }
         else if (other.CompareTag("Wall"))

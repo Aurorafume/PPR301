@@ -40,6 +40,8 @@ public class Lock : MonoBehaviour
     
     // A private reference to the key object that enters the trigger.
     private GameObject key;
+    //script for sound effects
+    public SoundEffects openDoor;
 
     /// <summary>
     /// Defines the different types of locks and their corresponding keys.
@@ -48,6 +50,10 @@ public class Lock : MonoBehaviour
     {
         GreenLock,
         BlueLock
+    }
+    void Start()
+    {
+        openDoor = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
     }
 
     /// <summary>
@@ -90,6 +96,8 @@ public class Lock : MonoBehaviour
     /// </summary>
     void Unlock()
     {
+        // Door sound effect
+        openDoor.unlockDoor.Play();
         // Consume the key.
         Destroy(key);
         // "Open" the door by deactivating it.

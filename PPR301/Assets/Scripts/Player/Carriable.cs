@@ -108,7 +108,7 @@ public class Carriable : MonoBehaviour
     void Carry()
     {
         //play key sound
-        soundEffects.soundEffects[2].Play();
+        soundEffects.pickUpKey.Play();
         // Update state flags.
         myInteractable.SetAwaitingFurtherInteraction(true);
         held = true;

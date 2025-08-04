@@ -62,6 +62,7 @@ public class ShootProjectile : MonoBehaviour
     public float dist;
 
     public GameObject lingeringLight;
+    public SoundEffects soundEffects;
 
     //public AudioSource shootTrumpet;
 
@@ -69,6 +70,11 @@ public class ShootProjectile : MonoBehaviour
     private List<GameObject> projectileList = new List<GameObject>();
     // A static list of all ShootProjectile instances in the scene.
     public static List<ShootProjectile> trumpetList = new List<ShootProjectile>();
+
+    void Start()
+    {
+        soundEffects = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
+    }
 
     /// <summary>
     /// Called when the script instance is being loaded. Adds itself to the static list.
@@ -108,6 +114,9 @@ public class ShootProjectile : MonoBehaviour
                 // Only fire if the number of active projectiles is below the limit.
                 if (projectileList.Count < projectileCount)
                 {
+                    //play sounds
+                    soundEffects.trumpetBang.Play();
+                    soundEffects.trumpetMusic.Play();
                     //create note effect
                     Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y,transform.position.z + 1), Quaternion.identity);
 
