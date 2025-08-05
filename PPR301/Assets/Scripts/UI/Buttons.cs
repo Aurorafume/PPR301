@@ -49,8 +49,9 @@ public class Buttons : MonoBehaviour
     public Image audioButton2;
     [Tooltip("The animator for the record player stylus.")]
     public Animator stylusAnimator;
-    [Tooltip("The UI Slider for controlling music volume.")]
+    [Tooltip("The UI Slider for controlling music and audio volume.")]
     public Slider musicSlider;
+    public Slider audioSlider;
 
     [Header("Music & Audio")]
     [Tooltip("The index of the currently playing track in the musicList.")]
@@ -72,6 +73,7 @@ public class Buttons : MonoBehaviour
     private bool mute; // Tracks if the music is currently muted.
     public bool mute2; // Tracks if the audio is currently muted.
     private float lastValue; // Stores the volume level before muting.
+    private float lastValue2; // Stores the volume level before muting.
 
     /// <summary>
     /// Implements the singleton pattern to ensure only one instance of this manager exists.
@@ -114,6 +116,7 @@ public class Buttons : MonoBehaviour
         if (musicList.Count > musicIndex)
         {
             musicSlider.value = musicList[musicIndex].volume;
+            audioSlider.value = 1;
             lastValue = musicList[musicIndex].volume;
             musicList[musicIndex].Play();
         }
@@ -134,6 +137,8 @@ public class Buttons : MonoBehaviour
     {
         // Re-find UI elements in the newly loaded scene.
         musicSlider = GameObject.Find("Slider")?.GetComponent<Slider>();
+        audioSlider = GameObject.Find("Slider 2")?.GetComponent<Slider>();
+
         stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
         audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>();
         states = FindObjectOfType<States>();
@@ -150,6 +155,16 @@ public class Buttons : MonoBehaviour
             musicSlider.onValueChanged.RemoveAllListeners();
             musicSlider.onValueChanged.AddListener(SetVolume);
         }
+        // Re-configure the audio slider.
+        if (audioSlider != null)
+        {
+            audioSlider.value = lastValue2;
+
+
+            // Re-assign the listener to prevent errors from old scene references.
+            audioSlider.onValueChanged.RemoveAllListeners();
+            audioSlider.onValueChanged.AddListener(SetAudioVolume);
+        }
 
         // Re-assign button listeners.
         Button stylusButton = GameObject.Find("Stylus")?.GetComponent<Button>();
@@ -163,6 +178,12 @@ public class Buttons : MonoBehaviour
         {
             audioB.onClick.RemoveAllListeners();
             audioB.onClick.AddListener(MuteMusic);
+        }
+        Button audioB2 = GameObject.Find("Audio Icon")?.GetComponent<Button>();
+        if (audioB2 != null)
+        {
+            audioB2.onClick.RemoveAllListeners();
+            audioB2.onClick.AddListener(MuteAudio);
         }
         Button recordButton = GameObject.Find("Logo Vynyl")?.GetComponent<Button>();
         if (recordButton != null)
@@ -216,16 +237,14 @@ public class Buttons : MonoBehaviour
     }
     public void SetAudioVolume(float volume)
     {
-        //musicList[musicIndex].volume = volume * volumeOverrideMultiplier;
-        // Update the mute state and visuals based on the new volume.
         if (volume == 0)
         {
-            UpdateMuteState(true);
+            UpdateAudioIcon(true);
         }
         else
         {
-            lastValue = volume;
-            UpdateMuteState(false);
+            lastValue2 = volume;
+            UpdateAudioIcon(false);
         }
     }
 
@@ -281,13 +300,24 @@ public class Buttons : MonoBehaviour
         // If not muted, mute the audio.
         if (!mute2)
         {
-            mute2 = true;
+            //mute2 = true;
+            lastValue2 = audioSlider.value;
+            audioSlider.value = 0;
             UpdateAudioIcon(true);
         }
         // If already muted, unmute the audio.
         else
         {
-            mute2 = false;
+            //mute2 = false;
+            if (lastValue2 > 0)
+            {
+                audioSlider.value = lastValue2;
+            }
+            // If the last value was 0, set it to a default audible level.
+            else
+            {
+                audioSlider.value = 0.5f;
+            }
             UpdateAudioIcon(false);
         }
     }
