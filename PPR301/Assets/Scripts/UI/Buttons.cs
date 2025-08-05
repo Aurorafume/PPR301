@@ -140,7 +140,9 @@ public class Buttons : MonoBehaviour
         audioSlider = GameObject.Find("Slider 2")?.GetComponent<Slider>();
 
         stylusAnimator = GameObject.Find("Stylus")?.GetComponent<Animator>();
+
         audioButton = GameObject.Find("Music Icon")?.GetComponent<Image>();
+        audioButton2 = GameObject.Find("Audio Icon")?.GetComponent<Image>();
         states = FindObjectOfType<States>();
 
         // Re-configure the volume slider.
@@ -237,6 +239,7 @@ public class Buttons : MonoBehaviour
     }
     public void SetAudioVolume(float volume)
     {
+        //audioSlider.volume = volume * volumeOverrideMultiplier;
         if (volume == 0)
         {
             UpdateAudioIcon(true);
