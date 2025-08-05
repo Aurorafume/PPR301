@@ -2180,6 +2180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states: {fileID: 0}
   audioButton: {fileID: 235776642}
+  audioButton2: {fileID: 1458431065}
   stylusAnimator: {fileID: 309280054}
   musicSlider: {fileID: 1895061007}
   musicIndex: 0
@@ -2190,6 +2191,9 @@ MonoBehaviour:
   - {fileID: 646616706}
   audioUI: {fileID: 21300000, guid: 66d46e26bfce1c24798280748cae7c47, type: 3}
   mutedUI: {fileID: 21300000, guid: 4ebff83652e607b41bce85205a34d855, type: 3}
+  audioUI2: {fileID: 21300000, guid: 69bf8c50766a3dd48bbc6681bd32d5dd, type: 3}
+  mutedUI2: {fileID: 21300000, guid: a70121f0b5aca0a4eb64941a1bc3c630, type: 3}
+  mute2: 0
 --- !u!4 &646616702
 Transform:
   m_ObjectHideFlags: 0
@@ -4531,7 +4535,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1458431065}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 646616701}
+        m_TargetAssemblyTypeName: Buttons, Assembly-CSharp
+        m_MethodName: MuteAudio
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1458431065
 MonoBehaviour:
   m_ObjectHideFlags: 0

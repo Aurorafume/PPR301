@@ -46,6 +46,7 @@ public class Buttons : MonoBehaviour
     public States states;
     [Tooltip("The UI Image for the audio button, to swap its sprite.")]
     public Image audioButton;
+    public Image audioButton2;
     [Tooltip("The animator for the record player stylus.")]
     public Animator stylusAnimator;
     [Tooltip("The UI Slider for controlling music volume.")]
@@ -61,11 +62,15 @@ public class Buttons : MonoBehaviour
     [Tooltip("The sprite to display when audio is muted.")]
     public Sprite mutedUI;
 
+    public Sprite audioUI2;
+    public Sprite mutedUI2;
+
     private float volumeOverrideMultiplier = 1f;
     private Coroutine fadeMusicCoroutine;
 
     // --- Private State Variables ---
     private bool mute; // Tracks if the music is currently muted.
+    public bool mute2; // Tracks if the audio is currently muted.
     private float lastValue; // Stores the volume level before muting.
 
     /// <summary>
@@ -209,6 +214,20 @@ public class Buttons : MonoBehaviour
             UpdateMuteState(false);
         }
     }
+    public void SetAudioVolume(float volume)
+    {
+        //musicList[musicIndex].volume = volume * volumeOverrideMultiplier;
+        // Update the mute state and visuals based on the new volume.
+        if (volume == 0)
+        {
+            UpdateMuteState(true);
+        }
+        else
+        {
+            lastValue = volume;
+            UpdateMuteState(false);
+        }
+    }
 
     /// <summary>
     /// Cycles to the next music track in the playlist.
@@ -257,6 +276,21 @@ public class Buttons : MonoBehaviour
             UpdateMuteState(false);
         }
     }
+    public void MuteAudio()
+    {
+        // If not muted, mute the audio.
+        if (!mute2)
+        {
+            mute2 = true;
+            UpdateAudioIcon(true);
+        }
+        // If already muted, unmute the audio.
+        else
+        {
+            mute2 = false;
+            UpdateAudioIcon(false);
+        }
+    }
 
     /// <summary>
     /// Updates the mute flag and all related UI visuals.
@@ -273,6 +307,11 @@ public class Buttons : MonoBehaviour
         {
             stylusAnimator.SetBool("Mute", isMuted);
         }
+    }
+    private void UpdateAudioIcon(bool isMuted)
+    {
+        mute2 = isMuted;
+        audioButton2.sprite = isMuted ? mutedUI2 : audioUI2;
     }
 
     public void FadeMusic(float target, float fadeSpeed)

@@ -17610,7 +17610,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: dd27920d67467ae4b97a97018cc03c10, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -36247,12 +36247,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states: {fileID: 1289048060}
   audioButton: {fileID: 0}
+  audioButton2: {fileID: 0}
   stylusAnimator: {fileID: 0}
   musicSlider: {fileID: 0}
   musicIndex: 0
   musicList: []
   audioUI: {fileID: 0}
   mutedUI: {fileID: 0}
+  audioUI2: {fileID: 0}
+  mutedUI2: {fileID: 0}
+  mute2: 0
 --- !u!4 &1921804668
 Transform:
   m_ObjectHideFlags: 0
