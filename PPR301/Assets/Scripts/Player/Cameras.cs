@@ -86,6 +86,8 @@ public class Cameras : MonoBehaviour
     private bool robotFollow; // Internal state flag for when the camera has finished transitioning.
     private Vector3 velocity = Vector3.zero; // Used by SmoothDamp for velocity calculation.
 
+    public Outline OScript;
+
     /// <summary>
     /// Initialises camera depths, populates the camera list, and sets the initial state.
     /// </summary>
@@ -101,6 +103,8 @@ public class Cameras : MonoBehaviour
         cameraList.Add(camera2);
         cameraList.Add(camera3);
         cameraList.Add(camera4);
+        //assign OScript to script
+        OScript = gameObject.GetComponent<Outline>();
 
         // Start in the default player-following camera mode.
         move = true;
@@ -123,6 +127,8 @@ public class Cameras : MonoBehaviour
         // --- STATE 1: Moving to or following the Player Camera ---
         if (move)
         {
+            //disable outline
+            OScript.enabled = false;
             // If the camera is still transitioning back to the player...
             if (!robotFollow)
             {
@@ -156,6 +162,8 @@ public class Cameras : MonoBehaviour
         // --- STATE 2: Moving to a Fixed Camera ---
         else if (!move)
         {
+            //enable outline
+            OScript.enabled = true;
             // Switch active camera depth to the selected fixed camera.
             camera1.depth = 0;
             followCamera.depth = 1;
