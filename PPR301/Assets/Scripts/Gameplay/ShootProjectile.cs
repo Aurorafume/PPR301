@@ -112,14 +112,13 @@ public class ShootProjectile : MonoBehaviour
             // Fire on left mouse button click.
             if (Input.GetMouseButtonDown(0))
             {
-                animator.SetBool("Shot", true);
                 // Clean the list of any projectiles that have been destroyed.
                 projectileList.RemoveAll(item => item == null);
 
                 // Only fire if the number of active projectiles is below the limit.
                 if (projectileList.Count < projectileCount)
                 {
-                    animator.SetBool("Shot", false);
+                    animator.SetTrigger("a");
                     //play sounds
                     soundEffects.trumpetBang.Play();
                     soundEffects.Sax();
@@ -145,6 +144,10 @@ public class ShootProjectile : MonoBehaviour
                             }
                             break;
                     }
+                }
+                else
+                {
+                    animator.SetBool("Shot", false);
                 }
             }
         }

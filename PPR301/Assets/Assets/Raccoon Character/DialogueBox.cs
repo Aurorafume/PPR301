@@ -188,7 +188,7 @@ public class DialogueBox : MonoBehaviour
                 {
                     listIndex++;
                     sentenceIndex = 0;
-                    anim.SetBool("talking", false);
+                    anim.SetTrigger("Trigger");
                     speechBubbleAnim.SetBool("isTalking", false);
                     
                     // Trigger game events after completing a dialogue stage.

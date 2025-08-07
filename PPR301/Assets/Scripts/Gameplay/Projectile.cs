@@ -49,6 +49,7 @@ public class Projectile : MonoBehaviour
     private float lifespanTimer;
 
     private SoundEffects soundEffects;
+    private Animator animator;
 
     //public AudioSource bounceSound;
     //public AudioSource breakDoorSound;
