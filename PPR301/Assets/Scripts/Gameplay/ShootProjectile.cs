@@ -63,6 +63,7 @@ public class ShootProjectile : MonoBehaviour
 
     public GameObject lingeringLight;
     public SoundEffects soundEffects;
+    public Animator animator;
 
     //public AudioSource shootTrumpet;
 
@@ -74,6 +75,9 @@ public class ShootProjectile : MonoBehaviour
     void Start()
     {
         soundEffects = GameObject.Find("Sound effects").GetComponent<SoundEffects>();
+        //animator = gameObject.GetComponent<Animator>();
+        animator = gameObject.GetComponentInChildren<Animator>();
+        //animator.enabled = false;
     }
 
     /// <summary>
@@ -108,17 +112,19 @@ public class ShootProjectile : MonoBehaviour
             // Fire on left mouse button click.
             if (Input.GetMouseButtonDown(0))
             {
+                animator.SetBool("Shot", true);
                 // Clean the list of any projectiles that have been destroyed.
                 projectileList.RemoveAll(item => item == null);
 
                 // Only fire if the number of active projectiles is below the limit.
                 if (projectileList.Count < projectileCount)
                 {
+                    animator.SetBool("Shot", false);
                     //play sounds
                     soundEffects.trumpetBang.Play();
                     soundEffects.Sax();
                     //create note effect
-                    Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y,transform.position.z + 1), Quaternion.identity);
+                    Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y + 1,transform.position.z + 1), Quaternion.identity);
 
                     // Create a new projectile instance.
                     GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
