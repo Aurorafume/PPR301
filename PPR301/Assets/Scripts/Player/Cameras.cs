@@ -128,6 +128,7 @@ public class Cameras : MonoBehaviour
         if (move)
         {
             //disable outline
+            if(OScript != null)
             OScript.enabled = false;
             // If the camera is still transitioning back to the player...
             if (!robotFollow)
@@ -163,6 +164,7 @@ public class Cameras : MonoBehaviour
         else if (!move)
         {
             //enable outline
+            if(OScript != null)
             OScript.enabled = true;
             // Switch active camera depth to the selected fixed camera.
             camera1.depth = 0;
