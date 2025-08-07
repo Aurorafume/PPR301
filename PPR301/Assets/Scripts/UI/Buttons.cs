@@ -121,12 +121,7 @@ public class Buttons : MonoBehaviour
             musicList[musicIndex].Play();
         }
 
-        // Configure the vinyl record image to ignore clicks on its transparent areas.
-        Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
-        if (img != null)
-        {
-            img.alphaHitTestMinimumThreshold = 0.5f;
-        }
+
     }
 
     /// <summary>
@@ -192,6 +187,13 @@ public class Buttons : MonoBehaviour
         {
             recordButton.onClick.RemoveAllListeners();
             recordButton.onClick.AddListener(ChangeMusic);
+        }
+
+        // Configure the vinyl record image to ignore clicks on its transparent areas.
+        Image img = GameObject.Find("Logo Vynyl")?.GetComponent<Image>();
+        if (img != null)
+        {
+            img.alphaHitTestMinimumThreshold = 0.5f;
         }
     }
 

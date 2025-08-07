@@ -10374,7 +10374,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 118570015}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -20387,6 +20387,29 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2724198075042662040, guid: b4bcc671da8bd3f428e41592d141ab10, type: 3}
   m_PrefabInstance: {fileID: 997381340}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &997381342 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3352256041571638306, guid: b4bcc671da8bd3f428e41592d141ab10, type: 3}
+  m_PrefabInstance: {fileID: 997381340}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &997381343
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997381342}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 0.9575, b: 0, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &998918198
 GameObject:
   m_ObjectHideFlags: 0
@@ -32449,7 +32472,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1596434679}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
   m_Name: 
@@ -39947,6 +39970,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1622204352603805013, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
+      propertyPath: m_UpdateWhenOffscreen
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5001199290680640534, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
@@ -40081,7 +40108,7 @@ PrefabInstance:
       objectReference: {fileID: 199334966}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -256.54
+      value: -296.89
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.y
@@ -40089,7 +40116,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591898, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 98.74
+      value: 151.26
       objectReference: {fileID: 0}
     - target: {fileID: 6770507989242591903, guid: 21812ba5315039546b1a529cdc2c68e7, type: 3}
       propertyPath: jumpForce
