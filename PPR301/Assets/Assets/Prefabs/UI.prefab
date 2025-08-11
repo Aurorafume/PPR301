@@ -1570,7 +1570,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ecc28c153b0216441922f2f8f2b66af2, type: 3}
   - {fileID: 21300000, guid: bbdde45b46c39ea418aa053b3dc9e447, type: 3}
   - {fileID: 21300000, guid: e0f2b651bbe19af479de8e55bb05c227, type: 3}
-  noisePercentage: 0
   states: {fileID: 0}
   enemySpawning: {fileID: 0}
 --- !u!114 &2157725853210087377

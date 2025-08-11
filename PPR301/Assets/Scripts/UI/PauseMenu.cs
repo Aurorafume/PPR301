@@ -131,6 +131,11 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f; // Ensure time is resumed before loading a new scene.
         SceneManager.LoadScene("StartMenu");
     }
+    public void Restart()
+    {
+        Time.timeScale = 1f; // Ensure time is resumed before loading a new scene.
+        SceneManager.LoadScene("MainDemoA3");
+    }
 
     /// <summary>
     /// The callback method for the 'Quit' button.

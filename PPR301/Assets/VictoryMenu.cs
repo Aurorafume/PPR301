@@ -5,12 +5,15 @@ using UnityEngine.SceneManagement;
 
 public class VictoryMenu : MonoBehaviour
 {
+    public GameObject MenuUI;
+    public GameObject victoryUI;
     public void Restart()
     {
         SceneManager.LoadScene("MainDemoA3");
     }
     public void Menu()
     {
-        SceneManager.LoadScene("StartMenu");
+        MenuUI.SetActive(true);
+        victoryUI.SetActive(false);
     }
 }
