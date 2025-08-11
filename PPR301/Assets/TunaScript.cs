@@ -16,6 +16,7 @@ public class TunaScript : MonoBehaviour
         if(collider.gameObject.CompareTag("Player"))
         {
             VICTORYUI.SetActive(true);
+            Time.timeScale = 0f;
         }
     }
 }
