@@ -50,6 +50,7 @@ public class Draggable : MonoBehaviour
     private ConfigurableJoint joint; // The joint component created at runtime.
     private Interactable myInteractable;
     private PlayerInteractHandler playerInteractHandler;
+    private PlayerMovement movement;
     private Rigidbody rb;
     private bool defaultFreezeRotation; // Stores the initial freezeRotation state of the Rigidbody.
     public SoundEffects soundEffects;
@@ -68,6 +69,7 @@ public class Draggable : MonoBehaviour
         myInteractable = GetComponent<Interactable>();
         playerInteractHandler = FindObjectOfType<PlayerInteractHandler>();
         rb = GetComponent<Rigidbody>();
+        movement = FindObjectOfType<PlayerMovement>();
         
         // Store the default rotation constraint to restore it later.
         defaultFreezeRotation = rb.freezeRotation;
@@ -96,21 +98,24 @@ public class Draggable : MonoBehaviour
     /// </summary>
     void Drag()
     {
-        //play sound effect
-        soundEffects.Meow();
-        myInteractable.SetAwaitingFurtherInteraction(true);
-        grabbed = true;
-        OnDragObject?.Invoke(true); // Notify other systems that dragging has started.
-        rb.freezeRotation = true; // Temporarily freeze rotation to prevent wild spinning.
-
-        // Get the precise point where the player's interaction raycast hit the object.
-        grabPoint = playerInteractHandler.hitPoint;
-
-        // Create a new joint if one doesn't already exist.
-        if (!joint)
+        if(movement.grounded == true)
         {
-            joint = gameObject.AddComponent<ConfigurableJoint>();
-            ConfigureJoint();
+            //play sound effect
+            soundEffects.Meow();
+            myInteractable.SetAwaitingFurtherInteraction(true);
+            grabbed = true;
+            OnDragObject?.Invoke(true); // Notify other systems that dragging has started.
+            rb.freezeRotation = true; // Temporarily freeze rotation to prevent wild spinning.
+
+            // Get the precise point where the player's interaction raycast hit the object.
+            grabPoint = playerInteractHandler.hitPoint;
+
+            // Create a new joint if one doesn't already exist.
+            if (!joint)
+            {
+                joint = gameObject.AddComponent<ConfigurableJoint>();
+                ConfigureJoint();
+            }
         }
     }
 

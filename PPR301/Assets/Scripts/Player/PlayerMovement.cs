@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
     private float verticalInput;
     private Vector3 moveDirection;
     private Rigidbody rb;
-    private bool jumpPressed;
+    public bool jumpPressed;
 
     // Delegate for switching movement behavior
     private delegate void MoveBehaviour();
@@ -437,15 +437,18 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void Jump()
     {
-        // Reset vertical velocity to ensure consistent jump height.
-        rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
-        rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        
-        // Add a small forward boost to the jump.
-        rb.AddForce(moveDirection * playerSpeed * 1f, ForceMode.Impulse);
-        
-        anim.SetBool("isJumping", true);
-        Invoke(nameof(EnableGroundDetection), 0.1f);
+        if(!draggingObject)
+        {
+            // Reset vertical velocity to ensure consistent jump height.
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            
+            // Add a small forward boost to the jump.
+            rb.AddForce(moveDirection * playerSpeed * 1f, ForceMode.Impulse);
+            
+            anim.SetBool("isJumping", true);
+            Invoke(nameof(EnableGroundDetection), 0.1f);
+        }
     }
     
     #endregion
