@@ -37,7 +37,9 @@ public class PlayerCamera : MonoBehaviour
     [Tooltip("The player transform that the camera will follow.")]
     public Transform player;
     [Tooltip("The camera's offset from the player. Only the Y-value is used for height adjustment.")]
-    public Vector3 offset = new Vector3(0, 2, -4);
+    public Vector3 heightOffset = new Vector3(0, 2, -4);
+    [Tooltip("The distance the camera should maintain from colliders.")]
+    public float collisionOffset = 0.25f;
 
     [Header("Control Settings")]
     [Tooltip("How sensitive the camera rotation is to mouse movement.")]
@@ -103,7 +105,7 @@ public class PlayerCamera : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
 
         // Calculate the camera's desired position based on rotation, zoom, and height offset.
-        Vector3 desiredPosition = player.position - transform.forward * currentZoom + Vector3.up * offset.y;
+        Vector3 desiredPosition = player.position - transform.forward * currentZoom + Vector3.up * heightOffset.y;
 
         // Perform a collision check to prevent the camera from moving through objects.
         RaycastHit hit;
@@ -111,7 +113,7 @@ public class PlayerCamera : MonoBehaviour
         if (Physics.Raycast(player.position, desiredPosition - player.position, out hit, currentZoom + 1f) && hit.collider.tag != "Spawn Collider")
         {
             // If the ray hits an obstacle, move the desired position to the collision point.
-            desiredPosition = hit.point;
+            desiredPosition = hit.point + hit.normal * collisionOffset;
         }
 
         // Smoothly transition the camera's actual position to the final desired position.

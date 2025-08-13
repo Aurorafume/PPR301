@@ -35,6 +35,8 @@ public class PlayerEnterTrigger : MonoBehaviour
     [Header("Trigger Settings")]
     [Tooltip("The set of events to invoke when the player enters this trigger.")]
     public UnityEvent OnPlayerEnter;
+    [Tooltip("The set of events to invoke when the player exits this trigger.")]
+    public UnityEvent OnPlayerExit;
     [Tooltip("If true, this trigger will be destroyed after firing, making it a one-time event.")]
     public bool destroyOnEnter;
 
@@ -51,6 +53,14 @@ public class PlayerEnterTrigger : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerExit();
+        }
+    }
+
     /// <summary>
     /// Invokes the configured UnityEvent and handles the self-destruction of the trigger.
     /// </summary>
@@ -62,5 +72,10 @@ public class PlayerEnterTrigger : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    private void PlayerExit()
+    {
+        OnPlayerExit.Invoke();
     }
 }
