@@ -29,6 +29,7 @@
 // ==========================================================================
 
 using UnityEngine;
+using System;
 
 /// <summary>
 /// Manages player input and raycasting to detect and trigger interactions with objects.
@@ -58,6 +59,8 @@ public class PlayerInteractHandler : MonoBehaviour
     private bool interactableDetected; // True if the sphere cast finds an interactable object.
     private Interactable interactableInUse; // A reference to the object currently being interacted with (e.g. held).
     private ShowIconScript activeClickIcon; // A reference to the currently visible interaction icon.
+
+    public static event Action OnClickNoInteractable;
 
     /// <summary>
     /// The precise world-space point where the interaction raycast hit an object.
@@ -183,6 +186,11 @@ public class PlayerInteractHandler : MonoBehaviour
                 // Call the 'Interact' method on the target object's 'Interactable' component.
                 interactable.Interact();
             }
+        }
+        else
+        {
+            // If no interactable is detected, trigger a global event to notify other systems.
+            OnClickNoInteractable?.Invoke();
         }
     }
 

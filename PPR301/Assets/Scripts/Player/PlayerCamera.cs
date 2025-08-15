@@ -26,6 +26,7 @@
 //
 // ==========================================================================
 
+using Unity.VisualScripting;
 using UnityEngine;
 
 /// <summary>
@@ -59,6 +60,14 @@ public class PlayerCamera : MonoBehaviour
     [Tooltip("The farthest the camera can zoom out from the player.")]
     public float maxZoom = 8f;
 
+    public float zoomWhenHiding = 2f;
+    public float heightWhenHiding = 1f;
+
+    Vector3 lastPushDir;
+
+    States states; 
+
+
     // --- Private State Variables ---
     private float pitch = 0f;       // The current up/down rotation angle.
     private float yaw = 0f;         // The current left/right rotation angle.
@@ -71,6 +80,7 @@ public class PlayerCamera : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        states = FindObjectOfType<States>();
     }
 
     /// <summary>
@@ -104,16 +114,59 @@ public class PlayerCamera : MonoBehaviour
         // Smoothly rotate the camera towards the target rotation.
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
 
+        float distance = currentZoom;
+        float height = heightOffset.y;
+        if (states)
+        {
+            if (states.playerIsHiding)
+            {
+                distance = zoomWhenHiding;
+                height = heightWhenHiding;
+            }
+        }
+
         // Calculate the camera's desired position based on rotation, zoom, and height offset.
-        Vector3 desiredPosition = player.position - transform.forward * currentZoom + Vector3.up * heightOffset.y;
+        Vector3 desiredPosition = player.position - transform.forward * distance + Vector3.up * height;
 
         // Perform a collision check to prevent the camera from moving through objects.
         RaycastHit hit;
+        Vector3 direction = desiredPosition - player.position;
+        Collider[] overlaps = new Collider[0];
         // Cast a ray from the player towards the camera's desired position.
-        if (Physics.Raycast(player.position, desiredPosition - player.position, out hit, currentZoom + 1f) && hit.collider.tag != "Spawn Collider")
+        if (Physics.Raycast(player.position, direction.normalized, out hit, distance + collisionOffset))
         {
-            // If the ray hits an obstacle, move the desired position to the collision point.
-            desiredPosition = hit.point + hit.normal * collisionOffset;
+            if (hit.collider.tag != "Spawn Collider")
+            {
+                // Move camera to hit point minus buffer
+                desiredPosition = hit.point - direction.normalized * collisionOffset;
+
+                float angle = Vector3.Angle(direction, hit.normal);
+                float angleInRadians = angle * Mathf.Deg2Rad;
+                float normalDistanceFromCollider = Mathf.Cos(angleInRadians) * collisionOffset;
+                desiredPosition += hit.normal * (collisionOffset - normalDistanceFromCollider);
+            }
+        }
+        else
+        {
+            // If no ray hit, check if desired position is inside a collider (e.g. thin walls)
+            overlaps = Physics.OverlapSphere(desiredPosition, collisionOffset);
+            foreach (var col in overlaps)
+            {
+                if (col.tag != "Spawn Collider")
+                {
+                    // Push camera out along the normal from the closest point
+                    Vector3 closest = col.ClosestPoint(desiredPosition);
+                    Vector3 pushDir = (desiredPosition - closest).normalized;
+                    if (pushDir == Vector3.zero)
+                    {
+                        pushDir = lastPushDir;
+                    }
+                    desiredPosition = closest + pushDir * collisionOffset;
+                    
+                    lastPushDir = pushDir;
+                    break;
+                }
+            }
         }
 
         // Smoothly transition the camera's actual position to the final desired position.

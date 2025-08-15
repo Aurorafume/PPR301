@@ -96,6 +96,7 @@ public class DialogueBox : MonoBehaviour
     void OnEnable()
     {
         raccoonList.Add(this);
+        PlayerInteractHandler.OnClickNoInteractable += HandleInput;
     }
 
     /// <summary>
@@ -104,6 +105,7 @@ public class DialogueBox : MonoBehaviour
     void OnDisable()
     {
         raccoonList.Remove(this);
+        PlayerInteractHandler.OnClickNoInteractable -= HandleInput;
     }
 
     /// <summary>
@@ -129,6 +131,51 @@ public class DialogueBox : MonoBehaviour
         
         // Smoothly interpolate to the target rotation.
         transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * 12);
+    }
+
+    void HandleInput()
+    {
+        // If the player is close to THIS specific raccoon and clicks...
+        if (Vector3.Distance(player.position, transform.position) < 3f)
+        {
+            if(audioPoint == 1)
+            {
+                raccoonLaugh.raccoonLaugh.Play();
+                audioPoint = 0;
+            }
+            // ...start the talking animations.
+            anim.SetBool("talking", true);
+            speechBubbleAnim.SetBool("isTalking", true);
+            
+            // If there are more sentences in the current list, show the next one.
+            if (sentenceIndex < sentenceListList[listIndex].Count)
+            {
+                textSign.text = sentenceListList[listIndex][sentenceIndex];
+                sentenceIndex++;
+            }
+            // If at the end of a list but there is another list to show, switch to it.
+            else if (listIndex < sentenceListList.Count - 1)
+            {
+                listIndex++;
+                sentenceIndex = 0;
+                anim.SetTrigger("Trigger");
+                speechBubbleAnim.SetBool("isTalking", false);
+                
+                // Trigger game events after completing a dialogue stage.
+                if (key != null) key.SetActive(true);
+                if (indicatorLight != null) indicatorLight.SetActive(false);
+
+                audioPoint = 1;
+            }
+            // If at the end of all dialogue, reset.
+            else
+            {
+                sentenceIndex = 0;
+                anim.SetBool("talking", false);
+                speechBubbleAnim.SetBool("isTalking", false);
+                audioPoint = 1;
+            }
+        }
     }
     
     /// <summary>
@@ -165,47 +212,7 @@ public class DialogueBox : MonoBehaviour
             icon.transform.LookAt(Camera.main.transform.position, Vector3.up);
             icon.transform.Rotate(0f, 180f, 0f);
 
-            // If the player is close to THIS specific raccoon and clicks...
-            if (Vector3.Distance(player.position, transform.position) < 3f && Input.GetMouseButtonDown(0))
-            {
-                if(audioPoint == 1)
-                {
-                    raccoonLaugh.raccoonLaugh.Play();
-                    audioPoint = 0;
-                }
-                // ...start the talking animations.
-                anim.SetBool("talking", true);
-                speechBubbleAnim.SetBool("isTalking", true);
-                
-                // If there are more sentences in the current list, show the next one.
-                if (sentenceIndex < sentenceListList[listIndex].Count)
-                {
-                    textSign.text = sentenceListList[listIndex][sentenceIndex];
-                    sentenceIndex++;
-                }
-                // If at the end of a list but there is another list to show, switch to it.
-                else if (listIndex < sentenceListList.Count - 1)
-                {
-                    listIndex++;
-                    sentenceIndex = 0;
-                    anim.SetTrigger("Trigger");
-                    speechBubbleAnim.SetBool("isTalking", false);
-                    
-                    // Trigger game events after completing a dialogue stage.
-                    if (key != null) key.SetActive(true);
-                    if (indicatorLight != null) indicatorLight.SetActive(false);
-
-                    audioPoint = 1;
-                }
-                // If at the end of all dialogue, reset.
-                else
-                {
-                    sentenceIndex = 0;
-                    anim.SetBool("talking", false);
-                    speechBubbleAnim.SetBool("isTalking", false);
-                    audioPoint = 1;
-                }
-            }
+            
         }
     }
 }

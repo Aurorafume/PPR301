@@ -36,6 +36,16 @@ public class RecordRotation : MonoBehaviour
     public float rotationSpeed = 100f;
     [Tooltip("The number of points awarded to the player upon collection.")]
     public int scoreValue = 1000;
+    public AudioClip collectSound; // Sound played when the item is collected.
+    public Collider myCollider;
+    public Renderer myRenderer; // Reference to the Renderer component for visual effects.
+
+    AudioSource audioSource; // Reference to the AudioSource component for playing sounds.
+
+    void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     /// <summary>
     /// Called every frame by Unity to handle the object's rotation.
@@ -45,7 +55,7 @@ public class RecordRotation : MonoBehaviour
         // Rotate the object around its local Y-axis based on the rotation speed.
         transform.Rotate(0, rotationSpeed * Time.deltaTime, 0);
     }
-    
+
     /// <summary>
     /// Called by Unity when a collider enters this object's trigger volume.
     /// </summary>
@@ -55,9 +65,11 @@ public class RecordRotation : MonoBehaviour
         // Check if the object that entered the trigger is the Player.
         if (other.CompareTag("Player"))
         {
+            audioSource.PlayOneShot(collectSound);
+
             // Find the ScoreManager component in the scene.
             ScoreManager scoreManager = FindObjectOfType<ScoreManager>();
-            
+
             // If the ScoreManager exists, add the score value to it.
             if (scoreManager != null)
             {
@@ -67,9 +79,17 @@ public class RecordRotation : MonoBehaviour
             {
                 Debug.LogWarning("ScoreManager not found in scene. Cannot add score.");
             }
-            
-            // Destroy this collectible item.
-            Destroy(gameObject);
+
+
+            myCollider.enabled = false;
+            myRenderer.enabled = false; 
+
+            Invoke(nameof(DestroyObject), collectSound.length); // Wait for the sound to finish before destroying the object.
         }
+    }
+
+    void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
