@@ -44,8 +44,8 @@ public class ShootProjectile : MonoBehaviour
     [Header("Projectile Settings")]
     [Tooltip("The GameObject prefab for the projectile to be fired.")]
     public GameObject projectilePrefab;
-    [Tooltip("The maximum number of projectiles allowed from this launcher at one time.")]
-    public int projectileCount;
+    [Tooltip("The cooldown time between projectile shots.")]
+    public float cooldownTime;
     [Tooltip("The Transform where the projectile will be spawned.")]
     public Transform startingSpawnLocator;
     [Tooltip("The direction the projectile will travel (used for specific projectile types).")]
@@ -64,6 +64,9 @@ public class ShootProjectile : MonoBehaviour
     public GameObject lingeringLight;
     public SoundEffects soundEffects;
     public Animator animator;
+
+    bool onCoolDown;
+    float cooldownTimeRemaining;
 
     //public AudioSource shootTrumpet;
 
@@ -102,10 +105,12 @@ public class ShootProjectile : MonoBehaviour
     {
         // If the player reference is missing, do nothing.
         if (player == null) return;
-        
+
+        HandleCooldown();
+
         // Check the distance between the launcher and the player.
         dist = Vector3.Distance(transform.position, player.position);
-        
+
         // Only allow firing if the player is within a close range.
         if (dist <= 3)
         {
@@ -116,14 +121,17 @@ public class ShootProjectile : MonoBehaviour
                 projectileList.RemoveAll(item => item == null);
 
                 // Only fire if the number of active projectiles is below the limit.
-                if (projectileList.Count < projectileCount)
+                if (!onCoolDown)
                 {
+                    onCoolDown = true;
+                    cooldownTimeRemaining = cooldownTime;
+
                     animator.SetTrigger("a");
                     //play sounds
                     soundEffects.trumpetBang.Play();
                     soundEffects.Sax();
                     //create note effect
-                    Instantiate(lingeringLight, new Vector3(transform.position.x,transform.position.y + 1,transform.position.z + 1), Quaternion.identity);
+                    Instantiate(lingeringLight, new Vector3(transform.position.x, transform.position.y + 1, transform.position.z + 1), Quaternion.identity);
 
                     // Create a new projectile instance.
                     GameObject projectileInstance = Instantiate(projectilePrefab, startingSpawnLocator.position, transform.rotation);
@@ -149,6 +157,18 @@ public class ShootProjectile : MonoBehaviour
                 {
                     animator.SetBool("Shot", false);
                 }
+            }
+        }
+    }
+
+    void HandleCooldown()
+    {
+        if (onCoolDown)
+        {
+            cooldownTimeRemaining -= Time.deltaTime;
+            if (cooldownTimeRemaining <= 0)
+            {
+                onCoolDown = false;
             }
         }
     }

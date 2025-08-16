@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 3275121510649938423, guid: 1b7ce48e98272b844ad37bda5ffc1bef, type: 3}
-  projectileCount: 1
+  cooldownTime: 2
   startingSpawnLocator: {fileID: 6434140651981856900}
   projectileDirection: {x: 0, y: 0, z: 1}
   projectileLifeSpan: 0

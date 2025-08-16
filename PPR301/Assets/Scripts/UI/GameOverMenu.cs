@@ -51,6 +51,7 @@ public class GameOverMenu : MonoBehaviour
     private States states;
     private NoiseHandler noiseHandler;
     private Buttons buttons;
+    private ScoreManager scoreManager;
 
     /// <summary>
     /// Caches references to other manager components in the scene.
@@ -62,6 +63,7 @@ public class GameOverMenu : MonoBehaviour
         noiseHandler = FindObjectOfType<NoiseHandler>();
         playerObject = states.gameObject;
         buttons = FindObjectOfType<Buttons>();
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     /// <summary>
@@ -99,6 +101,11 @@ public class GameOverMenu : MonoBehaviour
         if (noiseHandler != null)
         {
             noiseHandler.ClearNoise();
+        }
+
+        if (scoreManager != null)
+        {
+            scoreManager.AddDeathCount(); // Increment death count when game over occurs.
         }
     }
 

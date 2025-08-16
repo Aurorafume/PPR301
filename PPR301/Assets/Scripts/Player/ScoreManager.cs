@@ -23,80 +23,105 @@
 //
 // ==========================================================================
 
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 /// <summary>
 /// Manages the game timer and player score, including a time-based bonus upon winning.
 /// </summary>
 public class ScoreManager : MonoBehaviour
 {
-    [Header("In-Game Values")]
-    [Tooltip("The countdown timer, in seconds.")]
-    public float timer;
-    [Tooltip("The player's current score.")]
-    public int score;
+    [Header("Time Settings")]
+    public float perfectTimeThreshold = 300f; // 5 minutes
+    [Header("References")]
+    public GameObject victoryMenu;
+    public GameObject noiseBar;
 
-    [Header("Game Timer Scoring")]
-    [Tooltip("The maximum time for the level, in minutes.")]
-    public float maxTimeMinutes = 12f;
-    [Tooltip("The number of bonus points awarded for each second remaining on the clock.")]
-    public int bonusScorePerSecondRemaining;
+    [Header("UI References")]
+    public TextMeshProUGUI timerText;
+    public TextMeshProUGUI deathCountText;
+    public TextMeshProUGUI recordCountText;
+    public Color perfectTextColour;
 
-    // A flag to stop the timer once the level has been won.
-    private bool hasWon;
+    float gameStartTime;
+    float elapsedGameTime;
+    int collectedRecords;
+    int deaths;
 
-    /// <summary>
-    /// Initialises the countdown timer at the start of the level.
-    /// </summary>
+    int totalNumRecords;
+
+
     void Start()
     {
-        // Convert the max time from minutes to seconds.
-        timer = maxTimeMinutes * 60f;
+        gameStartTime = Time.time;
+        RecordRotation[] records = FindObjectsOfType<RecordRotation>();
+        totalNumRecords = records.Length;
     }
 
-    /// <summary>
-    /// Handles the countdown logic each frame.
-    /// </summary>
-    void Update()
+    public void CollectGoldenRecord()
     {
-        // Do not count down if the level has already been won.
-        if (hasWon) return;
+        collectedRecords++;
+    }
 
-        // If time is still remaining, decrease the timer.
-        if (timer > 0f)
+    public void AddDeathCount()
+    {
+        deaths++;
+    }
+
+    public void HandleGameComplete()
+    {
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        elapsedGameTime = Time.time - gameStartTime;
+
+        DrawVictoryMenuInfo();
+
+        if (victoryMenu != null)
         {
-            timer -= Time.deltaTime;
+            victoryMenu.SetActive(true);
         }
-        // Otherwise, clamp the timer at zero.
-        else
+
+        if (noiseBar != null)
         {
-            timer = 0f;
+            noiseBar.SetActive(false);
+        }        
+    }
+
+    void DrawVictoryMenuInfo()
+    {
+        if (timerText != null)
+        {
+            TimeSpan timeSpan = TimeSpan.FromSeconds(elapsedGameTime);
+            timerText.text = string.Format("{0:D2} : {1:D2} : {2:D2}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds);
+            if (elapsedGameTime < perfectTimeThreshold)
+            {
+                timerText.color = perfectTextColour;
+                timerText.fontStyle = FontStyles.Bold;
+            }
         }
-    }
 
-    /// <summary>
-    /// Adds a specified value to the total score.
-    /// </summary>
-    /// <param name="value">The number of points to add.</param>
-    public void AddScore(int value)
-    {
-        score += value;
-    }
+        if (deathCountText != null)
+        {
+            deathCountText.text = deaths.ToString();
+            if (deaths == 0)
+            {
+                deathCountText.color = perfectTextColour;
+                deathCountText.fontStyle = FontStyles.Bold;
+            }
+        }
 
-    /// <summary>
-    /// Called when the player wins the level to calculate and add the final time bonus.
-    /// </summary>
-    public void LevelWin()
-    {
-        hasWon = true;
-
-        // Calculate the bonus score from the remaining time.
-        int secondsRemaining = (int)timer;
-        int bonusTimeScore = secondsRemaining * bonusScorePerSecondRemaining;
-
-        // Add the bonus to the final score.
-        AddScore(bonusTimeScore);
+        if (recordCountText != null)
+        {
+            recordCountText.text = collectedRecords.ToString();
+            if (collectedRecords == totalNumRecords)
+            {
+                recordCountText.color = perfectTextColour;
+                recordCountText.fontStyle = FontStyles.Bold;
+            }
+        }
     }
 }

@@ -73,12 +73,9 @@ public class RecordRotation : MonoBehaviour
             // If the ScoreManager exists, add the score value to it.
             if (scoreManager != null)
             {
-                scoreManager.AddScore(scoreValue);
+                scoreManager.CollectGoldenRecord();
             }
-            else
-            {
-                Debug.LogWarning("ScoreManager not found in scene. Cannot add score.");
-            }
+
 
 
             myCollider.enabled = false;
