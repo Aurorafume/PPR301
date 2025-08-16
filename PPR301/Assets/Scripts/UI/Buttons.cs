@@ -365,13 +365,19 @@ public class Buttons : MonoBehaviour
         while (volumeOverrideMultiplier != target)
         {
             volumeOverrideMultiplier = Mathf.MoveTowards(volumeOverrideMultiplier, target, fadeSpeed * Time.deltaTime);
-            SetVolume(lastValue);
+            if (!mute)
+            {
+                SetVolume(lastValue);
+            }
 
             yield return new WaitForEndOfFrame();
         }
 
         volumeOverrideMultiplier = target;
-        SetVolume(lastValue);
+        if (!mute)
+        {
+            SetVolume(lastValue);
+        }
         fadeMusicCoroutine = null;
     }
 }
